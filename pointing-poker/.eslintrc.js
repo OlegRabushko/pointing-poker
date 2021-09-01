@@ -1,0 +1,45 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json'
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  extends: [
+    'airbnb-typescript',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+  ],
+  rules: {
+    'import/no-extraneous-dependencies': 'off',
+    '@typescript-eslint/comma-dangle': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'react/jsx-curly-newline': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'operator-linebreak': 'off',
+    'no-nested-ternary': 'off',
+    '@typescript-eslint/indent': 'off',
+    'react/button-has-type': 'off',
+    'import/prefer-default-export': 'off',
+    'react/self-closing-comp': 'off',
+    "react/jsx-one-expression-per-line": 'off',
+    "linebreak-style": 0,
+    'eslint-disable linebreak-style': 'off',
+    'react/no-array-index-key': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'object-curly-newline': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+  },
+};

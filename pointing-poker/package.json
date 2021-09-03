@@ -6,7 +6,8 @@
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "test": "npx jest ./src/tests"
   },
   "keywords": [
     "React",
@@ -34,6 +35,8 @@
     "@babel/preset-typescript": "^7.12.16",
     "@babel/runtime": "^7.13.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^26.0.24",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/react-transition-group": "^4.4.2",
@@ -56,7 +59,9 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-webpack-plugin": "^3.0.1",
     "html-webpack-plugin": "^5.1.0",
+    "jest": "^27.1.0",
     "husky": "4",
     "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^2.1.0",

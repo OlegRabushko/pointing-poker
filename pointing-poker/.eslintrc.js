@@ -3,18 +3,24 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: './tsconfig.eslint.json'
+    project: './tsconfig.eslint.json',
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
+  ignorePatterns: ['.eslintrc.js'],
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:jsx-a11y/recommended',
+    'plugin:react/recommended',
+    'prettier',
+    'plugin:prettier/recommended',
   ],
   rules: {
     'import/no-extraneous-dependencies': 'off',
@@ -30,8 +36,8 @@ module.exports = {
     'react/button-has-type': 'off',
     'import/prefer-default-export': 'off',
     'react/self-closing-comp': 'off',
-    "react/jsx-one-expression-per-line": 'off',
-    "linebreak-style": 0,
+    'react/jsx-one-expression-per-line': 'off',
+    'linebreak-style': 0,
     'eslint-disable linebreak-style': 'off',
     'react/no-array-index-key': 'off',
     'no-unused-vars': 'error',

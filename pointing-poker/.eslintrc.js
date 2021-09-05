@@ -4,13 +4,14 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
     project: './tsconfig.eslint.json',
+    tsconfigRootDir: __dirname,
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'webpack', 'jest.config.js', '__mocks__', 'node_modules'],
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',
@@ -30,6 +31,8 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'implicit-arrow-linebreak': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/click-events-have-key-events':'off',
+    'jsx-a11y/no-noninteractive-element-interactions':'off',
     'operator-linebreak': 'off',
     'no-nested-ternary': 'off',
     '@typescript-eslint/indent': 'off',

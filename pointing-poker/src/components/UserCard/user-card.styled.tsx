@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UserCardContainer = styled.div`
+export const StyledUserCard = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,13 +33,13 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const UserInfoDiv = styled.div`
+export const StyledUserInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 25px;
   flex: 1 0 auto;
 
-  & > .card__user-name {
+  & > .card-user-name {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
@@ -50,13 +50,13 @@ export const UserInfoDiv = styled.div`
 
     color: #000000;
 
-    & > .card__user-position {
+    & > .card-user-position {
       font-size: 10px;
       line-height: 12px;
     }
   }
 `;
 
-export const ExcludeBtn = styled.div`
+export const Exclude = styled.div`
   cursor: pointer;
 `;

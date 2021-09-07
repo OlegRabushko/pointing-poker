@@ -4,7 +4,7 @@ interface Iprops {
   selected: boolean;
 }
 
-export const GameCardContainerDiv = styled.div<Iprops>`
+export const StyledGameCard = styled.div<Iprops>`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -17,7 +17,7 @@ export const GameCardContainerDiv = styled.div<Iprops>`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 67px;
 
-  & > .card__selected-icon {
+  & > .card-selected-icon {
     display: ${(props) => (props.selected ? 'block' : 'none')};
     position: absolute;
     top: 50%;
@@ -33,7 +33,7 @@ export const GameCardContainerDiv = styled.div<Iprops>`
     padding-left: 40px;
   }
 
-  .card__score.up {
+  .card-score.up {
     display: flex;
     flex-direction: row;
     padding: 20px 40px 0px 40px;
@@ -41,7 +41,7 @@ export const GameCardContainerDiv = styled.div<Iprops>`
     justify-content: space-between;
   }
 
-  .card__score > .card__input-score {
+  .card-score > .card-input-score {
     border: none;
     outline: none;
     font-family: 'Roboto';
@@ -53,14 +53,14 @@ export const GameCardContainerDiv = styled.div<Iprops>`
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
   }
 
-  .card__score > .card__input-score:disabled {
+  .card-score > .card-input-score:disabled {
     font-weight: bold;
     font-style: normal;
     color: ${(props) => (props.selected ? 'rgba(0,0,0, 0.45)' : ' #000000')};
     background-color: ${(props) => (props.selected ? 'rgba(96, 218, 191, 0)' : ' #ffffff')};
     box-shadow: 0px 0px 0px 0px;
   }
-  .card__score > .pencil {
+  .card-score > .pencil {
     width: 80px;
     height: 80px;
     cursor: pointer;

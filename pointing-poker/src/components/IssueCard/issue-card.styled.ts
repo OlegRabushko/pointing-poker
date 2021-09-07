@@ -4,7 +4,7 @@ interface Iprops {
   current: boolean;
 }
 
-export const IssueCardContainer = styled.div<Iprops>`
+export const StyledIssueCard = styled.div<Iprops>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,12 +39,12 @@ export const IssueCardContainer = styled.div<Iprops>`
   }
 `;
 
-export const IssueInfoDiv = styled.div`
+export const StyledIssueInfo = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
 
-  & > .issue-card__name {
+  & > .issue-card-name {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
@@ -55,7 +55,7 @@ export const IssueInfoDiv = styled.div`
 
     color: #000000;
 
-    & > .issue-card__prior {
+    & > .issue-card-prior {
       font-size: 10px;
       line-height: 12px;
     }

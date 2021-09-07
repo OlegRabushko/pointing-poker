@@ -1,20 +1,20 @@
-import { IssueCardContainer, IssueInfoDiv } from './issue-card.style';
+import { StyledIssueCard, StyledIssueInfo } from './issue-card.styled';
 import addPlusImg from '../../assets/icons/plus-add.png';
 
 const AddIssueCard = () => {
   const current = true;
   const game = true;
   return (
-    <IssueCardContainer className="user-card" current={current}>
-      <IssueInfoDiv>
-        <span className="issue-card__name">Creat new Issue</span>
-      </IssueInfoDiv>
+    <StyledIssueCard className="user-card" current={current}>
+      <StyledIssueInfo>
+        <span className="issue-card-name">Creat new Issue</span>
+      </StyledIssueInfo>
       {game && (
         <button className="add-btn btn">
           <img src={addPlusImg} alt="" />
         </button>
       )}
-    </IssueCardContainer>
+    </StyledIssueCard>
   );
 };
 

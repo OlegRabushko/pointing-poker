@@ -1,11 +1,11 @@
 import addImg from '../../assets/icons/add-plus.png';
-import { AddCardContainerDiv } from './add-card.style';
+import { StyledAddCard } from './add-card.styled';
 
 const AddCard = () => {
   return (
-    <AddCardContainerDiv>
+    <StyledAddCard>
       <img src={addImg} alt="" />
-    </AddCardContainerDiv>
+    </StyledAddCard>
   );
 };
 

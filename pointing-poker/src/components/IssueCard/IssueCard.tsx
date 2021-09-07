@@ -1,4 +1,4 @@
-import { IssueCardContainer, IssueInfoDiv } from './issue-card.style';
+import { StyledIssueCard, StyledIssueInfo } from './issue-card.styled';
 import pencil from '../../assets/icons/edit_pencil.svg';
 import deleteImg from '../../assets/icons/delete_basket.png';
 import crossImg from '../../assets/icons/cancel-icon.png';
@@ -8,16 +8,16 @@ const IssueCard = () => {
   const game = false;
   const diller = true;
   return (
-    <IssueCardContainer className="user-card" current={current}>
-      <IssueInfoDiv>
+    <StyledIssueCard className="user-card" current={current}>
+      <StyledIssueInfo>
         {current && game ? (
           <span className="current-issue">Current</span>
         ) : (
           <span className="plug"></span>
         )}
-        <span className="issue-card__name">Issue 4523</span>
-        <span className="issue-card__prior">low priority</span>
-      </IssueInfoDiv>
+        <span className="issue-card-name">Issue 4523</span>
+        <span className="issue-card-prior">low priority</span>
+      </StyledIssueInfo>
       {!game && diller && (
         <div className="edit-wrapper">
           <button className="edit-btn btn">
@@ -34,7 +34,7 @@ const IssueCard = () => {
           <img src={crossImg} alt="" />
         </button>
       )}
-    </IssueCardContainer>
+    </StyledIssueCard>
   );
 };
 

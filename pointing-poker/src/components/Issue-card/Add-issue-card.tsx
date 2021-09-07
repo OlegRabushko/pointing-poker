@@ -9,11 +9,7 @@ const AddIssueCard = () => {
       <IssueInfoDiv>
         <span className="issue-card__name">Creat new Issue</span>
       </IssueInfoDiv>
-      {game && (
-        <button className="add-btn btn">
-          <img src={addPlusImg} alt="" />
-        </button>
-      )}
+      {game && <img src={addPlusImg} className="plus-img" alt="" />}
     </IssueCardContainer>
   );
 };

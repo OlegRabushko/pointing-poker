@@ -1,7 +1,6 @@
 import { IssueCardContainer, IssueInfoDiv } from './issue-card.style';
 import pencil from '../../assets/icons/edit_pencil.svg';
 import deleteImg from '../../assets/icons/delete_basket.png';
-import crossImg from '../../assets/icons/cancel-icon.png';
 
 const IssueCard = () => {
   const current = true;
@@ -20,19 +19,9 @@ const IssueCard = () => {
       </IssueInfoDiv>
       {!game && diller && (
         <div className="edit-wrapper">
-          <button className="edit-btn btn">
-            <img src={pencil} alt="edit" className="edit-img" />
-          </button>
-
-          <button className="delete-btn btn">
-            <img src={deleteImg} alt="" className="delete-img" />
-          </button>
+          <img src={pencil} alt="edit" className="edit-img" />
+          <img src={deleteImg} alt="" className="delete-img" />
         </div>
-      )}
-      {game && (
-        <button className="cancel-btn btn">
-          <img src={crossImg} alt="" />
-        </button>
       )}
     </IssueCardContainer>
   );

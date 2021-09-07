@@ -1,10 +1,11 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { mainReducer } from './reducers';
+import { lobbySettingsReducer, mainReducer } from './reducers';
 
 const rootReducer = combineReducers({
   hero: mainReducer,
+  settings: lobbySettingsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

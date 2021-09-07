@@ -31,6 +31,8 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'implicit-arrow-linebreak': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/click-events-have-key-events':'off',
+    'jsx-a11y/no-noninteractive-element-interactions':'off',
     'operator-linebreak': 'off',
     'no-nested-ternary': 'off',
     '@typescript-eslint/indent': 'off',

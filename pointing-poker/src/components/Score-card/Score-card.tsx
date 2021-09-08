@@ -1,4 +1,4 @@
-import { ScoreCardDiv } from './score-card.style';
+import { ScoreCardDiv } from './StyledScoreCard';
 
 const ScoreCard = () => {
   return (

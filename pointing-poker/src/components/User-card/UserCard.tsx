@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { ExcludeBtn, ImageContainer, UserCardContainer, UserInfoDiv } from './UserCard.style';
+import { ExcludeBtn, ImageContainer, StyledUserCard, UserInfoDiv } from './StyledUserCard';
 
-const UserCard = () => {
+interface IUserCardProps {
+  dealer?: boolean;
+}
+
+const UserCard: FC<IUserCardProps> = ({ dealer }) => {
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -11,7 +15,7 @@ const UserCard = () => {
   };
 
   return (
-    <UserCardContainer className="user-card">
+    <StyledUserCard className="user-card">
       <ImageContainer>
         <p className="initials">{getInitials('James Blake')}</p>
       </ImageContainer>
@@ -19,10 +23,12 @@ const UserCard = () => {
         <span className="card__user-name">James Blake</span>
         <span className="card__user-position">Software Engenier</span>
       </UserInfoDiv>
-      <ExcludeBtn>
-        <img src={cancelImg} alt="exclude button" />
-      </ExcludeBtn>
-    </UserCardContainer>
+      {!dealer && (
+        <ExcludeBtn>
+          <img src={cancelImg} alt="exclude button" />
+        </ExcludeBtn>
+      )}
+    </StyledUserCard>
   );
 };
 

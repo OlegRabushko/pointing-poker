@@ -16,7 +16,7 @@ const UserCard: FC<IUserCardProps> = ({ dealer }) => {
 
   return (
     <StyledUserCard className="user-card">
-      <ImageContainer>
+      <ImageContainer className="img-container">
         <p className="initials">{getInitials('James Blake')}</p>
       </ImageContainer>
       <UserInfoDiv>

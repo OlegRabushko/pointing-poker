@@ -1,4 +1,4 @@
-import { StyleFooter } from './footer.styled';
+import { StyleFooter } from './StyledFooter';
 import gitLogo from '../../assets/icons/github-ico.svg';
 
 const Footer = () => {

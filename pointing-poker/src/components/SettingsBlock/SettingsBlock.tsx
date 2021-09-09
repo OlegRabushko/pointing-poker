@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { StyledSettingBlock } from './settings.styled';
-import Switcher from '../Switcher/Swither';
+import { StyledSettingBlock } from './StyledSettings';
+import Switcher from '../Switcher/Switcher';
 import {
   setCardInRoundEnd,
   setCoffeeCard,

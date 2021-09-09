@@ -6,6 +6,8 @@ interface Iprops {
 
 export const StyleSwitcher = styled.div<Iprops>`
   position: relative;
+  width: 55px;
+  height: 30px;
   input {
     opacity: 0;
     width: 0;
@@ -20,19 +22,19 @@ export const StyleSwitcher = styled.div<Iprops>`
     right: 0;
     position: absolute;
     cursor: pointer;
-    width: 80px;
-    height: 40px;
-    background: ${(props) => (props.checked ? '#60dabf' : '#c4c4c4')};
+    width: 55px;
+    height: 30px;
+    background: ${({ checked }) => (checked ? '#60dabf' : '#c4c4c4')};
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     transition: 0.7s;
     &::before {
-      transform: ${(props) => (props.checked ? 'translateX(-40px)' : 'translateX(0px)')};
+      transform: ${({ checked }) => (checked ? 'translateX(-27.5px)' : 'translateX(0px)')};
 
       content: '';
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

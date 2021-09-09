@@ -1,22 +1,22 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSwitcher } from './switcher.styled';
+import { StyleSwitcher } from './StyledSwitcher';
 
 export interface ISwitcherProps {
   listener: (role: boolean) => {
     type: string;
     payload: boolean;
   };
-  checker: boolean;
+  checked: boolean;
 }
 
-const Switcher: FC<ISwitcherProps> = ({ listener, checker }) => {
+const Switcher: FC<ISwitcherProps> = ({ listener, checked }) => {
   const dispatch = useDispatch();
 
   return (
-    <StyleSwitcher checked={checker}>
+    <StyleSwitcher checked={checked}>
       <label>
-        <input type="checkbox" onClick={() => dispatch(listener(!checker))} />
+        <input type="checkbox" onClick={() => dispatch(listener(!checked))} />
         <span></span>
       </label>
     </StyleSwitcher>

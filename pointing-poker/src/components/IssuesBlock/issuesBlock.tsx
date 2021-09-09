@@ -1,15 +1,12 @@
-import { StyledIssuesBlock } from './issues.styled';
-import IssueCard from '../Issue-card/Issue-card';
-import AddIssueCard from '../Issue-card/Add-issue-card';
+import { StyledIssuesBlock } from './StyledIssues';
+import IssueCard from '../Issue-card/IssueCard';
+import AddIssueCard from '../Issue-card/AddIssueCard';
 
 const IssuesBlock = () => {
   return (
     <StyledIssuesBlock>
       <div className="text">Issues: </div>
       <div className="flex-box">
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
         <IssueCard />
         <AddIssueCard />
       </div>

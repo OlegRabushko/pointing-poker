@@ -1,14 +1,9 @@
-import logo from '../../assets/icons/logo.svg';
-import { StyleHeader } from './header.styled';
+import { HeaderStyled, IconStyled } from './StyledHeader';
 
-const Header = () => {
+export default function Header() {
   return (
-    <StyleHeader>
-      <img src={logo} alt="logo" />
-      <div className="fon-1"></div>
-      <div className="fon-2"></div>
-    </StyleHeader>
+    <HeaderStyled>
+      <IconStyled />
+    </HeaderStyled>
   );
-};
-
-export default Header;
+}

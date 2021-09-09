@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from '../MainPage/MainPage';
 import SettingPage from '../SettingPage/SettingPage';
-import { StyleBody } from './body.styled';
+import { StyleBody } from './StyledBody';
 
 const Body = () => {
   return (

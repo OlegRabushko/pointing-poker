@@ -1,9 +1,9 @@
-import { StyleSettingPage } from './setting-page.styled';
+import { StyleSettingPage } from './StyledSettingPage';
 import editPencil from '../../assets/icons/edit_pencil.svg';
 import ScramMaster from '../ScramMaster/ScramMaster';
 import MembersBlock from '../MembersBlock/MembersBlock';
-import IssuesBlock from '../IssuesBlock/issuesBlock';
 import SettingBlock from '../SettingsBlock/SettingsBlock';
+import IssuesBlock from '../IssuesBlock/IssuesBlock';
 
 const SettingPage = () => {
   return (

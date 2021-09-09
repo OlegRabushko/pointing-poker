@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyleFooter = styled.div`
+export const StyleFooter = styled.footer`
   display: flex;
   position: relative;
   ul {
@@ -18,7 +18,7 @@ export const StyleFooter = styled.div`
   }
   .fon {
     flex: 0 1 auto;
-    bottom: 0;
+    /* bottom: 0; */
     width: 100%;
     height: 50px;
     background-color: #2b3a67;

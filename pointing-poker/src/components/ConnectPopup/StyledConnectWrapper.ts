@@ -9,10 +9,15 @@ export const StyledConnectWrapper = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #c4c4c4;
+  z-index: 100;
+  background: rgba(196, 196, 196, 0.6);
 
   .connect-form-wrapper {
-    padding: 0 0 100px 30px;
+    padding: 0 0 80px 30px;
+
+    @media (max-width: 700px) {
+      padding: 0 0 40px 15px;
+    }
   }
 
   .connect-buttons-container {

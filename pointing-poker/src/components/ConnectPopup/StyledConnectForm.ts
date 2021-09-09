@@ -6,35 +6,72 @@ export const StyledConnectForm = styled.form`
   background-color: #fff;
   padding: 15px;
 
-  > legend {
+  legend {
     width: 100%;
-    text-align: center;
+    max-width: 520px;
     color: #000;
     font-size: 64px;
     font-weight: 700;
-    padding: 45px 0;
+
+    @media (max-width: 700px) {
+      font-size: 42px;
+      padding: 0 0 20px 15px;
+    }
+  }
+
+  .input-file-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 467px;
+
+    @media (max-width: 700px) {
+      padding: 0 0 20px 15px;
+    }
+  }
+
+  .legend-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 0 40px 30px;
+  }
+
+  .switcher-wrapper {
+    display: flex;
+    align-items: center;
+    font-family: Ruda;
+    font-weight: 700;
+    font-size: 24px;
+
+    p {
+      padding: 0 20px;
+      width: 183px;
+    }
   }
 
   .connect-label {
     display: block;
-    position: relative;
     font-size: 24px;
     width: 100%;
     max-width: 467px;
     font-weight: 700;
-    padding: 0 0 20px 0;
+    margin: 0 0 20px 0;
+
+    @media (max-width: 700px) {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+    }
   }
 
   .upload-label {
-    display: inline-flex;
-    justify-content: center;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 47px;
     max-width: 276px;
     margin: 0 0 20px 0;
-    padding: 0;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-weight: 300;
     font-size: 24px;
     cursor: pointer;
@@ -42,6 +79,11 @@ export const StyledConnectForm = styled.form`
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 0px 10px;
+
+    @media (max-width: 700px) {
+      font-size: 18px;
+      height: 40px;
+    }
   }
 
   .connect-input {
@@ -56,6 +98,11 @@ export const StyledConnectForm = styled.form`
     border-radius: 0px 0px 0px 10px;
     outline: none;
     margin: 0 0 10px 0;
+
+    @media (max-width: 700px) {
+      font-size: 19px;
+      height: 40px;
+    }
   }
 
   .upload-input {

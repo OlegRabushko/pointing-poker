@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyleMainPage = styled.div`
-  padding: 100px 30px 0 30px;
+  padding: 70px 30px 0 30px;
   .header {
     position: relative;
     margin: 0 auto;
@@ -63,14 +63,13 @@ export const StyleMainPage = styled.div`
       font-size: 48px;
       line-height: 56px;
       color: #66999b;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       @media (max-width: 700px) {
         font-size: 40px;
       }
     }
     div:nth-child(3) {
-      margin-top: 40px;
-      text-align: center;
+      margin-top: 20px;
     }
   }
   .flex-box {
@@ -79,8 +78,6 @@ export const StyleMainPage = styled.div`
   }
   input {
     width: 100%;
-    margin-top: 10px;
-    height: 50px;
     font-size: 22px;
     padding: 0 10px;
     outline: none;

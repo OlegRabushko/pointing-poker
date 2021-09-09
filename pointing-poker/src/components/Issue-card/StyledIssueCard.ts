@@ -4,7 +4,7 @@ interface Iprops {
   current: boolean;
 }
 
-export const StyledIssueCard = styled.div<Iprops>`
+export const IssueCardContainer = styled.div<Iprops>`
   display: flex;
   flex-direction: row;
   align-items: center;

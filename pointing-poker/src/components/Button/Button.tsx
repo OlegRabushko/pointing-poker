@@ -6,11 +6,20 @@ interface IButtonProps {
   colorBG: string;
   text: string;
   mainPage?: boolean;
+  borderRadius?: string;
+  display?: string;
+  onClick?: () => void;
 }
 
-const Button: FC<IButtonProps> = ({ colorBG, text, color, mainPage }) => {
+const Button: FC<IButtonProps> = ({ colorBG, text, color, mainPage, borderRadius, onClick }) => {
   return (
-    <StyleButton color={color} colorBG={colorBG} mainPage={mainPage}>
+    <StyleButton
+      onClick={onClick}
+      color={color}
+      colorBG={colorBG}
+      mainPage={mainPage}
+      borderRadius={borderRadius}
+    >
       <button>{text}</button>
     </StyleButton>
   );

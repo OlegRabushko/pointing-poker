@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { ExcludeBtn, ImageContainer, StyledUserCard, UserInfoDiv } from './StyledUserCard';
+import { StyledUserCard, ExcludeBtn, ImageContainer, UserInfoDiv } from './StyledUserCard';
 
 interface IUserCardProps {
   dealer?: boolean;

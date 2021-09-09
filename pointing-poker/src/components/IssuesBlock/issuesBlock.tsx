@@ -8,12 +8,6 @@ const IssuesBlock = () => {
       <div className="text">Issues: </div>
       <div className="flex-box">
         <IssueCard />
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
         <AddIssueCard />
       </div>
     </StyledIssuesBlock>

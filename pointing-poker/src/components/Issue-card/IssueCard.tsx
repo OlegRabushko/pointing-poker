@@ -1,4 +1,4 @@
-import { StyledIssueCard, IssueInfoDiv } from './StyledIssueCard';
+import { IssueCardContainer, IssueInfoDiv } from './StyledIssueCard';
 import pencil from '../../assets/icons/edit_pencil.svg';
 import deleteImg from '../../assets/icons/delete_basket.png';
 
@@ -7,7 +7,7 @@ const IssueCard = () => {
   const game = false;
   const diller = true;
   return (
-    <StyledIssueCard className="user-card" current={current}>
+    <IssueCardContainer className="user-card" current={current}>
       <IssueInfoDiv>
         {current && game ? (
           <span className="current-issue">Current</span>
@@ -23,7 +23,7 @@ const IssueCard = () => {
           <img src={deleteImg} alt="" className="delete-img" />
         </div>
       )}
-    </StyledIssueCard>
+    </IssueCardContainer>
   );
 };
 

@@ -1,10 +1,15 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { lobbySettingsReducer, mainReducer } from './reducers';
+import {
+  connectFormDataReducer,
+  connectCheckboxToLobbyReducer,
+  lobbySettingsReducer,
+} from './reducers';
 
 const rootReducer = combineReducers({
-  hero: mainReducer,
+  dataConnectForm: connectFormDataReducer,
+  connectCheckbox: connectCheckboxToLobbyReducer,
   settings: lobbySettingsReducer,
 });
 

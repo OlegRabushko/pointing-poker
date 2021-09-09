@@ -1,19 +1,27 @@
-import { BrowserRouter } from 'react-router-dom';
-import GlobalStyle from './components/GlobalStyle/StyledGlobal';
+import styled from 'styled-components';
+import GlobalStyle from './components/GlobalStyle/GlobalStyle';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Body from './components/Body/Body';
 
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+`;
+
 const App = () => {
   return (
-    <BrowserRouter>
+    <StyledApp>
       <GlobalFonts />
       <GlobalStyle />
       <Header />
       <Body />
       <Footer />
-    </BrowserRouter>
+    </StyledApp>
   );
 };
 

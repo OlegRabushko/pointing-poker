@@ -12,14 +12,20 @@ export const StyledUserCard = styled.div`
   border-radius: 4px;
 `;
 
-export const ImageContainer = styled.div`
+interface IPropsAvater {
+  background?: string;
+  width?: string;
+  height?: string;
+}
+
+export const ImageContainer = styled.div<IPropsAvater>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55px;
-  height: 55px;
+  width: ${({ width }) => width || '55px'};
+  height: ${({ height }) => height || '55px'};
   border-radius: 50%;
-  background-color: #60dabf;
+  background: #60dabf ${({ background }) => background || ''} center / cover no-repeat;
 
   .initials {
     font-weight: bold;

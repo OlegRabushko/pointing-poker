@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import { blue } from '../GlobalStyle/StyledGlobal';
-import IssuesBlock from '../IssuesBlock/issuesBlock';
+import IssuesBlock from '../IssuesBlock/IssuesBlock';
 import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
 import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
+import { blue } from '../GlobalStyle/GlobalStyle';
 
 const GamePage = () => {
   const [openResults, setOpenResults] = useState(false);

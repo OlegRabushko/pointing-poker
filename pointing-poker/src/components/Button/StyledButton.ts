@@ -4,29 +4,29 @@ interface Iprops {
   colorBG: string;
   color: string;
   mainPage?: boolean;
+  borderRadius?: string;
 }
 
 export const StyleButton = styled.div<Iprops>`
   button {
-    background-color: ${(props) => props.colorBG};
+    background-color: ${({ colorBG }) => colorBG};
     outline: none;
-    border: none;
-    height: ${(props) => (props.mainPage ? '50px' : '40px')};
-    width: ${(props) => (props.mainPage ? '240px' : '180px')};
+    height: ${({ mainPage }) => (mainPage ? '60px' : '47px')};
+    width: ${({ mainPage }) => (mainPage ? '241px' : '189px')};
+    border-radius: ${({ borderRadius }) => borderRadius || '3px'};
     cursor: pointer;
-    color: ${(props) => props.color};
+    color: ${({ color }) => color};
     font-size: 24px;
     font-weight: bold;
-    border-radius: 3px;
     border: 1px solid #2b3a67;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    transition: 0.2;
+    transition: 0.2s;
     &:hover {
-      color: ${(props) => props.colorBG};
-      background-color: ${(props) => props.color};
+      color: ${({ colorBG }) => colorBG};
+      background-color: ${({ color }) => color};
     }
     @media (max-width: 700px) {
-      width: 180px;
+      width: 189px;
       font-size: 20px;
       height: 40px;
     }

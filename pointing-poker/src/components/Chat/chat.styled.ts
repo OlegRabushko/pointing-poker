@@ -6,30 +6,24 @@ export const StyledChatBox = styled.div`
   flex-direction: column;
   overflow: hidden;
   height: 80vh;
+  width: 400px;
 `;
 
 export const StyledChatWindow = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-`;
-
-export const StyledMsgMe = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  margin: 0.5rem 0;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgb(0 0 0 / 14%), 0 4px 8px rgb(0 0 0 / 28%);
 
   .msg-txt {
     border-radius: 1.15rem;
     line-height: 1.25;
-    max-width: 75%;
+    max-width: 100%;
     padding: 0.5rem 0.875rem;
     position: relative;
-    word-wrap: break-word;
+    word-break: break-word;
     width: fit-content;
-    background-color: #248bf5;
-    color: #fff;
   }
 
   .msg-txt::before {
@@ -37,11 +31,6 @@ export const StyledMsgMe = styled.div`
     content: '';
     height: 1rem;
     position: absolute;
-
-    border-bottom-left-radius: 0.8rem 0.7rem;
-    border-right: 1rem solid #248bf5;
-    right: -0.35rem;
-    transform: translate(0, -0.1rem);
   }
 
   .msg-txt::after {
@@ -49,7 +38,60 @@ export const StyledMsgMe = styled.div`
     content: '';
     height: 1rem;
     position: absolute;
+  }
 
+  .text-bubble {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+  }
+
+  .chat-username {
+    padding: 0 0 3px 0;
+    font-weight: 500;
+  }
+
+  .msg {
+    position: relative;
+  }
+
+  .msg-info {
+    font-size: 12px;
+    user-select: none;
+    padding: 0 0 0 0;
+    line-height: 1;
+    vertical-align: bottom;
+  }
+`;
+
+export const StyledMsgMe = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  margin: 0.5rem 0;
+
+  .text-bubble {
+    justify-content: flex-end;
+    margin: 0 7px 0 15px;
+  }
+
+  .chat-username {
+    color: yellowgreen;
+  }
+
+  .msg-txt {
+    background-color: #248bf5;
+    color: #fff;
+  }
+
+  .msg-txt::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #248bf5;
+    right: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+
+  .msg-txt::after {
     background-color: #fff;
     border-bottom-left-radius: 0.5rem;
     right: -40px;
@@ -64,25 +106,21 @@ export const StyledMsgOther = styled.div`
   margin: 0.5rem 0;
   align-items: flex-start;
 
-  .msg-txt {
-    border-radius: 1.15rem;
-    line-height: 1.25;
-    max-width: 75%;
-    padding: 0.5rem 0.875rem;
-    position: relative;
-    word-wrap: break-word;
-    width: fit-content;
+  .text-bubble {
+    justify-content: flex-start;
+    margin: 0 15px 0 7px;
+  }
 
+  .chat-username {
+    color: orange;
+  }
+
+  .msg-txt {
     background-color: #e5e5ea;
     color: #000;
   }
 
   .msg-txt::before {
-    bottom: -0.1rem;
-    content: '';
-    height: 1rem;
-    position: absolute;
-
     border-bottom-right-radius: 0.8rem 0.7rem;
     border-left: 1rem solid #e5e5ea;
     left: -0.35rem;
@@ -90,11 +128,6 @@ export const StyledMsgOther = styled.div`
   }
 
   .msg-txt::after {
-    bottom: -0.1rem;
-    content: '';
-    height: 1rem;
-    position: absolute;
-
     background-color: #fff;
     border-bottom-right-radius: 0.5rem;
     left: 20px;
@@ -103,4 +136,44 @@ export const StyledMsgOther = styled.div`
   }
 `;
 
-export const StyledChatInput = styled.form``;
+export const StyledChatInput = styled.form`
+  .input-wrapper {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    /* padding: 5px 10px; */
+    border: 2px solid #f2f2f2;
+  }
+
+  .text-input {
+    padding: 10px 5px;
+    border: none;
+    background-color: #ffffff;
+    outline: none;
+    resize: none;
+    width: 400px;
+    word-break: break-word;
+  }
+
+  [contentEditable='true']:empty::before {
+    content: attr(data-placeholder);
+    color: #a2acb4;
+  }
+
+  .send-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    background-color: #248bf5;
+    cursor: pointer;
+  }
+
+  .send-btn-img {
+    transition: transform 0.5s ease-in-out;
+  }
+  .send-btn-img:hover {
+    transform: rotate(-90deg);
+    transition: transform 0.5s ease-in-out;
+  }
+`;

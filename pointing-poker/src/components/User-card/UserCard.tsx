@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { ExcludeBtn, ImageContainer, UserCardContainer, UserInfoDiv } from './StyledUserCard';
+import { StyledUserCard, ExcludeBtn, ImageContainer, UserInfoDiv } from './StyledUserCard';
 
 interface IUserCardProps {
-  dealer: boolean;
+  dealer?: boolean;
 }
 
 const UserCard: FC<IUserCardProps> = ({ dealer }) => {
@@ -15,8 +15,8 @@ const UserCard: FC<IUserCardProps> = ({ dealer }) => {
   };
 
   return (
-    <UserCardContainer className="user-card">
-      <ImageContainer>
+    <StyledUserCard className="user-card">
+      <ImageContainer className="img-container">
         <p className="initials">{getInitials('James Blake')}</p>
       </ImageContainer>
       <UserInfoDiv>
@@ -28,7 +28,7 @@ const UserCard: FC<IUserCardProps> = ({ dealer }) => {
           <img src={cancelImg} alt="exclude button" />
         </ExcludeBtn>
       )}
-    </UserCardContainer>
+    </StyledUserCard>
   );
 };
 

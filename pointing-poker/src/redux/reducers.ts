@@ -5,6 +5,7 @@ import {
   SET_QUESTION_CARD,
   ActionTypeLobbySettings,
   SET_SCRAM_MASTER_ROLE,
+  SET_SEQUENCE_TYPE,
   SET_OBSERVER,
   ActionTypeConnectLobby,
   ActionTypeConnectFormData,
@@ -21,6 +22,7 @@ const lobbySettingsState = {
   timerNeeded: true,
   coffeeCardNeeded: true,
   questionCardNeeded: false,
+  sequenceType: 'Fibonacci',
 };
 
 export const lobbySettingsReducer = (
@@ -31,27 +33,32 @@ export const lobbySettingsReducer = (
     case SET_SCRAM_MASTER_ROLE:
       return {
         ...state,
-        scramMasterAsPlayer: action.payload,
+        scramMasterAsPlayer: action.payload as boolean,
       };
     case SET_CARD_IN_ROUND_END:
       return {
         ...state,
-        changeCardInRoundEnd: action.payload,
+        changeCardInRoundEnd: action.payload as boolean,
       };
     case SET_TIMER:
       return {
         ...state,
-        timerNeeded: action.payload,
+        timerNeeded: action.payload as boolean,
       };
     case SET_COFFEE_CARD:
       return {
         ...state,
-        coffeeCardNeeded: action.payload,
+        coffeeCardNeeded: action.payload as boolean,
       };
     case SET_QUESTION_CARD:
       return {
         ...state,
-        questionCardNeeded: action.payload,
+        questionCardNeeded: action.payload as boolean,
+      };
+    case SET_SEQUENCE_TYPE:
+      return {
+        ...state,
+        sequenceType: action.payload as string,
       };
     default:
       return state;

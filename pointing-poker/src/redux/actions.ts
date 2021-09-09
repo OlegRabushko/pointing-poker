@@ -11,6 +11,7 @@ import {
   SET_CONNECT_FORM_ROLE,
   SET_AVATAR,
   SHOW_CONNECT_FORM,
+  SET_SEQUENCE_TYPE,
 } from './redux-types';
 
 export const setHeroInfo = (info: string) => ({ type: SET_HERO_INFO, payload: info });
@@ -34,6 +35,10 @@ export const setCoffeeCard = (count: boolean) => ({
 export const setQuestionCard = (count: boolean) => ({
   type: SET_QUESTION_CARD,
   payload: count,
+});
+export const setSequenceType = (sequence: string) => ({
+  type: SET_SEQUENCE_TYPE,
+  payload: sequence,
 });
 
 // CONNECT FORM ACTION CREATORS

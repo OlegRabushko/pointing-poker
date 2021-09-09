@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const blue = '#fff';
-
 const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;

@@ -4,7 +4,7 @@ import { AddCardContainerDiv } from './StyledAddCard';
 const AddCard = () => {
   return (
     <AddCardContainerDiv>
-      <img src={addImg} alt="" />
+      <img src={addImg} alt="add-ico" />
     </AddCardContainerDiv>
   );
 };

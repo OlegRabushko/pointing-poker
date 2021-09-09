@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UserCardContainer = styled.div`
+export const StyledUserCard = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;

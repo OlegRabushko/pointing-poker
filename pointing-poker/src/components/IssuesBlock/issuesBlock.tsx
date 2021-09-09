@@ -1,4 +1,4 @@
-import { StyledIssuesBlock } from './StyledIssues';
+import { StyledIssuesBlock } from './StyledIssuesBlock';
 import IssueCard from '../Issue-card/IssueCard';
 import AddIssueCard from '../Issue-card/AddIssueCard';
 

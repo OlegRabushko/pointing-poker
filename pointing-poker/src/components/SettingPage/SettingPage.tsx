@@ -1,22 +1,20 @@
-import { StyleSettingPage } from './StyledSettingPage';
-import editPencil from '../../assets/icons/edit_pencil.svg';
-import ScramMaster from '../ScramMaster/ScramMaster';
 import MembersBlock from '../MembersBlock/MembersBlock';
 import SettingBlock from '../SettingsBlock/SettingsBlock';
 import IssuesBlock from '../IssuesBlock/IssuesBlock';
+import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
+import ScramMasterBlock from '../ScramMasterBlock/ScramMasterBlock';
+import CardValuesBlock from '../CardValuesBlock/CardValuesBlock';
 
 const SettingPage = () => {
   return (
-    <StyleSettingPage>
-      <section className="header">
-        <div className="header-text">Spring 23 planning</div>
-        <img src={editPencil} alt="" />
-      </section>
-      <ScramMaster />
+    <>
+      <LobbyHeaderBlock />
+      <ScramMasterBlock />
       <MembersBlock />
       <IssuesBlock />
       <SettingBlock />
-    </StyleSettingPage>
+      <CardValuesBlock />
+    </>
   );
 };
 

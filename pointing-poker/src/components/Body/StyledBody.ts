@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const StyleBody = styled.main`
   margin: 0 auto;
   width: 1100px;
-  height: 100%;
   min-height: 880px;
+  height: 100%;
   padding-bottom: 100px;
   margin-bottom: 50px;
   padding: 20px;

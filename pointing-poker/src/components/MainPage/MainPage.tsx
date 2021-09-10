@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { showConnectForm } from '../../redux/actions';
@@ -37,9 +36,13 @@ const MainPage = () => {
         </p>
         <div className="flex-box">
           <input type="text" />
-          <Link to="/lobby">
-            <Button color="#fff" mainPage colorBG="#2B3A67" text="Connect" />
-          </Link>
+          <Button
+            color="#fff"
+            mainPage
+            colorBG="#2B3A67"
+            text="Connect"
+            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+          />
         </div>
       </section>
       {isConnectForm && <ConnectPopup />}

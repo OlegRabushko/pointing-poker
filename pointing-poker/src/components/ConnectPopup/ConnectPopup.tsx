@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import {
@@ -102,17 +102,15 @@ const ConnectPopup = () => {
           </ImageContainer>
         </div>
         <div className="connect-buttons-container">
-          <BrowserRouter>
-            <Link to="/settings">
-              <Button
-                mainPage
-                text="Confirm"
-                color="#fff"
-                colorBG="#2B3A67"
-                onClick={() => dispatch(showConnectForm(!isConnectForm))}
-              />
-            </Link>
-          </BrowserRouter>
+          <Link to="/settings">
+            <Button
+              mainPage
+              text="Confirm"
+              color="#fff"
+              colorBG="#2B3A67"
+              onClick={() => dispatch(showConnectForm(!isConnectForm))}
+            />
+          </Link>
           <Button
             mainPage
             colorBG="#fff"

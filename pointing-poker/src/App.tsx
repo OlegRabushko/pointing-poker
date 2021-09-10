@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import GlobalStyle from './components/GlobalStyle/GlobalStyle';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Body from './components/Body/Body';
+import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 
 const StyledApp = styled.div`
   display: flex;

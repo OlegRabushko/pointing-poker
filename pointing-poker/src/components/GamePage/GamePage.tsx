@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import IssuesBlock from '../IssuesBlock/IssuesBlock';
 import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
 import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import { blue } from '../GlobalStyle/GlobalStyle';
+import IssuesBlock from '../IssuesBlock/IssuesBlock';
+import { blueColor } from '../GlobalStyle/StyledGlobal';
 
 const GamePage = () => {
   const [openResults, setOpenResults] = useState(false);
@@ -29,7 +29,7 @@ const GamePage = () => {
               <ScramMaster />
               <div className="stop-game-btn">
                 <Link to="/">
-                  <Button text="Stop Game" colorBG="#fff" color={blue}></Button>
+                  <Button text="Stop Game" colorBG="#fff" color={blueColor}></Button>
                 </Link>
               </div>
             </div>
@@ -39,7 +39,7 @@ const GamePage = () => {
               <IssuesBlock />
               <div className="timer-block">
                 <Timer />
-                <Button text="Run Round" color="#fff" colorBG={blue} />
+                <Button text="Run Round" color="#fff" colorBG={blueColor} />
               </div>
             </div>
           </div>

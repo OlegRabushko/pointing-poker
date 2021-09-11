@@ -1,5 +1,5 @@
-import { StyledIssueCard, StyledIssueInfo } from './issue-card.styled';
 import addPlusImg from '../../assets/icons/plus-add.png';
+import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 
 const AddIssueCard = () => {
   const current = true;
@@ -7,13 +7,9 @@ const AddIssueCard = () => {
   return (
     <StyledIssueCard className="user-card" current={current}>
       <StyledIssueInfo>
-        <span className="issue-card-name">Creat new Issue</span>
+        <span className="issue-card__name">Creat new Issue</span>
       </StyledIssueInfo>
-      {game && (
-        <button className="add-btn btn">
-          <img src={addPlusImg} alt="" />
-        </button>
-      )}
+      {game && <img src={addPlusImg} className="plus-img" alt="" />}
     </StyledIssueCard>
   );
 };

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import UserCard from '../UserCard/UserCard';
 import Button from '../Button/Button';
-import { StyledScramMaster } from './scram-master.styled';
+import { StyledScramMaster } from './StyledScramMaster';
 
 const ScramMaster = () => {
   return (

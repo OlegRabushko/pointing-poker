@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ImageContainer } from '../UserCard/user-card.styled';
+import { ImageContainer } from '../UserCard/StyledUserCard';
 import sendImg from '../../assets/icons/send-icon.svg';
-import { StyledChatBox, StyledChatInput, StyledChatWindow, StyledMsg } from './chat.styled';
+import { StyledChatBox, StyledChatInput, StyledChatWindow, StyledMsg } from './StyledChat';
 import { RootState } from '../../redux';
 import { IMsg } from '../../types/interfaces';
 import { vME, vOTHERS } from '../../types/virables';
-import { setMessage } from '../../redux/chat-reducer/chat-actions';
+import { setMessage } from '../../redux/ChatRedux/ChatActions';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');

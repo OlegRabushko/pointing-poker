@@ -1,15 +1,12 @@
+import { StyledIssuesBlock } from './StyledIssuesBlock';
 import AddIssueCard from '../IssueCard/AddIssueCard';
 import IssueCard from '../IssueCard/IssueCard';
-import { StyledIssuesBlock } from './issues.styled';
 
-const IssuesBlock = () => {
+const IssuesBlock = (): JSX.Element => {
   return (
     <StyledIssuesBlock>
       <div className="text">Issues: </div>
       <div className="flex-box">
-        <IssueCard />
-        <IssueCard />
-        <IssueCard />
         <IssueCard />
         <AddIssueCard />
       </div>

@@ -1,4 +1,4 @@
-import { StyledMembers } from './members.styled';
+import { StyledMembers } from './StyledMembers';
 import UserCard from '../UserCard/UserCard';
 
 const MembersBlock = () => {

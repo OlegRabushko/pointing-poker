@@ -1,6 +1,6 @@
-import { StyledIssueCard, StyledIssueInfo } from './issue-card.styled';
 import pencil from '../../assets/icons/edit_pencil.svg';
 import deleteImg from '../../assets/icons/delete_basket.png';
+import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 
 const IssueCard = () => {
   const current = true;
@@ -23,11 +23,6 @@ const IssueCard = () => {
           <img src={deleteImg} alt="" className="delete-img" />
         </div>
       )}
-      {/* {game && (
-        <button className="cancel-btn btn">
-          <img src={crossImg} alt="" />
-        </button>
-      )} */}
     </StyledIssueCard>
   );
 };

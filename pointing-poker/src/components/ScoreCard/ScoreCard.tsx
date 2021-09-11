@@ -1,4 +1,4 @@
-import { StyledScoreCard } from './score-card.styled';
+import { StyledScoreCard } from './StyledScoreCard';
 
 const ScoreCard = () => {
   return (

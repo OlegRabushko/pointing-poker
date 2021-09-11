@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
+import { RootState } from '../../redux';
+import { showConnectForm } from '../../redux/actions';
 import Button from '../Button/Button';
-import { StyleMainPage } from './main-page.styled';
+import ConnectPopup from '../ConnectPopup/ConnectPopup';
+import { StyleMainPage } from './StyledMainPage';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  const { isConnectForm } = useSelector((state: RootState) => state.dataConnectForm);
+
   return (
     <StyleMainPage>
       <section className="header">
@@ -16,9 +22,13 @@ const MainPage = () => {
         <div>Start your planning</div>
         <div className="flex-box">
           <p>Create session:</p>
-          <Link to="/settings">
-            <Button color="#fff" mainPage colorBG="#2B3A67" text="Start new game" />
-          </Link>
+          <Button
+            color="#fff"
+            mainPage
+            colorBG="#2B3A67"
+            text=" Start new game"
+            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+          />
         </div>
         <div>OR:</div>
         <p className="connect__text">
@@ -26,9 +36,16 @@ const MainPage = () => {
         </p>
         <div className="flex-box">
           <input type="text" />
-          <Button color="#fff" mainPage colorBG="#2B3A67" text="Connect" />
+          <Button
+            color="#fff"
+            mainPage
+            colorBG="#2B3A67"
+            text="Connect"
+            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+          />
         </div>
       </section>
+      {isConnectForm && <ConnectPopup />}
     </StyleMainPage>
   );
 };

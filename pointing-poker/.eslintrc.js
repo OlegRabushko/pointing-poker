@@ -44,7 +44,7 @@ module.exports = {
     'eslint-disable linebreak-style': 'off',
     'react/no-array-index-key': 'off',
     'no-unused-vars': 'error',
-    'no-console': 'error',
+    'no-console': 'warn',
     'no-await-in-loop': 'error',
     '@typescript-eslint/no-unused-vars': ['error'],
     'object-curly-newline': 'off',

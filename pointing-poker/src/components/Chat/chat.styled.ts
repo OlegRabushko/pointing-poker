@@ -1,20 +1,40 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { vME } from '../../types/virables';
 
 export const StyledChatBox = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  height: 80vh;
+  height: 85vh;
   width: 400px;
+  z-index: 10;
 `;
 
 export const StyledChatWindow = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  flex: 2 2 85vh;
+  padding: 5px 5px 0 5px;
+  overflow-y: scroll;
   background-color: #ffffff;
   box-shadow: 0 0 4px rgb(0 0 0 / 14%), 0 4px 8px rgb(0 0 0 / 28%);
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
   .msg-txt {
     border-radius: 1.15rem;
@@ -64,73 +84,63 @@ export const StyledChatWindow = styled.div`
   }
 `;
 
-export const StyledMsgMe = styled.div`
+export const StyledMsg = styled.div`
   display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-end;
+  ${({ viewType }: { viewType: string }) =>
+    viewType === vME
+      ? css`
+          flex-direction: row-reverse;
+          align-items: flex-end;
+        `
+      : css`
+          flex-direction: row;
+          align-items: flex-start;
+        `};
   margin: 0.5rem 0;
 
   .text-bubble {
-    justify-content: flex-end;
-    margin: 0 7px 0 15px;
+    ${({ viewType }: { viewType: string }) =>
+      viewType === vME
+        ? css`
+            justify-content: flex-end;
+            margin: 0 7px 0 15px;
+          `
+        : css`
+            justify-content: flex-start;
+            margin: 0 15px 0 7px;
+          `};
   }
 
   .chat-username {
-    color: yellowgreen;
+    color: ${({ viewType }: { viewType: string }) => (viewType === vME ? 'yellowgreen' : 'orange')};
   }
 
   .msg-txt {
-    background-color: #248bf5;
+    background-color: ${({ viewType }: { viewType: string }) =>
+      viewType === vME ? '#248bf5' : '#248bf5'};
     color: #fff;
   }
 
   .msg-txt::before {
+    border-right: ${({ viewType }: { viewType: string }) =>
+      viewType === vME ? '1rem solid #248bf5; ' : '1rem solid #e5e5ea;'};
     border-bottom-left-radius: 0.8rem 0.7rem;
-    border-right: 1rem solid #248bf5;
     right: -0.35rem;
     transform: translate(0, -0.1rem);
   }
 
   .msg-txt::after {
+    ${({ viewType }: { viewType: string }) =>
+      viewType === vME
+        ? css`
+            right: -40px;
+          `
+        : css`
+            left: 20px;
+          `};
     background-color: #fff;
     border-bottom-left-radius: 0.5rem;
-    right: -40px;
-    transform: translate(-30px, -2px);
-    width: 10px;
-  }
-`;
 
-export const StyledMsgOther = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0.5rem 0;
-  align-items: flex-start;
-
-  .text-bubble {
-    justify-content: flex-start;
-    margin: 0 15px 0 7px;
-  }
-
-  .chat-username {
-    color: orange;
-  }
-
-  .msg-txt {
-    background-color: #e5e5ea;
-    color: #000;
-  }
-
-  .msg-txt::before {
-    border-bottom-right-radius: 0.8rem 0.7rem;
-    border-left: 1rem solid #e5e5ea;
-    left: -0.35rem;
-    transform: translate(0, -0.1rem);
-  }
-
-  .msg-txt::after {
-    background-color: #fff;
-    border-bottom-right-radius: 0.5rem;
-    left: 20px;
     transform: translate(-30px, -2px);
     width: 10px;
   }
@@ -141,11 +151,12 @@ export const StyledChatInput = styled.form`
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
-    /* padding: 5px 10px; */
-    border: 2px solid #f2f2f2;
+    border-top: 2px solid #f2f2f2;
+    border-bottom: 3px solid #f2f2f2;
   }
 
   .text-input {
+    font-family: 'Roboto';
     padding: 10px 5px;
     border: none;
     background-color: #ffffff;

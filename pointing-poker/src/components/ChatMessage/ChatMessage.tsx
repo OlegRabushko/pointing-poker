@@ -1,6 +1,6 @@
 import { IMsg, IUsers } from '../../types/interfaces';
 import { vME, vOTHERS } from '../../types/virables';
-import { StyledMsg } from '../Chat/StyledChat';
+import { StyledMsg } from './StyledChatMsg';
 import { ImageContainer } from '../UserCard/StyledUserCard';
 
 interface IProps {

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { StyledChatInput } from '../Chat/StyledChat';
+import { StyledChatInput } from './StyledChatInput';
 import sendImg from '../../assets/icons/send-icon.svg';
 
 interface IProps {

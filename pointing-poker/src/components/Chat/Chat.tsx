@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ImageContainer } from '../UserCard/StyledUserCard';
-import sendImg from '../../assets/icons/send-icon.svg';
-import { StyledChatBox, StyledChatInput, StyledChatWindow, StyledMsg } from './StyledChat';
+import { StyledChatBox, StyledChatWindow } from './StyledChat';
 import { RootState } from '../../redux';
 import { IMsg } from '../../types/interfaces';
-import { vME, vOTHERS } from '../../types/virables';
 import { setMessage } from '../../redux/ChatRedux/ChatActions';
+import ChatMessage from '../ChatMessage/ChatMessage';
+import ChatInput from '../ChatInput/ChatInput';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');
@@ -28,60 +27,22 @@ const Chat = () => {
       userId: currUserID,
       username: users[currUserID].userName,
       msgText: msg,
-      msgDate: `${sendTime.getHours()}:${sendTime.getMinutes()}`,
+      msgDate: `${sendTime.getHours()}:${
+        sendTime.getMinutes().toString().length < 2
+          ? `0${sendTime.getMinutes()}`
+          : sendTime.getMinutes()
+      }`,
     });
-  };
-  const showMsg = ({ msgId, userId, username, msgText, msgDate }: IMsg): JSX.Element => {
-    const currMsgUser = users[userId];
-    return (
-      <StyledMsg key={msgId} viewType={userId === currUserID ? vME : vOTHERS}>
-        <ImageContainer className="avatar-chat">
-          {currMsgUser.avatatr ? (
-            <img src={currMsgUser.avatatr} className="" alt="avatar" />
-          ) : (
-            <p className="initials">{currMsgUser.userName.slice(0, 1)}</p>
-          )}
-        </ImageContainer>
-        <div className="text-bubble">
-          <div className="msg-txt">
-            <div className="chat-username">{username}</div>
-            <div className="msg">{msgText}</div>
-            <span className="msg-info">{msgDate}</span>
-          </div>
-        </div>
-      </StyledMsg>
-    );
   };
   useEffect(() => {}, []);
   return (
     <StyledChatBox>
-      <StyledChatWindow>{msgs.map((msgData: IMsg) => showMsg(msgData))}</StyledChatWindow>
-      <StyledChatInput>
-        <div className="input-wrapper">
-          <div
-            contentEditable="true"
-            role="textbox"
-            data-placeholder="Message"
-            className="text-input"
-            ref={txtRef}
-            onInput={(e: React.KeyboardEvent<HTMLDivElement>) =>
-              setMsg((e.target as HTMLInputElement).innerText)
-            }
-            onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) =>
-              e.key === 'Enter' && !e.shiftKey ? (submitMsg(), e.preventDefault()) : null
-            }
-            tabIndex={-1}
-          />
-          <div
-            role="button"
-            onClick={() => submitMsg()}
-            className="send-btn-container"
-            tabIndex={0}
-          >
-            <img src={sendImg} alt="send message" className="send-btn-img" />
-          </div>
-        </div>
-      </StyledChatInput>
+      <StyledChatWindow>
+        {msgs.map((msgData: IMsg, msgIndex) => (
+          <ChatMessage key={msgIndex} users={users} currUserID={currUserID} msgData={msgData} />
+        ))}
+      </StyledChatWindow>
+      <ChatInput submitMsg={submitMsg} setMsg={setMsg} txtRef={txtRef} />
     </StyledChatBox>
   );
 };

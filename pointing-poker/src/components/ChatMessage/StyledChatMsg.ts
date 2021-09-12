@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { vME } from '../../types/virables';
+import { vME } from '../../types/globalVirables';
 
 export const StyledMsg = styled.div`
   display: flex;

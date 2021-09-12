@@ -1,5 +1,5 @@
 import { IMsg, IUsers } from '../../types/interfaces';
-import { vME, vOTHERS } from '../../types/virables';
+import { vME, vOTHERS } from '../../types/globalVirables';
 import { StyledMsg } from './StyledChatMsg';
 import { ImageContainer } from '../UserCard/StyledUserCard';
 
@@ -18,8 +18,8 @@ const ChatMessage = ({
   return (
     <StyledMsg key={msgId} viewType={userId === currUserID ? vME : vOTHERS}>
       <ImageContainer className="avatar-chat">
-        {currMsgUser.avatatr ? (
-          <img src={currMsgUser.avatatr} className="" alt="avatar" />
+        {currMsgUser.avatar ? (
+          <img src={currMsgUser.avatar} className="" alt="avatar" />
         ) : (
           <p className="initials">{currMsgUser.userName.slice(0, 1)}</p>
         )}

@@ -12,7 +12,7 @@ export interface IUserInfo {
   userLatName: string;
   role: string;
   position: string;
-  avatatr: string;
+  avatar: string;
 }
 
 export interface IUsers {

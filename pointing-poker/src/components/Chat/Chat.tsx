@@ -23,12 +23,13 @@ const Chat = () => {
   };
   const submitMsg = () => {
     const sendTime = new Date();
+    const decimaLen = 2;
     sendMsgToServer({
       userId: currUserID,
       username: users[currUserID].userName,
       msgText: msg,
       msgDate: `${sendTime.getHours()}:${
-        sendTime.getMinutes().toString().length < 2
+        sendTime.getMinutes().toString().length < decimaLen
           ? `0${sendTime.getMinutes()}`
           : sendTime.getMinutes()
       }`,

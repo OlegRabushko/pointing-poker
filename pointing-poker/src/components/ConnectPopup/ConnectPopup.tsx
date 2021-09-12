@@ -12,7 +12,7 @@ import {
 } from '../../redux/actions';
 import Button from '../Button/Button';
 import Switcher from '../Switcher/Switcher';
-import { ImageContainer } from '../User-card/StyledUserCard';
+import { ImageContainer } from '../UserCard/StyledUserCard';
 import { StyledConnectForm } from './StyledConnectForm';
 import { StyledConnectWrapper } from './StyledConnectWrapper';
 

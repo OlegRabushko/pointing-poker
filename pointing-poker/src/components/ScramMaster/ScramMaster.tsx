@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import UserCard from '../User-card/UserCard';
+import UserCard from '../UserCard/UserCard';
 import Button from '../Button/Button';
 import { StyledScramMaster } from './StyledScramMaster';
 

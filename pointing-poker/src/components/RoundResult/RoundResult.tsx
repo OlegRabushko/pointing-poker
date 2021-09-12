@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import PlayerDecision from '../PlayerDecision/PlayerDecision';
-import UserCard from '../User-card/UserCard';
+import UserCard from '../UserCard/UserCard';
 import { StyledRoundResult } from './StyledRoundResult';
 import plusIco from '../../assets/icons/cancel-ico.svg';
 

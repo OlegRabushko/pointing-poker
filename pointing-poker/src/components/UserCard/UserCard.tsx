@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { StyledUserCard, ExcludeBtn, ImageContainer, UserInfoDiv } from './StyledUserCard';
+import { StyledUserCard, ImageContainer, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
 interface IUserCardProps {
   dealer?: boolean;
@@ -19,10 +19,10 @@ const UserCard: FC<IUserCardProps> = ({ dealer }) => {
       <ImageContainer className="img-container">
         <p className="initials">{getInitials('James Blake')}</p>
       </ImageContainer>
-      <UserInfoDiv>
-        <span className="card__user-name">James Blake</span>
-        <span className="card__user-position">Software Engenier</span>
-      </UserInfoDiv>
+      <StyledUserInfo>
+        <span className="card-user-name">James Blake</span>
+        <span className="card-user-position">Software Engenier</span>
+      </StyledUserInfo>
       {!dealer && (
         <ExcludeBtn>
           <img src={cancelImg} alt="exclude button" />

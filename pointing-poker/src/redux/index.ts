@@ -1,6 +1,8 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { chatReducer } from './ChatRedux/ChatReducer';
+import { initialReducer } from './InitialRedux/InitialReducer';
 import {
   connectFormDataReducer,
   connectCheckboxToLobbyReducer,
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   dataConnectForm: connectFormDataReducer,
   connectCheckbox: connectCheckboxToLobbyReducer,
   settings: lobbySettingsReducer,
+  initial: initialReducer,
+  chat: chatReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

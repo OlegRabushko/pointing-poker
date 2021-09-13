@@ -7,8 +7,8 @@ import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import IssuesBlock from '../IssuesBlock/IssuesBlock';
 import { blueColor } from '../GlobalStyle/StyledGlobal';
+import IssuesBlock from '../IssuesBlock/issuesBlock';
 
 const GamePage = () => {
   const [openResults, setOpenResults] = useState(false);

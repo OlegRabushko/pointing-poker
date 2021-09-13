@@ -1,5 +1,5 @@
 import { StyledMembers } from './StyledMembers';
-import UserCard from '../User-card/UserCard';
+import UserCard from '../UserCard/UserCard';
 
 const MembersBlock = () => {
   return (

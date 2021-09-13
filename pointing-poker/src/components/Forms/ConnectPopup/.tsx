@@ -15,12 +15,12 @@ import {
 } from '../../../redux/ReduxConnectForm/actions';
 import Button from '../../Button/Button';
 import Switcher from '../../Switcher/Switcher';
-import { ImageContainer } from '../../User-card/StyledUserCard';
 import { IConnectForm } from '../FormTypes';
 import { StyledInput } from './StyledInput';
 import { StyledLabel } from './StyledLabel';
 import { StyledConnectForm } from './StyledConnectForm';
 import { StyledConnectWrapper } from './StyledConnectWrapper';
+import { ImageContainer } from '../../UserCard/StyledUserCard';
 
 const ConnectPopup = () => {
   const getInitials = (name: string) => {

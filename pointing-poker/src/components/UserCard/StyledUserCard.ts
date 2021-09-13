@@ -38,14 +38,14 @@ export const ImageContainer = styled.div<IPropsAvater>`
   }
 `;
 
-export const UserInfoDiv = styled.div`
+export const StyledUserInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 25px;
   padding-top: 10px;
   flex: 1 0 auto;
 
-  .card__user-name {
+  .card-user-name {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
@@ -54,7 +54,7 @@ export const UserInfoDiv = styled.div`
     align-items: center;
     color: #000000;
   }
-  .card__user-position {
+  .card-user-position {
     font-size: 12px;
   }
 `;

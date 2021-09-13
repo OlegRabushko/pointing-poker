@@ -19,6 +19,7 @@
   "author": "Oleg Rabushko",
   "license": "MIT",
   "dependencies": {
+    "nanoid": "^3.1.25",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.15.2",

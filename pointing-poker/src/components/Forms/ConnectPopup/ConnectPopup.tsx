@@ -3,7 +3,6 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { RootState } from '../../../redux';
 
 import {
   setAvatar,
@@ -15,12 +14,13 @@ import {
 } from '../../../redux/ReduxConnectForm/actions';
 import Button from '../../Button/Button';
 import Switcher from '../../Switcher/Switcher';
-import { ImageContainer } from '../../User-card/StyledUserCard';
 import { IConnectForm } from '../FormTypes';
 import { StyledInput } from './StyledInput';
 import { StyledLabel } from './StyledLabel';
 import { StyledConnectForm } from './StyledConnectForm';
 import { StyledConnectWrapper } from './StyledConnectWrapper';
+import { RootState } from '../../../redux/index';
+import { ImageContainer } from '../../UserCard/StyledUserCard';
 
 const ConnectPopup = () => {
   const getInitials = (name: string) => {

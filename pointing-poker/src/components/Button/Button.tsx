@@ -8,10 +8,21 @@ interface IButtonProps {
   mainPage?: boolean;
   borderRadius?: string;
   display?: string;
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-const Button: FC<IButtonProps> = ({ colorBG, text, color, mainPage, borderRadius, onClick }) => {
+const Button: FC<IButtonProps> = ({
+  colorBG,
+  text,
+  color,
+  mainPage,
+  borderRadius,
+  onClick,
+  type,
+  disabled,
+}) => {
   return (
     <StyleButton
       onClick={onClick}
@@ -20,7 +31,9 @@ const Button: FC<IButtonProps> = ({ colorBG, text, color, mainPage, borderRadius
       mainPage={mainPage}
       borderRadius={borderRadius}
     >
-      <button>{text}</button>
+      <button type={type} disabled={disabled}>
+        {text}
+      </button>
     </StyleButton>
   );
 };

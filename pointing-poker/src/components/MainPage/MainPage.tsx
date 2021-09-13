@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
-import { showConnectForm } from '../../redux/actions';
+import { showConnectForm } from '../../redux/ReduxConnectForm/actions';
 import Button from '../Button/Button';
-import ConnectPopup from '../ConnectPopup/ConnectPopup';
+import ConnectPopup from '../Forms/ConnectPopup/ConnectPopup';
 import { StyleMainPage } from './StyledMainPage';
 
 const MainPage = () => {
@@ -21,7 +21,7 @@ const MainPage = () => {
       <section className="body">
         <div>Start your planning</div>
         <div className="flex-box">
-          <p>Create session:</p>
+          <p className="create-session-text">Create session:</p>
           <Button
             color="#fff"
             mainPage

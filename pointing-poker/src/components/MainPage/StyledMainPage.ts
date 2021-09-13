@@ -19,13 +19,13 @@ export const StyleMainPage = styled.div`
       left: -80px;
     }
   }
+  .create-session-text {
+    padding-top: 10px;
+  }
   p {
     font-weight: 300;
     font-size: 24px;
     line-height: 28px;
-    &:first-child {
-      padding-top: 10px;
-    }
     @media (max-width: 700px) {
       font-size: 20px;
       line-height: 24px;

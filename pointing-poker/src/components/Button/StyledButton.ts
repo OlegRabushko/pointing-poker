@@ -25,6 +25,9 @@ export const StyleButton = styled.div<Iprops>`
       color: ${({ colorBG }) => colorBG};
       background-color: ${({ color }) => color};
     }
+    &:disabled {
+      opacity: 0.5;
+    }
     @media (max-width: 700px) {
       width: 189px;
       font-size: 20px;

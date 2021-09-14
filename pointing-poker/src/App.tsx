@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Body from './components/Body/Body';
 import GlobalStyle from './components/GlobalStyle/StyledGlobal';
+import { connectToSocket } from './sockets/Sockets';
 
 const StyledApp = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
+  connectToSocket();
   return (
     <StyledApp>
       <GlobalFonts />

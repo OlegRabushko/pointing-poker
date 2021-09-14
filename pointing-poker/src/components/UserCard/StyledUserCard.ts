@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledUserCard = styled.div`
   display: flex;
@@ -26,7 +26,12 @@ export const ImageContainer = styled.div<IPropsAvater>`
   height: ${({ height }) => height || '55px'};
   border-radius: 50%;
   background: #60dabf ${({ background }) => background || ''} center / cover no-repeat;
-
+  ${(props) =>
+    props.className === 'avatar-chat'
+      ? css`
+          flex-shrink: 0;
+        `
+      : null}
   .initials {
     font-weight: bold;
     font-size: 32px;

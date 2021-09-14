@@ -5,8 +5,13 @@ import {
   SET_CONNECT_FORM_SURNAME,
   SET_OBSERVER,
   SHOW_CONNECT_FORM,
-} from './types';
+  SHOW_ISSUES_FORM,
+  SET_TITLE_ISSUE,
+  SET_LINK_ISSUE,
+  SET_PRIORITY_ISSUE,
+} from './FormTypes';
 
+// ACTION-CREATORS CONNECT FORM
 export const setObserver = (payload: boolean) => ({
   type: SET_OBSERVER,
   payload,
@@ -29,5 +34,23 @@ export const setAvatar = (payload: string) => ({
 });
 export const showConnectForm = (payload: boolean) => ({
   type: SHOW_CONNECT_FORM,
+  payload,
+});
+export const showIssuesForm = (payload: boolean) => ({
+  type: SHOW_ISSUES_FORM,
+  payload,
+});
+
+// ACTION-CREATORS ISSUE FORM
+export const setIssueTitle = (payload: string) => ({
+  type: SET_TITLE_ISSUE,
+  payload,
+});
+export const setIssueLink = (payload: string) => ({
+  type: SET_LINK_ISSUE,
+  payload,
+});
+export const setIssuePriority = (payload: string) => ({
+  type: SET_PRIORITY_ISSUE,
   payload,
 });

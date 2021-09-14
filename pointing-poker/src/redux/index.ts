@@ -4,10 +4,11 @@ import thunk from 'redux-thunk';
 import { chatReducer } from './ChatRedux/ChatReducer';
 import { initialReducer } from './InitialRedux/InitialReducer';
 import { lobbySettingsReducer } from './reducers';
-import { connectFormDataReducer } from './ReduxConnectForm/reducers';
+import { connectFormDataReducer, issueFormDataReducer } from './FormRedux/FormReducers';
 
 const rootReducer = combineReducers({
   dataConnectForm: connectFormDataReducer,
+  dataIssuesForm: issueFormDataReducer,
   settings: lobbySettingsReducer,
   initial: initialReducer,
   chat: chatReducer,

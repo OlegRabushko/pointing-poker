@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledTimer = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const StyledTimer = styled.div`
   justify-content: space-between;
   padding: 0 10px;
   border-radius: 5px;
-  background: #ffffff;
+  background: ${whiteColor};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   div {
@@ -15,7 +16,7 @@ export const StyledTimer = styled.div`
     font-size: 12px;
     color: rgba(0, 0, 0, 0.5);
   }
-  input {
+  & > input {
     text-align: center;
     appearance: none;
     font-size: 45px;

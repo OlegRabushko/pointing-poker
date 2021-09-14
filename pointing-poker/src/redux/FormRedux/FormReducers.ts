@@ -6,15 +6,21 @@ import {
   SET_CONNECT_FORM_SURNAME,
   SET_OBSERVER,
   SHOW_CONNECT_FORM,
-} from './types';
+  SHOW_ISSUES_FORM,
+  SET_TITLE_ISSUE,
+  ActionTypeIssueFormData,
+  SET_LINK_ISSUE,
+  SET_PRIORITY_ISSUE,
+} from './FormTypes';
 
-// CONNECT FORM INPUTS VALUE
+// CONNECT FORM
 const connectFormState = {
   firstName: '',
   lastName: '',
   job: '',
   avatar: '',
   isConnectForm: false,
+  isIssuesForm: false,
   role: false,
 };
 
@@ -48,10 +54,45 @@ export const connectFormDataReducer = (
         ...state,
         isConnectForm: action.payload,
       };
+    case SHOW_ISSUES_FORM:
+      return {
+        ...state,
+        isIssuesForm: action.payload,
+      };
     case SET_OBSERVER:
       return {
         ...state,
         role: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+// ISSUE FORMS
+const issueFormState = {
+  title: '',
+  link: '',
+  priority: '',
+  voitingResults: [{}],
+};
+
+export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueFormData) => {
+  switch (action.type) {
+    case SET_TITLE_ISSUE:
+      return {
+        ...state,
+        title: action.payload,
+      };
+    case SET_LINK_ISSUE:
+      return {
+        ...state,
+        link: action.payload,
+      };
+    case SET_PRIORITY_ISSUE:
+      return {
+        ...state,
+        priority: action.payload,
       };
     default:
       return state;

@@ -18,15 +18,12 @@ export const StyleButton = styled.div<Iprops>`
     color: ${({ color }) => color};
     font-size: 24px;
     font-weight: bold;
-    border: 1px solid #2b3a67;
+    border: 1px solid blueColor;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: 0.2s;
     &:hover {
       color: ${({ colorBG }) => colorBG};
       background-color: ${({ color }) => color};
-    }
-    &:disabled {
-      opacity: 0.5;
     }
     @media (max-width: 700px) {
       width: 189px;

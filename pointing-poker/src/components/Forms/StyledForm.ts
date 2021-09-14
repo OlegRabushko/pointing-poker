@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
+import { IPopupWrapper } from './FormTypes';
 
-export const StyledConnectForm = styled.form`
+export const StyledConnectForm = styled.form<IPopupWrapper>`
   width: 100%;
   max-width: 876px;
-  background-color: #fff;
+  background-color: ${whiteColor};
   padding: 15px;
 
   legend {
@@ -12,6 +14,7 @@ export const StyledConnectForm = styled.form`
     color: #000;
     font-size: 64px;
     font-weight: 700;
+    text-align: ${({ textAlign }) => textAlign};
 
     @media (max-width: 700px) {
       font-size: 42px;
@@ -33,7 +36,8 @@ export const StyledConnectForm = styled.form`
   .legend-wrapper {
     display: flex;
     align-items: center;
-    padding: 0 0 40px 30px;
+    justify-content: ${({ justifyContent }) => justifyContent};
+    padding: ${({ padding }) => padding || '0 0 40px 30px'};
   }
 
   .switcher-wrapper {
@@ -83,6 +87,10 @@ export const StyledConnectForm = styled.form`
   }
 
   .error {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 12px;
     line-height: 12px;
     color: red;

@@ -25,7 +25,7 @@ export const StyledScramMaster = styled.div`
     width: 100%;
     margin-top: 30px;
   }
-  input {
+  .scram-master-input {
     text-align: center;
     width: 100%;
     font-size: 25px;

@@ -4,7 +4,12 @@ export const SET_CONNECT_FORM_SURNAME = 'SET_CONNECT_FORM_SURNAME';
 export const SET_CONNECT_FORM_JOB = 'SET_CONNECT_FORM_JOB';
 export const SET_AVATAR = 'SET_AVATAR';
 export const SHOW_CONNECT_FORM = 'SHOW_CONNECT_FORM';
+export const SHOW_ISSUES_FORM = 'SHOW_ISSUES_FORM';
+export const SET_TITLE_ISSUE = 'SET_TITLE_ISSUE';
+export const SET_LINK_ISSUE = 'SET_LINK_ISSUE';
+export const SET_PRIORITY_ISSUE = 'SET_PRIORITY_ISSUE';
 
+// CONNECT FORM
 interface IConnectRole {
   type: typeof SET_OBSERVER;
   payload: boolean;
@@ -35,10 +40,34 @@ interface IShowConnectForm {
   payload: boolean;
 }
 
+interface IShowIssuesForm {
+  type: typeof SHOW_ISSUES_FORM;
+  payload: boolean;
+}
+
 export type ActionTypeConnectFormData =
   | IConnectFirstName
   | IConnectLastName
   | IConnectFormJob
   | IAvatar
   | IShowConnectForm
-  | IConnectRole;
+  | IConnectRole
+  | IShowIssuesForm;
+
+// ISSUES FORM
+interface IIssueTitle {
+  type: typeof SET_TITLE_ISSUE;
+  payload: string;
+}
+
+interface IIssueLink {
+  type: typeof SET_LINK_ISSUE;
+  payload: string;
+}
+
+interface IIssuePriority {
+  type: typeof SET_PRIORITY_ISSUE;
+  payload: string;
+}
+
+export type ActionTypeIssueFormData = IIssueTitle | IIssueLink | IIssuePriority;

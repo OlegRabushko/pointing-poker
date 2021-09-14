@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputProps } from '../FormTypes';
-import { StyledInput } from '../ConnectPopup/StyledInput';
-import { StyledLabel } from '../ConnectPopup/StyledLabel';
+import { StyledInput } from '../StyledInput';
+import { StyledLabel } from '../StyledLabel';
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
   <StyledLabel className={props.labelClass || 'connect-label'}>

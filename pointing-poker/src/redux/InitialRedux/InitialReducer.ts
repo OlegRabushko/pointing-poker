@@ -9,7 +9,7 @@ const initialState: InitialState = {
       userLatName: 'Gordon',
       role: 'player',
       position: 'frontender',
-      avatatr: '',
+      avatar: '',
     },
     '1000': {
       userID: '1000',
@@ -17,7 +17,7 @@ const initialState: InitialState = {
       userLatName: 'Volk',
       role: 'player',
       position: 'manager',
-      avatatr: '',
+      avatar: '',
     },
   },
 };

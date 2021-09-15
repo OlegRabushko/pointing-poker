@@ -12,6 +12,33 @@ export const StyledUserCard = styled.div`
   border-radius: 4px;
 `;
 
+interface IPropsAvater {
+  background?: string;
+  width?: string;
+  height?: string;
+}
+
+export const ImageContainer = styled.div<IPropsAvater>`
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  align-items: center;
+  width: ${({ width }) => width || '55px'};
+  height: ${({ height }) => height || '55px'};
+  border-radius: 50%;
+  background: #60dabf ${({ background }) => background || ''} center / cover no-repeat;
+
+  .initials {
+    font-weight: bold;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+`;
+
 export const StyledUserInfo = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyleMainPage = styled.div`
   padding: 70px 30px 0 30px;
@@ -20,13 +19,13 @@ export const StyleMainPage = styled.div`
       left: -80px;
     }
   }
-  .create-session-text {
-    padding-top: 10px;
-  }
   p {
     font-weight: 300;
     font-size: 24px;
     line-height: 28px;
+    &:first-child {
+      padding-top: 10px;
+    }
     @media (max-width: 700px) {
       font-size: 20px;
       line-height: 24px;
@@ -36,7 +35,7 @@ export const StyleMainPage = styled.div`
     margin-left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    border: 5px solid ${whiteColor};
+    border: 5px solid #ffffff;
     border-radius: 5px;
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.25);
   }
@@ -77,7 +76,7 @@ export const StyleMainPage = styled.div`
     display: flex;
     justify-content: space-between;
   }
-  & > input {
+  input {
     width: 100%;
     font-size: 22px;
     padding: 0 10px;

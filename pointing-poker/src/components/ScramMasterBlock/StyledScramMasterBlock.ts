@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledScramMaster = styled.div`
+export const StyledScramMasterBlock = styled.div`
   margin-top: 20px;
   .text {
     font-size: 12px;

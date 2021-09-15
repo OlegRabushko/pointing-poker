@@ -1,26 +1,20 @@
-import { useSelector } from 'react-redux';
 import MembersBlock from '../MembersBlock/MembersBlock';
+import SettingBlock from '../SettingsBlock/SettingsBlock';
 import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
+import ScramMasterBlock from '../ScramMasterBlock/ScramMasterBlock';
 import CardValuesBlock from '../CardValuesBlock/CardValuesBlock';
 import { StyledSettingPage } from './StyledSettingPage';
-import IssuesBlock from '../IssuesBlock/IssuesBlock';
-import ScramMaster from '../ScramMaster/ScramMaster';
-import SettingBlock from '../SettingsBlock/SettingsBlock';
-import CreateIssueForm from '../Forms/CreateIssueForm';
-import { RootState } from '../../redux';
+import IssuesBlock from '../IssuesBlock/issuesBlock';
 
 const SettingPage = () => {
-  const { isIssuesForm } = useSelector((state: RootState) => state.dataConnectForm);
-
   return (
     <StyledSettingPage>
       <LobbyHeaderBlock />
-      <ScramMaster />
+      <ScramMasterBlock />
       <MembersBlock />
       <IssuesBlock />
       <SettingBlock />
       <CardValuesBlock />
-      {isIssuesForm && <CreateIssueForm />}
     </StyledSettingPage>
   );
 };

@@ -21,7 +21,7 @@ const ChatMessage = ({
         {currMsgUser.avatar ? (
           <img src={currMsgUser.avatar} className="" alt="avatar" />
         ) : (
-          <p className="initials">{currMsgUser.userName.slice(0, 1)}</p>
+          <p className="initials">{currMsgUser.lastName.slice(0, 1)}</p>
         )}
       </ImageContainer>
       <div className="text-bubble">

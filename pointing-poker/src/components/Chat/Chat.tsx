@@ -26,7 +26,7 @@ const Chat = () => {
     const decimaLen = 2;
     sendMsgToServer({
       userId: currUserID,
-      username: users[currUserID].userName,
+      username: users[currUserID].lastName,
       msgText: msg,
       msgDate: `${sendTime.getHours()}:${
         sendTime.getMinutes().toString().length < decimaLen

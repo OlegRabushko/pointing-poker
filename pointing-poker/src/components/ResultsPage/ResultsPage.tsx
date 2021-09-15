@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import GameCard from '../GameCard/GameCard';
-import { blueColor } from '../GlobalStyle/StyledGlobal';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledResultsPage } from './StyledResultsPage';
 import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
@@ -64,7 +64,7 @@ const ResultsPage = () => {
   return (
     <StyledResultsPage>
       <Link to="/">
-        <Button text="Exit" color="#fff" colorBG={blueColor} />
+        <Button text="Exit" color={whiteColor} colorBG={blueColor} />
       </Link>
       <section>
         {arr.map((el, i) => (

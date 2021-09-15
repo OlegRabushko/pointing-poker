@@ -6,14 +6,6 @@ import {
   ActionTypeLobbySettings,
   SET_SCRAM_MASTER_ROLE,
   SET_SEQUENCE_TYPE,
-  SET_OBSERVER,
-  ActionTypeConnectLobby,
-  ActionTypeConnectFormData,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_SURNAME,
-  SET_CONNECT_FORM_ROLE,
-  SET_AVATAR,
-  SHOW_CONNECT_FORM,
 } from './redux-types';
 
 const lobbySettingsState = {
@@ -60,70 +52,6 @@ export const lobbySettingsReducer = (
       return {
         ...state,
         sequenceType: action.payload as string,
-      };
-    default:
-      return state;
-  }
-};
-
-// CONNECT FORM CHECKBOX REDUSER
-const connectLobbyState = {
-  checkObserver: false,
-};
-
-export const connectCheckboxToLobbyReducer = (
-  state = connectLobbyState,
-  action: ActionTypeConnectLobby,
-) => {
-  switch (action.type) {
-    case SET_OBSERVER:
-      return {
-        ...state,
-        checkObserver: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-// CONNECT FORM INPUTS VALUE
-const connectFormInputsValueState = {
-  connectFormName: '',
-  connectFormSurname: '',
-  connectFormRole: '',
-  avatar: '',
-  isConnectForm: false,
-};
-
-export const connectFormDataReducer = (
-  state = connectFormInputsValueState,
-  action: ActionTypeConnectFormData,
-) => {
-  switch (action.type) {
-    case SET_CONNECT_FORM_NAME:
-      return {
-        ...state,
-        connectFormName: action.payload,
-      };
-    case SET_CONNECT_FORM_SURNAME:
-      return {
-        ...state,
-        connectFormSurname: action.payload,
-      };
-    case SET_CONNECT_FORM_ROLE:
-      return {
-        ...state,
-        connectFormRole: action.payload,
-      };
-    case SET_AVATAR:
-      return {
-        ...state,
-        avatar: action.payload,
-      };
-    case SHOW_CONNECT_FORM:
-      return {
-        ...state,
-        isConnectForm: action.payload,
       };
     default:
       return state;

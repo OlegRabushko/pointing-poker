@@ -7,7 +7,7 @@ import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import { blueColor } from '../GlobalStyle/StyledGlobal';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import IssuesBlock from '../IssuesBlock/issuesBlock';
 
@@ -34,7 +34,7 @@ const GamePageDealer = () => {
               <ScramMaster />
               <div className="stop-game-btn">
                 <Link to="/">
-                  <Button text="Stop Game" colorBG="#fff" color={blueColor}></Button>
+                  <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
                 </Link>
               </div>
             </div>
@@ -48,7 +48,7 @@ const GamePageDealer = () => {
                   <>
                     <Button
                       text="Restart Round"
-                      color="#fff"
+                      color={whiteColor}
                       onClick={showStatistics}
                       colorBG={blueColor}
                     />
@@ -56,7 +56,7 @@ const GamePageDealer = () => {
                       <Button
                         text="Next ISSUE"
                         onClick={showStatistics}
-                        color="#fff"
+                        color={whiteColor}
                         colorBG={blueColor}
                       />
                     </Link>
@@ -65,7 +65,7 @@ const GamePageDealer = () => {
                   <Button
                     text="Run Round"
                     onClick={showStatistics}
-                    color="#fff"
+                    color={whiteColor}
                     colorBG={blueColor}
                   />
                 )}

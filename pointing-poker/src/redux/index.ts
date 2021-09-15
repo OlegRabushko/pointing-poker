@@ -4,15 +4,17 @@ import thunk from 'redux-thunk';
 import { chatReducer } from './ChatRedux/ChatReducer';
 import { initialReducer } from './InitialRedux/InitialReducer';
 import { gameCardReducer } from './GameCardRedux/GameCardReducer';
+import { lobbySettingsReducer } from './reducers';
 import {
   connectFormDataReducer,
-  connectCheckboxToLobbyReducer,
-  lobbySettingsReducer,
-} from './reducers';
+  issueFormDataReducer,
+  showFormsReducer,
+} from './FormRedux/FormReducers';
 
 const rootReducer = combineReducers({
+  showForms: showFormsReducer,
+  issueFormData: issueFormDataReducer,
   dataConnectForm: connectFormDataReducer,
-  connectCheckbox: connectCheckboxToLobbyReducer,
   settings: lobbySettingsReducer,
   initial: initialReducer,
   chat: chatReducer,

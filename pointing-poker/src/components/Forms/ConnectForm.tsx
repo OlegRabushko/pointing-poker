@@ -20,7 +20,7 @@ import { StyledLabel } from './StyledLabel';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
-// import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
+import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 
 const ConnectForm = () => {
@@ -32,7 +32,8 @@ const ConnectForm = () => {
   } = useForm<IConnectForm>({ mode: 'onChange' });
 
   const dispatch = useDispatch();
-  const { avatar, isConnectForm, role, firstName, lastName } = useSelector(
+  const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+  const { avatar, role, firstName, lastName } = useSelector(
     (state: RootState) => state.dataConnectForm,
   );
   const history = useHistory();
@@ -105,6 +106,9 @@ const ConnectForm = () => {
               text="Load File"
             />
           </div>
+          <ImageContainer background={`url(${avatar})`} width="83px" height="83px">
+            {!avatar && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
+          </ImageContainer>
         </div>
         <div className="connect-buttons-container">
           <Button

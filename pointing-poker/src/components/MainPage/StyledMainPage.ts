@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyleMainPage = styled.div`
   padding: 70px 30px 0 30px;
@@ -32,14 +33,7 @@ export const StyleMainPage = styled.div`
     }
   }
   .strip {
-<<<<<<< HEAD
     border: 1px solid ${whiteColor};
-=======
-    margin-left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    border: 5px solid #ffffff;
->>>>>>> 0ea935dea63109c91f05fad9cba27cf07bfc5a8f
     border-radius: 5px;
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.25);
   }

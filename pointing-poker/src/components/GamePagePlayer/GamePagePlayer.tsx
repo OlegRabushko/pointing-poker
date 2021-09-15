@@ -7,7 +7,7 @@ import Timer from '../Timer/Timer';
 import { StyledGamePage } from '../GamePageDealer/StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import { blueColor } from '../GlobalStyle/StyledGlobal';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import IssuesBlock from '../IssuesBlock/issuesBlock';
 import { Cards } from '../CardValuesBlock/CardValuesBlock';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
@@ -32,7 +32,7 @@ const GamePagePlayer = () => {
               <ScramMaster />
               <div className="stop-game-btn">
                 <Link to="/">
-                  <Button text="Exit" colorBG="#fff" color={blueColor}></Button>
+                  <Button text="Exit" colorBG={whiteColor} color={blueColor}></Button>
                 </Link>
               </div>
             </div>

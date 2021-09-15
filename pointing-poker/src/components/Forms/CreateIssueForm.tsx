@@ -28,7 +28,7 @@ const CreateIssueForm = () => {
   } = useForm<ICreateIssueForm>({ mode: 'onChange' });
 
   const dispatch = useDispatch();
-  const { isIssuesForm } = useSelector((state: RootState) => state.dataConnectForm);
+  const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
   const onSubmit: SubmitHandler<ICreateIssueForm> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));

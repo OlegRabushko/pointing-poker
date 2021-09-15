@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import MembersBlock from '../MembersBlock/MembersBlock';
 import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
+import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
 import Button from '../Button/Button';
 import { StyledLobbyPage } from './StyledLobbyPage';
-import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import ScramMaster from '../ScramMaster/ScramMaster';
 
 const LobbyPage = () => {
   return (
@@ -13,7 +12,7 @@ const LobbyPage = () => {
       <ScramMaster />
       <Link to="/">
         <div className="container">
-          <Button text="Exit" color={blueColor} colorBG={whiteColor} />
+          <Button text="Exit" color="#2B3A67" colorBG="#fff" />
         </div>
       </Link>
       <MembersBlock />

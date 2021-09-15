@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const StyleCardValuesBlock = styled.div`
-  text-align: center;
+interface Iprops {
+  events?: boolean;
+}
 
+export const StyleCardValuesBlock = styled.div<Iprops>`
+  text-align: center;
+  pointer-events: ${(props) => (!props.events ? 'auto' : 'none')};
   .text {
     font-size: 24px;
     font-weight: bold;
@@ -12,6 +16,6 @@ export const StyleCardValuesBlock = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: auto;
   }
 `;

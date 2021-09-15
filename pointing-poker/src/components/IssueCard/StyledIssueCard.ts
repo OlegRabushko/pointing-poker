@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 interface Iprops {
   current: boolean;
@@ -14,13 +13,9 @@ export const StyledIssueCard = styled.div<Iprops>`
   margin-top: 10px;
   width: 300px;
   height: 75px;
-  background: ${(props) => (!props.current ? 'rgba(96, 218, 191, 0.33)' : `${whiteColor}`)};
+  background: ${(props) => (!props.current ? 'rgba(96, 218, 191, 0.33)' : '#ffffff')};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-
-  &.add-user-card {
-    cursor: pointer;
-  }
 
   .edit-wrapper {
     display: flex;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledPopupWrapper = styled.div`
+export const StyledConnectWrapper = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -18,13 +18,6 @@ export const StyledPopupWrapper = styled.div`
     @media (max-width: 700px) {
       padding: 0 0 40px 15px;
     }
-  }
-
-  .create-issue-form-wrapper {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 570px;
-    padding: 0 0 143px 0;
   }
 
   .connect-buttons-container {

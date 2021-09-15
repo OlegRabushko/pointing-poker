@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-onchange */
 import { useDispatch, useSelector } from 'react-redux';
+import { StyledSettingBlock } from './StyledSettingsBlock';
 import Switcher from '../Switcher/Switcher';
 import {
   setCardInRoundEnd,
@@ -11,7 +12,6 @@ import {
 } from '../../redux/actions';
 import Timer from '../Timer/Timer';
 import { RootState } from '../../redux';
-import { StyledSettingBlock } from './StyledSettingsBlock';
 
 const SettingBlock = () => {
   const dispatch = useDispatch();

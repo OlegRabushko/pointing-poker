@@ -5,17 +5,17 @@ import { StyledRoundResult } from './StyledRoundResult';
 import plusIco from '../../assets/icons/cancel-ico.svg';
 
 interface IRoundResultProps {
-  setOpenResults?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowResults?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const RoundResult: FC<IRoundResultProps> = ({ setOpenResults }) => {
+const RoundResult: FC<IRoundResultProps> = ({ setShowResults }) => {
   return (
     <StyledRoundResult>
       <div className="full-container">
         <div className="top-text">
           <div>Decision:</div>
           <div className="text">Players:</div>
-          <img onClick={() => setOpenResults!(false)} src={plusIco} alt="" />
+          <img onClick={() => setShowResults!(false)} src={plusIco} alt="close-ico" />
         </div>
         <div className="container">
           {Array(15)

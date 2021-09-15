@@ -1,52 +1,41 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux';
+import { useHistory } from 'react-router-dom';
+
 import {
   setAvatar,
+  setConnectFormJob,
   setConnectFormName,
-  setConnectFormRole,
   setConnectFormSurname,
   setObserver,
   showConnectForm,
-} from '../../redux/actions';
+} from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import Switcher from '../Switcher/Switcher';
-import { ImageContainer } from '../UserCard/StyledUserCard';
-import { StyledConnectForm } from './StyledConnectForm';
-import { StyledConnectWrapper } from './StyledConnectWrapper';
+import { IConnectForm } from './FormTypes';
+import { StyledInput } from './StyledInput';
+import { StyledLabel } from './StyledLabel';
+import { StyledConnectForm } from './StyledForm';
+import { StyledPopupWrapper } from './StyledPopupWrapper';
+import { RootState } from '../../redux/index';
+import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 
-const ConnectPopup = () => {
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map((w) => w.slice(0, 1))
-      .join('');
-  };
+const ConnectForm = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IConnectForm>({ mode: 'onChange' });
 
   const dispatch = useDispatch();
-  const connectStateObserver = useSelector(
-    (state: RootState) => state.connectCheckbox.checkObserver,
-  );
-  const { connectFormName, connectFormSurname, connectFormRole, avatar } = useSelector(
+  const { avatar, isConnectForm, role, firstName, lastName } = useSelector(
     (state: RootState) => state.dataConnectForm,
   );
-  const { isConnectForm } = useSelector((state: RootState) => state.dataConnectForm);
-
-  const onSetConnectName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    dispatch(setConnectFormName(value));
-  };
-
-  const onSetConnectSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    dispatch(setConnectFormSurname(value));
-  };
-
-  const onSetConnectRole = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    dispatch(setConnectFormRole(value));
-  };
+  const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const src = await new Promise((resolve) => {
@@ -63,65 +52,83 @@ const ConnectPopup = () => {
     return src;
   };
 
+  const onSubmit: SubmitHandler<IConnectForm> = (data) => {
+    dispatch(showConnectForm(!isConnectForm));
+    dispatch(setConnectFormName(data.firstName));
+    dispatch(setConnectFormSurname(data.lastName));
+    dispatch(setConnectFormJob(data.job));
+    reset();
+    history.push('/settings');
+  };
+
+  const onShowConnectForm = () => {
+    dispatch(showConnectForm(!isConnectForm));
+  };
+
   return (
-    <StyledConnectWrapper>
-      <StyledConnectForm>
+    <StyledPopupWrapper onMouseDown={onShowConnectForm}>
+      <StyledConnectForm
+        onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="legend-wrapper">
           <legend>Connect to lobby</legend>
           <div className="switcher-wrapper">
             <p>Connect as observer</p>
-            <Switcher checked={connectStateObserver} listener={setObserver} />
+            <Switcher checked={role} listener={setObserver} />
           </div>
         </div>
         <div className="connect-form-wrapper">
-          <label className="connect-label">
+          <StyledLabel>
             Your first name:
-            <input className="connect-input" value={connectFormName} onChange={onSetConnectName} />
-          </label>
-          <label className="connect-label">
+            <StyledInput {...register('firstName', { required: true, maxLength: 10 })} />
+            {errors.firstName && <p className="error">First name is required</p>}
+          </StyledLabel>
+          <StyledLabel>
             Your last name:
-            <input
-              className="connect-input"
-              value={connectFormSurname}
-              onChange={onSetConnectSurname}
-            />
-          </label>
-          <label className="connect-label">
+            <StyledInput {...register('lastName', { required: true, maxLength: 10 })} />
+            {errors.firstName && <p className="error">Last name is required</p>}
+          </StyledLabel>
+          <StyledLabel>
             Your job position:
-            <input className="connect-input" value={connectFormRole} onChange={onSetConnectRole} />
-          </label>
+            <StyledInput {...register('job')} />
+          </StyledLabel>
           <div className="input-file-wrapper">
             <label className="upload-label">
               <span>Choose avatar</span>
               <input type="file" className="upload-input" onChange={addAvatar} />
             </label>
-            <Button borderRadius="0 5px 5px 0" colorBG="#2b3a67" color="#fff" text="Load File" />
+            <Button
+              borderRadius="0 5px 5px 0"
+              colorBG={blueColor}
+              color={whiteColor}
+              text="Load File"
+            />
           </div>
-          <ImageContainer background={`url(${avatar})`}>
-            {!avatar && <p className="initials">{getInitials('James Blake')}</p>}
+          <ImageContainer background={`url(${avatar})`} width="83px" height="83px">
+            {!avatar && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
           </ImageContainer>
         </div>
         <div className="connect-buttons-container">
-          <Link to="/settings">
-            <Button
-              mainPage
-              text="Confirm"
-              color="#fff"
-              colorBG="#2B3A67"
-              onClick={() => dispatch(showConnectForm(!isConnectForm))}
-            />
-          </Link>
+          <Button
+            type="submit"
+            mainPage
+            text="Confirm"
+            color={whiteColor}
+            colorBG={blueColor}
+            onClick={() => onSubmit}
+          />
           <Button
             mainPage
-            colorBG="#fff"
-            color="#2B3A67"
+            colorBG={whiteColor}
+            color={blueColor}
             text="Cancel"
-            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+            onClick={onShowConnectForm}
           />
         </div>
       </StyledConnectForm>
-    </StyledConnectWrapper>
+    </StyledPopupWrapper>
   );
 };
 
-export default ConnectPopup;
+export default ConnectForm;

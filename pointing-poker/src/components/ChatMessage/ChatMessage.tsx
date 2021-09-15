@@ -10,25 +10,25 @@ interface IProps {
 }
 
 const ChatMessage = ({
-  msgData: { msgId, userId, username, msgText, msgDate },
+  msgData: { msgId, user_id, username, text, time },
   currUserID,
   users,
 }: IProps): JSX.Element => {
-  const currMsgUser = users[userId];
+  const currMsgUser = users[user_id];
   return (
-    <StyledMsg key={msgId} viewType={userId === currUserID ? vME : vOTHERS}>
+    <StyledMsg key={msgId} viewType={user_id === currUserID ? vME : vOTHERS}>
       <ImageContainer className="avatar-chat">
         {currMsgUser.avatar ? (
           <img src={currMsgUser.avatar} className="" alt="avatar" />
         ) : (
-          <p className="initials">{currMsgUser.userName.slice(0, 1)}</p>
+          <p className="initials">{currMsgUser.name.slice(0, 1)}</p>
         )}
       </ImageContainer>
       <div className="text-bubble">
         <div className="msg-txt">
           <div className="chat-username">{username}</div>
-          <div className="msg">{msgText}</div>
-          <span className="msg-info">{msgDate}</span>
+          <div className="msg">{text}</div>
+          <span className="msg-info">{time}</span>
         </div>
       </div>
     </StyledMsg>

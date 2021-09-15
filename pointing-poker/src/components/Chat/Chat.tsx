@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
 import { RootState } from '../../redux';
 import { IMsg } from '../../types/interfaces';
-import { setMessage } from '../../redux/ChatRedux/ChatActions';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
+import { sendMsgToAll } from '../../sockets/Sockets';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');
-  const dispatch = useDispatch();
   const txtRef = useRef<HTMLDivElement>(null);
   const { msgs, currUserID, users } = useSelector((state: RootState) => ({
     currUserID: state.initial.currUserID,
@@ -17,7 +17,7 @@ const Chat = () => {
     users: state.initial.users,
   }));
   const sendMsgToServer = (content: IMsg) => {
-    dispatch(setMessage(content));
+    sendMsgToAll(content);
     setMsg('');
     if (txtRef.current) txtRef.current.innerText = '';
   };
@@ -25,10 +25,11 @@ const Chat = () => {
     const sendTime = new Date();
     const decimaLen = 2;
     sendMsgToServer({
-      userId: currUserID,
-      username: users[currUserID].userName,
-      msgText: msg,
-      msgDate: `${sendTime.getHours()}:${
+      order_id: `${nanoid()}`,
+      user_id: currUserID,
+      username: users[currUserID].name,
+      text: msg,
+      time: `${sendTime.getHours()}:${
         sendTime.getMinutes().toString().length < decimaLen
           ? `0${sendTime.getMinutes()}`
           : sendTime.getMinutes()

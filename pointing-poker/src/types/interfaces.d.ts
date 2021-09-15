@@ -1,15 +1,16 @@
 export interface IMsg {
   msgId?: string;
-  userId: string;
+  order_id: string;
+  user_id: string;
   username: string;
-  msgText: string;
-  msgDate: string;
+  text: string;
+  time: string;
 }
 
 export interface IUserInfo {
   userID: string;
-  userName: string;
-  userLatName: string;
+  name: string;
+  lastName: string;
   role: string;
   position: string;
   avatar: string;

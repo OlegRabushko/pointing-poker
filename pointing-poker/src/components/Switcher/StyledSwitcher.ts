@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 interface Iprops {
   checked: boolean;
@@ -37,7 +36,7 @@ export const StyleSwitcher = styled.div<Iprops>`
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: ${whiteColor};
+      background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       top: 5px;
       right: 5px;

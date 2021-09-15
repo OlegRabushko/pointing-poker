@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
-import { IPopupWrapper } from './FormTypes';
 
-export const StyledConnectForm = styled.form<IPopupWrapper>`
+export const StyledConnectForm = styled.form`
   width: 100%;
   max-width: 876px;
-  background-color: ${whiteColor};
+  background-color: #fff;
   padding: 15px;
 
   legend {
@@ -14,7 +12,6 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
     color: #000;
     font-size: 64px;
     font-weight: 700;
-    text-align: ${({ textAlign }) => textAlign};
 
     @media (max-width: 700px) {
       font-size: 42px;
@@ -26,7 +23,6 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
     display: flex;
     width: 100%;
     max-width: 467px;
-    padding: 20px 0 0 0;
 
     @media (max-width: 700px) {
       padding: 0 0 20px 15px;
@@ -36,8 +32,7 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
   .legend-wrapper {
     display: flex;
     align-items: center;
-    justify-content: ${({ justifyContent }) => justifyContent};
-    padding: ${({ padding }) => padding || '0 0 40px 30px'};
+    padding: 0 0 40px 30px;
   }
 
   .switcher-wrapper {
@@ -50,6 +45,20 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
     p {
       padding: 0 20px;
       width: 183px;
+    }
+  }
+
+  .connect-label {
+    display: block;
+    font-size: 24px;
+    width: 100%;
+    max-width: 467px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+
+    @media (max-width: 700px) {
+      font-size: 18px;
+      margin: 0 0 10px 0;
     }
   }
 
@@ -77,6 +86,25 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
     }
   }
 
+  .connect-input {
+    display: block;
+    width: 100%;
+    height: 47px;
+    padding: 0 0 0 15px;
+    font-size: 21px;
+    font-weight: 500;
+    border: 1px solid #2b3a67;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 0px 0px 10px;
+    outline: none;
+    margin: 0 0 10px 0;
+
+    @media (max-width: 700px) {
+      font-size: 19px;
+      height: 40px;
+    }
+  }
+
   .upload-input {
     opacity: 0;
     position: absolute;
@@ -84,16 +112,5 @@ export const StyledConnectForm = styled.form<IPopupWrapper>`
     overflow: hidden;
     width: 0.4px;
     height: 0.4px;
-  }
-
-  .error {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-    line-height: 12px;
-    color: red;
-    padding: 0 0 10px 0;
   }
 `;

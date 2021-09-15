@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledPlayerDecision = styled.div`
   margin-top: 10px;
@@ -7,7 +6,7 @@ export const StyledPlayerDecision = styled.div`
   height: 70px;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 4px;
-  background-color: ${whiteColor};
+  background-color: #fff;
   margin-right: 15px;
   div {
     padding-top: 20px;

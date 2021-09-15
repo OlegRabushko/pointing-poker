@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { StyleSwitcher } from './StyledSwitcher';
 
 export interface ISwitcherProps {
-  listener?: (role: boolean) => {
+  listener: (role: boolean) => {
     type: string;
     payload: boolean;
   };
-  checked?: boolean;
+  checked: boolean;
 }
 
 const Switcher: FC<ISwitcherProps> = ({ listener, checked }) => {

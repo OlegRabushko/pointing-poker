@@ -1,13 +1,19 @@
 import React, { FC } from 'react';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
-import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
+import { StyledUserCard, ImageContainer, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
 interface IUserCardProps {
   dealer?: boolean;
 }
 
 const UserCard: FC<IUserCardProps> = ({ dealer }) => {
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((w) => w.slice(0, 1))
+      .join('');
+  };
+
   return (
     <StyledUserCard className="user-card">
       <ImageContainer className="img-container">

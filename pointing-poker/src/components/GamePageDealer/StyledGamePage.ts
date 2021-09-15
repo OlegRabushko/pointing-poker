@@ -27,7 +27,7 @@ export const StyledGamePage = styled.div`
       }
     }
     .timer-block {
-      height: 160px;
+      height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -38,5 +38,12 @@ export const StyledGamePage = styled.div`
       margin-top: -100px;
       transform: scale(0.8);
     }
+  }
+  .cards-section {
+    margin: 35px;
+  }
+  .text {
+    text-align: left !important;
+    margin-left: 50px;
   }
 `;

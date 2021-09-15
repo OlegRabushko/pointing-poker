@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import { blueColor } from '../GlobalStyle/StyledGlobal';
 
-export const StyledGameCard = styled.div`
+interface Iprops {
+  isStats: boolean;
+}
+
+export const StyledGameCard = styled.div<Iprops>`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,10 +20,17 @@ export const StyledGameCard = styled.div`
   font-size: 16px;
   font-weight: bold;
   cursor: default;
-  margin-top: 10px;
+  margin: ${(props) => (props.isStats ? '50px 5px 0px' : '10px 5px 0')};
   img {
     width: 70px;
     margin-bottom: 10px;
+  }
+  .stats {
+    color: ${blueColor};
+    text-shadow: 0 0 5px #fdd1a1;
+    font-size: 25px;
+    top: -30px;
+    position: absolute;
   }
   .number {
     font-size: 60px;

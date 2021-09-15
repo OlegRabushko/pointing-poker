@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-onchange */
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledSettingBlock } from './StyledSettings';
+import { StyledSettingBlock } from './StyledSettingsBlock';
 import Switcher from '../Switcher/Switcher';
 import {
   setCardInRoundEnd,

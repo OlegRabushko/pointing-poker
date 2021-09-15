@@ -1,4 +1,6 @@
+import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import Chat from './components/Chat/Chat';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -15,13 +17,16 @@ const StyledApp = styled.div`
 
 const App = () => {
   return (
-    <StyledApp>
-      <GlobalFonts />
-      <GlobalStyle />
-      <Header />
-      <Body />
-      <Footer />
-    </StyledApp>
+    <BrowserRouter>
+      <StyledApp>
+        <GlobalFonts />
+        <GlobalStyle />
+        <Header />
+        <Chat />
+        <Body />
+        <Footer />
+      </StyledApp>
+    </BrowserRouter>
   );
 };
 

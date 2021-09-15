@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
-import { showConnectForm } from '../../redux/actions';
+import { showConnectForm } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
-import ConnectPopup from '../ConnectPopup/ConnectPopup';
+import ConnectPopup from '../Forms/ConnectForm';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyleMainPage } from './StyledMainPage';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const { isConnectForm } = useSelector((state: RootState) => state.dataConnectForm);
+  const { isConnectForm } = useSelector((state: RootState) => state.showForms);
 
   return (
     <StyleMainPage>
@@ -23,9 +24,9 @@ const MainPage = () => {
         <div className="flex-box">
           <p>Create session:</p>
           <Button
-            color="#fff"
+            color={whiteColor}
             mainPage
-            colorBG="#2B3A67"
+            colorBG={blueColor}
             text=" Start new game"
             onClick={() => dispatch(showConnectForm(!isConnectForm))}
           />
@@ -35,11 +36,11 @@ const MainPage = () => {
           Connect to lobby by <b style={{ color: '#66999B' }}>URL</b>:
         </p>
         <div className="flex-box">
-          <input type="text" />
+          <input className="started-page-url" />
           <Button
-            color="#fff"
+            color={whiteColor}
             mainPage
-            colorBG="#2B3A67"
+            colorBG={blueColor}
             text="Connect"
             onClick={() => dispatch(showConnectForm(!isConnectForm))}
           />

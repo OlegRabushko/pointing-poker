@@ -87,13 +87,7 @@ const CreateIssueForm = () => {
           </StyledLabel>
         </div>
         <div className="connect-buttons-container">
-          <Button
-            type="submit"
-            text="Yes"
-            color={whiteColor}
-            colorBG={blueColor}
-            onClick={() => onSubmit}
-          />
+          <Button text="Yes" color={whiteColor} colorBG={blueColor} onClick={() => onSubmit} />
           <Button colorBG={whiteColor} color={blueColor} text="No" onClick={onShowConnectForm} />
         </div>
       </StyledConnectForm>

@@ -5,19 +5,19 @@ const initialState: InitialState = {
   users: {
     '1001': {
       userID: '1001',
-      userName: 'Alex',
-      userLatName: 'Gordon',
+      firstName: 'Alex',
+      lastName: 'Gordon',
       role: 'player',
-      position: 'frontender',
-      avatatr: '',
+      job: 'frontender',
+      avatar: '',
     },
     '1000': {
       userID: '1000',
-      userName: 'Ivan',
-      userLatName: 'Volk',
+      firstName: 'Ivan',
+      lastName: 'Volk',
       role: 'player',
-      position: 'manager',
-      avatatr: '',
+      job: 'manager',
+      avatar: '',
     },
   },
 };

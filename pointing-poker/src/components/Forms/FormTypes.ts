@@ -5,18 +5,6 @@ export interface IConnectForm {
   role: boolean;
 }
 
-export interface IIssueStatus {
-  id: string;
-  stats: string;
-}
-
-export interface ICreateIssueForm {
-  title: string;
-  link: string;
-  priority: string;
-  voitingResults: IIssueStatus[];
-}
-
 export interface InputProps {
   labelClass?: string;
   inputClass?: string;
@@ -41,4 +29,18 @@ export interface IPopupWrapper {
   textAlign?: string;
   justifyContent?: string;
   padding?: string;
+}
+
+// ISSUES DATA
+export interface IIssueStatus {
+  id: string;
+  status: string;
+  content: string;
+}
+
+export interface ICreateIssueForm {
+  title: string;
+  link: string;
+  priority: string;
+  voitingResults: IIssueStatus[];
 }

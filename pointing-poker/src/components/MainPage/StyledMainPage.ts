@@ -33,10 +33,7 @@ export const StyleMainPage = styled.div`
     }
   }
   .strip {
-    margin-left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    border: 5px solid ${whiteColor};
+    border: 1px solid ${whiteColor};
     border-radius: 5px;
     box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.25);
   }
@@ -77,12 +74,11 @@ export const StyleMainPage = styled.div`
     display: flex;
     justify-content: space-between;
   }
-  & > input {
+  .started-page-url {
     width: 100%;
     font-size: 22px;
     padding: 0 10px;
     outline: none;
-    border: none;
     border: 1px solid black;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 0px 10px;

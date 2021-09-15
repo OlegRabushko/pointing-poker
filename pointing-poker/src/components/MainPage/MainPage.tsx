@@ -40,7 +40,7 @@ const MainPage = () => {
           Connect to lobby by <b style={{ color: '#66999B' }}>URL</b>:
         </p>
         <div className="flex-box">
-          <input type="text" />
+          <input className="started-page-url" />
           <Button
             color={whiteColor}
             mainPage

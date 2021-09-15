@@ -9,7 +9,7 @@ export const StyleSwitcher = styled.div<Iprops>`
   position: relative;
   width: 55px;
   height: 30px;
-  & > input {
+  .switcher-input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -23,14 +23,14 @@ export const StyleSwitcher = styled.div<Iprops>`
     right: 0;
     position: absolute;
     cursor: pointer;
-    width: 55px;
+    width: 60px;
     height: 30px;
     background: ${({ checked }) => (checked ? '#60dabf' : '#c4c4c4')};
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    transition: 0.7s;
+    transition: 0.5s;
     &::before {
-      transform: ${({ checked }) => (checked ? 'translateX(-27.5px)' : 'translateX(0px)')};
+      transform: ${({ checked }) => (checked ? 'translateX(-30px)' : 'translateX(0px)')};
 
       content: '';
       position: absolute;

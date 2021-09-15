@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { blueColor } from '../GlobalStyle/StyledGlobal';
 
 interface Iprops {
   colorBG: string;
@@ -18,7 +19,7 @@ export const StyleButton = styled.div<Iprops>`
     color: ${({ color }) => color};
     font-size: 24px;
     font-weight: bold;
-    border: 1px solid blueColor;
+    border: 1px solid ${blueColor};
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: 0.2s;
     &:hover {

@@ -1,7 +1,7 @@
 import { IMsg, IUsers } from '../../types/interfaces';
 import { vME, vOTHERS } from '../../types/globalVirables';
 import { StyledMsg } from './StyledChatMsg';
-import { ImageContainer } from '../Avatar/StyledAvatar';
+import { ImageContainer } from '../UserCard/StyledUserCard';
 
 interface IProps {
   users: IUsers;

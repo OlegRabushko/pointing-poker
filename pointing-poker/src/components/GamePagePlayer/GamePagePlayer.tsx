@@ -2,34 +2,37 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
+import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
 import Timer from '../Timer/Timer';
-import { StyledGamePage } from './StyledGamePage';
+import { StyledGamePage } from '../GamePageDealer/StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import IssuesBlock from '../IssuesBlock/IssuesBlock';
-import ScramMaster from '../ScramMaster/ScramMaster';
+import { blueColor } from '../GlobalStyle/StyledGlobal';
+import IssuesBlock from '../IssuesBlock/issuesBlock';
+import { Cards } from '../CardValuesBlock/CardValuesBlock';
+import StatisticsSection from '../StatisticsSection/StatisticsSection';
 
-const GamePage = () => {
-  const [openResults, setOpenResults] = useState(false);
+const GamePagePlayer = () => {
+  const [showResults, setShowResults] = useState(false);
 
   return (
     <StyledGamePage>
       <div className="flex-box">
         <section className="info">
+          <Link to="/game-dealer">DealerPage</Link>
           <LobbyHeaderBlock />
           <img
             className="results-ico"
-            onClick={() => setOpenResults(true)}
+            onClick={() => setShowResults(true)}
             src={resultsIco}
-            alt="lobby"
+            alt=""
           />
           <div className="scram-master-container">
             <div className="flex-box">
               <ScramMaster />
               <div className="stop-game-btn">
                 <Link to="/">
-                  <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
+                  <Button text="Exit" colorBG="#fff" color={blueColor}></Button>
                 </Link>
               </div>
             </div>
@@ -39,15 +42,20 @@ const GamePage = () => {
               <IssuesBlock />
               <div className="timer-block">
                 <Timer />
-                <Button text="Run Round" color={whiteColor} colorBG={blueColor} />
               </div>
             </div>
           </div>
         </section>
-        {openResults && <RoundResult setOpenResults={setOpenResults} />}
+        {showResults && <RoundResult setShowResults={setShowResults} />}
       </div>
+      <section className="cards-section">
+        <StatisticsSection isStats />
+      </section>
+      <section className="cards-section">
+        <Cards isStats={false} />
+      </section>
     </StyledGamePage>
   );
 };
 
-export default GamePage;
+export default GamePagePlayer;

@@ -34,13 +34,16 @@ export const StyledGamePage = styled.div`
       margin-top: 120px;
     }
     @media (max-width: 650px) {
-      margin-left: -60px;
-      margin-top: -100px;
-      transform: scale(0.8);
+      margin-left: -70px;
+      margin-top: -130px;
+      transform: scale(0.7);
     }
   }
   .cards-section {
     margin: 35px;
+    @media (max-width: 650px) {
+      margin: 10px;
+    }
   }
   .text {
     text-align: left !important;

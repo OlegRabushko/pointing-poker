@@ -1,20 +1,20 @@
-import MembersBlock from '../MembersBlock/MembersBlock';
-import SettingBlock from '../SettingsBlock/SettingsBlock';
-import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
-import ScramMasterBlock from '../ScramMasterBlock/ScramMasterBlock';
-import CardValuesBlock from '../CardValuesBlock/CardValuesBlock';
+import MembersSection from '../MembersSection/MembersSection';
+import SettingsSection from '../SettingsSection/SettingsSection';
+import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
+import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
+import CardValuesSection from '../CardValuesSection/CardValuesSection';
 import { StyledSettingPage } from './StyledSettingPage';
-import IssuesBlock from '../IssuesBlock/issuesBlock';
+import IssuesSection from '../IssuesSection/issuesSection';
 
 const SettingPage = () => {
   return (
     <StyledSettingPage>
-      <LobbyHeaderBlock />
-      <ScramMasterBlock />
-      <MembersBlock />
-      <IssuesBlock />
-      <SettingBlock />
-      <CardValuesBlock />
+      <LobbyHeaderSection />
+      <ScramMasterSection />
+      <MembersSection />
+      <IssuesSection />
+      <SettingsSection />
+      <CardValuesSection />
     </StyledSettingPage>
   );
 };

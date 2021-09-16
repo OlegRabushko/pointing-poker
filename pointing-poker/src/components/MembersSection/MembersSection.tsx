@@ -1,7 +1,7 @@
 import { StyledMembers } from './StyledMembers';
 import UserCard from '../UserCard/UserCard';
 
-const MembersBlock = () => {
+const MembersSection = () => {
   return (
     <StyledMembers>
       <div className="text">Members: </div>
@@ -16,4 +16,4 @@ const MembersBlock = () => {
   );
 };
 
-export default MembersBlock;
+export default MembersSection;

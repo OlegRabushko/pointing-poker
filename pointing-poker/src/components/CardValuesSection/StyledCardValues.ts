@@ -4,7 +4,7 @@ interface Iprops {
   events?: boolean;
 }
 
-export const StyleCardValuesBlock = styled.div<Iprops>`
+export const StyleCardValuesSection = styled.div<Iprops>`
   text-align: center;
   pointer-events: ${(props) => (!props.events ? 'auto' : 'none')};
   .text {

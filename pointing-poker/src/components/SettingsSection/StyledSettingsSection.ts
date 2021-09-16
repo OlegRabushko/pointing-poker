@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSettingBlock = styled.div`
+export const StyledSettingsSection = styled.div`
   margin-bottom: 40px;
   margin-top: 50px;
   .text {

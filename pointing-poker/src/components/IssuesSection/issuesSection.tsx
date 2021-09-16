@@ -1,10 +1,10 @@
-import { StyledIssuesBlock } from './StyledIssuesBlock';
+import { StyledIssuesSection } from './StyledIssuesSection';
 import AddIssueCard from '../IssueCard/AddIssueCard';
 import IssueCard from '../IssueCard/IssueCard';
 
-const IssuesBlock = (): JSX.Element => {
+const IssuesSection = (): JSX.Element => {
   return (
-    <StyledIssuesBlock>
+    <StyledIssuesSection>
       <div className="text issue-game-page">Issues: </div>
       <div className="flex-box">
         <IssueCard />
@@ -15,8 +15,8 @@ const IssuesBlock = (): JSX.Element => {
         <IssueCard />
         <AddIssueCard />
       </div>
-    </StyledIssuesBlock>
+    </StyledIssuesSection>
   );
 };
 
-export default IssuesBlock;
+export default IssuesSection;

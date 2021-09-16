@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { vME } from '../../types/globalVirables';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledMsg = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ export const StyledMsg = styled.div`
   .msg-txt {
     background-color: ${({ viewType }: { viewType: string }) =>
       viewType === vME ? '#248bf5' : '#248bf5'};
-    color: #fff;
+    color: ${whiteColor};
   }
 
   .msg-txt::before {
@@ -55,7 +56,7 @@ export const StyledMsg = styled.div`
         : css`
             left: 20px;
           `};
-    background-color: #fff;
+    background-color: ${whiteColor};
     border-bottom-left-radius: 0.5rem;
 
     transform: translate(-30px, -2px);

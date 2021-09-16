@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyleLobbyHeaderBlock = styled.div`
+export const StyleLobbyHeaderSection = styled.div`
   display: flex;
   justify-content: center;
   .header-text {

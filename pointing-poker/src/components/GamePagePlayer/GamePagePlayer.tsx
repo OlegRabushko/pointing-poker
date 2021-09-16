@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
-import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
+import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
+import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from '../GamePageDealer/StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import IssuesBlock from '../IssuesBlock/issuesBlock';
-import { Cards } from '../CardValuesBlock/CardValuesBlock';
+import IssuesSection from '../IssuesSection/issuesSection';
+import { Cards } from '../CardValuesSection/CardValuesSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 
 const GamePagePlayer = () => {
@@ -20,7 +20,7 @@ const GamePagePlayer = () => {
       <div className="flex-box">
         <section className="info">
           <Link to="/game-dealer">DealerPage</Link>
-          <LobbyHeaderBlock />
+          <LobbyHeaderSection />
           <img
             className="results-ico"
             onClick={() => setShowResults(true)}
@@ -39,7 +39,7 @@ const GamePagePlayer = () => {
           </div>
           <div className="issues-container">
             <div className="flex-box">
-              <IssuesBlock />
+              <IssuesSection />
               <div className="timer-block">
                 <Timer />
               </div>

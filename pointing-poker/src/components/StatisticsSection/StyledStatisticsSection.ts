@@ -17,4 +17,9 @@ export const StyledStatisticsSection = styled.div`
   .flex-box {
     justify-content: center;
   }
+  @media (max-width: 650px) {
+    margin-left: -110px;
+    margin-top: -130px;
+    transform: scale(0.6);
+  }
 `;

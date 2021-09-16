@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Cards } from '../CardValuesBlock/CardValuesBlock';
+import { Cards } from '../CardValuesSection/CardValuesSection';
 import { StyledStatisticsSection } from './StyledStatisticsSection';
 
 interface IStatisticsSectionProps {

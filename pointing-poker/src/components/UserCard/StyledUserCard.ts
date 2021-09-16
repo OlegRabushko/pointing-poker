@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledUserCard = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const StyledUserCard = styled.div`
   margin: 10px 10px 0 0;
   width: 300px;
   height: 70px;
-  background: #ffffff;
+  background: ${whiteColor};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 `;
@@ -34,7 +35,7 @@ export const ImageContainer = styled.div<IPropsAvater>`
     display: flex;
     align-items: center;
     text-align: center;
-    color: #ffffff;
+    color: ${whiteColor};
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 `;

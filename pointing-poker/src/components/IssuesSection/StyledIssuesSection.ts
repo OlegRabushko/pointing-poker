@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledIssuesBlock = styled.div`
+export const StyledIssuesSection = styled.div`
   margin-top: 50px;
   .flex-box {
     width: 490px;

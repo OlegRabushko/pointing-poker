@@ -4,7 +4,6 @@ import {
   SET_CONNECT_FORM_NAME,
   SET_CONNECT_FORM_JOB,
   SET_CONNECT_FORM_SURNAME,
-  SET_OBSERVER,
   SHOW_CONNECT_FORM,
   SHOW_ISSUES_FORM,
   SET_TITLE_ISSUE,
@@ -43,7 +42,6 @@ const connectFormState = {
   lastName: '',
   job: '',
   avatar: '',
-  role: false,
 };
 
 export const connectFormDataReducer = (
@@ -71,17 +69,12 @@ export const connectFormDataReducer = (
         ...state,
         avatar: action.payload,
       };
-    case SET_OBSERVER:
-      return {
-        ...state,
-        role: action.payload,
-      };
     default:
       return state;
   }
 };
 
-// ISSUE FORMS
+// ISSUE FORM
 const issueFormState = {
   title: '',
   link: '',

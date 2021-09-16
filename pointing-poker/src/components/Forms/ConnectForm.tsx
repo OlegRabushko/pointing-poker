@@ -9,7 +9,6 @@ import {
   setConnectFormJob,
   setConnectFormName,
   setConnectFormSurname,
-  setObserver,
   showConnectForm,
 } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
@@ -22,7 +21,11 @@ import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
+import {
+  setDillerStatus,
+  setObserverStatus,
+  setPlayerStatus,
+} from '../../redux/RolesRedux/RolesActions';
 
 const ConnectForm = () => {
   const {
@@ -34,10 +37,8 @@ const ConnectForm = () => {
 
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-  const { isDiller } = useSelector((state: RootState) => state.personStatus);
-  const { avatar, role, firstName, lastName } = useSelector(
-    (state: RootState) => state.dataConnectForm,
-  );
+  const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
+  const { avatar, firstName, lastName } = useSelector((state: RootState) => state.dataConnectForm);
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +61,10 @@ const ConnectForm = () => {
     dispatch(setConnectFormName(data.firstName));
     dispatch(setConnectFormSurname(data.lastName));
     dispatch(setConnectFormJob(data.job));
+    if (isDialer) history.push('/settings');
+    if (isPlayer) history.push('/game-player');
+    if (isObserver) history.push('/lobby-page');
     reset();
-    history.push('/settings');
   };
 
   const onShowConnectForm = () => {
@@ -78,10 +81,10 @@ const ConnectForm = () => {
       >
         <div className="legend-wrapper">
           <legend>Connect to lobby</legend>
-          {!isDiller && (
+          {!isDialer && (
             <div className="switcher-wrapper">
               <p>Connect as observer</p>
-              <Switcher checked={role} listener={setObserver} />
+              <Switcher checked={isObserver} listener={setObserverStatus} />
             </div>
           )}
         </div>

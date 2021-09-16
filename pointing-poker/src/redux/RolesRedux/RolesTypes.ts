@@ -1,9 +1,9 @@
-export const SET_DILLER_STATUS = 'SET_DILLER_STETUS';
+export const SET_DIALER_STATUS = 'SET_DIALER_STATUS';
 export const SET_OBSERVER_STATUS = 'SET_OBSERVER_STETUS';
 export const SET_PLAYER_STATUS = 'SET_PLAYER_STETUS';
 
 interface ISetDillerStetus {
-  type: typeof SET_DILLER_STATUS;
+  type: typeof SET_DIALER_STATUS;
   payload: boolean;
 }
 

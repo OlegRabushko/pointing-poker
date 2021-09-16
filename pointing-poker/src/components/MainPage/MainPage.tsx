@@ -10,11 +10,11 @@ import { StyleMainPage } from './StyledMainPage';
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-  const { isDiller, isPlayer } = useSelector((state: RootState) => state.personStatus);
+  const { isDialer, isPlayer } = useSelector((state: RootState) => state.personStatus);
 
   const handlerDillerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(!isDiller));
+    dispatch(setDillerStatus(!isDialer));
   };
 
   const handlerPlayerState = () => {

@@ -1,7 +1,7 @@
-import { SET_DILLER_STATUS, SET_OBSERVER_STATUS, SET_PLAYER_STATUS } from './RolesTypes';
+import { SET_DIALER_STATUS, SET_OBSERVER_STATUS, SET_PLAYER_STATUS } from './RolesTypes';
 
 export const setDillerStatus = (payload: boolean) => ({
-  type: SET_DILLER_STATUS,
+  type: SET_DIALER_STATUS,
   payload,
 });
 

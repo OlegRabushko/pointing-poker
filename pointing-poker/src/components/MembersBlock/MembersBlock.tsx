@@ -6,11 +6,9 @@ const MembersBlock = () => {
     <StyledMembers>
       <div className="text">Members: </div>
       <div className="flex-box">
-        <UserCard dealer={false} />
-        <UserCard dealer={false} />
-        <UserCard dealer={false} />
-        <UserCard dealer={false} />
-        <UserCard dealer={false} />
+        <UserCard />
+        <UserCard />
+        <UserCard />
       </div>
     </StyledMembers>
   );

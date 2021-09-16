@@ -9,6 +9,8 @@ import Body from './components/Body/Body';
 import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
+import CreateIssueForm from './components/Forms/CreateIssueForm';
+// import DeleteUser from './components/DeleteUser/DeleteUser';
 
 const StyledApp = styled.div`
   display: flex;
@@ -20,6 +22,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+  const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
   return (
     <BrowserRouter>
@@ -28,9 +31,11 @@ const App = () => {
         <GlobalStyle />
         <Header />
         {/* <Chat /> */}
+        {/* <DeleteUser /> */}
         <Body />
         <Footer />
         {isConnectForm && <ConnectForm />}
+        {isIssuesForm && <CreateIssueForm />}
       </StyledApp>
     </BrowserRouter>
   );

@@ -1,12 +1,12 @@
 import {
   ActionsPersonStatusGame,
-  SET_DILLER_STATUS,
+  SET_DIALER_STATUS,
   SET_OBSERVER_STATUS,
   SET_PLAYER_STATUS,
 } from './RolesTypes';
 
 const initialGameStatusPersonState = {
-  isDiller: false,
+  isDialer: false,
   isObserver: false,
   isPlayer: false,
 };
@@ -16,10 +16,10 @@ export const gameStatusPersonReducer = (
   action: ActionsPersonStatusGame,
 ) => {
   switch (action.type) {
-    case SET_DILLER_STATUS:
+    case SET_DIALER_STATUS:
       return {
         ...state,
-        isDiller: action.payload,
+        isDialer: action.payload,
       };
     case SET_OBSERVER_STATUS:
       return {

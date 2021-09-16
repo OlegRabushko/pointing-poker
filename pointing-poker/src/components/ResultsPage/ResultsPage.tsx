@@ -1,8 +1,7 @@
-/* eslint-disable no-else-return */
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import GameCard from '../GameCard/GameCard';
-import { blueColor } from '../GlobalStyle/StyledGlobal';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledResultsPage } from './StyledResultsPage';
 import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
@@ -28,6 +27,16 @@ const arr = [
         stats: 10,
         content: 5,
       },
+      {
+        id: 4,
+        stats: 60,
+        content: 10,
+      },
+      {
+        id: 7,
+        stats: 60,
+        content: 80,
+      },
     ],
   },
   {
@@ -43,7 +52,7 @@ const arr = [
       {
         id: 1,
         stats: 47,
-        content: 'Unknown',
+        content: 1,
       },
       {
         id: 5,
@@ -53,6 +62,7 @@ const arr = [
     ],
   },
 ];
+
 const setContent = (content: string | number) => {
   if (typeof content === 'number') return content;
   if (content === 'Unknown') return questionIco;
@@ -64,25 +74,26 @@ const ResultsPage = () => {
   return (
     <StyledResultsPage>
       <Link to="/">
-        <Button text="Exit" color="#fff" colorBG={blueColor} />
+        <Button text="Exit" color={whiteColor} colorBG={blueColor} />
       </Link>
-      <section>
-        {arr.map((el, i) => (
-          <div key={i}>
-            <div>{el.title}</div>
+      {arr.map((el, i) => (
+        <div key={i}>
+          <div className="title">{el.title}:</div>
+          <section className="cards-section">
             {el.cardsResult.map((card, ind) => (
-              <section className="cards-section" key={ind}>
+              <div className="card" key={ind}>
+                <div className="stats">{card.stats}%</div>
                 <GameCard
                   content={setContent(card.content)}
                   ID={card.id}
                   type={typeof card.id === 'number' ? 'SP' : card.id}
                   isStats={false}
                 />
-              </section>
+              </div>
             ))}
-          </div>
-        ))}
-      </section>
+          </section>
+        </div>
+      ))}
     </StyledResultsPage>
   );
 };

@@ -8,10 +8,10 @@ export interface IMsg {
 
 export interface IUserInfo {
   userID: string;
-  userName: string;
-  userLatName: string;
+  firstName: string;
+  lastName: string;
   role: string;
-  position: string;
+  job: string;
   avatar: string;
 }
 

@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import Chat from './components/Chat/Chat';
+// import Chat from './components/Chat/Chat';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -22,7 +22,7 @@ const App = () => {
         <GlobalFonts />
         <GlobalStyle />
         <Header />
-        <Chat />
+        {/* <Chat /> */}
         <Body />
         <Footer />
       </StyledApp>

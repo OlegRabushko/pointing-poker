@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
-import LobbyHeaderBlock from '../LobbyHeaderBlock/LobbyHeaderBlock';
-import { ScramMaster } from '../ScramMasterBlock/ScramMasterBlock';
+import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
+import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
 import RoundResult from '../RoundResult/RoundResult';
-import { blueColor } from '../GlobalStyle/StyledGlobal';
+import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
-import IssuesBlock from '../IssuesBlock/issuesBlock';
+import IssuesSection from '../IssuesSection/issuesSection';
 
 const GamePageDealer = () => {
   const [showResults, setShowResults] = useState(false);
@@ -22,7 +22,7 @@ const GamePageDealer = () => {
       <div className="flex-box">
         <section className="info">
           <Link to="/game-player">PlayerPage</Link>
-          <LobbyHeaderBlock />
+          <LobbyHeaderSection />
           <img
             className="results-ico"
             onClick={() => setShowResults(true)}
@@ -34,21 +34,21 @@ const GamePageDealer = () => {
               <ScramMaster />
               <div className="stop-game-btn">
                 <Link to="/">
-                  <Button text="Stop Game" colorBG="#fff" color={blueColor}></Button>
+                  <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
                 </Link>
               </div>
             </div>
           </div>
           <div className="issues-container">
             <div className="flex-box">
-              <IssuesBlock />
+              <IssuesSection />
               <div className="timer-block">
                 <Timer />
                 {round ? (
                   <>
                     <Button
                       text="Restart Round"
-                      color="#fff"
+                      color={whiteColor}
                       onClick={showStatistics}
                       colorBG={blueColor}
                     />
@@ -56,7 +56,7 @@ const GamePageDealer = () => {
                       <Button
                         text="Next ISSUE"
                         onClick={showStatistics}
-                        color="#fff"
+                        color={whiteColor}
                         colorBG={blueColor}
                       />
                     </Link>
@@ -65,7 +65,7 @@ const GamePageDealer = () => {
                   <Button
                     text="Run Round"
                     onClick={showStatistics}
-                    color="#fff"
+                    color={whiteColor}
                     colorBG={blueColor}
                   />
                 )}

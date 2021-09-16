@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledChatBox = styled.div`
   position: absolute;
@@ -16,7 +17,7 @@ export const StyledChatWindow = styled.div`
   flex: 2 2 85vh;
   padding: 5px 5px 0 5px;
   overflow-y: scroll;
-  background-color: #ffffff;
+  background-color: ${whiteColor};
   box-shadow: 0 0 4px rgb(0 0 0 / 14%), 0 4px 8px rgb(0 0 0 / 28%);
 
   &::-webkit-scrollbar {

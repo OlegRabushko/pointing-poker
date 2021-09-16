@@ -16,7 +16,11 @@ const Switcher: FC<ISwitcherProps> = ({ listener, checked }) => {
   return (
     <StyleSwitcher checked={checked}>
       <label>
-        <input type="checkbox" onClick={() => dispatch(listener(!checked))} />
+        <input
+          className="switcher-input"
+          type="checkbox"
+          onClick={() => dispatch(listener(!checked))}
+        />
         <span></span>
       </label>
     </StyleSwitcher>

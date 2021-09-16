@@ -4,22 +4,25 @@ import thunk from 'redux-thunk';
 import { chatReducer } from './ChatRedux/ChatReducer';
 import { initialReducer } from './InitialRedux/InitialReducer';
 import { gameCardReducer } from './GameCardRedux/GameCardReducer';
+import { lobbySettingsReducer } from './SettingsSectionRedux/SettingsSectionReducer';
 import {
   connectFormDataReducer,
-  connectCheckboxToLobbyReducer,
-  lobbySettingsReducer,
-} from './reducers';
+  issueFormDataReducer,
+  showFormsReducer,
+} from './FormRedux/FormReducers';
+import { timerReducer } from './TimerRedux/TimerReducer';
 
 const rootReducer = combineReducers({
+  showForms: showFormsReducer,
+  issueFormData: issueFormDataReducer,
   dataConnectForm: connectFormDataReducer,
-  connectCheckbox: connectCheckboxToLobbyReducer,
   settings: lobbySettingsReducer,
   initial: initialReducer,
   chat: chatReducer,
   card: gameCardReducer,
+  timer: timerReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-// Этот тип используется в: useSelector((state: RootState)=>state)
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledChatInput = styled.form`
   .input-wrapper {
-    background-color: #ffffff;
+    background-color: ${whiteColor};
     display: flex;
     flex-direction: row;
     border-top: 2px solid #f2f2f2;
@@ -13,7 +14,7 @@ export const StyledChatInput = styled.form`
     font-family: 'Roboto';
     padding: 10px 5px;
     border: none;
-    background-color: #ffffff;
+    background-color: ${whiteColor};
     outline: none;
     resize: none;
     width: 400px;

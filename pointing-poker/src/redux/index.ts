@@ -10,8 +10,10 @@ import {
   issueFormDataReducer,
   showFormsReducer,
 } from './FormRedux/FormReducers';
+import { gameStatusPersonReducer } from './RolesRedux/RolesReducers';
 
 const rootReducer = combineReducers({
+  personStatus: gameStatusPersonReducer,
   showForms: showFormsReducer,
   issueFormData: issueFormDataReducer,
   dataConnectForm: connectFormDataReducer,

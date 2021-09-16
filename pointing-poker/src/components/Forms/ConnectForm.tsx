@@ -22,6 +22,7 @@ import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
+import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
 
 const ConnectForm = () => {
   const {
@@ -33,6 +34,7 @@ const ConnectForm = () => {
 
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+  const { isDiller } = useSelector((state: RootState) => state.personStatus);
   const { avatar, role, firstName, lastName } = useSelector(
     (state: RootState) => state.dataConnectForm,
   );
@@ -64,6 +66,8 @@ const ConnectForm = () => {
 
   const onShowConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
+    dispatch(setDillerStatus(false));
+    dispatch(setPlayerStatus(false));
   };
 
   return (
@@ -74,10 +78,12 @@ const ConnectForm = () => {
       >
         <div className="legend-wrapper">
           <legend>Connect to lobby</legend>
-          <div className="switcher-wrapper">
-            <p>Connect as observer</p>
-            <Switcher checked={role} listener={setObserver} />
-          </div>
+          {!isDiller && (
+            <div className="switcher-wrapper">
+              <p>Connect as observer</p>
+              <Switcher checked={role} listener={setObserver} />
+            </div>
+          )}
         </div>
         <div className="connect-form-wrapper">
           <StyledLabel>

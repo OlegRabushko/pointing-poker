@@ -2,14 +2,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { showConnectForm } from '../../redux/FormRedux/FormActions';
+import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
 import Button from '../Button/Button';
-import ConnectPopup from '../Forms/ConnectForm';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyleMainPage } from './StyledMainPage';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+  const { isDiller, isPlayer } = useSelector((state: RootState) => state.personStatus);
+
+  const handlerDillerState = () => {
+    dispatch(showConnectForm(!isConnectForm));
+    dispatch(setDillerStatus(!isDiller));
+  };
+
+  const handlerPlayerState = () => {
+    dispatch(showConnectForm(!isConnectForm));
+    dispatch(setPlayerStatus(!isPlayer));
+  };
 
   return (
     <StyleMainPage>
@@ -28,7 +39,7 @@ const MainPage = () => {
             mainPage
             colorBG={blueColor}
             text=" Start new game"
-            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+            onClick={handlerDillerState}
           />
         </div>
         <div>OR:</div>
@@ -42,11 +53,10 @@ const MainPage = () => {
             mainPage
             colorBG={blueColor}
             text="Connect"
-            onClick={() => dispatch(showConnectForm(!isConnectForm))}
+            onClick={handlerPlayerState}
           />
         </div>
       </section>
-      {isConnectForm && <ConnectPopup />}
     </StyleMainPage>
   );
 };

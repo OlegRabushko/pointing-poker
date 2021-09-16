@@ -27,8 +27,6 @@ const CreateIssueForm = () => {
     formState: { errors },
   } = useForm<ICreateIssueForm>({ mode: 'onChange' });
 
-  // erferferfrf
-
   const dispatch = useDispatch();
   const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
 

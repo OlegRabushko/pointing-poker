@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-onchange */
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledSettingBlock } from './StyledSettingsBlock';
+import { StyledSettingsSection } from './StyledSettingsSection';
 import Switcher from '../Switcher/Switcher';
 import {
   setCardInRoundEnd,
@@ -9,15 +9,15 @@ import {
   setScramMasterRole,
   setSequenceType,
   setTimer,
-} from '../../redux/actions';
+} from '../../redux/SettingsSectionRedux/SettingsSectionActions';
 import Timer from '../Timer/Timer';
 import { RootState } from '../../redux';
 
-const SettingBlock = () => {
+const SettingsSection = () => {
   const dispatch = useDispatch();
   const checker = useSelector((state: RootState) => state.settings);
   return (
-    <StyledSettingBlock>
+    <StyledSettingsSection>
       <div className="text">Game settings: </div>
       <div className="flex-box">
         <div className="setting-name">Scram master as player</div>
@@ -52,8 +52,8 @@ const SettingBlock = () => {
           <Timer />
         </div>
       )}
-    </StyledSettingBlock>
+    </StyledSettingsSection>
   );
 };
 
-export default SettingBlock;
+export default SettingsSection;

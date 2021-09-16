@@ -1,4 +1,3 @@
-export const SET_HERO_INFO = 'SET_HERO_INFO';
 export const SET_SCRAM_MASTER_ROLE = 'SET_SCRAM_MASTER_ROLE';
 export const SET_CARD_IN_ROUND_END = 'SET_CARD_IN_ROUND_END';
 export const SET_TIMER = 'SET_TIMER';
@@ -9,11 +8,6 @@ export const SET_SEQUENCE_TYPE = 'SET_SEQUENCE_TYPE';
 export type ActionColor = {
   about: boolean;
   home: boolean;
-};
-
-export type ReduxStateType = {
-  type: typeof SET_HERO_INFO;
-  payload: string;
 };
 
 export type ActionTypeLobbySettings = {

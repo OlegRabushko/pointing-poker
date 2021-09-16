@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { whiteColor, blueColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledConnectForm = styled.form`
   width: 100%;
   max-width: 876px;
-  background-color: #fff;
+  background-color: ${whiteColor};
   padding: 15px;
 
   legend {
@@ -93,7 +94,7 @@ export const StyledConnectForm = styled.form`
     padding: 0 0 0 15px;
     font-size: 21px;
     font-weight: 500;
-    border: 1px solid #2b3a67;
+    border: 1px solid ${blueColor};
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 0px 10px;
     outline: none;

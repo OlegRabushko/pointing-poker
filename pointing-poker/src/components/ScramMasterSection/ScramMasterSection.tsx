@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
 import UserCard from '../UserCard/UserCard';
 import Button from '../Button/Button';
-import { StyledScramMasterBlock } from './StyledScramMasterBlock';
+import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const ScramMaster = () => (
-  <StyledScramMasterBlock>
+  <StyledScramMasterSection>
     <div className="text">Scram master</div>
-    <UserCard dealer />
-  </StyledScramMasterBlock>
+    <UserCard />
+  </StyledScramMasterSection>
 );
 
-const ScramMasterBlock = () => {
+const ScramMasterSection = () => {
   return (
-    <StyledScramMasterBlock>
+    <StyledScramMasterSection>
       <ScramMaster />
       <div className="key-text">Key to lobby:</div>
       <div className="flex-box">
@@ -28,8 +28,8 @@ const ScramMasterBlock = () => {
           <Button colorBG={whiteColor} color={blueColor} text="Cancel Game" />
         </Link>
       </div>
-    </StyledScramMasterBlock>
+    </StyledScramMasterSection>
   );
 };
 
-export default ScramMasterBlock;
+export default ScramMasterSection;

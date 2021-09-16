@@ -1,14 +1,11 @@
 import {
-  SET_HERO_INFO,
   SET_SCRAM_MASTER_ROLE,
   SET_CARD_IN_ROUND_END,
   SET_TIMER,
   SET_COFFEE_CARD,
   SET_QUESTION_CARD,
   SET_SEQUENCE_TYPE,
-} from './redux-types';
-
-export const setHeroInfo = (info: string) => ({ type: SET_HERO_INFO, payload: info });
+} from './SettingsSectionTypes';
 
 export const setScramMasterRole = (role: boolean) => ({
   type: SET_SCRAM_MASTER_ROLE,

@@ -6,7 +6,7 @@ import {
   ActionTypeLobbySettings,
   SET_SCRAM_MASTER_ROLE,
   SET_SEQUENCE_TYPE,
-} from './redux-types';
+} from './SettingsSectionTypes';
 
 const lobbySettingsState = {
   scramMasterAsPlayer: true,

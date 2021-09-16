@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import GameCard from '../GameCard/GameCard';
-import { StyleCardValuesBlock } from './StyledCardValues';
+import { StyleCardValuesSection } from './StyledCardValues';
 import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
 import { RootState } from '../../redux';
@@ -28,7 +28,7 @@ export const Cards: FC<ICardsProps> = ({ isStats }) => {
   }, [location.pathname]);
 
   return (
-    <StyleCardValuesBlock events={isHide}>
+    <StyleCardValuesSection events={isHide}>
       <div className="flex-box">
         {state.coffeeCardNeeded && (
           <GameCard isStats={isStats} ID="Coffee" type="Coffee" content={coffeeIco} />
@@ -44,17 +44,17 @@ export const Cards: FC<ICardsProps> = ({ isStats }) => {
           <GameCard isStats={isStats} ID="Unknown" type="Unknown" content={questionIco} />
         )}
       </div>
-    </StyleCardValuesBlock>
+    </StyleCardValuesSection>
   );
 };
 
-const CardValuesBlock = () => {
+const CardValuesSection = () => {
   return (
-    <StyleCardValuesBlock>
+    <StyleCardValuesSection>
       <div className="text">Card Values:</div>
       <Cards isStats={false} />
-    </StyleCardValuesBlock>
+    </StyleCardValuesSection>
   );
 };
 
-export default CardValuesBlock;
+export default CardValuesSection;

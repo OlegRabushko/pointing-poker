@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
-import { RootState } from '../../redux';
 import { IMsg } from '../../types/interfaces';
 import { setMessage } from '../../redux/ChatRedux/ChatActions';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
+import { RootState } from '../../redux';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');

@@ -1,18 +1,27 @@
-const Message = require('../shemas/MessageShema')
+const MessageDB = require('../shemas/MessageShema')
 
 class ChatService {
 
     async addMessage(msg){
-        await Message.create(msg)
+        console.log('in service', msg)
+        MessageDB.create(msg)
     }
 
-    async getMessage(msgId){
+    async getMessage(msgOrderId){
+        if(!msgOrderId){
+            throw new Error('no message ID')
+        }
+        const msg = await MessageDB.findById(msgOrderId)
+        return msg
+    }
+    
+    async deleteMessage(msgId){
         if(!msgId){
             throw new Error('no ID')
         }
-        const msg = await Message.findById(msgId)
-        return msg
-    } 
+        const delMsg = await MessageDB.findByIdAndDelete(msgId)
+        return delMsg
+    }
 }
 
-module.exports = ChatService
+module.exports = new ChatService()

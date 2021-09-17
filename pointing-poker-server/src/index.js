@@ -1,10 +1,11 @@
+const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload') 
 const router = require('./router')
 const {json} = require('body-parser')
 const cors = require('cors')
 const express = require('express')
 const http = require('http')
-const MsgController  = require('./handlers/MsgController')
+const MsgController  = require('./controllers/MsgController')
 
 const PORT = Number(process.env.PORT) || 7001
 const HOST = '0.0.0.0'
@@ -17,14 +18,22 @@ const io = require('socket.io')(server, {
         origin: 'http://localhost:8080'
     }
 })
+try {
+    io.on('connection', (socket) => {
+        console.log('user connected with id', socket.id)
+    
+        const msgController = new MsgController(io, socket)
+        socket.on('send-msg', msg => msgController.setMessage(msg))
+    })    
+} catch (error) {
+    console.log(error)
+}
 
-io.on('connection', (socket) => {
-    console.log('user connected with id', socket.id)
-
-    const msgController = new MsgController(io, socket)
-    socket.on('send-msg', msg => msgController.setMessage(msg))
-})
-
-server.listen(PORT,() => {
-    console.log(`server is started on ${PORT}`)
-})
+try {
+    server.listen(PORT, async () => {
+        console.log(`server is started on ${PORT}`)
+        await mongoose.connect(DB_URL,{useUnifiedTopology: true ,useNewUrlParser: true})
+    })
+} catch (error) {
+    console.log(error)
+}

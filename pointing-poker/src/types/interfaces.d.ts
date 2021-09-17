@@ -2,7 +2,6 @@ export interface IMsg {
   msgId?: string;
   order_id: string;
   user_id: string;
-  username: string;
   text: string;
   time: string;
 }

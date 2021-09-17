@@ -7,12 +7,17 @@ module.exports = class MsgController {
     }
 
     async setMessage(msg){
-        await ChatService.addMessage(msg)
-        this.getMessage(msg.order_id)
+        try {
+            await ChatService.addMessage(msg)
+            
+        } catch (error) {
+            
+        }
+         
     }
 
-    async getMessage(msgId){
-            const msg = await ChatService.getMessage(msgId)
+    async getMessage(msgOrderId){
+            const msg = await ChatService.getMessage(msgOrderId)
             return msg
     }
 }

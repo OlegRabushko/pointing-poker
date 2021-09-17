@@ -27,7 +27,6 @@ const Chat = () => {
     sendMsgToServer({
       order_id: `${nanoid()}`,
       user_id: currUserID,
-      username: users[currUserID].name,
       text: msg,
       time: `${sendTime.getHours()}:${
         sendTime.getMinutes().toString().length < decimaLen

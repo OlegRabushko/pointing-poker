@@ -1,23 +1,24 @@
+import { nanoid } from 'nanoid';
 import { InitialState, SET_CURR_USER_ID, SET_USER, TReduxInitial } from './InitialTypes';
 
 const initialState: InitialState = {
   currUserID: '1001',
   users: {
     '1001': {
-      userID: '1001',
-      userName: 'Alex',
-      userLatName: 'Gordon',
+      userID: `${nanoid()}`,
+      name: 'Alex',
+      lastName: 'Gordon',
       role: 'player',
       position: 'frontender',
-      avatatr: '',
+      avatar: '',
     },
     '1000': {
-      userID: '1000',
-      userName: 'Ivan',
-      userLatName: 'Volk',
+      userID: `${nanoid()}`,
+      name: 'Ivan',
+      lastName: 'Volk',
       role: 'player',
       position: 'manager',
-      avatatr: '',
+      avatar: '',
     },
   },
 };

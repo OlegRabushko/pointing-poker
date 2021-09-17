@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ChatMessage = ({
-  msgData: { msgId, user_id, username, text, time },
+  msgData: { msgId, user_id, text, time },
   currUserID,
   users,
 }: IProps): JSX.Element => {
@@ -26,7 +26,7 @@ const ChatMessage = ({
       </ImageContainer>
       <div className="text-bubble">
         <div className="msg-txt">
-          <div className="chat-username">{username}</div>
+          <div className="chat-username">{currMsgUser.name}</div>
           <div className="msg">{text}</div>
           <span className="msg-info">{time}</span>
         </div>

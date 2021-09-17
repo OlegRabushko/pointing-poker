@@ -1,8 +1,9 @@
 import {
+  IConnectFormData,
   SET_AVATAR,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_SURNAME,
+  SET_IS_DEALER,
+  SET_IS_OBSERVER,
+  SET_IS_PLAYER,
   SET_LINK_ISSUE,
   SET_PRIORITY_ISSUE,
   SET_TITLE_ISSUE,
@@ -10,18 +11,20 @@ import {
   SHOW_ISSUES_FORM,
 } from './FormTypes';
 
-export const setConnectFormName = (payload: string) => ({
-  type: SET_CONNECT_FORM_NAME,
-  payload,
+export const setConnectFormDialer = (payload: IConnectFormData, avatar: string) => ({
+  type: SET_IS_DEALER,
+  payload: { ...payload, avatar },
 });
-export const setConnectFormSurname = (payload: string) => ({
-  type: SET_CONNECT_FORM_SURNAME,
-  payload,
+export const setConnectFormPlayer = (payload: IConnectFormData, avatar: string) => ({
+  type: SET_IS_PLAYER,
+  payload: { ...payload, avatar },
 });
-export const setConnectFormJob = (payload: string) => ({
-  type: SET_CONNECT_FORM_JOB,
-  payload,
+export const setConnectFormObserver = (payload: IConnectFormData, avatar: string) => ({
+  type: SET_IS_OBSERVER,
+  payload: { ...payload, avatar },
 });
+
+// AVATAR CONNECT FORM
 export const setAvatar = (payload: string) => ({
   type: SET_AVATAR,
   payload,

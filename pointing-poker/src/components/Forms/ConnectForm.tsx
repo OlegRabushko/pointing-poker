@@ -4,28 +4,23 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import {
-  setAvatar,
-  setConnectFormJob,
-  setConnectFormName,
-  setConnectFormSurname,
-  showConnectForm,
-} from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import Switcher from '../Switcher/Switcher';
 import { IConnectForm } from './FormTypes';
-import { StyledInput } from './StyledInput';
-import { StyledLabel } from './StyledLabel';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
-import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
+import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
+import { setObserverStatus } from '../../redux/RolesRedux/RolesActions';
 import {
-  setDillerStatus,
-  setObserverStatus,
-  setPlayerStatus,
-} from '../../redux/RolesRedux/RolesActions';
+  setAvatar,
+  setConnectFormDialer,
+  setConnectFormObserver,
+  setConnectFormPlayer,
+  showConnectForm,
+} from '../../redux/FormRedux/FormActions';
+import { StyledInput, StyledLabel } from './StyledFormComponents';
 
 const ConnectForm = () => {
   const {
@@ -38,7 +33,7 @@ const ConnectForm = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
   const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
-  const { avatar, firstName, lastName } = useSelector((state: RootState) => state.dataConnectForm);
+  const { avatar } = useSelector((state: RootState) => state.connectAvatar);
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,19 +53,23 @@ const ConnectForm = () => {
 
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setConnectFormName(data.firstName));
-    dispatch(setConnectFormSurname(data.lastName));
-    dispatch(setConnectFormJob(data.job));
-    if (isDialer) history.push('/settings');
-    if (isPlayer) history.push('/game-player');
-    if (isObserver) history.push('/lobby-page');
+    if (isDialer) {
+      dispatch(setConnectFormDialer(data, avatar));
+      history.push('/settings');
+    }
+    if (isPlayer) {
+      dispatch(setConnectFormPlayer(data, avatar));
+      history.push('/game-player');
+    }
+    if (isObserver) {
+      dispatch(setConnectFormObserver(data, avatar));
+      history.push('/lobby-page');
+    }
     reset();
   };
 
   const onShowConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(false));
-    dispatch(setPlayerStatus(false));
   };
 
   return (
@@ -115,9 +114,7 @@ const ConnectForm = () => {
               text="Load File"
             />
           </div>
-          <ImageContainer background={`url(${avatar})`} width="83px" height="83px">
-            {!avatar && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
-          </ImageContainer>
+          <ImageContainer background={`url(${avatar})`} width="83px" height="83px" />
         </div>
         <div className="connect-buttons-container">
           <Button

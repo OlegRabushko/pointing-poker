@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
 import { RootState } from '../../redux';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
+import { IUserCardProps } from './TypesUserCard';
 
-const UserCard = () => {
-  const { isDialer } = useSelector((state: RootState) => state.personStatus);
-  const { avatar, job, firstName, lastName } = useSelector(
-    (state: RootState) => state.dataConnectForm,
-  );
+const UserCard: FC<IUserCardProps> = (props) => {
+  const { firstName, lastName, job, avatar } = props;
+
+  const isDialer = useSelector((state: RootState) => state.personStatus);
 
   return (
     <StyledUserCard className="user-card">
       <ImageContainer background={`url(${avatar})`} className="img-container">
-        {!avatar && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
+        {avatar === '' && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
       </ImageContainer>
       <StyledUserInfo>
         <span className="card-user-name">

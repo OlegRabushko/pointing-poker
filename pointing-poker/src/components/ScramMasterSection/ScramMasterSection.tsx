@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
-import UserCard from '../UserCard/UserCard';
 import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-
-export const ScramMaster = () => (
-  <StyledScramMasterSection>
-    <div className="text">Scram master</div>
-    <UserCard />
-  </StyledScramMasterSection>
-);
+import ScramMaster from '../ScramMaster/ScramMaster';
 
 const ScramMasterSection = () => {
   return (

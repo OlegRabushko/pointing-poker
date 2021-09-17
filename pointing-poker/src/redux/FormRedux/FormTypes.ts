@@ -1,47 +1,52 @@
 export const SET_OBSERVER = 'SET_OBSERVER';
-export const SET_CONNECT_FORM_NAME = 'SET_CONNECT_FORM_NAME';
-export const SET_CONNECT_FORM_SURNAME = 'SET_CONNECT_FORM_SURNAME';
-export const SET_CONNECT_FORM_JOB = 'SET_CONNECT_FORM_JOB';
-export const SET_AVATAR = 'SET_AVATAR';
 export const SHOW_CONNECT_FORM = 'SHOW_CONNECT_FORM';
 export const SHOW_ISSUES_FORM = 'SHOW_ISSUES_FORM';
 export const SHOW_DELETE_PLAYER_FORM = 'SHOW_DELETE_PLAYER_FORM';
 export const SET_TITLE_ISSUE = 'SET_TITLE_ISSUE';
 export const SET_LINK_ISSUE = 'SET_LINK_ISSUE';
 export const SET_PRIORITY_ISSUE = 'SET_PRIORITY_ISSUE';
+export const SET_IS_DEALER = 'SET_IS_DEALER';
+export const SET_IS_PLAYER = 'SET_IS_PLAYER';
+export const SET_IS_OBSERVER = 'SET_IS_OBSERVER';
+export const SET_AVATAR = 'SET_AVATAR';
 
 // CONNECT FORM
-interface IConnectRole {
-  type: typeof SET_OBSERVER;
-  payload: boolean;
+
+export interface IConnectFormData {
+  firstName: string;
+  lastName: string;
+  job: string;
+  avatar: string;
 }
 
-interface IConnectFirstName {
-  type: typeof SET_CONNECT_FORM_NAME;
-  payload: string;
+export interface IInitialStateFormData {
+  isUserDealer: IConnectFormData[];
+  isUserPlayer: IConnectFormData[];
+  isUserObserver: IConnectFormData[];
 }
 
-interface IConnectLastName {
-  type: typeof SET_CONNECT_FORM_SURNAME;
-  payload: string;
+interface IConnectIsDealer {
+  type: typeof SET_IS_DEALER;
+  payload: IConnectFormData;
 }
 
-interface IConnectFormJob {
-  type: typeof SET_CONNECT_FORM_JOB;
-  payload: string;
+interface IConnectIsPlayer {
+  type: typeof SET_IS_PLAYER;
+  payload: IConnectFormData;
 }
 
-interface IAvatar {
+interface IConnectIsObserver {
+  type: typeof SET_IS_OBSERVER;
+  payload: IConnectFormData;
+}
+
+export type ActionTypeConnectFormData = IConnectIsDealer | IConnectIsPlayer | IConnectIsObserver;
+
+// AVATAR CONNECT FORM
+export interface IAvatar {
   type: typeof SET_AVATAR;
   payload: string;
 }
-
-export type ActionTypeConnectFormData =
-  | IConnectFirstName
-  | IConnectLastName
-  | IConnectFormJob
-  | IAvatar
-  | IConnectRole;
 
 // ISSUES FORM
 interface IIssueTitle {

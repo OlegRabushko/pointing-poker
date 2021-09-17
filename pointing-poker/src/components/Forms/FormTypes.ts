@@ -2,7 +2,7 @@ export interface IConnectForm {
   firstName: string;
   lastName: string;
   job: string;
-  role: boolean;
+  avatar: string;
 }
 
 export interface InputProps {

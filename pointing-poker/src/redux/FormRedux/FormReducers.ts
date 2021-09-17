@@ -1,9 +1,5 @@
 import {
   ActionTypeConnectFormData,
-  SET_AVATAR,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_SURNAME,
   SHOW_CONNECT_FORM,
   SHOW_ISSUES_FORM,
   SET_TITLE_ISSUE,
@@ -11,6 +7,12 @@ import {
   SET_LINK_ISSUE,
   SET_PRIORITY_ISSUE,
   ActionTypeShowForms,
+  SET_IS_DEALER,
+  SET_IS_PLAYER,
+  SET_IS_OBSERVER,
+  IAvatar,
+  SET_AVATAR,
+  IInitialStateFormData,
 } from './FormTypes';
 
 // SHOW FORMS
@@ -36,12 +38,28 @@ export const showFormsReducer = (state = showFormsState, action: ActionTypeShowF
   }
 };
 
-// CONNECT FORM
-const connectFormState = {
-  firstName: '',
-  lastName: '',
-  job: '',
+// AVATAR CONNECT FORM
+const initialAvatar = {
   avatar: '',
+};
+
+export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => {
+  switch (action.type) {
+    case SET_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+// CONNECT FORM
+const connectFormState: IInitialStateFormData = {
+  isUserDealer: [],
+  isUserPlayer: [],
+  isUserObserver: [],
 };
 
 export const connectFormDataReducer = (
@@ -49,25 +67,20 @@ export const connectFormDataReducer = (
   action: ActionTypeConnectFormData,
 ) => {
   switch (action.type) {
-    case SET_CONNECT_FORM_NAME:
+    case SET_IS_DEALER:
       return {
         ...state,
-        firstName: action.payload,
+        isUserDealer: [...state.isUserDealer, action.payload],
       };
-    case SET_CONNECT_FORM_SURNAME:
+    case SET_IS_PLAYER:
       return {
         ...state,
-        lastName: action.payload,
+        isUserPlayer: [...state.isUserPlayer, action.payload],
       };
-    case SET_CONNECT_FORM_JOB:
+    case SET_IS_OBSERVER:
       return {
         ...state,
-        job: action.payload,
-      };
-    case SET_AVATAR:
-      return {
-        ...state,
-        avatar: action.payload,
+        isUserObserver: [...state.isUserObserver, action.payload],
       };
     default:
       return state;

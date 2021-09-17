@@ -5,7 +5,7 @@ export const SET_CONNECT_FORM_JOB = 'SET_CONNECT_FORM_JOB';
 export const SET_AVATAR = 'SET_AVATAR';
 export const SHOW_CONNECT_FORM = 'SHOW_CONNECT_FORM';
 export const SHOW_ISSUES_FORM = 'SHOW_ISSUES_FORM';
-export const SHOW_KIK_PLAYER_FORM = 'SHOW_KIK_PLAYER_FORM';
+export const SHOW_DELETE_PLAYER_FORM = 'SHOW_DELETE_PLAYER_FORM';
 export const SET_TITLE_ISSUE = 'SET_TITLE_ISSUE';
 export const SET_LINK_ISSUE = 'SET_LINK_ISSUE';
 export const SET_PRIORITY_ISSUE = 'SET_PRIORITY_ISSUE';
@@ -72,9 +72,9 @@ interface IShowIssuesForm {
   payload: boolean;
 }
 
-interface IShowKikPlayerForm {
-  type: typeof SHOW_KIK_PLAYER_FORM;
+interface IShowDeletePlayerForm {
+  type: typeof SHOW_DELETE_PLAYER_FORM;
   payload: boolean;
 }
 
-export type ActionTypeShowForms = IShowConnectForm | IShowIssuesForm | IShowKikPlayerForm;
+export type ActionTypeShowForms = IShowConnectForm | IShowIssuesForm | IShowDeletePlayerForm;

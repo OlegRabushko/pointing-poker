@@ -23,7 +23,7 @@ const RoundResult: FC<IRoundResultProps> = ({ setShowResults }) => {
             .map((_, i) => (
               <div key={i} className="flex-box">
                 <PlayerDecision decision="in progress" />
-                <UserCard dealer />
+                <UserCard />
               </div>
             ))}
         </div>

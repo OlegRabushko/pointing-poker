@@ -18,6 +18,10 @@ export const StyledIssueCard = styled.div<Iprops>`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 
+  &.add-user-card {
+    cursor: pointer;
+  }
+
   .edit-wrapper {
     display: flex;
     flex-direction: row;

@@ -1,29 +1,28 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
-import { StyledUserCard, ImageContainer, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
+import { RootState } from '../../redux';
+import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
+import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
-interface IUserCardProps {
-  dealer?: boolean;
-}
-
-const UserCard: FC<IUserCardProps> = ({ dealer }) => {
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map((w) => w.slice(0, 1))
-      .join('');
-  };
+const UserCard = () => {
+  const { isDialer } = useSelector((state: RootState) => state.personStatus);
+  const { avatar, job, firstName, lastName } = useSelector(
+    (state: RootState) => state.dataConnectForm,
+  );
 
   return (
     <StyledUserCard className="user-card">
-      <ImageContainer className="img-container">
-        <p className="initials">{getInitials('James Blake')}</p>
+      <ImageContainer background={`url(${avatar})`} className="img-container">
+        {!avatar && <p className="initials">{getInitials(`${firstName} ${lastName}`)}</p>}
       </ImageContainer>
       <StyledUserInfo>
-        <span className="card-user-name">James Blake</span>
-        <span className="card-user-position">Software Engenier</span>
+        <span className="card-user-name">
+          {firstName} {lastName}
+        </span>
+        <span className="card-user-position">{job}</span>
       </StyledUserInfo>
-      {!dealer && (
+      {!isDialer && (
         <ExcludeBtn>
           <img src={cancelImg} alt="exclude button" />
         </ExcludeBtn>

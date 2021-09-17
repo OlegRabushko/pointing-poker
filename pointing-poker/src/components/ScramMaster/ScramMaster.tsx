@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import UserCard from '../UserCard/UserCard';
 import Button from '../Button/Button';
 import { StyledScramMaster } from './StyledScramMaster';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
+import { RootState } from '../../redux';
 
 const ScramMaster = () => {
+  const { isDialer } = useSelector((state: RootState) => state.personStatus);
+
   return (
     <StyledScramMaster>
       <div className="text">Scram master</div>
-      <UserCard dealer />
+      {isDialer && <UserCard />}
       <div className="key-text">Key to lobby:</div>
       <div className="flex-box">
         <input type="text" defaultValue="2Rt9g5f1" />

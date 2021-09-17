@@ -7,7 +7,7 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 export const ScramMaster = () => (
   <StyledScramMasterSection>
     <div className="text">Scram master</div>
-    <UserCard dealer />
+    <UserCard />
   </StyledScramMasterSection>
 );
 

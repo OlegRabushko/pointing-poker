@@ -1,9 +1,6 @@
+/* eslint-disable no-case-declarations */
 import {
   ActionTypeConnectFormData,
-  SET_AVATAR,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_SURNAME,
   SHOW_CONNECT_FORM,
   SHOW_ISSUES_FORM,
   SET_TITLE_ISSUE,
@@ -11,12 +8,21 @@ import {
   SET_LINK_ISSUE,
   SET_PRIORITY_ISSUE,
   ActionTypeShowForms,
+  IAvatar,
+  SET_AVATAR,
+  IInitialStateFormData,
+  SHOW_DELETE_PLAYER_FORM,
+  UPDATE_PLAYERS_STATE,
+  SET_DEALERS,
+  SET_PLAYERS,
+  SET_OBSERVERS,
 } from './FormTypes';
 
 // SHOW FORMS
 const showFormsState = {
   isConnectForm: false,
   isIssuesForm: false,
+  isDeleteUser: false,
 };
 
 export const showFormsReducer = (state = showFormsState, action: ActionTypeShowForms) => {
@@ -31,17 +37,38 @@ export const showFormsReducer = (state = showFormsState, action: ActionTypeShowF
         ...state,
         isIssuesForm: action.payload,
       };
+    case SHOW_DELETE_PLAYER_FORM:
+      return {
+        ...state,
+        isDeleteUser: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+// AVATAR CONNECT FORM
+const initialAvatar = {
+  avatar: '',
+};
+
+export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => {
+  switch (action.type) {
+    case SET_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload,
+      };
     default:
       return state;
   }
 };
 
 // CONNECT FORM
-const connectFormState = {
-  firstName: '',
-  lastName: '',
-  job: '',
-  avatar: '',
+const connectFormState: IInitialStateFormData = {
+  userDealers: [],
+  userPlayers: [],
+  userObservers: [],
 };
 
 export const connectFormDataReducer = (
@@ -49,25 +76,30 @@ export const connectFormDataReducer = (
   action: ActionTypeConnectFormData,
 ) => {
   switch (action.type) {
-    case SET_CONNECT_FORM_NAME:
+    case SET_DEALERS:
       return {
         ...state,
-        firstName: action.payload,
+        userDealers: [...state.userDealers, action.payload],
       };
-    case SET_CONNECT_FORM_SURNAME:
+    case SET_PLAYERS:
       return {
         ...state,
-        lastName: action.payload,
+        userPlayers: [...state.userPlayers, action.payload],
       };
-    case SET_CONNECT_FORM_JOB:
+    case UPDATE_PLAYERS_STATE:
+      const { userPlayers } = state;
+      const userIndex = userPlayers.findIndex(({ userID }) => userID === action.payload);
       return {
         ...state,
-        job: action.payload,
+        userPlayers: [
+          ...state.userPlayers.slice(0, userIndex),
+          ...state.userPlayers.slice(userIndex + 1),
+        ],
       };
-    case SET_AVATAR:
+    case SET_OBSERVERS:
       return {
         ...state,
-        avatar: action.payload,
+        userObservers: [...state.userObservers, action.payload],
       };
     default:
       return state;

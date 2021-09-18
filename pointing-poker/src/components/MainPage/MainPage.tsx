@@ -10,17 +10,16 @@ import { StyleMainPage } from './StyledMainPage';
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-  const { isDialer, isPlayer } = useSelector((state: RootState) => state.personStatus);
 
   const handlerDillerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(!isDialer));
+    dispatch(setDillerStatus(true));
     dispatch(setAvatar(''));
   };
 
   const handlerPlayerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setPlayerStatus(!isPlayer));
+    dispatch(setPlayerStatus(true));
     dispatch(setAvatar(''));
   };
 

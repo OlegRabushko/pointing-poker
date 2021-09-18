@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   ActionTypeConnectFormData,
   SHOW_CONNECT_FORM,
@@ -7,18 +8,21 @@ import {
   SET_LINK_ISSUE,
   SET_PRIORITY_ISSUE,
   ActionTypeShowForms,
-  SET_IS_DEALER,
-  SET_IS_PLAYER,
-  SET_IS_OBSERVER,
   IAvatar,
   SET_AVATAR,
   IInitialStateFormData,
+  SHOW_DELETE_PLAYER_FORM,
+  UPDATE_PLAYERS_STATE,
+  SET_DEALERS,
+  SET_PLAYERS,
+  SET_OBSERVERS,
 } from './FormTypes';
 
 // SHOW FORMS
 const showFormsState = {
   isConnectForm: false,
   isIssuesForm: false,
+  isDeleteUser: false,
 };
 
 export const showFormsReducer = (state = showFormsState, action: ActionTypeShowForms) => {
@@ -32,6 +36,11 @@ export const showFormsReducer = (state = showFormsState, action: ActionTypeShowF
       return {
         ...state,
         isIssuesForm: action.payload,
+      };
+    case SHOW_DELETE_PLAYER_FORM:
+      return {
+        ...state,
+        isDeleteUser: action.payload,
       };
     default:
       return state;
@@ -57,9 +66,9 @@ export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => 
 
 // CONNECT FORM
 const connectFormState: IInitialStateFormData = {
-  isUserDealer: [],
-  isUserPlayer: [],
-  isUserObserver: [],
+  userDealers: [],
+  userPlayers: [],
+  userObservers: [],
 };
 
 export const connectFormDataReducer = (
@@ -67,20 +76,30 @@ export const connectFormDataReducer = (
   action: ActionTypeConnectFormData,
 ) => {
   switch (action.type) {
-    case SET_IS_DEALER:
+    case SET_DEALERS:
       return {
         ...state,
-        isUserDealer: [...state.isUserDealer, action.payload],
+        userDealers: [...state.userDealers, action.payload],
       };
-    case SET_IS_PLAYER:
+    case SET_PLAYERS:
       return {
         ...state,
-        isUserPlayer: [...state.isUserPlayer, action.payload],
+        userPlayers: [...state.userPlayers, action.payload],
       };
-    case SET_IS_OBSERVER:
+    case UPDATE_PLAYERS_STATE:
+      const { userPlayers } = state;
+      const userIndex = userPlayers.findIndex(({ userID }) => userID === action.payload);
       return {
         ...state,
-        isUserObserver: [...state.isUserObserver, action.payload],
+        userPlayers: [
+          ...state.userPlayers.slice(0, userIndex),
+          ...state.userPlayers.slice(userIndex + 1),
+        ],
+      };
+    case SET_OBSERVERS:
+      return {
+        ...state,
+        userObservers: [...state.userObservers, action.payload],
       };
     default:
       return state;

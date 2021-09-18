@@ -5,14 +5,16 @@ export const SHOW_DELETE_PLAYER_FORM = 'SHOW_DELETE_PLAYER_FORM';
 export const SET_TITLE_ISSUE = 'SET_TITLE_ISSUE';
 export const SET_LINK_ISSUE = 'SET_LINK_ISSUE';
 export const SET_PRIORITY_ISSUE = 'SET_PRIORITY_ISSUE';
-export const SET_IS_DEALER = 'SET_IS_DEALER';
-export const SET_IS_PLAYER = 'SET_IS_PLAYER';
-export const SET_IS_OBSERVER = 'SET_IS_OBSERVER';
+export const SET_DEALERS = 'SET_DEALERS';
+export const SET_PLAYERS = 'SET_PLAYERS';
+export const UPDATE_PLAYERS_STATE = 'UPDATE_PLAYERS_STATE';
+export const SET_OBSERVERS = 'SET_OBSERVERS';
 export const SET_AVATAR = 'SET_AVATAR';
 
 // CONNECT FORM
 
 export interface IConnectFormData {
+  userID: string;
   firstName: string;
   lastName: string;
   job: string;
@@ -20,27 +22,36 @@ export interface IConnectFormData {
 }
 
 export interface IInitialStateFormData {
-  isUserDealer: IConnectFormData[];
-  isUserPlayer: IConnectFormData[];
-  isUserObserver: IConnectFormData[];
+  userDealers: IConnectFormData[];
+  userPlayers: IConnectFormData[];
+  userObservers: IConnectFormData[];
 }
 
 interface IConnectIsDealer {
-  type: typeof SET_IS_DEALER;
+  type: typeof SET_DEALERS;
   payload: IConnectFormData;
 }
 
 interface IConnectIsPlayer {
-  type: typeof SET_IS_PLAYER;
+  type: typeof SET_PLAYERS;
   payload: IConnectFormData;
 }
 
 interface IConnectIsObserver {
-  type: typeof SET_IS_OBSERVER;
+  type: typeof SET_OBSERVERS;
   payload: IConnectFormData;
 }
 
-export type ActionTypeConnectFormData = IConnectIsDealer | IConnectIsPlayer | IConnectIsObserver;
+interface IUpdatePlayerState {
+  type: typeof UPDATE_PLAYERS_STATE;
+  payload: string;
+}
+
+export type ActionTypeConnectFormData =
+  | IConnectIsDealer
+  | IConnectIsPlayer
+  | IConnectIsObserver
+  | IUpdatePlayerState;
 
 // AVATAR CONNECT FORM
 export interface IAvatar {

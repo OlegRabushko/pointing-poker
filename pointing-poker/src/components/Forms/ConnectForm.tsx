@@ -3,6 +3,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 import Button from '../Button/Button';
 import Switcher from '../Switcher/Switcher';
@@ -12,7 +13,11 @@ import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import { setObserverStatus } from '../../redux/RolesRedux/RolesActions';
+import {
+  setDillerStatus,
+  setObserverStatus,
+  setPlayerStatus,
+} from '../../redux/RolesRedux/RolesActions';
 import {
   setAvatar,
   setConnectFormDialer,
@@ -54,15 +59,18 @@ const ConnectForm = () => {
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
     dispatch(showConnectForm(!isConnectForm));
     if (isDialer) {
-      dispatch(setConnectFormDialer(data, avatar));
+      dispatch(setConnectFormDialer(data, avatar, nanoid()));
+      dispatch(setDillerStatus(false));
       history.push('/settings');
     }
     if (isPlayer) {
-      dispatch(setConnectFormPlayer(data, avatar));
-      history.push('/game-player');
+      dispatch(setConnectFormPlayer(data, avatar, nanoid()));
+      dispatch(setPlayerStatus(false));
+      history.push('/game-page');
     }
     if (isObserver) {
-      dispatch(setConnectFormObserver(data, avatar));
+      dispatch(setConnectFormObserver(data, avatar, nanoid()));
+      dispatch(setObserverStatus(false));
       history.push('/lobby-page');
     }
     reset();
@@ -70,6 +78,9 @@ const ConnectForm = () => {
 
   const onShowConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
+    dispatch(setDillerStatus(false));
+    dispatch(setPlayerStatus(false));
+    dispatch(setObserverStatus(false));
   };
 
   return (

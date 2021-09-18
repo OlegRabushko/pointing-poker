@@ -7,12 +7,13 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 
 const ScramMaster = () => {
-  const { isUserDealer } = useSelector((state: RootState) => state.dataConnectForm);
+  const { userDealers } = useSelector((state: RootState) => state.dataConnectForm);
 
-  const userDealerData = isUserDealer.map((data, idx) => {
+  const userDealerData = userDealers.map((data) => {
     return (
       <UserCard
-        key={idx}
+        key={data.userID}
+        userID={data.userID}
         firstName={data.firstName}
         lastName={data.lastName}
         job={data.job}

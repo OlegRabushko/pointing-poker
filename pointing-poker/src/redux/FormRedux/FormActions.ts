@@ -1,27 +1,48 @@
 import {
   IConnectFormData,
   SET_AVATAR,
-  SET_IS_DEALER,
-  SET_IS_OBSERVER,
-  SET_IS_PLAYER,
+  SET_DEALERS,
   SET_LINK_ISSUE,
+  SET_OBSERVERS,
+  SET_PLAYERS,
   SET_PRIORITY_ISSUE,
   SET_TITLE_ISSUE,
   SHOW_CONNECT_FORM,
+  SHOW_DELETE_PLAYER_FORM,
   SHOW_ISSUES_FORM,
+  UPDATE_PLAYERS_STATE,
 } from './FormTypes';
 
-export const setConnectFormDialer = (payload: IConnectFormData, avatar: string) => ({
-  type: SET_IS_DEALER,
-  payload: { ...payload, avatar },
+export const setConnectFormDialer = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_DEALERS,
+  payload: { ...payload, avatar, userID },
 });
-export const setConnectFormPlayer = (payload: IConnectFormData, avatar: string) => ({
-  type: SET_IS_PLAYER,
-  payload: { ...payload, avatar },
+
+export const setConnectFormPlayer = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_PLAYERS,
+  payload: { ...payload, avatar, userID },
 });
-export const setConnectFormObserver = (payload: IConnectFormData, avatar: string) => ({
-  type: SET_IS_OBSERVER,
-  payload: { ...payload, avatar },
+
+export const setConnectFormObserver = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_OBSERVERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setUpdatedPlayersState = (payload: string) => ({
+  type: UPDATE_PLAYERS_STATE,
+  payload,
 });
 
 // AVATAR CONNECT FORM
@@ -37,6 +58,10 @@ export const showConnectForm = (payload: boolean) => ({
 });
 export const showIssuesForm = (payload: boolean) => ({
   type: SHOW_ISSUES_FORM,
+  payload,
+});
+export const showDeleteForm = (payload: boolean) => ({
+  type: SHOW_DELETE_PLAYER_FORM,
   payload,
 });
 

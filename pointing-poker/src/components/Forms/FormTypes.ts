@@ -1,4 +1,5 @@
 export interface IConnectForm {
+  userID: string;
   firstName: string;
   lastName: string;
   job: string;

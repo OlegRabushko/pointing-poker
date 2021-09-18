@@ -4,12 +4,13 @@ import UserCard from '../UserCard/UserCard';
 import { RootState } from '../../redux';
 
 const MembersSection = () => {
-  const { isUserPlayer } = useSelector((state: RootState) => state.dataConnectForm);
+  const { userPlayers } = useSelector((state: RootState) => state.dataConnectForm);
 
-  const users = isUserPlayer.map((data, idx) => {
+  const users = userPlayers.map((data) => {
     return (
       <UserCard
-        key={idx}
+        key={data.userID}
+        userID={data.userID}
         firstName={data.firstName}
         lastName={data.lastName}
         job={data.job}

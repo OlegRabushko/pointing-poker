@@ -14,6 +14,12 @@ class ChatService {
         const msg = await MessageDB.findById(msgOrderId)
         return msg
     }
+
+    async getAllMessages(gameId){
+            const msgs = await MessageDB.find({game_id: gameId})
+            return  msgs           
+    }   
+    
     
     async deleteMessage(msgId){
         if(!msgId){

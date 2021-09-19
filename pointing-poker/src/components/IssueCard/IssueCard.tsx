@@ -7,7 +7,7 @@ const IssueCard = () => {
   const game = false;
   const diller = true;
   return (
-    <StyledIssueCard className="user-card" current={current}>
+    <StyledIssueCard current={current}>
       <StyledIssueInfo>
         {current && game ? (
           <span className="current-issue">Current</span>

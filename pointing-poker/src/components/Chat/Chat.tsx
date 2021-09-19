@@ -1,17 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
-import { RootState } from '../../redux';
 import { IMsg } from '../../types/interfaces';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
-import { sendMsgToAll } from '../../sockets/Sockets';
+import { recieveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
+import { RootState } from '../../redux';
+import { receiveAllMsgs } from '../../api/api';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');
+  const dispatch = useDispatch();
   const txtRef = useRef<HTMLDivElement>(null);
-  const { msgs, currUserID, users } = useSelector((state: RootState) => ({
+  const { gameId, msgs, currUserID, users } = useSelector((state: RootState) => ({
+    gameId: state.initial.gameId,
     currUserID: state.initial.currUserID,
     msgs: state.chat.msgs,
     users: state.initial.users,
@@ -25,7 +27,7 @@ const Chat = () => {
     const sendTime = new Date();
     const decimaLen = 2;
     sendMsgToServer({
-      order_id: `${nanoid()}`,
+      game_id: `${gameId}`,
       user_id: currUserID,
       text: msg,
       time: `${sendTime.getHours()}:${
@@ -35,13 +37,17 @@ const Chat = () => {
       }`,
     });
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(receiveAllMsgs(gameId));
+    dispatch(recieveMsg());
+  }, []);
   return (
     <StyledChatBox>
       <StyledChatWindow>
-        {msgs.map((msgData: IMsg, msgIndex) => (
-          <ChatMessage key={msgIndex} users={users} currUserID={currUserID} msgData={msgData} />
-        ))}
+        {msgs.length &&
+          msgs.map((msgData: IMsg, msgIndex) => (
+            <ChatMessage key={msgIndex} users={users} currUserID={currUserID} msgData={msgData} />
+          ))}
       </StyledChatWindow>
       <ChatInput submitMsg={submitMsg} setMsg={setMsg} txtRef={txtRef} />
     </StyledChatBox>

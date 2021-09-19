@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const blueColor = '#2B3A67';
+export const whiteColor = '#ffffff';
+export const beigeColor = '#fdd1a1';
+
 const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
@@ -26,7 +29,6 @@ a {
 body {
   width: 100%;
   height: 100%;
-  font-family: 'Roboto';
 }
 
 #root {

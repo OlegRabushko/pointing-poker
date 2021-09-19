@@ -4,6 +4,7 @@ export const SET_CURR_USER_ID = 'SET_USER_ID';
 export const SET_USER = 'SET_USER';
 
 export interface InitialState {
+  gameId: string;
   currUserID: string;
   users: IUsers;
 }

@@ -1,7 +1,12 @@
 import { IMsg } from '../../types/interfaces';
-import { SET_MESSAGE } from './ChatTypes';
+import { GET_ALL_MESSAGES, GET_MESSAGE, IActionGetAllMsgs, IActionGetMsg } from './ChatTypes';
 
-export const setMessage = (msg: IMsg) => ({
-  type: SET_MESSAGE,
+export const getMessage = (msg: IMsg): IActionGetMsg => ({
+  type: GET_MESSAGE,
   payload: msg,
+});
+
+export const getAllMessage = (msgs: IMsg[]): IActionGetAllMsgs => ({
+  type: GET_ALL_MESSAGES,
+  payload: msgs,
 });

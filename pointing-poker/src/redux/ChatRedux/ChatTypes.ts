@@ -1,8 +1,16 @@
 import { IMsg } from '../../types/interfaces';
 
-export const SET_MESSAGE = 'SET_MESSAGE';
+export const GET_MESSAGE = 'GET_MESSAGE';
+export const GET_ALL_MESSAGES = 'GET_ALL_MESSAGES';
 
-export type TReduxChat = {
-  type: typeof SET_MESSAGE;
+export type TChatActions = IActionGetMsg | IActionGetAllMsgs;
+
+export interface IActionGetMsg {
+  type: 'GET_MESSAGE';
   payload: IMsg;
-};
+}
+
+export interface IActionGetAllMsgs {
+  type: 'GET_ALL_MESSAGES';
+  payload: IMsg[];
+}

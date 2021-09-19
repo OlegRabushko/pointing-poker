@@ -1,6 +1,6 @@
 export interface IMsg {
   msgId?: string;
-  order_id: string;
+  game_id: string;
   user_id: string;
   text: string;
   time: string;
@@ -11,7 +11,7 @@ export interface IUserInfo {
   name: string;
   lastName: string;
   role: string;
-  position: string;
+  job: string;
   avatar: string;
 }
 

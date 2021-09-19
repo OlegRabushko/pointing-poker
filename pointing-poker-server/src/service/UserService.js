@@ -2,9 +2,9 @@ const UserDB = require ('../shemas/UserShema')
 
 class UserService {
 
-    async setUser(userInfo){
-        console.log('in service', userInfo)
-        UserDB.create(userInfo)
+    async setUser(userInfo){ 
+        const result = await UserDB.create(userInfo)
+        return result
     }
 
     async getUser(userId){
@@ -15,8 +15,8 @@ class UserService {
         return user.json()
     }
     
-    async getUsers(){
-        const users = await UserDB.find()
+    async getAllUsers(gameId){
+        const users = await UserDB.find({game_id: gameId})
         return users.json()
     }
 
@@ -24,8 +24,16 @@ class UserService {
         if(!userId){
             throw new Error('no ID')
         }
-        const delUser = await UserDB.findByIdAndDelete(userId)
-        return delUser
+        await UserDB.findByIdAndDelete(userId, (err) => {
+            if(err){
+                return {res: 'Not Found User'}
+            }
+            else {
+                return {res: 'User deleted'}
+            } 
+        }
+        )
+        
     }
 }
 

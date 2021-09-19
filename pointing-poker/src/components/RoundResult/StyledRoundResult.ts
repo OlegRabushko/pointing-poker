@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledRoundResult = styled.div`
   width: 450px;
@@ -30,9 +31,6 @@ export const StyledRoundResult = styled.div`
     ::-webkit-scrollbar {
       width: 10px;
     }
-    @media (max-width: 650px) {
-      padding: 0px 0px 10px 10px;
-    }
   }
 
   .flex-box {
@@ -45,7 +43,7 @@ export const StyledRoundResult = styled.div`
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 30px;
-    color: white;
+    color: ${whiteColor};
     img {
       cursor: pointer;
       width: 40px;
@@ -53,11 +51,16 @@ export const StyledRoundResult = styled.div`
       border-radius: 50%;
       &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 5px white;
+        box-shadow: 0 0 5px ${whiteColor};
       }
     }
   }
   @media (max-width: 650px) {
     width: 400px;
+  }
+  @media (max-width: 650px) {
+    transform: scale(0.8);
+    top: 5%;
+    left: 10%;
   }
 `;

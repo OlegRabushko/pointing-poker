@@ -1,11 +1,18 @@
+import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import Chat from './components/Chat/Chat';
+// import Chat from './components/Chat/Chat';
+import { useSelector } from 'react-redux';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Body from './components/Body/Body';
 import GlobalStyle from './components/GlobalStyle/StyledGlobal';
-import { connectToSocket } from './sockets/Sockets';
+import { connectToSocket } from './sockets/SocketsAPI';
+import { RootState } from './redux';
+import ConnectForm from './components/Forms/ConnectForm';
+import CreateIssueForm from './components/Forms/CreateIssueForm';
+import Chat from './components/Chat/Chat';
+// import DeleteUser from './components/DeleteUser/DeleteUser';
 
 const StyledApp = styled.div`
   display: flex;
@@ -17,15 +24,23 @@ const StyledApp = styled.div`
 
 const App = () => {
   connectToSocket();
+  const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+  const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
+
   return (
-    <StyledApp>
-      <GlobalFonts />
-      <GlobalStyle />
-      <Header />
-      <Chat />
-      <Body />
-      <Footer />
-    </StyledApp>
+    <BrowserRouter>
+      <StyledApp>
+        <GlobalFonts />
+        <GlobalStyle />
+        <Header />
+        <Chat />
+        {/* <DeleteUser /> */}
+        <Body />
+        <Footer />
+        {isConnectForm && <ConnectForm />}
+        {isIssuesForm && <CreateIssueForm />}
+      </StyledApp>
+    </BrowserRouter>
   );
 };
 

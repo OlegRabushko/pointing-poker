@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload') 
-const router = require('./router')
+const {route} = require('./router/router')
 const {json} = require('body-parser')
 const cors = require('cors')
 const express = require('express')
@@ -11,6 +11,12 @@ const PORT = Number(process.env.PORT) || 7001
 const HOST = '0.0.0.0'
 const DB_URL = 'mongodb+srv://user1:user1@clusterfornodejs.71bfz.mongodb.net/poining_poker?retryWrites=true&w=majority'
 const app = express()
+app.use(express.json())
+app.use(json())
+app.use(cors({
+    origin:'http://localhost:8080'
+}))
+
 const server = http.createServer(app)
 
 const io = require('socket.io')(server, {
@@ -18,12 +24,19 @@ const io = require('socket.io')(server, {
         origin: 'http://localhost:8080'
     }
 })
+app.use('/api', route)
 try {
     io.on('connection', (socket) => {
-        console.log('user connected with id', socket.id)
+        console.log('user connected with id msg from sever', socket.id)
     
         const msgController = new MsgController(io, socket)
-        socket.on('send-msg', msg => msgController.setMessage(msg))
+        socket.on('send-msg', (msg) =>{
+            //socket.broadcast.emit('recieve-msg', msg)
+            io.emit('recieve-msg', msg)  
+            msgController.setMessage(msg)
+        } 
+            )
+        
     })    
 } catch (error) {
     console.log(error)

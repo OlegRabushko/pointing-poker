@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import { InitialState, SET_CURR_USER_ID, SET_USER, TReduxInitial } from './InitialTypes';
 
 const initialState: InitialState = {
+  gameId: '1234',
   currUserID: '1001',
   users: {
     '1001': {
@@ -9,7 +10,7 @@ const initialState: InitialState = {
       name: 'Alex',
       lastName: 'Gordon',
       role: 'player',
-      position: 'frontender',
+      job: 'frontender',
       avatar: '',
     },
     '1000': {
@@ -17,7 +18,7 @@ const initialState: InitialState = {
       name: 'Ivan',
       lastName: 'Volk',
       role: 'player',
-      position: 'manager',
+      job: 'manager',
       avatar: '',
     },
   },

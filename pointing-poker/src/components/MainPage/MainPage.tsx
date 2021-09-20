@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
-import { showConnectForm } from '../../redux/FormRedux/FormActions';
+import { setAvatar, showConnectForm } from '../../redux/FormRedux/FormActions';
 import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
 import Button from '../Button/Button';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
@@ -10,16 +10,17 @@ import { StyleMainPage } from './StyledMainPage';
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-  const { isDialer, isPlayer } = useSelector((state: RootState) => state.personStatus);
 
   const handlerDillerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(!isDialer));
+    dispatch(setDillerStatus(true));
+    dispatch(setAvatar(''));
   };
 
   const handlerPlayerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setPlayerStatus(!isPlayer));
+    dispatch(setPlayerStatus(true));
+    dispatch(setAvatar(''));
   };
 
   return (
@@ -52,6 +53,7 @@ const MainPage = () => {
             color={whiteColor}
             mainPage
             colorBG={blueColor}
+            borderRadius="0 3px 3px 0"
             text="Connect"
             onClick={handlerPlayerState}
           />

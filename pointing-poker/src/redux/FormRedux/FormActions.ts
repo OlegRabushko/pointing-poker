@@ -1,27 +1,39 @@
+import { IConnectForm, IIssueCard } from '../../components/Forms/FormTypes';
 import {
+  DELETE_ISSUE_DATA,
   SET_AVATAR,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_SURNAME,
-  SET_LINK_ISSUE,
-  SET_PRIORITY_ISSUE,
-  SET_TITLE_ISSUE,
+  SET_DEALERS,
+  SET_ISSUE_DATA,
+  SET_OBSERVERS,
+  SET_PLAYERS,
   SHOW_CONNECT_FORM,
+  SHOW_DELETE_PLAYER_FORM,
   SHOW_ISSUES_FORM,
-} from './FormTypes';
+  UPDATE_PLAYERS_STATE,
+} from './ReduxFormTypes';
 
-export const setConnectFormName = (payload: string) => ({
-  type: SET_CONNECT_FORM_NAME,
+// ROLE PLAYERS
+export const setConnectFormDialer = (payload: IConnectForm, avatar: string, userID: string) => ({
+  type: SET_DEALERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setConnectFormPlayer = (payload: IConnectForm, avatar: string, userID: string) => ({
+  type: SET_PLAYERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setConnectFormObserver = (payload: IConnectForm, avatar: string, userID: string) => ({
+  type: SET_OBSERVERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setUpdatedPlayersState = (payload: string) => ({
+  type: UPDATE_PLAYERS_STATE,
   payload,
 });
-export const setConnectFormSurname = (payload: string) => ({
-  type: SET_CONNECT_FORM_SURNAME,
-  payload,
-});
-export const setConnectFormJob = (payload: string) => ({
-  type: SET_CONNECT_FORM_JOB,
-  payload,
-});
+
+// AVATAR CONNECT FORM
 export const setAvatar = (payload: string) => ({
   type: SET_AVATAR,
   payload,
@@ -36,17 +48,18 @@ export const showIssuesForm = (payload: boolean) => ({
   type: SHOW_ISSUES_FORM,
   payload,
 });
+export const showDeleteForm = (payload: boolean) => ({
+  type: SHOW_DELETE_PLAYER_FORM,
+  payload,
+});
 
-// ACTION-CREATORS ISSUE FORM
-export const setIssueTitle = (payload: string) => ({
-  type: SET_TITLE_ISSUE,
-  payload,
+// ISSUE FORM
+export const createIssueCard = (payload: IIssueCard, issueID: string) => ({
+  type: SET_ISSUE_DATA,
+  payload: { ...payload, issueID },
 });
-export const setIssueLink = (payload: string) => ({
-  type: SET_LINK_ISSUE,
-  payload,
-});
-export const setIssuePriority = (payload: string) => ({
-  type: SET_PRIORITY_ISSUE,
+
+export const deleteIssueCard = (payload: string) => ({
+  type: DELETE_ISSUE_DATA,
   payload,
 });

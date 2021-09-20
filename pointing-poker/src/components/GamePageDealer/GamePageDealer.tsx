@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
-import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
@@ -14,6 +13,7 @@ import IssuesSection from '../IssuesSection/issuesSection';
 import { RootState } from '../../redux';
 import { setRound } from '../../redux/InitialRedux/InitialActions';
 import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
+import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
 
 const GamePageDealer = () => {
   const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
@@ -43,7 +43,7 @@ const GamePageDealer = () => {
           />
           <div className="scram-master-container">
             <div className="flex-box">
-              <ScramMaster />
+              <ScramMasterSection />
               <div className="stop-game-btn">
                 <Link to="/">
                   <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>

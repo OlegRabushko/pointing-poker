@@ -6,6 +6,7 @@ import { initialReducer, gameProcessReducer } from './InitialRedux/InitialReduce
 import { gameCardReducer } from './GameCardRedux/GameCardReducer';
 import { lobbySettingsReducer } from './SettingsSectionRedux/SettingsSectionReducer';
 import {
+  connectAvatarReducer,
   connectFormDataReducer,
   issueFormDataReducer,
   showFormsReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   showForms: showFormsReducer,
   issueFormData: issueFormDataReducer,
   dataConnectForm: connectFormDataReducer,
+  connectAvatar: connectAvatarReducer,
   settings: lobbySettingsReducer,
   initial: initialReducer,
   chat: chatReducer,

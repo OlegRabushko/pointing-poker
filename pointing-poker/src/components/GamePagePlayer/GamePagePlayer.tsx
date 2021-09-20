@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
-import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from '../GamePageDealer/StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
@@ -11,6 +10,7 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import IssuesSection from '../IssuesSection/issuesSection';
 import { Cards } from '../CardValuesSection/CardValuesSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
+import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
 
 const GamePagePlayer = () => {
   const [showResults, setShowResults] = useState(false);
@@ -29,7 +29,7 @@ const GamePagePlayer = () => {
           />
           <div className="scram-master-container">
             <div className="flex-box">
-              <ScramMaster />
+              <ScramMasterSection />
               <div className="stop-game-btn">
                 <Link to="/">
                   <Button text="Exit" colorBG={whiteColor} color={blueColor}></Button>

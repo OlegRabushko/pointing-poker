@@ -1,22 +1,28 @@
+/* eslint-disable no-case-declarations */
 import {
   ActionTypeConnectFormData,
-  SET_AVATAR,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_SURNAME,
   SHOW_CONNECT_FORM,
   SHOW_ISSUES_FORM,
-  SET_TITLE_ISSUE,
-  ActionTypeIssueFormData,
-  SET_LINK_ISSUE,
-  SET_PRIORITY_ISSUE,
   ActionTypeShowForms,
-} from './FormTypes';
+  IAvatar,
+  SET_AVATAR,
+  IInitialStatePlayers,
+  SHOW_DELETE_PLAYER_FORM,
+  UPDATE_PLAYERS_STATE,
+  SET_DEALERS,
+  SET_PLAYERS,
+  SET_OBSERVERS,
+  SET_ISSUE_DATA,
+  IInitialStateIssueCards,
+  ActionTypeIssueCards,
+  DELETE_ISSUE_DATA,
+} from './ReduxFormTypes';
 
 // SHOW FORMS
 const showFormsState = {
   isConnectForm: false,
   isIssuesForm: false,
+  isDeleteUser: false,
 };
 
 export const showFormsReducer = (state = showFormsState, action: ActionTypeShowForms) => {
@@ -31,39 +37,23 @@ export const showFormsReducer = (state = showFormsState, action: ActionTypeShowF
         ...state,
         isIssuesForm: action.payload,
       };
+    case SHOW_DELETE_PLAYER_FORM:
+      return {
+        ...state,
+        isDeleteUser: action.payload,
+      };
     default:
       return state;
   }
 };
 
-// CONNECT FORM
-const connectFormState = {
-  firstName: '',
-  lastName: '',
-  job: '',
+// AVATAR CONNECT FORM
+const initialAvatar = {
   avatar: '',
 };
 
-export const connectFormDataReducer = (
-  state = connectFormState,
-  action: ActionTypeConnectFormData,
-) => {
+export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => {
   switch (action.type) {
-    case SET_CONNECT_FORM_NAME:
-      return {
-        ...state,
-        firstName: action.payload,
-      };
-    case SET_CONNECT_FORM_SURNAME:
-      return {
-        ...state,
-        lastName: action.payload,
-      };
-    case SET_CONNECT_FORM_JOB:
-      return {
-        ...state,
-        job: action.payload,
-      };
     case SET_AVATAR:
       return {
         ...state,
@@ -74,30 +64,69 @@ export const connectFormDataReducer = (
   }
 };
 
-// ISSUE FORM
-const issueFormState = {
-  title: '',
-  link: '',
-  priority: '',
-  voitingResults: [{}],
+// CONNECT FORM
+const connectFormState: IInitialStatePlayers = {
+  userDealers: [],
+  userPlayers: [],
+  userObservers: [],
 };
 
-export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueFormData) => {
+export const connectFormDataReducer = (
+  state = connectFormState,
+  action: ActionTypeConnectFormData,
+) => {
   switch (action.type) {
-    case SET_TITLE_ISSUE:
+    case SET_DEALERS:
       return {
         ...state,
-        title: action.payload,
+        userDealers: [...state.userDealers, action.payload],
       };
-    case SET_LINK_ISSUE:
+    case SET_PLAYERS:
       return {
         ...state,
-        link: action.payload,
+        userPlayers: [...state.userPlayers, action.payload],
       };
-    case SET_PRIORITY_ISSUE:
+    case UPDATE_PLAYERS_STATE:
+      const { userPlayers } = state;
+      const userIndex = userPlayers.findIndex(({ userID }) => userID === action.payload);
       return {
         ...state,
-        priority: action.payload,
+        userPlayers: [
+          ...state.userPlayers.slice(0, userIndex),
+          ...state.userPlayers.slice(userIndex + 1),
+        ],
+      };
+    case SET_OBSERVERS:
+      return {
+        ...state,
+        userObservers: [...state.userObservers, action.payload],
+      };
+    default:
+      return state;
+  }
+};
+
+// ISSUE FORM
+const issueFormState: IInitialStateIssueCards = {
+  issueCards: [],
+};
+
+export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueCards) => {
+  switch (action.type) {
+    case SET_ISSUE_DATA:
+      return {
+        ...state,
+        issueCards: [...state.issueCards, action.payload],
+      };
+    case DELETE_ISSUE_DATA:
+      const { issueCards } = state;
+      const issueIndex = issueCards.findIndex(({ issueID }) => issueID === action.payload);
+      return {
+        ...state,
+        issueCards: [
+          ...state.issueCards.slice(0, issueIndex),
+          ...state.issueCards.slice(issueIndex + 1),
+        ],
       };
     default:
       return state;

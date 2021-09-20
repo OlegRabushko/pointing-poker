@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
+import { whiteColor, blueColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledChatInput = styled.form`
   .input-wrapper {
@@ -15,6 +15,9 @@ export const StyledChatInput = styled.form`
     padding: 10px 5px;
     border: none;
     background-color: ${whiteColor};
+    border-right: 1px solid #c5d0db;
+    border-left: 1px solid #c5d0db;
+    border-bottom: 1px solid #c5d0db;
     outline: none;
     resize: none;
     width: 400px;
@@ -31,7 +34,7 @@ export const StyledChatInput = styled.form`
     justify-content: center;
     align-items: center;
     width: 40px;
-    background-color: #248bf5;
+    background-color: ${blueColor};
     cursor: pointer;
   }
 

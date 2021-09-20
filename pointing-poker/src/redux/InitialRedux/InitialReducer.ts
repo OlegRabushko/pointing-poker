@@ -1,4 +1,11 @@
-import { InitialState, SET_CURR_USER_ID, SET_USER, TReduxInitial } from './InitialTypes';
+import {
+  InitialState,
+  SET_CURR_USER_ID,
+  SET_USER,
+  TReduxInitial,
+  ActionTypeGameProcess,
+  SET_ROUND,
+} from './InitialTypes';
 
 const initialState: InitialState = {
   currUserID: '1001',
@@ -33,6 +40,22 @@ export const initialReducer = (state = initialState, action: TReduxInitial) => {
       return {
         ...state,
         users: { ...state.users, [action.payload.userID]: action.payload },
+      };
+    default:
+      return state;
+  }
+};
+
+const gameProcessState = {
+  startRound: false,
+  selectedCard: false,
+};
+export const gameProcessReducer = (state = gameProcessState, action: ActionTypeGameProcess) => {
+  switch (action.type) {
+    case SET_ROUND:
+      return {
+        ...state,
+        startRound: action.payload,
       };
     default:
       return state;

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
 import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
@@ -10,12 +11,23 @@ import RoundResult from '../RoundResult/RoundResult';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import IssuesSection from '../IssuesSection/issuesSection';
+import { RootState } from '../../redux';
+import { setRound } from '../../redux/InitialRedux/InitialActions';
+import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
 
 const GamePageDealer = () => {
+  const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
+  const timeStore = useSelector((store: RootState) => store.timer);
+  const dispatch = useDispatch();
   const [showResults, setShowResults] = useState(false);
-  const [round, setRound] = useState(false);
-
-  const showStatistics = () => setRound((prev) => !prev);
+  const startRound = () => dispatch(setRound(!isRound));
+  const stopRound = () => {
+    dispatch(setRound(!isRound));
+    setTimeout(() => {
+      dispatch(setMinutes(timeStore.startTime[0]));
+      dispatch(setSeconds(timeStore.startTime[1]));
+    }, 1000);
+  };
 
   return (
     <StyledGamePage>
@@ -44,18 +56,18 @@ const GamePageDealer = () => {
               <IssuesSection />
               <div className="timer-block">
                 <Timer />
-                {round ? (
+                {isRound ? (
                   <>
                     <Button
                       text="Restart Round"
                       color={whiteColor}
-                      onClick={showStatistics}
+                      onClick={stopRound}
                       colorBG={blueColor}
                     />
                     <Link to="/results">
                       <Button
                         text="Next ISSUE"
-                        onClick={showStatistics}
+                        onClick={startRound}
                         color={whiteColor}
                         colorBG={blueColor}
                       />
@@ -64,7 +76,7 @@ const GamePageDealer = () => {
                 ) : (
                   <Button
                     text="Run Round"
-                    onClick={showStatistics}
+                    onClick={startRound}
                     color={whiteColor}
                     colorBG={blueColor}
                   />
@@ -75,7 +87,7 @@ const GamePageDealer = () => {
         </section>
         {showResults && <RoundResult setShowResults={setShowResults} />}
       </div>
-      <section className="cards-section">{round && <StatisticsSection isStats />}</section>
+      <section className="cards-section">{isRound && <StatisticsSection isStats />}</section>
     </StyledGamePage>
   );
 };

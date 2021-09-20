@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-// import Chat from './components/Chat/Chat';
 import { useSelector } from 'react-redux';
+import Chat from './components/Chat/Chat';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -26,11 +26,11 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <StyledApp>
+      <StyledApp className="project-container">
         <GlobalFonts />
         <GlobalStyle />
         <Header />
-        {/* <Chat /> */}
+        <Chat />
         {/* <DeleteUser /> */}
         <Body />
         <Footer />

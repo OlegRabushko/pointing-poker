@@ -4,6 +4,7 @@ export interface IConnectForm {
   lastName: string;
   job: string;
   avatar: string;
+  session: string;
 }
 
 export interface InputProps {
@@ -35,7 +36,7 @@ export interface IPopupWrapper {
 // ISSUES DATA
 export interface IIssueCard {
   issueID: string;
-  // current: boolean;
+  current: boolean;
   issuePriority: string;
   issueLink?: string;
   issueTitle: string;

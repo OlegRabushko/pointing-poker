@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
 import { RootState } from '../../redux';
 import { showDeleteForm } from '../../redux/FormRedux/FormActions';
-import { IConnectFormData } from '../../redux/FormRedux/ReduxFormTypes';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import DeleteUser from '../DeletePlayer/DeleteUser';
+import { IConnectForm } from '../Forms/FormTypes';
 import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
-const UserCard: FC<IConnectFormData> = (props) => {
+const UserCard: FC<IConnectForm> = (props) => {
   const { firstName, lastName, job, avatar, userID } = props;
 
   const dispatch = useDispatch();

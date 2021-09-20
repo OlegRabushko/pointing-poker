@@ -113,6 +113,13 @@ const ConnectForm = () => {
             Your job position:
             <StyledInput {...register('job')} />
           </StyledLabel>
+          {isDialer && (
+            <StyledLabel>
+              Sessiot name:
+              <StyledInput {...register('session', { required: true, maxLength: 20 })} />
+              {errors.session && <p className="error">Session name is required</p>}
+            </StyledLabel>
+          )}
           <div className="input-file-wrapper">
             <label className="upload-label">
               <span>Choose avatar</span>

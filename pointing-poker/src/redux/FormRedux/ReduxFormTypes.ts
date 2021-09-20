@@ -6,6 +6,8 @@ export const SHOW_DELETE_PLAYER_FORM = 'SHOW_DELETE_PLAYER_FORM';
 
 export const SET_ISSUE_DATA = 'SET_ISSUE_DATA';
 export const DELETE_ISSUE_DATA = 'DELETE_ISSUE_DATA';
+export const TOGGLE_CURRENT_ISSUE_CARD = 'TOGGLE_CURRENT_ISSUE_CARD';
+export const RENAME_ISSUE_TITLE = 'RENAME_ISSUE_TITLE';
 
 export const SET_DEALERS = 'SET_DEALERS';
 export const SET_PLAYERS = 'SET_PLAYERS';
@@ -15,22 +17,22 @@ export const SET_AVATAR = 'SET_AVATAR';
 
 // CONNECT FORM
 export interface IInitialStatePlayers {
-  userDealers: IConnectForm[];
+  userDealer: IConnectForm;
   userPlayers: IConnectForm[];
   userObservers: IConnectForm[];
 }
 
-interface IConnectIsDealer {
+interface IConnectUserDealer {
   type: typeof SET_DEALERS;
   payload: IConnectForm;
 }
 
-interface IConnectIsPlayer {
+interface IConnectUserPlayer {
   type: typeof SET_PLAYERS;
   payload: IConnectForm;
 }
 
-interface IConnectIsObserver {
+interface IConnectUserObserver {
   type: typeof SET_OBSERVERS;
   payload: IConnectForm;
 }
@@ -41,9 +43,9 @@ interface IUpdatePlayerState {
 }
 
 export type ActionTypeConnectFormData =
-  | IConnectIsDealer
-  | IConnectIsPlayer
-  | IConnectIsObserver
+  | IConnectUserDealer
+  | IConnectUserPlayer
+  | IConnectUserObserver
   | IUpdatePlayerState;
 
 // AVATAR CONNECT FORM
@@ -67,7 +69,22 @@ interface IDeleteIssueFormData {
   payload: string;
 }
 
-export type ActionTypeIssueCards = ISetIssueFormData | IDeleteIssueFormData;
+interface IToggleCurrentIssueCard {
+  type: typeof TOGGLE_CURRENT_ISSUE_CARD;
+  payload: string;
+}
+
+interface IRenameIssueTitle {
+  type: typeof RENAME_ISSUE_TITLE;
+  payload: string;
+  issueID: string;
+}
+
+export type ActionTypeIssueCards =
+  | ISetIssueFormData
+  | IDeleteIssueFormData
+  | IToggleCurrentIssueCard
+  | IRenameIssueTitle;
 
 // SHOW FORMS
 interface IShowConnectForm {

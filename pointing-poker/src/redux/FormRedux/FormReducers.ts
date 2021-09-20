@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-case-declarations */
 import {
   ActionTypeConnectFormData,
@@ -16,6 +19,8 @@ import {
   IInitialStateIssueCards,
   ActionTypeIssueCards,
   DELETE_ISSUE_DATA,
+  TOGGLE_CURRENT_ISSUE_CARD,
+  RENAME_ISSUE_TITLE,
 } from './ReduxFormTypes';
 
 // SHOW FORMS
@@ -66,7 +71,14 @@ export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => 
 
 // CONNECT FORM
 const connectFormState: IInitialStatePlayers = {
-  userDealers: [],
+  userDealer: {
+    userID: '',
+    firstName: '',
+    lastName: '',
+    job: '',
+    avatar: '',
+    session: '',
+  },
   userPlayers: [],
   userObservers: [],
 };
@@ -79,7 +91,7 @@ export const connectFormDataReducer = (
     case SET_DEALERS:
       return {
         ...state,
-        userDealers: [...state.userDealers, action.payload],
+        userDealer: action.payload,
       };
     case SET_PLAYERS:
       return {
@@ -112,6 +124,9 @@ const issueFormState: IInitialStateIssueCards = {
 };
 
 export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueCards) => {
+  const { issueCards } = state;
+  const issueIndex = issueCards.findIndex(({ issueID }) => issueID === action.payload);
+
   switch (action.type) {
     case SET_ISSUE_DATA:
       return {
@@ -119,14 +134,30 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
         issueCards: [...state.issueCards, action.payload],
       };
     case DELETE_ISSUE_DATA:
-      const { issueCards } = state;
-      const issueIndex = issueCards.findIndex(({ issueID }) => issueID === action.payload);
       return {
         ...state,
         issueCards: [
           ...state.issueCards.slice(0, issueIndex),
           ...state.issueCards.slice(issueIndex + 1),
         ],
+      };
+    case TOGGLE_CURRENT_ISSUE_CARD:
+      issueCards.map((card) =>
+        card.issueID !== action.payload ? (card.current = false) : (card.current = true),
+      );
+      return {
+        ...state,
+        issueCards: [...state.issueCards],
+      };
+    case RENAME_ISSUE_TITLE:
+      issueCards.map((card) => {
+        if (card.issueID === action.issueID) {
+          card.issueTitle = action.payload;
+        }
+      });
+      return {
+        ...state,
+        issueCards: [...state.issueCards],
       };
     default:
       return state;

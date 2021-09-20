@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
-import { ScramMaster } from '../ScramMasterSection/ScramMasterSection';
 import Timer from '../Timer/Timer';
 import { StyledGamePage } from './StyledGamePage';
 import resultsIco from '../../assets/icons/results-ico.png';
@@ -10,6 +9,7 @@ import RoundResult from '../RoundResult/RoundResult';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import IssuesSection from '../IssuesSection/issuesSection';
+import ScramMaster from '../ScramMaster/ScramMaster';
 
 const GamePageDealer = () => {
   const [showResults, setShowResults] = useState(false);

@@ -24,8 +24,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   connectToSocket();
-  const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-  const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
+  const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
   return (
     <BrowserRouter>
@@ -33,7 +32,7 @@ const App = () => {
         <GlobalFonts />
         <GlobalStyle />
         <Header />
-        <Chat />
+        {/* <Chat /> */}
         {/* <DeleteUser /> */}
         <Body />
         <Footer />

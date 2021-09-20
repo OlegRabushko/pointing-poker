@@ -1,27 +1,51 @@
 import {
+  IConnectFormData,
   SET_AVATAR,
-  SET_CONNECT_FORM_JOB,
-  SET_CONNECT_FORM_NAME,
-  SET_CONNECT_FORM_SURNAME,
+  SET_DEALERS,
   SET_LINK_ISSUE,
+  SET_OBSERVERS,
+  SET_PLAYERS,
   SET_PRIORITY_ISSUE,
   SET_TITLE_ISSUE,
   SHOW_CONNECT_FORM,
+  SHOW_DELETE_PLAYER_FORM,
   SHOW_ISSUES_FORM,
+  UPDATE_PLAYERS_STATE,
 } from './FormTypes';
 
-export const setConnectFormName = (payload: string) => ({
-  type: SET_CONNECT_FORM_NAME,
+export const setConnectFormDialer = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_DEALERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setConnectFormPlayer = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_PLAYERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setConnectFormObserver = (
+  payload: IConnectFormData,
+  avatar: string,
+  userID: string,
+) => ({
+  type: SET_OBSERVERS,
+  payload: { ...payload, avatar, userID },
+});
+
+export const setUpdatedPlayersState = (payload: string) => ({
+  type: UPDATE_PLAYERS_STATE,
   payload,
 });
-export const setConnectFormSurname = (payload: string) => ({
-  type: SET_CONNECT_FORM_SURNAME,
-  payload,
-});
-export const setConnectFormJob = (payload: string) => ({
-  type: SET_CONNECT_FORM_JOB,
-  payload,
-});
+
+// AVATAR CONNECT FORM
 export const setAvatar = (payload: string) => ({
   type: SET_AVATAR,
   payload,
@@ -34,6 +58,10 @@ export const showConnectForm = (payload: boolean) => ({
 });
 export const showIssuesForm = (payload: boolean) => ({
   type: SHOW_ISSUES_FORM,
+  payload,
+});
+export const showDeleteForm = (payload: boolean) => ({
+  type: SHOW_DELETE_PLAYER_FORM,
   payload,
 });
 

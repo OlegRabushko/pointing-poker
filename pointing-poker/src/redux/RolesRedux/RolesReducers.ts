@@ -19,16 +19,22 @@ export const gameStatusPersonReducer = (
     case SET_DIALER_STATUS:
       return {
         ...state,
+        isPlayer: false,
+        isObserver: false,
         isDialer: action.payload,
       };
     case SET_OBSERVER_STATUS:
       return {
         ...state,
+        isPlayer: false,
+        isDialer: false,
         isObserver: action.payload,
       };
     case SET_PLAYER_STATUS:
       return {
         ...state,
+        isDialer: false,
+        isObserver: false,
         isPlayer: action.payload,
       };
     default:

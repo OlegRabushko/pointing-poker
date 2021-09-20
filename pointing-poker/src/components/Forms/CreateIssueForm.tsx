@@ -12,12 +12,10 @@ import {
 } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import { ICreateIssueForm } from './FormTypes';
-import { StyledInput } from './StyledInput';
-import { StyledLabel } from './StyledLabel';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import { StyledSelect } from './StyledSelect';
+import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
 
 const CreateIssueForm = () => {
   const {

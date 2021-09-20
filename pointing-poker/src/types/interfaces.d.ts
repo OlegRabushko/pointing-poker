@@ -10,7 +10,9 @@ export interface IUserInfo {
   userID: string;
   name: string;
   lastName: string;
-  role: string;
+  isDialer: Boolean;
+  isOvserver: Boolean;
+  isPlayer: Boolean;
   job: string;
   avatar: string;
 }

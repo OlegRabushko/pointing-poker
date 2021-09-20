@@ -7,12 +7,25 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 
 const ScramMaster = () => {
-  const { isDialer } = useSelector((state: RootState) => state.personStatus);
+  const { userDealers } = useSelector((state: RootState) => state.dataConnectForm);
+
+  const userDealerData = userDealers.map((data) => {
+    return (
+      <UserCard
+        key={data.userID}
+        userID={data.userID}
+        firstName={data.firstName}
+        lastName={data.lastName}
+        job={data.job}
+        avatar={data.avatar}
+      />
+    );
+  });
 
   return (
     <StyledScramMaster>
       <div className="text">Scram master</div>
-      {isDialer && <UserCard />}
+      {userDealerData}
       <div className="key-text">Key to lobby:</div>
       <div className="flex-box">
         <input type="text" defaultValue="2Rt9g5f1" />

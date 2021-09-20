@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const UserSchema = Schema({
   name: String,
   lastName: String,
-  role: String,
+  isDialer: Boolean,
+  isOvserver: Boolean,
+  isPlayer: Boolean,
   job:String,
   avatar: String
 });

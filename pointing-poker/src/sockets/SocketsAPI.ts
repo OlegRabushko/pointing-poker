@@ -1,6 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import io from 'socket.io-client';
-import { moveMessagePortToContext } from 'worker_threads';
 import { getMessage, IGetMsg } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IMsg } from '../types/interfaces';

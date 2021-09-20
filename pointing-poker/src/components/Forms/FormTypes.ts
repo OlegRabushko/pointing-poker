@@ -1,8 +1,9 @@
 export interface IConnectForm {
+  userID: string;
   firstName: string;
   lastName: string;
   job: string;
-  role: boolean;
+  avatar: string;
 }
 
 export interface InputProps {

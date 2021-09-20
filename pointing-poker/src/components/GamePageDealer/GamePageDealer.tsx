@@ -9,7 +9,7 @@ import RoundResult from '../RoundResult/RoundResult';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import IssuesSection from '../IssuesSection/issuesSection';
-import ScramMaster from '../ScramMaster/ScramMaster';
+import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
 
 const GamePageDealer = () => {
   const [showResults, setShowResults] = useState(false);
@@ -31,7 +31,7 @@ const GamePageDealer = () => {
           />
           <div className="scram-master-container">
             <div className="flex-box">
-              <ScramMaster />
+              <ScramMasterSection />
               <div className="stop-game-btn">
                 <Link to="/">
                   <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>

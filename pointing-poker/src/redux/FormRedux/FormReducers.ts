@@ -3,20 +3,20 @@ import {
   ActionTypeConnectFormData,
   SHOW_CONNECT_FORM,
   SHOW_ISSUES_FORM,
-  SET_TITLE_ISSUE,
-  ActionTypeIssueFormData,
-  SET_LINK_ISSUE,
-  SET_PRIORITY_ISSUE,
   ActionTypeShowForms,
   IAvatar,
   SET_AVATAR,
-  IInitialStateFormData,
+  IInitialStatePlayers,
   SHOW_DELETE_PLAYER_FORM,
   UPDATE_PLAYERS_STATE,
   SET_DEALERS,
   SET_PLAYERS,
   SET_OBSERVERS,
-} from './FormTypes';
+  SET_ISSUE_DATA,
+  IInitialStateIssueCards,
+  ActionTypeIssueCards,
+  DELETE_ISSUE_DATA,
+} from './ReduxFormTypes';
 
 // SHOW FORMS
 const showFormsState = {
@@ -65,7 +65,7 @@ export const connectAvatarReducer = (state = initialAvatar, action: IAvatar) => 
 };
 
 // CONNECT FORM
-const connectFormState: IInitialStateFormData = {
+const connectFormState: IInitialStatePlayers = {
   userDealers: [],
   userPlayers: [],
   userObservers: [],
@@ -107,29 +107,26 @@ export const connectFormDataReducer = (
 };
 
 // ISSUE FORM
-const issueFormState = {
-  title: '',
-  link: '',
-  priority: '',
-  voitingResults: [{}],
+const issueFormState: IInitialStateIssueCards = {
+  issueCards: [],
 };
 
-export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueFormData) => {
+export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueCards) => {
   switch (action.type) {
-    case SET_TITLE_ISSUE:
+    case SET_ISSUE_DATA:
       return {
         ...state,
-        title: action.payload,
+        issueCards: [...state.issueCards, action.payload],
       };
-    case SET_LINK_ISSUE:
+    case DELETE_ISSUE_DATA:
+      const { issueCards } = state;
+      const issueIndex = issueCards.findIndex(({ issueID }) => issueID === action.payload);
       return {
         ...state,
-        link: action.payload,
-      };
-    case SET_PRIORITY_ISSUE:
-      return {
-        ...state,
-        priority: action.payload,
+        issueCards: [
+          ...state.issueCards.slice(0, issueIndex),
+          ...state.issueCards.slice(issueIndex + 1),
+        ],
       };
     default:
       return state;

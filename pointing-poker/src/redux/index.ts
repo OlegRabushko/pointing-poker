@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { chatReducer } from './ChatRedux/ChatReducer';
-import { initialReducer } from './InitialRedux/InitialReducer';
+import { initialReducer, gameProcessReducer } from './InitialRedux/InitialReducer';
 import { gameCardReducer } from './GameCardRedux/GameCardReducer';
 import { lobbySettingsReducer } from './SettingsSectionRedux/SettingsSectionReducer';
 import {
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   chat: chatReducer,
   card: gameCardReducer,
   timer: timerReducer,
+  gameProcess: gameProcessReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

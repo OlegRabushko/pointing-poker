@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 import UserCard from '../UserCard/UserCard';
+import { setStartTime } from '../../redux/TimerRedux/TimerActions';
 
 const ScramMasterSection = () => {
   const { userDealers } = useSelector((state: RootState) => state.dataConnectForm);
+  const dispatch = useDispatch();
+  const timeStore = useSelector((store: RootState) => store.timer);
+  const startGame = () => {
+    dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
+  };
 
   const userDealerData = userDealers.map((data) => {
     return (
@@ -33,7 +39,7 @@ const ScramMasterSection = () => {
       </div>
       <div className="flex-box-2">
         <Link to="/game-dealer">
-          <Button colorBG={blueColor} color={whiteColor} text="Start Game" />
+          <Button onClick={startGame} colorBG={blueColor} color={whiteColor} text="Start Game" />
         </Link>
         <Link to="/">
           <Button colorBG={whiteColor} color={blueColor} text="Cancel Game" />

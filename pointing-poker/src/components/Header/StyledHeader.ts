@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderStyled = styled.header`
+  position: relative;
   padding: 0 0 0 64px;
   width: 100%;
   height: 70px;
@@ -14,4 +15,19 @@ export const IconStyled = styled.div`
   height: 78px;
   margin: 15px 0 0 0;
   background: url('../../assets/icons/logo.svg') center / cover no-repeat;
+`;
+
+export const ChatIcoStyled = styled.div`
+  position: absolute;
+  width: 45px;
+  height: 30px;
+  right: 5%;
+  top: 10px;
+  border-radius: 5px;
+  background: url('../../assets/icons/chat-ico.png') center / cover no-repeat;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;

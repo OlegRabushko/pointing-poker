@@ -11,13 +11,20 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family:'Roboto';
     font-style: normal;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;   
+    -khtml-user-select: none;    
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none;
 }
 
 *::before,
 *::before {
   box-sizing: inherit;
 }
-
+.project-container{
+}
  ul {
   list-style-type: none;
 }
@@ -29,6 +36,8 @@ a {
 body {
   width: 100%;
   height: 100%;
+  overflow-x:hidden;
+
 }
 
 #root {

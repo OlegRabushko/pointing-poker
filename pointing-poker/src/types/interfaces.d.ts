@@ -18,3 +18,9 @@ export interface IUserInfo {
 export interface IUsers {
   [key: string]: IUserInfo;
 }
+
+export interface IInputComponentProps {
+  setter: (count: number) => { type: string; payload: number };
+  count: number;
+  actualCount: number;
+}

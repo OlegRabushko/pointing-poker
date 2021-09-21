@@ -29,8 +29,6 @@ const App = () => {
         <GlobalStyle />
         <Header />
         <Chat />
-        {/* <DeleteUser /> */}
-        {/* <Chat /> */}
         <Body />
         <Footer />
         {isConnectForm && <ConnectForm />}

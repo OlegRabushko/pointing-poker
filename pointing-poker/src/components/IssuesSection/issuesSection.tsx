@@ -11,6 +11,7 @@ const IssuesSection = (): JSX.Element => {
     return (
       <IssueCard
         key={card.issueID}
+        current={card.current}
         issueTitle={card.issueTitle}
         issuePriority={card.issuePriority}
         issueID={card.issueID}
@@ -21,7 +22,7 @@ const IssuesSection = (): JSX.Element => {
   return (
     <StyledIssuesSection>
       <div className="text issue-game-page">Issues: </div>
-      <div className="flex-box">
+      <div className="issue-cards-section">
         {createIssueCards}
         <AddIssueCard />
       </div>

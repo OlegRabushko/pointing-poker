@@ -4,34 +4,20 @@ import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
-import UserCard from '../UserCard/UserCard';
 import { setStartTime } from '../../redux/TimerRedux/TimerActions';
+import ScramMasterCard from './ScramMasterCard';
 
 const ScramMasterSection = () => {
-  const { userDealers } = useSelector((state: RootState) => state.dataConnectForm);
   const dispatch = useDispatch();
   const timeStore = useSelector((store: RootState) => store.timer);
   const startGame = () => {
     dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
   };
 
-  const userDealerData = userDealers.map((data) => {
-    return (
-      <UserCard
-        key={data.userID}
-        userID={data.userID}
-        firstName={data.firstName}
-        lastName={data.lastName}
-        job={data.job}
-        avatar={data.avatar}
-      />
-    );
-  });
-
   return (
     <StyledScramMasterSection>
       <div className="text">Scram master</div>
-      {userDealerData}
+      <ScramMasterCard />
       <div className="key-text">Key to lobby:</div>
       <div className="flex-box">
         <input className="scram-master-input" type="text" defaultValue="2Rt9g5f1" />

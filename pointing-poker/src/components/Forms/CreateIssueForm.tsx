@@ -28,7 +28,7 @@ const CreateIssueForm = () => {
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));
     dispatch(setDillerStatus(true));
-    dispatch(createIssueCard(data, nanoid()));
+    dispatch(createIssueCard(data, nanoid(), false));
     reset();
   };
 
@@ -55,7 +55,7 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('issueTitle', { required: true, maxLength: 10 })}
+              {...register('issueTitle', { required: true, maxLength: 30 })}
             />
             {errors.issueTitle && <p className="error">Title is required</p>}
           </StyledLabel>
@@ -66,7 +66,7 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('issueLink', { required: true, maxLength: 10 })}
+              {...register('issueLink', { required: true, maxLength: 100 })}
             />
             {errors.issueLink && <p className="error">Link is required</p>}
           </StyledLabel>

@@ -8,8 +8,4 @@ export const StyleLobbyHeaderSection = styled.div`
     font-weight: bold;
     margin-right: 15px;
   }
-  img {
-    cursor: pointer;
-    width: 30px;
-  }
 `;

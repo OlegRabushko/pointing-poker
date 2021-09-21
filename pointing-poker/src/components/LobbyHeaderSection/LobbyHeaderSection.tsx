@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux';
 import { StyleLobbyHeaderSection } from './StyledLobbyHeaderSection';
-import editPencil from '../../assets/icons/edit_pencil.svg';
 
 const LobbyHeaderSection = () => {
+  const sessionName = useSelector((state: RootState) => state.dataConnectForm.userDealer.session);
+
   return (
     <StyleLobbyHeaderSection>
-      <div className="header-text">Spring 23 planning</div>
-      <img src={editPencil} alt="" />
+      <div className="header-text">{sessionName}</div>
     </StyleLobbyHeaderSection>
   );
 };

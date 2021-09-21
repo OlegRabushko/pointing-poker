@@ -12,6 +12,7 @@ import {
   SHOW_ISSUES_FORM,
   UPDATE_PLAYERS_STATE,
   RENAME_ISSUE_TITLE,
+  RENAME_ISSUE_PRIORITY,
 } from './ReduxFormTypes';
 
 // ROLE PLAYERS
@@ -73,6 +74,12 @@ export const toggleCurrentIssueCard = (payload: string) => ({
 
 export const renameIssueTitle = (payload: string, issueID: string) => ({
   type: RENAME_ISSUE_TITLE,
+  payload,
+  issueID,
+});
+
+export const renameIssuePriority = (payload: string, issueID: string) => ({
+  type: RENAME_ISSUE_PRIORITY,
   payload,
   issueID,
 });

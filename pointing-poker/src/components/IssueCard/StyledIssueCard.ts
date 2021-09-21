@@ -20,13 +20,17 @@ export const StyledIssueCard = styled.div<Iprops>`
   transition: all 0.2s ease;
   cursor: pointer;
 
-  .issue-card-title {
+  .upd-issue-card-title {
     border: none;
     border-radius: 5px;
     outline: none;
     height: 30px;
     width: 150px;
     font-size: 18px;
+  }
+
+  .upd-issue-card-priority {
+    outline: none;
   }
 
   &:hover {

@@ -4,6 +4,7 @@ export const StyledGamePage = styled.div`
   position: relative;
   .issues-container {
     display: flex;
+    justify-content: space-between;
   }
 
   .info {
@@ -31,6 +32,7 @@ export const StyledGamePage = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      align-items: center;
       margin-top: 120px;
     }
     @media (max-width: 650px) {
@@ -46,7 +48,7 @@ export const StyledGamePage = styled.div`
     }
   }
   .text {
-    /* text-align: left !important; */
-    margin-left: 50px;
+    text-align: left !important;
+    /* margin-left: 50px; */
   }
 `;

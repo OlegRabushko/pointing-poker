@@ -21,6 +21,7 @@ import {
   DELETE_ISSUE_DATA,
   TOGGLE_CURRENT_ISSUE_CARD,
   RENAME_ISSUE_TITLE,
+  RENAME_ISSUE_PRIORITY,
 } from './ReduxFormTypes';
 
 // SHOW FORMS
@@ -153,6 +154,16 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       issueCards.map((card) => {
         if (card.issueID === action.issueID) {
           card.issueTitle = action.payload;
+        }
+      });
+      return {
+        ...state,
+        issueCards: [...state.issueCards],
+      };
+    case RENAME_ISSUE_PRIORITY:
+      issueCards.map((card) => {
+        if (card.issueID === action.issueID) {
+          card.issuePriority = action.payload;
         }
       });
       return {

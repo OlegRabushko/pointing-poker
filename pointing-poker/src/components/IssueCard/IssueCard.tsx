@@ -9,6 +9,7 @@ import { RootState } from '../../redux';
 import { IIssueCard } from '../Forms/FormTypes';
 import {
   deleteIssueCard,
+  renameIssuePriority,
   renameIssueTitle,
   toggleCurrentIssueCard,
 } from '../../redux/FormRedux/FormActions';
@@ -16,7 +17,7 @@ import {
 const IssueCard: FC<IIssueCard> = (props) => {
   const { issueTitle, issuePriority, issueID, current } = props;
 
-  const { register, handleSubmit, reset } = useForm<IIssueCard>({ mode: 'onBlur' });
+  const { register, handleSubmit, reset } = useForm<IIssueCard>({ mode: 'onChange' });
 
   const dispatch = useDispatch();
   const isDialer = useSelector((state: RootState) => state.personStatus.isDialer);
@@ -29,6 +30,7 @@ const IssueCard: FC<IIssueCard> = (props) => {
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(renameIssueTitle(data.issueTitle, issueID));
+    dispatch(renameIssuePriority(data.issuePriority, issueID));
     setUpdateIssueTitle(false);
     reset();
   };
@@ -47,12 +49,23 @@ const IssueCard: FC<IIssueCard> = (props) => {
     <StyledIssueCard current={current} onClick={toggleCurrentState}>
       <StyledIssueInfo>
         {isUpdateIssueTitle ? (
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} onBlur={handleSubmit(onSubmit)}>
             <input
               type="text"
-              className="issue-card-title"
+              className="upd-issue-card-title"
+              defaultValue={issueTitle}
               {...register('issueTitle', { maxLength: 30 })}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             />
+            <select
+              className="upd-issue-card-priority"
+              {...register('issuePriority')}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+            >
+              <option value="Low">Low</option>
+              <option value="Middle">Middle</option>
+              <option value="Hight">Hight</option>
+            </select>
           </form>
         ) : (
           <>

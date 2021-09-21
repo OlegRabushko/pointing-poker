@@ -8,6 +8,7 @@ export const SET_ISSUE_DATA = 'SET_ISSUE_DATA';
 export const DELETE_ISSUE_DATA = 'DELETE_ISSUE_DATA';
 export const TOGGLE_CURRENT_ISSUE_CARD = 'TOGGLE_CURRENT_ISSUE_CARD';
 export const RENAME_ISSUE_TITLE = 'RENAME_ISSUE_TITLE';
+export const RENAME_ISSUE_PRIORITY = 'RENAME_ISSUE_PRIORITY';
 
 export const SET_DEALERS = 'SET_DEALERS';
 export const SET_PLAYERS = 'SET_PLAYERS';
@@ -80,11 +81,18 @@ interface IRenameIssueTitle {
   issueID: string;
 }
 
+interface IRenameIssuePriority {
+  type: typeof RENAME_ISSUE_PRIORITY;
+  payload: string;
+  issueID: string;
+}
+
 export type ActionTypeIssueCards =
   | ISetIssueFormData
   | IDeleteIssueFormData
   | IToggleCurrentIssueCard
-  | IRenameIssueTitle;
+  | IRenameIssueTitle
+  | IRenameIssuePriority;
 
 // SHOW FORMS
 interface IShowConnectForm {

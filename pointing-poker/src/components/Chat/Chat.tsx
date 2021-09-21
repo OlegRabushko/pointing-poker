@@ -6,7 +6,7 @@ import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
 import { recieveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
 import { RootState } from '../../redux';
-import { receiveAllMsgs } from '../../api/api';
+import { receiveAllMsgs } from '../../API/API';
 
 const Chat = () => {
   const [msg, setMsg] = useState('inner msg');

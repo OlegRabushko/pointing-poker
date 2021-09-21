@@ -7,11 +7,11 @@ export interface IMsg {
 }
 
 export interface IUserInfo {
-  userID: string;
+  userId?: string;
   name: string;
   lastName: string;
   isDialer: Boolean;
-  isOvserver: Boolean;
+  isObserver: Boolean;
   isPlayer: Boolean;
   job: string;
   avatar: string;

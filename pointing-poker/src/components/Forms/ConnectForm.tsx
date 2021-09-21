@@ -26,6 +26,7 @@ import {
   showConnectForm,
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
+import { createNewGame } from '../../API/API';
 
 const ConnectForm = () => {
   const {
@@ -58,9 +59,10 @@ const ConnectForm = () => {
 
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
     dispatch(showConnectForm(!isConnectForm));
+    console.log('in submit', isDialer, data)
     if (isDialer) {
       dispatch(setConnectFormDialer(data, avatar, nanoid()));
-      setNewGame(nanoid(), {
+      createNewGame(nanoid(), {
         name: data.firstName,
         lastName: data.lastName,
         isDialer,

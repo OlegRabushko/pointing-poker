@@ -7,6 +7,8 @@ const cors = require('cors')
 const express = require('express')
 const http = require('http')
 const MsgController  = require('./controllers/MsgController')
+const GameService = require('./service/GameService')
+const UserService = require('./service/UserService')
 
 const PORT = Number(process.env.PORT) || 7001
 const HOST = '0.0.0.0'
@@ -28,9 +30,10 @@ const io = require('socket.io')(server, {
 
 
 app.post('/api/start', (req, res) => {
-    const diler = req.body.diler
-    const gameId = req.body.gameId
-    
+    const {gameIndex} = req.body
+    consoe.log('server api', req.body)
+    GameService.setNewGame(gameIndex)
+    .then((newGame) => res.json(newGame))
 })
 
 

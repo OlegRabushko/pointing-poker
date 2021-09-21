@@ -2,6 +2,7 @@ import { IUserInfo, IUsers } from '../../types/interfaces';
 
 export const SET_CURR_USER_ID = 'SET_USER_ID';
 export const SET_USER = 'SET_USER';
+export const SET_GAME_ID = 'SET_GAME_ID';
 
 export interface InitialState {
   gameId: string;
@@ -9,14 +10,19 @@ export interface InitialState {
   users: IUsers;
 }
 
-export type TReduxInitial = ISetCurrUserID | ISetUser;
+export type TActionsInitial = IActionSetCurrUserID | IActionSetUser | IActionSetGameId;
 
-export interface ISetCurrUserID {
-  type: typeof SET_CURR_USER_ID;
+export interface IActionSetCurrUserID {
+  type: 'SET_USER_ID';
   payload: string;
 }
 
-export interface ISetUser {
-  type: typeof SET_USER;
+export interface IActionSetUser {
+  type: 'SET_USER';
   payload: IUserInfo;
+}
+
+export interface IActionSetGameId {
+  type: 'SET_GAME_ID';
+  payload: string;
 }

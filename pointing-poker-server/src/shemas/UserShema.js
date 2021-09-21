@@ -5,7 +5,7 @@ const UserSchema = Schema({
   name: String,
   lastName: String,
   isDialer: Boolean,
-  isOvserver: Boolean,
+  isObserver: Boolean,
   isPlayer: Boolean,
   job:String,
   avatar: String

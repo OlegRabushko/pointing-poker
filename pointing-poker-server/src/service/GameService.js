@@ -2,12 +2,8 @@ const GameDB = require('../shemas/GameShema')
 
 class GameService {
    async setNewGame(gameIdx){
-    await GameDB.create({game_index: gameIdx})
-        .then(game => 
-            {console.log('in game service', game),
-                game.toJson()
-            }
-            )
+      const newGame = await GameDB.create({game_index: gameIdx})
+      return newGame       
     }
 
     updateGame(){

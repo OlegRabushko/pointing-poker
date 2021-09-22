@@ -7,8 +7,8 @@ import {
   IActionSetCurrUserID,
   IActionSetGameId,
   InitialState,
-  ISetCurrUserID,
 } from '../redux/InitialRedux/InitialTypes';
+import { connectToSocket } from '../sockets/SocketsAPI';
 import { IUserInfo } from '../types/interfaces';
 
 const URL = 'http://localhost:7001/api';
@@ -31,7 +31,7 @@ export const createNewUser =
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((id) => dispatch(setCurrUserID(id)));
+      .then((user) => dispatch(setCurrUserID(user._id)));
   };
 
 export const createNewGame =
@@ -47,9 +47,6 @@ export const createNewGame =
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((gameId) => {
-        console.log('in api', gameId)
-        dispatch(setGameId(gameId));
-      })
-      .then(() => createNewUser(diler));
+      .then((newGame) => dispatch(setGameId(newGame._id)))
+      .then(() => dispatch(createNewUser(diler)));
   };

@@ -6,10 +6,8 @@ import { IMsg } from '../types/interfaces';
 
 export const socket = io('http://localhost:7001');
 
-export const connectToSocket = () => {
-  socket.on('connect', () => {
-    console.log('user connected with id msg from client', socket.id);
-  });
+export const connectToSocket = (roomId: string) => {
+  socket.emit('room-join', roomId);
 };
 
 export const sendMsgToAll = async (msg: IMsg) => {
@@ -24,3 +22,4 @@ export const recieveMsg =
       console.log('recieve from servver', msg);
       dispatch(getMessage(msg));
     });
+

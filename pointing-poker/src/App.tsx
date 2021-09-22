@@ -7,11 +7,9 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Body from './components/Body/Body';
 import GlobalStyle from './components/GlobalStyle/StyledGlobal';
-import { connectToSocket } from './sockets/SocketsAPI';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
-import Chat from './components/Chat/Chat';
 // import DeleteUser from './components/DeleteUser/DeleteUser';
 
 const StyledApp = styled.div`
@@ -23,7 +21,6 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  connectToSocket();
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
   return (

@@ -1,10 +1,10 @@
-const UserDB = require ('../shemas/UserShema')
+const UserDB = require('../shemas/UserShema')
 
 class UserService {
 
     async setUser(userInfo){ 
-        const result = await UserDB.create(userInfo)
-        return result
+        const newUser = await UserDB.create(userInfo)
+        return newUser
     }
 
     async getUser(userId){

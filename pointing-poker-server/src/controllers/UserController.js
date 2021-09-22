@@ -8,7 +8,8 @@ class UserController {
 
     setUser(req, res){
         try {
-            UserService.setUser(req.body)
+            const {newUser} = req.body
+            UserService.setUser(newUser)
               .then((result) => res.status(200).json(result))
         } catch (error) {
             res.status(500).json(error)

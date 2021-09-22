@@ -26,7 +26,7 @@ import {
   showConnectForm,
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
-import { createNewGame } from '../../API/API';
+import { createNewGame, createNewUser } from '../../API/API';
 
 const ConnectForm = () => {
   const {
@@ -57,30 +57,55 @@ const ConnectForm = () => {
     return src;
   };
 
-  const onSubmit: SubmitHandler<IConnectForm> = (data) => {
-    dispatch(showConnectForm(!isConnectForm));
-    console.log('in submit', isDialer, data)
-    if (isDialer) {
-      dispatch(setConnectFormDialer(data, avatar, nanoid()));
-      createNewGame(nanoid(), {
+  const insertNewUser = (
+    data: IConnectForm,
+    diler: boolean,
+    player: boolean,
+    observer: boolean,
+  ) => {
+    if (diler) {
+      dispatch(
+        createNewGame(nanoid(), {
+          name: data.firstName,
+          lastName: data.lastName,
+          isDialer: diler,
+          isObserver: player,
+          isPlayer: observer,
+          job: data.job,
+          avatar,
+        }),
+      );
+    }
+    dispatch(
+      createNewUser({
         name: data.firstName,
         lastName: data.lastName,
-        isDialer,
-        isObserver,
-        isPlayer,
+        isDialer: diler,
+        isObserver: player,
+        isPlayer: observer,
         job: data.job,
         avatar,
-      });
+      }),
+    );
+  };
+
+  const onSubmit: SubmitHandler<IConnectForm> = (data) => {
+    dispatch(showConnectForm(!isConnectForm));
+    if (isDialer) {
+      insertNewUser(data, isDialer, isPlayer, isObserver);
+      dispatch(setConnectFormDialer(data, avatar, nanoid()));
       dispatch(setDillerStatus(false));
 
       history.push('/settings');
     }
     if (isPlayer) {
+      insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
       dispatch(setPlayerStatus(false));
       history.push('/game-page');
     }
     if (isObserver) {
+      insertNewUser(data, isDialer, isObserver, isObserver);
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
       dispatch(setObserverStatus(false));
       history.push('/lobby-page');

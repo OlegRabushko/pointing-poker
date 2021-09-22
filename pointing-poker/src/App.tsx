@@ -10,6 +10,7 @@ import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
+import MiniGame from './components/MiniGame/MiniGame';
 
 const StyledApp = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ const App = () => {
         <GlobalStyle />
         <Header />
         <Chat />
+        <MiniGame />
         {/* <DeleteUser /> */}
         {/* <Chat /> */}
         <Body />

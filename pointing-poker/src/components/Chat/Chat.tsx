@@ -1,5 +1,5 @@
 /* eslint-disable import/namespace */
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';

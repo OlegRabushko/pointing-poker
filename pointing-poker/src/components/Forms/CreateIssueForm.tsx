@@ -12,7 +12,7 @@ import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
-import { setDillerStatus } from '../../redux/RolesRedux/RolesActions';
+import { setDealerStatus } from '../../redux/RolesRedux/RolesActions';
 
 const CreateIssueForm = () => {
   const {
@@ -27,7 +27,7 @@ const CreateIssueForm = () => {
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));
-    dispatch(setDillerStatus(true));
+    dispatch(setDealerStatus(true));
     dispatch(createIssueCard(data, nanoid(), false));
     reset();
   };

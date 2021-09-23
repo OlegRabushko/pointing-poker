@@ -100,14 +100,9 @@ export const connectFormDataReducer = (
         userPlayers: [...state.userPlayers, action.payload],
       };
     case UPDATE_PLAYERS_STATE:
-      const { userPlayers } = state;
-      const userIndex = userPlayers.findIndex(({ userID }) => userID === action.payload);
       return {
         ...state,
-        userPlayers: [
-          ...state.userPlayers.slice(0, userIndex),
-          ...state.userPlayers.slice(userIndex + 1),
-        ],
+        userPlayers: [...state.userPlayers.filter((el) => el.userID !== action.payload)],
       };
     case SET_OBSERVERS:
       return {

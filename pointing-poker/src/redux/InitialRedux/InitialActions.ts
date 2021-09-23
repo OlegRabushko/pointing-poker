@@ -5,6 +5,7 @@ import {
   IActionSetUser,
   SET_CURR_USER_ID,
   SET_GAME_ID,
+  SET_MINI_GAME,
   SET_ROUND,
   SET_USER,
 } from './InitialTypes';
@@ -26,5 +27,10 @@ export const setGameId = (gameId: string): IActionSetGameId => ({
 
 export const setRound = (count: boolean) => ({
   type: SET_ROUND,
+  payload: count,
+});
+
+export const setMiniGame = (count: boolean) => ({
+  type: SET_MINI_GAME,
   payload: count,
 });

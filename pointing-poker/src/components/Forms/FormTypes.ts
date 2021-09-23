@@ -4,7 +4,8 @@ export interface IConnectForm {
   lastName: string;
   job: string;
   avatar: string;
-  session: string;
+  session?: string;
+  dialer?: boolean;
 }
 
 export interface InputProps {

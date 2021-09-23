@@ -5,6 +5,7 @@ interface IPropsAvatar {
   background?: string;
   width?: string;
   height?: string;
+  mainPage?: boolean;
 }
 
 export const getInitials = (name: string) => {
@@ -22,14 +23,12 @@ export const ImageContainer = styled.div<IPropsAvatar>`
   width: ${({ width }) => width || '55px'};
   height: ${({ height }) => height || '55px'};
   border-radius: 50%;
-  background: #60dabf ${({ background }) => background || ''} center / cover no-repeat;
+  background: ${(props) => (props.mainPage ? 'transparent' : '#60dabf')}
+    ${({ background }) => background || ''} center / cover no-repeat;
 
   .initials {
     font-weight: bold;
     font-size: 32px;
-    display: flex;
-    align-items: center;
-    text-align: center;
     color: ${whiteColor};
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }

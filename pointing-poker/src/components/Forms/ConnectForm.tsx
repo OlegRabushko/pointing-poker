@@ -14,7 +14,7 @@ import { RootState } from '../../redux/index';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import {
-  setDillerStatus,
+  setDealerStatus,
   setObserverStatus,
   setPlayerStatus,
 } from '../../redux/RolesRedux/RolesActions';
@@ -27,7 +27,6 @@ import {
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
 import { createNewGame, createNewUser } from '../../API/API';
-import { InitialState } from '../../redux/InitialRedux/InitialTypes';
 
 const ConnectForm = () => {
   const {
@@ -41,7 +40,7 @@ const ConnectForm = () => {
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
   const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
   const { avatar } = useSelector((state: RootState) => state.connectAvatar);
-  const gameId = useSelector((state: InitialState) => state.gameId);
+  const gameId = useSelector((state: RootState) => state.initial.gameId);
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,7 +113,7 @@ const ConnectForm = () => {
 
   const onShowConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(false));
+    dispatch(setDealerStatus(false));
     dispatch(setPlayerStatus(false));
     dispatch(setObserverStatus(false));
   };
@@ -161,14 +160,8 @@ const ConnectForm = () => {
               <span>Choose avatar</span>
               <input type="file" className="upload-input" onChange={addAvatar} />
             </label>
-            <Button
-              borderRadius="0 5px 5px 0"
-              colorBG={blueColor}
-              color={whiteColor}
-              text="Load File"
-            />
           </div>
-          <ImageContainer background={`url(${avatar})`} width="83px" height="83px" />
+          <ImageContainer mainPage background={`url(${avatar})`} width="83px" height="83px" />
         </div>
         <div className="connect-buttons-container">
           <Button

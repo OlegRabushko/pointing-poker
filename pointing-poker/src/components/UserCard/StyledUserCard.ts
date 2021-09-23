@@ -55,7 +55,7 @@ export const StyledUserInfo = styled.div`
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
-    font-size: 25px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     color: #000000;

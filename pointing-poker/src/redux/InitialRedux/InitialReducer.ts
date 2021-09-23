@@ -5,6 +5,7 @@ import {
   TReduxInitial,
   ActionTypeGameProcess,
   SET_ROUND,
+  SET_MINI_GAME,
 } from './InitialTypes';
 
 const initialState: InitialState = {
@@ -49,13 +50,20 @@ export const initialReducer = (state = initialState, action: TReduxInitial) => {
 const gameProcessState = {
   startRound: false,
   selectedCard: false,
+  miniGame: false,
 };
+
 export const gameProcessReducer = (state = gameProcessState, action: ActionTypeGameProcess) => {
   switch (action.type) {
     case SET_ROUND:
       return {
         ...state,
         startRound: action.payload,
+      };
+    case SET_MINI_GAME:
+      return {
+        ...state,
+        miniGame: action.payload,
       };
     default:
       return state;

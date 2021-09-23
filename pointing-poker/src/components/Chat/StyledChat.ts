@@ -12,14 +12,17 @@ export const StyledChatBox = styled.div<Iprops>`
   overflow: hidden;
   height: 550px;
   width: 400px;
-  top: 50px;
+  top: 100px;
+  right: 100px;
   z-index: 10;
   border-radius: 10px 10px 0 0;
   .header {
+    z-index: 2;
     height: 70px;
     background-color: rgba(43, 58, 103, 0.9);
     cursor: grab;
     button {
+      z-index: 5;
       margin: 10px 0 0 350px;
       width: 30px;
       height: 30px;

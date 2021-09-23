@@ -3,6 +3,7 @@ import { IUserInfo, IUsers } from '../../types/interfaces';
 export const SET_CURR_USER_ID = 'SET_USER_ID';
 export const SET_USER = 'SET_USER';
 export const SET_ROUND = 'SET_ROUND';
+export const SET_MINI_GAME = 'SET_MINI_GAME';
 
 export interface InitialState {
   currUserID: string;
@@ -17,7 +18,7 @@ export interface ISetCurrUserID {
 }
 
 export interface ActionTypeGameProcess {
-  type: typeof SET_ROUND;
+  type: typeof SET_ROUND | typeof SET_MINI_GAME;
   payload: boolean;
 }
 

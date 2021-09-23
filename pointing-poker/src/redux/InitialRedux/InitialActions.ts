@@ -1,5 +1,5 @@
 import { IUserInfo } from '../../types/interfaces';
-import { SET_CURR_USER_ID, SET_ROUND, SET_USER } from './InitialTypes';
+import { SET_CURR_USER_ID, SET_MINI_GAME, SET_ROUND, SET_USER } from './InitialTypes';
 
 export const setCurrUserID = (id: string) => ({
   type: SET_CURR_USER_ID,
@@ -13,5 +13,10 @@ export const setUser = (userInfo: IUserInfo) => ({
 
 export const setRound = (count: boolean) => ({
   type: SET_ROUND,
+  payload: count,
+});
+
+export const setMiniGame = (count: boolean) => ({
+  type: SET_MINI_GAME,
   payload: count,
 });

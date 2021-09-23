@@ -41,8 +41,9 @@ const GamePageDealer = () => {
             src={resultsIco}
             alt=""
           />
+          <div className="text">Scram master</div>
+          <ScramMasterCard />
           <div className="scram-master-container">
-            <ScramMasterCard />
             <div className="stop-game-btn">
               <Link to="/">
                 <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>

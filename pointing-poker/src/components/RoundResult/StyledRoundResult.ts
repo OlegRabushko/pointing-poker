@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledRoundResult = styled.div`
-  width: 450px;
-  position: fixed;
+  width: 520px;
+  top: 0;
+  position: absolute;
   height: 640px;
   padding: 20px 0;
   border-radius: 10px;
@@ -12,7 +13,6 @@ export const StyledRoundResult = styled.div`
   transform: translateX(-50%);
 
   .full-container {
-    top: 140px;
     height: 600px;
     padding: 10px 20px 30px 30px;
     border-radius: 5px;

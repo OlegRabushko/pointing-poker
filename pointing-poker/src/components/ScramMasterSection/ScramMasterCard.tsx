@@ -8,7 +8,14 @@ const ScramMasterCard = () => {
   const { userID, lastName, firstName, job, avatar } = userDealer;
 
   return (
-    <UserCard userID={userID} lastName={lastName} firstName={firstName} job={job} avatar={avatar} />
+    <UserCard
+      userID={userID}
+      lastName={lastName}
+      firstName={firstName}
+      job={job}
+      avatar={avatar}
+      dialer
+    />
   );
 };
 

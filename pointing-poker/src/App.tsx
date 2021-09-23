@@ -10,6 +10,7 @@ import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
+import MiniGame from './components/MiniGame/MiniGame';
 
 const StyledApp = styled.div`
   display: flex;
@@ -22,6 +23,17 @@ const StyledApp = styled.div`
 const App = () => {
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
+  // window.onclick = () => {
+  //   const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+  //   console.log(
+  //     animals.filter((el) => {
+  //       if (el !== 'camel') {
+  //         return el;
+  //       }
+  //     }),
+  //   );
+  // };
+
   return (
     <BrowserRouter>
       <StyledApp className="project-container">
@@ -29,6 +41,7 @@ const App = () => {
         <GlobalStyle />
         <Header />
         <Chat />
+        <MiniGame />
         <Body />
         <Footer />
         {isConnectForm && <ConnectForm />}

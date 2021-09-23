@@ -26,6 +26,7 @@ import {
   showConnectForm,
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
+import { createNewGame, createNewUser } from '../../API/API';
 
 const ConnectForm = () => {
   const {
@@ -39,6 +40,7 @@ const ConnectForm = () => {
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
   const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
   const { avatar } = useSelector((state: RootState) => state.connectAvatar);
+  const gameId = useSelector((state: RootState) => state.initial.gameId);
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,17 +58,53 @@ const ConnectForm = () => {
     return src;
   };
 
+  const insertNewUser = (
+    data: IConnectForm,
+    diler: boolean,
+    player: boolean,
+    observer: boolean,
+  ) => {
+    if (diler) {
+      dispatch(
+        createNewGame(nanoid(), {
+          name: data.firstName,
+          lastName: data.lastName,
+          isDialer: diler,
+          isObserver: player,
+          isPlayer: observer,
+          job: data.job,
+          avatar,
+        }),
+      );
+    } else {
+      dispatch(
+        createNewUser(gameId, {
+          name: data.firstName,
+          lastName: data.lastName,
+          isDialer: diler,
+          isObserver: player,
+          isPlayer: observer,
+          job: data.job,
+          avatar,
+        }),
+      );
+    }
+  };
+
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
     dispatch(showConnectForm(!isConnectForm));
     if (isDialer) {
+      insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormDialer(data, avatar, nanoid()));
       history.push('/settings');
     }
     if (isPlayer) {
+      insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
       history.push('/lobby');
     }
     if (isObserver) {
+      insertNewUser(data, isDialer, isObserver, isObserver);
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
       history.push('/lobby');
     }

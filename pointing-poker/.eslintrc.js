@@ -46,6 +46,7 @@ module.exports = {
     'no-unused-vars': 'error',
     'no-console': 'error',
     'no-await-in-loop': 'error',
+    'no-underscore-dangle':'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     'object-curly-newline': 'off',
     'react/prop-types': 'off',

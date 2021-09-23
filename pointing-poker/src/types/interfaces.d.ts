@@ -1,16 +1,19 @@
 export interface IMsg {
   msgId?: string;
-  userId: string;
-  username: string;
-  msgText: string;
-  msgDate: string;
+  game_id: string;
+  user_id: string;
+  text: string;
+  time: string;
 }
 
 export interface IUserInfo {
-  userID: string;
-  firstName: string;
+  _id?: string;
+  game_id?: string;
+  name: string;
   lastName: string;
-  role: string;
+  isDialer: Boolean;
+  isObserver: Boolean;
+  isPlayer: Boolean;
   job: string;
   avatar: string;
 }

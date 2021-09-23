@@ -9,10 +9,17 @@ import ScramMasterCard from './ScramMasterCard';
 
 const ScramMasterSection = () => {
   const dispatch = useDispatch();
-  const timeStore = useSelector((store: RootState) => store.timer);
+  const { timeStore, gameId } = useSelector((store: RootState) => ({
+    timeStore: store.timer,
+    gameId: store.initial.gameId,
+  }));
   const isDialer = useSelector((store: RootState) => store.personStatus.isDialer);
   const startGame = () => {
     dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
+  };
+
+  const EntryKeyField = ({ gameKey }: { gameKey: string }) => {
+    return <input className="scram-master-input" type="text" defaultValue={gameKey} />;
   };
 
   return (
@@ -23,7 +30,7 @@ const ScramMasterSection = () => {
         <>
           <div className="key-text">Key to lobby:</div>
           <div className="flex-box">
-            <input className="scram-master-input" type="text" defaultValue="2Rt9g5f1" />
+            <EntryKeyField gameKey={gameId} />
             <Button colorBG={blueColor} color={whiteColor} text="Copy" />
           </div>
           <div className="flex-box-2">

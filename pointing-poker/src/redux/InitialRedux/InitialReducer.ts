@@ -1,36 +1,21 @@
 import {
+  IActionTypeGameProcess,
   InitialState,
   SET_CURR_USER_ID,
-  SET_USER,
-  TReduxInitial,
-  ActionTypeGameProcess,
-  SET_ROUND,
+  SET_GAME_ID,
   SET_MINI_GAME,
+  SET_ROUND,
+  SET_USER,
+  TActionsInitial,
 } from './InitialTypes';
 
 const initialState: InitialState = {
-  currUserID: '1001',
-  users: {
-    '1001': {
-      userID: '1001',
-      firstName: 'Alex',
-      lastName: 'Gordon',
-      role: 'player',
-      job: 'frontender',
-      avatar: '',
-    },
-    '1000': {
-      userID: '1000',
-      firstName: 'Ivan',
-      lastName: 'Volk',
-      role: 'player',
-      job: 'manager',
-      avatar: '',
-    },
-  },
+  gameId: '',
+  currUserID: '',
+  users: {},
 };
 
-export const initialReducer = (state = initialState, action: TReduxInitial) => {
+export const initialReducer = (state = initialState, action: TActionsInitial) => {
   switch (action.type) {
     case SET_CURR_USER_ID:
       return {
@@ -40,7 +25,12 @@ export const initialReducer = (state = initialState, action: TReduxInitial) => {
     case SET_USER:
       return {
         ...state,
-        users: { ...state.users, [action.payload.userID]: action.payload },
+        users: { ...state.users, [action.payload._id]: action.payload },
+      };
+    case SET_GAME_ID:
+      return {
+        ...state,
+        gameId: action.payload,
       };
     default:
       return state;
@@ -52,8 +42,7 @@ const gameProcessState = {
   selectedCard: false,
   miniGame: false,
 };
-
-export const gameProcessReducer = (state = gameProcessState, action: ActionTypeGameProcess) => {
+export const gameProcessReducer = (state = gameProcessState, action: IActionTypeGameProcess) => {
   switch (action.type) {
     case SET_ROUND:
       return {

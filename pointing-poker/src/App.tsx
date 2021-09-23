@@ -1,7 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import Chat from './components/Chat/Chat';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -10,6 +9,9 @@ import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
+import Chat from './components/Chat/Chat';
+import { jonedNotification } from './sockets/SocketsAPI';
+// import DeleteUser from './components/DeleteUser/DeleteUser';
 import MiniGame from './components/MiniGame/MiniGame';
 
 const StyledApp = styled.div`
@@ -22,6 +24,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
+  jonedNotification();
 
   // window.onclick = () => {
   //   const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];

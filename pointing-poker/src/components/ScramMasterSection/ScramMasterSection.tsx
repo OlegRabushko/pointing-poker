@@ -22,6 +22,11 @@ const ScramMasterSection = () => {
     return <input className="scram-master-input" type="text" defaultValue={gameKey} />;
   };
 
+  const copyGameID = () => {
+    const link = document.querySelector('.scram-master-input') as HTMLInputElement;
+    window.navigator.clipboard.writeText(link.value);
+  };
+
   return (
     <StyledScramMasterSection>
       <div className="text">Scram master</div>
@@ -31,7 +36,7 @@ const ScramMasterSection = () => {
           <div className="key-text">Key to lobby:</div>
           <div className="flex-box">
             <EntryKeyField gameKey={gameId} />
-            <Button colorBG={blueColor} color={whiteColor} text="Copy" />
+            <Button colorBG={blueColor} color={whiteColor} text="Copy" onClick={copyGameID} />
           </div>
           <div className="flex-box-2">
             <Link to="/game-dealer">

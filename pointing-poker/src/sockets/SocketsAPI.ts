@@ -1,5 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { setMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';
@@ -14,7 +14,7 @@ export const connectToSocket = (roomId: string, user: IUserInfo) => {
 
 export const sendMsgToAll = async (msg: IMsg) => {
   console.log('send msg from client', msg);
-  await socket.emit('send-msg', msg);
+  socket.emit('send-msg', msg);
 };
 
 export const recieveMsg =

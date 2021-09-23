@@ -6,7 +6,6 @@
     "dev": "node src/index.js",
     "watch": "nodemon"
   },
-  
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

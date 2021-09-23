@@ -26,7 +26,7 @@ import {
   showConnectForm,
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
-import { createNewGame, createNewUser } from '../../API/API';
+import { createNewGame, createNewUser } from '../../api/api';
 
 const ConnectForm = () => {
   const {

@@ -14,7 +14,7 @@ import { RootState } from '../../redux/index';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import {
-  setDillerStatus,
+  setDealerStatus,
   setObserverStatus,
   setPlayerStatus,
 } from '../../redux/RolesRedux/RolesActions';
@@ -60,25 +60,22 @@ const ConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
     if (isDialer) {
       dispatch(setConnectFormDialer(data, avatar, nanoid()));
-      dispatch(setDillerStatus(false));
       history.push('/settings');
     }
     if (isPlayer) {
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
-      dispatch(setPlayerStatus(false));
-      history.push('/game-page');
+      history.push('/lobby');
     }
     if (isObserver) {
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
-      dispatch(setObserverStatus(false));
-      history.push('/lobby-page');
+      history.push('/lobby');
     }
     reset();
   };
 
   const onShowConnectForm = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(false));
+    dispatch(setDealerStatus(false));
     dispatch(setPlayerStatus(false));
     dispatch(setObserverStatus(false));
   };
@@ -113,19 +110,20 @@ const ConnectForm = () => {
             Your job position:
             <StyledInput {...register('job')} />
           </StyledLabel>
+          {isDialer && (
+            <StyledLabel>
+              Sessiot name:
+              <StyledInput {...register('session', { required: true, maxLength: 20 })} />
+              {errors.session && <p className="error">Session name is required</p>}
+            </StyledLabel>
+          )}
           <div className="input-file-wrapper">
             <label className="upload-label">
               <span>Choose avatar</span>
               <input type="file" className="upload-input" onChange={addAvatar} />
             </label>
-            <Button
-              borderRadius="0 5px 5px 0"
-              colorBG={blueColor}
-              color={whiteColor}
-              text="Load File"
-            />
           </div>
-          <ImageContainer background={`url(${avatar})`} width="83px" height="83px" />
+          <ImageContainer mainPage background={`url(${avatar})`} width="83px" height="83px" />
         </div>
         <div className="connect-buttons-container">
           <Button

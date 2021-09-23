@@ -13,7 +13,7 @@ import IssuesSection from '../IssuesSection/issuesSection';
 import { RootState } from '../../redux';
 import { setRound } from '../../redux/InitialRedux/InitialActions';
 import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
-import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
+import ScramMasterCard from '../ScramMasterSection/ScramMasterCard';
 
 const GamePageDealer = () => {
   const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
@@ -41,47 +41,44 @@ const GamePageDealer = () => {
             src={resultsIco}
             alt=""
           />
+          <div className="text">Scram master</div>
+          <ScramMasterCard />
           <div className="scram-master-container">
-            <div className="flex-box">
-              <ScramMasterSection />
-              <div className="stop-game-btn">
-                <Link to="/">
-                  <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
-                </Link>
-              </div>
+            <div className="stop-game-btn">
+              <Link to="/">
+                <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
+              </Link>
             </div>
           </div>
           <div className="issues-container">
-            <div className="flex-box">
-              <IssuesSection />
-              <div className="timer-block">
-                <Timer />
-                {isRound ? (
-                  <>
-                    <Button
-                      text="Restart Round"
-                      color={whiteColor}
-                      onClick={stopRound}
-                      colorBG={blueColor}
-                    />
-                    <Link to="/results">
-                      <Button
-                        text="Next ISSUE"
-                        onClick={startRound}
-                        color={whiteColor}
-                        colorBG={blueColor}
-                      />
-                    </Link>
-                  </>
-                ) : (
+            <IssuesSection />
+            <div className="timer-block">
+              <Timer />
+              {isRound ? (
+                <>
                   <Button
-                    text="Run Round"
-                    onClick={startRound}
+                    text="Restart Round"
                     color={whiteColor}
+                    onClick={stopRound}
                     colorBG={blueColor}
                   />
-                )}
-              </div>
+                  <Link to="/results">
+                    <Button
+                      text="Next ISSUE"
+                      onClick={startRound}
+                      color={whiteColor}
+                      colorBG={blueColor}
+                    />
+                  </Link>
+                </>
+              ) : (
+                <Button
+                  text="Run Round"
+                  onClick={startRound}
+                  color={whiteColor}
+                  colorBG={blueColor}
+                />
+              )}
             </div>
           </div>
         </section>

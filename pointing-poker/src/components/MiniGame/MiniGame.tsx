@@ -105,7 +105,12 @@ const MiniGame = () => {
           <div>Score: {score}</div>
         </section>
         <section className=" input-block flex-box">
-          <input value={inputWord} onChange={(e) => setInputWord(e.target.value)} type="text" />
+          <input
+            value={inputWord}
+            placeholder="Decipher word..."
+            onChange={(e) => setInputWord(e.target.value)}
+            type="text"
+          />
           <button onClick={setAnswer}>OK</button>
         </section>
         {isAnswer && (

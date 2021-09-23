@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { setAvatar, showConnectForm } from '../../redux/FormRedux/FormActions';
-import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
+import { setDealerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
 import Button from '../Button/Button';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyleMainPage } from './StyledMainPage';
@@ -11,9 +11,9 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
 
-  const handlerDillerState = () => {
+  const handlerDealerState = () => {
     dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDillerStatus(true));
+    dispatch(setDealerStatus(true));
     dispatch(setAvatar(''));
   };
 
@@ -40,7 +40,7 @@ const MainPage = () => {
             mainPage
             colorBG={blueColor}
             text=" Start new game"
-            onClick={handlerDillerState}
+            onClick={handlerDealerState}
           />
         </div>
         <div>OR:</div>

@@ -23,6 +23,17 @@ const StyledApp = styled.div`
 const App = () => {
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
+  // window.onclick = () => {
+  //   const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+  //   console.log(
+  //     animals.filter((el) => {
+  //       if (el !== 'camel') {
+  //         return el;
+  //       }
+  //     }),
+  //   );
+  // };
+
   return (
     <BrowserRouter>
       <StyledApp className="project-container">
@@ -31,8 +42,6 @@ const App = () => {
         <Header />
         <Chat />
         <MiniGame />
-        {/* <DeleteUser /> */}
-        {/* <Chat /> */}
         <Body />
         <Footer />
         {isConnectForm && <ConnectForm />}

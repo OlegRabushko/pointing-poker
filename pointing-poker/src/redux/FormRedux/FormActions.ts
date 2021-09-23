@@ -4,12 +4,15 @@ import {
   SET_AVATAR,
   SET_DEALERS,
   SET_ISSUE_DATA,
+  TOGGLE_CURRENT_ISSUE_CARD,
   SET_OBSERVERS,
   SET_PLAYERS,
   SHOW_CONNECT_FORM,
   SHOW_DELETE_PLAYER_FORM,
   SHOW_ISSUES_FORM,
   UPDATE_PLAYERS_STATE,
+  RENAME_ISSUE_TITLE,
+  RENAME_ISSUE_PRIORITY,
 } from './ReduxFormTypes';
 
 // ROLE PLAYERS
@@ -54,12 +57,29 @@ export const showDeleteForm = (payload: boolean) => ({
 });
 
 // ISSUE FORM
-export const createIssueCard = (payload: IIssueCard, issueID: string) => ({
+export const createIssueCard = (payload: IIssueCard, issueID: string, current: boolean) => ({
   type: SET_ISSUE_DATA,
-  payload: { ...payload, issueID },
+  payload: { ...payload, issueID, current },
 });
 
 export const deleteIssueCard = (payload: string) => ({
   type: DELETE_ISSUE_DATA,
   payload,
+});
+
+export const toggleCurrentIssueCard = (payload: string) => ({
+  type: TOGGLE_CURRENT_ISSUE_CARD,
+  payload,
+});
+
+export const renameIssueTitle = (payload: string, issueID: string) => ({
+  type: RENAME_ISSUE_TITLE,
+  payload,
+  issueID,
+});
+
+export const renameIssuePriority = (payload: string, issueID: string) => ({
+  type: RENAME_ISSUE_PRIORITY,
+  payload,
+  issueID,
 });

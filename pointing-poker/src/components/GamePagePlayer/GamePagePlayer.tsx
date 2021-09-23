@@ -10,7 +10,7 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import IssuesSection from '../IssuesSection/issuesSection';
 import { Cards } from '../CardValuesSection/CardValuesSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
-import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
+import ScramMasterCard from '../ScramMasterSection/ScramMasterCard';
 
 const GamePagePlayer = () => {
   const [showResults, setShowResults] = useState(false);
@@ -27,9 +27,10 @@ const GamePagePlayer = () => {
             src={resultsIco}
             alt=""
           />
+          <div className="text">Scram master</div>
+          <ScramMasterCard />
           <div className="scram-master-container">
             <div className="flex-box">
-              <ScramMasterSection />
               <div className="stop-game-btn">
                 <Link to="/">
                   <Button text="Exit" colorBG={whiteColor} color={blueColor}></Button>

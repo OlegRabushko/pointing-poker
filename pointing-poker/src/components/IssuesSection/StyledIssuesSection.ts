@@ -1,21 +1,18 @@
 import styled from 'styled-components';
 
 export const StyledIssuesSection = styled.div`
-  margin-top: 50px;
-  .flex-box {
-    width: 490px;
+  margin: 50px 0 auto;
+  min-width: 330px;
+  padding: 0 15px;
+  .issue-cards-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .text {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-  }
-  .flex-box {
-    justify-content: start;
-    width: 95%;
-    flex-wrap: wrap;
   }
 `;

@@ -2,20 +2,17 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { RootState } from '../../redux';
 
-import {
-  setIssueLink,
-  setIssuePriority,
-  setIssueTitle,
-  showIssuesForm,
-} from '../../redux/FormRedux/FormActions';
+import { createIssueCard, showIssuesForm } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
-import { ICreateIssueForm } from './FormTypes';
+import { IIssueCard } from './FormTypes';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
+import { setDillerStatus } from '../../redux/RolesRedux/RolesActions';
 
 const CreateIssueForm = () => {
   const {
@@ -23,16 +20,15 @@ const CreateIssueForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ICreateIssueForm>({ mode: 'onChange' });
+  } = useForm<IIssueCard>({ mode: 'onChange' });
 
   const dispatch = useDispatch();
   const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
-  const onSubmit: SubmitHandler<ICreateIssueForm> = (data) => {
+  const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));
-    dispatch(setIssueTitle(data.title));
-    dispatch(setIssueLink(data.link));
-    dispatch(setIssuePriority(data.priority));
+    dispatch(setDillerStatus(true));
+    dispatch(createIssueCard(data, nanoid(), false));
     reset();
   };
 
@@ -59,9 +55,9 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('title', { required: true, maxLength: 10 })}
+              {...register('issueTitle', { required: true, maxLength: 30 })}
             />
-            {errors.title && <p className="error">Title is required</p>}
+            {errors.issueTitle && <p className="error">Title is required</p>}
           </StyledLabel>
 
           <StyledLabel display="flex" maxWidth="570px" padding="0 0 40px 0">
@@ -70,14 +66,14 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('link', { required: true, maxLength: 10 })}
+              {...register('issueLink', { required: true, maxLength: 100 })}
             />
-            {errors.link && <p className="error">Link is required</p>}
+            {errors.issueLink && <p className="error">Link is required</p>}
           </StyledLabel>
 
           <StyledLabel display="flex" maxWidth="415px">
             Priority:
-            <StyledSelect {...register('priority')}>
+            <StyledSelect {...register('issuePriority')}>
               <option value="Low">Low</option>
               <option value="Middle">Middle</option>
               <option value="Hight">Hight</option>

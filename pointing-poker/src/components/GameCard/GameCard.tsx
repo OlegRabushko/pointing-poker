@@ -16,18 +16,25 @@ const GameCard: FC<IGameCardProps> = ({ isStats, ID, type, content }) => {
   const stats = useSelector(
     (store: RootState) => store.card.store.find((el) => el.id === ID).stats,
   );
-  const choiceCard = () =>
+  const isSelected = useSelector(
+    (store: RootState) => store.card.store.find((el) => el.id === ID).selected,
+  );
+
+  const choiceCard = () => {
     dispatch(
       setGameCard({
         id: ID,
         chosen: 1,
+        selected: true,
       }),
     );
+  };
 
   return (
     <>
       {stats !== 0 || !isStats ? (
         <StyledGameCard isStats={isStats} onClick={() => choiceCard()}>
+          {isSelected && <div className="selected-card-skin" />}
           {isStats && <div className="stats">{stats}%</div>}
           <div className="type-left">{type}</div>
           {typeof content === 'number' ? (

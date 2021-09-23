@@ -18,7 +18,7 @@ const ChatMessage = ({
   return (
     <StyledMsg key={msgId} viewType={user_id === currUserID ? vME : vOTHERS}>
       <ImageContainer className="avatar-chat">
-        {currMsgUser.avatar ? (
+        {currMsgUser.avatar.length ? (
           <img src={currMsgUser.avatar} className="" alt="avatar" />
         ) : (
           <p className="initials">{currMsgUser.name.slice(0, 1)}</p>

@@ -4,13 +4,13 @@ import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
 import Button from '../Button/Button';
 import { StyledLobbyPage } from './StyledLobbyPage';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import ScramMaster from '../ScramMaster/ScramMaster';
+import ScramMasterSection from '../ScramMasterSection/ScramMasterSection';
 
 const LobbyPage = () => {
   return (
     <StyledLobbyPage>
       <LobbyHeaderSection />
-      <ScramMaster />
+      <ScramMasterSection />
       <Link to="/">
         <div className="container">
           <Button text="Exit" color={blueColor} colorBG={whiteColor} />

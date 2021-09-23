@@ -1,22 +1,29 @@
 import { IMsg } from '../../types/interfaces';
-import { GET_ALL_MESSAGES, GET_MESSAGE, TChatActions } from './ChatTypes';
+import { SET_ALL_MESSAGES, SET_MESSAGE, SET_OPEN_CHAT, TChatActions } from './ChatTypes';
 
 export interface IChatState {
   msgs: IMsg[];
+  isOpen: boolean;
 }
 
 const chatState: IChatState = {
   msgs: [],
+  isOpen: false,
 };
 
 export const chatReducer = (state = chatState, action: TChatActions) => {
   switch (action.type) {
-    case GET_MESSAGE:
+    case SET_MESSAGE:
       return {
         ...state,
-        msgs: [...state.msgs, action.payload],
+        msgs: [...state.msgs, action.payload as IMsg],
       };
-    case GET_ALL_MESSAGES:
+    case SET_OPEN_CHAT:
+      return {
+        ...state,
+        isOpen: action.payload as boolean,
+      };
+    case SET_ALL_MESSAGES:
       return {
         ...state,
         msgs: action.payload,

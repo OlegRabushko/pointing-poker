@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-// import Chat from './components/Chat/Chat';
 import { useSelector } from 'react-redux';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
@@ -10,6 +9,8 @@ import GlobalStyle from './components/GlobalStyle/StyledGlobal';
 import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
+import Chat from './components/Chat/Chat';
+import { jonedNotification } from './sockets/SocketsAPI';
 // import DeleteUser from './components/DeleteUser/DeleteUser';
 
 const StyledApp = styled.div`
@@ -22,15 +23,14 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
-
+  jonedNotification();
   return (
     <BrowserRouter>
-      <StyledApp>
+      <StyledApp className="project-container">
         <GlobalFonts />
         <GlobalStyle />
         <Header />
-        {/* <Chat /> */}
-        {/* <DeleteUser /> */}
+        <Chat />
         <Body />
         <Footer />
         {isConnectForm && <ConnectForm />}

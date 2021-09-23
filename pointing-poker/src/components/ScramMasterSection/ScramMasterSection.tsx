@@ -1,24 +1,38 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import ScramMaster from '../ScramMaster/ScramMaster';
-import { InitialState } from '../../redux/InitialRedux/InitialTypes';
+import { RootState } from '../../redux';
+import { setStartTime } from '../../redux/TimerRedux/TimerActions';
+import ScramMasterCard from './ScramMasterCard';
 
 const ScramMasterSection = () => {
-  const gameId = useSelector((state: InitialState) => state.gameId);
+  const dispatch = useDispatch();
+  const { timeStore, gameId } = useSelector((store: RootState) => ({
+    timeStore: store.timer,
+    gameId: store.initial.gameId,
+  }));
+  const startGame = () => {
+    dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
+  };
+
+  const EntryKeyField = ({ gameKey }: { gameKey: string }) => {
+    return <input className="scram-master-input" type="text" defaultValue={gameKey} />;
+  };
+
   return (
     <StyledScramMasterSection>
-      <ScramMaster />
+      <div className="text">Scram master</div>
+      <ScramMasterCard />
       <div className="key-text">Key to lobby:</div>
       <div className="flex-box">
-        <input type="text" defaultValue={`http://localhost:8080/${gameId}`} />
+        <EntryKeyField gameKey={gameId} />
         <Button colorBG={blueColor} color={whiteColor} text="Copy" />
       </div>
       <div className="flex-box-2">
         <Link to="/game-dealer">
-          <Button colorBG={blueColor} color={whiteColor} text="Start Game" />
+          <Button onClick={startGame} colorBG={blueColor} color={whiteColor} text="Start Game" />
         </Link>
         <Link to="/">
           <Button colorBG={whiteColor} color={blueColor} text="Cancel Game" />

@@ -1,4 +1,4 @@
-import { SET_FULL_SECONDS, SET_MINUTES, SET_SECONDS } from './TimerTypes';
+import { SET_FULL_SECONDS, SET_MINUTES, SET_SECONDS, SET_START_TIME } from './TimerTypes';
 
 export const setSeconds = (count: number) => ({
   type: SET_SECONDS,
@@ -10,5 +10,9 @@ export const setMinutes = (count: number) => ({
 });
 export const setFullSeconds = (count: number) => ({
   type: SET_FULL_SECONDS,
+  payload: count,
+});
+export const setStartTime = (count: number[]) => ({
+  type: SET_START_TIME,
   payload: count,
 });

@@ -6,8 +6,12 @@ class GameService {
       return newGame       
     }
 
-    updateGame(){
-
+    async updateGameUsers(gameId, userId){
+      const updateGame = await GameDB.updateOne(
+         {_id: gameId},
+         {$push: {users: userId}}
+      );
+      return updateGame
     }
 
 }

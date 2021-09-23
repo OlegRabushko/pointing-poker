@@ -3,8 +3,7 @@ const MessageDB = require('../shemas/MessageShema')
 class ChatService {
 
     async addMessage(msg){
-        console.log('in service', msg)
-        MessageDB.create(msg)
+      await MessageDB.create(msg)
     }
 
     async getMessage(msgOrderId){

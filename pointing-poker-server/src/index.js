@@ -32,23 +32,23 @@ const io = require('socket.io')(server, {
 app.post('/api/start', (req, res) => {
     const {gameIndex} = req.body
     GameService.setNewGame(gameIndex)
-    .then((newGame) => res.send(newGame))
+    .then((newGame) => {res.send(newGame)})
 })
 
 
 try {
+    //socket connect
     io.on('connection', (socket) => {
-        console.log('user connected with id msg from sever', socket.id)
-        
-        socket.on('room-join', (roomId) => {
-            console.log('socket servet roomid', roomId),
+        //socket wait till joined to room
+        socket.on('room-join', (roomId, user) => {
+            console.log('socket server user join', roomId, user),
             socket.join(roomId)
+            socket.to(roomId).emit('joined', user)
         }
         )
         
         const msgController = new MsgController(io, socket)
         socket.on('send-msg', (msg) =>{
-            
             io.emit('recieve-msg', msg)  
             msgController.setMessage(msg)
         } 

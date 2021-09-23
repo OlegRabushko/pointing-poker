@@ -27,6 +27,7 @@ import {
 } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
 import { createNewGame, createNewUser } from '../../API/API';
+import { InitialState } from '../../redux/InitialRedux/InitialTypes';
 
 const ConnectForm = () => {
   const {
@@ -40,6 +41,7 @@ const ConnectForm = () => {
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
   const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
   const { avatar } = useSelector((state: RootState) => state.connectAvatar);
+  const gameId = useSelector((state: InitialState) => state.gameId);
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,18 +77,19 @@ const ConnectForm = () => {
           avatar,
         }),
       );
+    } else {
+      dispatch(
+        createNewUser(gameId, {
+          name: data.firstName,
+          lastName: data.lastName,
+          isDialer: diler,
+          isObserver: player,
+          isPlayer: observer,
+          job: data.job,
+          avatar,
+        }),
+      );
     }
-    dispatch(
-      createNewUser({
-        name: data.firstName,
-        lastName: data.lastName,
-        isDialer: diler,
-        isObserver: player,
-        isPlayer: observer,
-        job: data.job,
-        avatar,
-      }),
-    );
   };
 
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
@@ -94,21 +97,17 @@ const ConnectForm = () => {
     if (isDialer) {
       insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormDialer(data, avatar, nanoid()));
-      dispatch(setDillerStatus(false));
-
       history.push('/settings');
     }
     if (isPlayer) {
       insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
-      dispatch(setPlayerStatus(false));
-      history.push('/game-page');
+      history.push('/lobby');
     }
     if (isObserver) {
       insertNewUser(data, isDialer, isObserver, isObserver);
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
-      dispatch(setObserverStatus(false));
-      history.push('/lobby-page');
+      history.push('/lobby');
     }
     reset();
   };
@@ -150,6 +149,13 @@ const ConnectForm = () => {
             Your job position:
             <StyledInput {...register('job')} />
           </StyledLabel>
+          {isDialer && (
+            <StyledLabel>
+              Sessiot name:
+              <StyledInput {...register('session', { required: true, maxLength: 20 })} />
+              {errors.session && <p className="error">Session name is required</p>}
+            </StyledLabel>
+          )}
           <div className="input-file-wrapper">
             <label className="upload-label">
               <span>Choose avatar</span>

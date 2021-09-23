@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import LobbyHeaderSection from '../LobbyHeaderSection/LobbyHeaderSection';
 import Timer from '../Timer/Timer';
@@ -9,13 +10,24 @@ import RoundResult from '../RoundResult/RoundResult';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import IssuesSection from '../IssuesSection/issuesSection';
-import ScramMaster from '../ScramMaster/ScramMaster';
+import { RootState } from '../../redux';
+import { setRound } from '../../redux/InitialRedux/InitialActions';
+import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
+import ScramMasterCard from '../ScramMasterSection/ScramMasterCard';
 
 const GamePageDealer = () => {
+  const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
+  const timeStore = useSelector((store: RootState) => store.timer);
+  const dispatch = useDispatch();
   const [showResults, setShowResults] = useState(false);
-  const [round, setRound] = useState(false);
-
-  const showStatistics = () => setRound((prev) => !prev);
+  const startRound = () => dispatch(setRound(!isRound));
+  const stopRound = () => {
+    dispatch(setRound(!isRound));
+    setTimeout(() => {
+      dispatch(setMinutes(timeStore.startTime[0]));
+      dispatch(setSeconds(timeStore.startTime[1]));
+    }, 1000);
+  };
 
   return (
     <StyledGamePage>
@@ -30,52 +42,48 @@ const GamePageDealer = () => {
             alt=""
           />
           <div className="scram-master-container">
-            <div className="flex-box">
-              <ScramMaster />
-              <div className="stop-game-btn">
-                <Link to="/">
-                  <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
-                </Link>
-              </div>
+            <ScramMasterCard />
+            <div className="stop-game-btn">
+              <Link to="/">
+                <Button text="Stop Game" colorBG={whiteColor} color={blueColor}></Button>
+              </Link>
             </div>
           </div>
           <div className="issues-container">
-            <div className="flex-box">
-              <IssuesSection />
-              <div className="timer-block">
-                <Timer />
-                {round ? (
-                  <>
-                    <Button
-                      text="Restart Round"
-                      color={whiteColor}
-                      onClick={showStatistics}
-                      colorBG={blueColor}
-                    />
-                    <Link to="/results">
-                      <Button
-                        text="Next ISSUE"
-                        onClick={showStatistics}
-                        color={whiteColor}
-                        colorBG={blueColor}
-                      />
-                    </Link>
-                  </>
-                ) : (
+            <IssuesSection />
+            <div className="timer-block">
+              <Timer />
+              {isRound ? (
+                <>
                   <Button
-                    text="Run Round"
-                    onClick={showStatistics}
+                    text="Restart Round"
                     color={whiteColor}
+                    onClick={stopRound}
                     colorBG={blueColor}
                   />
-                )}
-              </div>
+                  <Link to="/results">
+                    <Button
+                      text="Next ISSUE"
+                      onClick={startRound}
+                      color={whiteColor}
+                      colorBG={blueColor}
+                    />
+                  </Link>
+                </>
+              ) : (
+                <Button
+                  text="Run Round"
+                  onClick={startRound}
+                  color={whiteColor}
+                  colorBG={blueColor}
+                />
+              )}
             </div>
           </div>
         </section>
         {showResults && <RoundResult setShowResults={setShowResults} />}
       </div>
-      <section className="cards-section">{round && <StatisticsSection isStats />}</section>
+      <section className="cards-section">{isRound && <StatisticsSection isStats />}</section>
     </StyledGamePage>
   );
 };

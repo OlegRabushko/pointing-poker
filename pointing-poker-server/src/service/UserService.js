@@ -12,7 +12,7 @@ class UserService {
             throw new Error('no ID')
         }
         const user = await UserDB.findById(userId)
-        return user.json()
+        return user
     }
     
     async getAllUsers(gameId){

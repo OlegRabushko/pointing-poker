@@ -5,10 +5,10 @@ import { RootState } from '../../redux';
 import { showDeleteForm } from '../../redux/FormRedux/FormActions';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import DeleteUser from '../DeletePlayer/DeleteUser';
+import { IConnectForm } from '../Forms/FormTypes';
 import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
-import { IUserCardProps } from './TypesUserCard';
 
-const UserCard: FC<IUserCardProps> = (props) => {
+const UserCard: FC<IConnectForm> = (props) => {
   const { firstName, lastName, job, avatar, userID } = props;
 
   const dispatch = useDispatch();

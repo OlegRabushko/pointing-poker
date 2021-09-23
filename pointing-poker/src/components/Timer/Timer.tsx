@@ -2,14 +2,9 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { RootState } from '../../redux';
-import { setFullSeconds, setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
+import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
+import { IInputComponentProps } from '../../types/interfaces';
 import { StyledTimer } from './StyledTimer';
-
-interface IInputComponentProps {
-  setter: (count: number) => { type: string; payload: number };
-  count: number;
-  actualCount: number;
-}
 
 const InputComponent: FC<IInputComponentProps> = ({ actualCount, setter, count }) => {
   const dispatch = useDispatch();
@@ -39,9 +34,24 @@ const InputComponent: FC<IInputComponentProps> = ({ actualCount, setter, count }
 const Timer = () => {
   const dispatch = useDispatch();
   const state = useSelector((store: RootState) => store.timer);
+  const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
+
   useEffect(() => {
-    dispatch(setFullSeconds(state.minutes * 60 + state.seconds));
-  }, [state.minutes, state.seconds]);
+    if (isRound) {
+      setTimeout(() => {
+        if (state.minutes > 0) {
+          if (state.seconds > 0) {
+            dispatch(setSeconds(state.seconds - 1));
+          } else {
+            dispatch(setSeconds(59));
+            dispatch(setMinutes(state.minutes - 1));
+          }
+        } else if (state.seconds > 0) {
+          dispatch(setSeconds(state.seconds - 1));
+        }
+      }, 1000);
+    }
+  }, [isRound, state.seconds, state.minutes]);
 
   return (
     <StyledTimer>

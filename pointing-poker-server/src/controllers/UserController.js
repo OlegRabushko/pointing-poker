@@ -1,3 +1,4 @@
+const GameService = require("../service/GameService")
 const UserService = require( "../service/UserService")
 
 class UserController {
@@ -8,9 +9,12 @@ class UserController {
 
     setUser(req, res){
         try {
-            const {newUser} = req.body
+            const {newUser, gameId} = req.body
+            newUser.game_id = gameId
             UserService.setUser(newUser)
-              .then((result) => res.status(200).json(result))
+              .then((user) =>{
+                  res.status(200).json(user);
+                  GameService.updateGameUsers(gameId, user._id)} )
         } catch (error) {
             res.status(500).json(error)
         }

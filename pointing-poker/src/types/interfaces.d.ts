@@ -7,7 +7,8 @@ export interface IMsg {
 }
 
 export interface IUserInfo {
-  userId?: string;
+  _id?: string;
+  game_id?: string;
   name: string;
   lastName: string;
   isDialer: Boolean;
@@ -19,4 +20,10 @@ export interface IUserInfo {
 
 export interface IUsers {
   [key: string]: IUserInfo;
+}
+
+export interface IInputComponentProps {
+  setter: (count: number) => { type: string; payload: number };
+  count: number;
+  actualCount: number;
 }

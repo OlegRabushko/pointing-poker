@@ -1,12 +1,23 @@
 import { IMsg } from '../../types/interfaces';
-import { GET_ALL_MESSAGES, GET_MESSAGE, IActionGetAllMsgs, IActionGetMsg } from './ChatTypes';
+import {
+  IActionOpenChat,
+  IActionSetAllMsgs,
+  IActionSetMsg,
+  SET_ALL_MESSAGES,
+  SET_MESSAGE,
+  SET_OPEN_CHAT,
+} from './ChatTypes';
 
-export const getMessage = (msg: IMsg): IActionGetMsg => ({
-  type: GET_MESSAGE,
+export const setMessage = (msg: IMsg): IActionSetMsg => ({
+  type: SET_MESSAGE,
   payload: msg,
 });
 
-export const getAllMessage = (msgs: IMsg[]): IActionGetAllMsgs => ({
-  type: GET_ALL_MESSAGES,
+export const setAllMessage = (msgs: IMsg[]): IActionSetAllMsgs => ({
+  type: SET_ALL_MESSAGES,
   payload: msgs,
+});
+export const setOpenChat = (count: boolean): IActionOpenChat => ({
+  type: SET_OPEN_CHAT,
+  payload: count,
 });

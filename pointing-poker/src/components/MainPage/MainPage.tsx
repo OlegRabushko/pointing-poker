@@ -1,7 +1,9 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { setAvatar, showConnectForm } from '../../redux/FormRedux/FormActions';
+import { setGameId } from '../../redux/InitialRedux/InitialActions';
 import { setDillerStatus, setPlayerStatus } from '../../redux/RolesRedux/RolesActions';
 import Button from '../Button/Button';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
@@ -21,6 +23,10 @@ const MainPage = () => {
     dispatch(showConnectForm(!isConnectForm));
     dispatch(setPlayerStatus(true));
     dispatch(setAvatar(''));
+  };
+
+  const setGameKey = (e: React.FormEvent<HTMLInputElement>) => {
+    dispatch(setGameId(e.currentTarget.value));
   };
 
   return (
@@ -48,7 +54,7 @@ const MainPage = () => {
           Connect to lobby by <b style={{ color: '#66999B' }}>URL</b>:
         </p>
         <div className="flex-box">
-          <input className="started-page-url" />
+          <input className="started-page-url" onInput={(e) => setGameKey(e)} />
           <Button
             color={whiteColor}
             mainPage

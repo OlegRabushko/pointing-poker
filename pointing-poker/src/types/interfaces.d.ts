@@ -1,5 +1,5 @@
 export interface IMsg {
-  msgId?: string;
+  _id?: string;
   game_id: string;
   user_id: string;
   text: string;

@@ -4,12 +4,12 @@ import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
 import { IMsg } from '../../types/interfaces';
+import { receiveAllMsgs } from '../../API/RestAPI';
 import { setOpenChat } from '../../redux/ChatRedux/ChatActions';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
 import { recieveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
 import { RootState } from '../../redux';
-import { receiveAllMsgs } from '../../API/API';
 import { mouseDown, mouseMove, mouseUp } from './helper';
 
 const Chat = () => {
@@ -17,7 +17,7 @@ const Chat = () => {
   const [pointY, setPointY] = useState(0);
   const [isMouseDown, setMouseDown] = useState(false);
   const location = useLocation().pathname;
-  const [msg, setMsg] = useState('inner msg');
+  const [msg, setMsg] = useState('');
   const dispatch = useDispatch();
   const chatIsOpen = useSelector((store: RootState) => store.chat.isOpen);
   const txtRef = useRef<HTMLDivElement>(null);
@@ -27,8 +27,8 @@ const Chat = () => {
     msgs: state.chat.msgs,
     users: state.initial.users,
   }));
-  const sendMsgToServer = (content: IMsg) => {
-    sendMsgToAll(content);
+  const sendMsgToServer = (msgContent: IMsg) => {
+    sendMsgToAll(msgContent);
     setMsg('');
     if (txtRef.current) txtRef.current.innerText = '';
   };
@@ -51,7 +51,7 @@ const Chat = () => {
       dispatch(receiveAllMsgs(gameId));
       dispatch(recieveMsg());
     }
-  }, [currUserID]);
+  }, []);
   const closeChat = () => dispatch(setOpenChat(false));
 
   return (

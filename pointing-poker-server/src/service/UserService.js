@@ -17,7 +17,7 @@ class UserService {
     
     async getAllUsers(gameId){
         const users = await UserDB.find({game_id: gameId})
-        return users.json()
+        return users
     }
 
     async deleteUser(userId){

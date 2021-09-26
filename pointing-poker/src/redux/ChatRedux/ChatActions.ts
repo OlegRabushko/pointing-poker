@@ -17,7 +17,7 @@ export const setAllMessage = (msgs: IMsg[]): IActionSetAllMsgs => ({
   type: SET_ALL_MESSAGES,
   payload: msgs,
 });
-export const setOpenChat = (count: boolean): IActionOpenChat => ({
+export const setOpenChat = (currState: boolean): IActionOpenChat => ({
   type: SET_OPEN_CHAT,
-  payload: count,
+  payload: currState,
 });

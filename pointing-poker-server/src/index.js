@@ -37,19 +37,20 @@ app.post('/api/start', (req, res) => {
 
 
 try {
-    //socket connect
     io.on('connection', (socket) => {
-        //socket wait till joined to room
-        socket.on('room-join', (roomId, user) => {
-            console.log('socket server user join', roomId, user),
+        socket.on('join-game', async (roomId) => {
+            console.log('socket server user join', roomId),
             socket.join(roomId)
-            socket.to(roomId).emit('joined', user)
+            const users = await UserService.getAllUsers(roomId)
+            console.log('all users from server', users)
+            io.in(roomId).emit('joined', users, socket.id)
         }
         )
         
         const msgController = new MsgController(io, socket)
         socket.on('send-msg', (msg) =>{
-            io.emit('recieve-msg', msg)  
+            console.log('msg sent', msg)
+            io.in(msg.game_id).emit('recieve-msg', msg)  
             msgController.setMessage(msg)
         } 
             )

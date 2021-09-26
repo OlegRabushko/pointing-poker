@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { vME } from '../../types/globalVirables';
-import { whiteColor } from '../GlobalStyle/StyledGlobal';
+import { blackColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledMsg = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const StyledMsg = styled.div`
         `
       : css`
           flex-direction: row;
-          align-items: flex-start;
+          align-items: flex-end;
         `};
   margin: 0.5rem 0;
 
@@ -30,20 +30,36 @@ export const StyledMsg = styled.div`
   }
 
   .chat-username {
-    color: ${({ viewType }: { viewType: string }) => (viewType === vME ? 'yellowgreen' : 'orange')};
+    color: ${({ viewType }: { viewType: string }) => (viewType === vME ? '#ffe28c' : '#5F9747')};
   }
 
   .msg-txt {
-    background-color: ${({ viewType }: { viewType: string }) =>
-      viewType === vME ? '#248bf5' : '#248bf5'};
-    color: ${whiteColor};
+    ${({ viewType }: { viewType: string }) =>
+      viewType === vME
+        ? css`
+            background-color: #248bf5;
+            color: ${whiteColor};
+          `
+        : css`
+            background-color: #e5e5ea;
+            color: ${blackColor};
+          `};
   }
 
   .msg-txt::before {
-    border-right: ${({ viewType }: { viewType: string }) =>
-      viewType === vME ? '1rem solid #248bf5; ' : '1rem solid #e5e5ea;'};
-    border-bottom-left-radius: 0.8rem 0.7rem;
-    right: -0.35rem;
+    ${({ viewType }: { viewType: string }) =>
+      viewType === vME
+        ? css`
+            border-right: 1rem solid #248bf5;
+            border-bottom-left-radius: 0.8rem 0.7rem;
+            right: -0.35rem;
+          `
+        : css`
+            border-left: 1rem solid #e5e5ea;
+            border-bottom-right-radius: 0.8rem 0.7rem;
+            left: -0.35rem;
+          `}
+
     transform: translate(0, -0.1rem);
   }
 
@@ -52,13 +68,13 @@ export const StyledMsg = styled.div`
       viewType === vME
         ? css`
             right: -40px;
+            border-bottom-left-radius: 0.5rem;
           `
         : css`
             left: 20px;
+            border-bottom-right-radius: 0.5rem;
           `};
-    background-color: ${whiteColor};
-    border-bottom-left-radius: 0.5rem;
-
+    background-color: #f8f8ff;
     transform: translate(-30px, -2px);
     width: 10px;
   }

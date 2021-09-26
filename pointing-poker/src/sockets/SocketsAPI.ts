@@ -4,12 +4,13 @@ import { setMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';
 import { setUser } from '../redux/InitialRedux/InitialActions';
+import { IActionSetUser, InitialState } from '../redux/InitialRedux/InitialTypes';
 import { IMsg, IUserInfo } from '../types/interfaces';
 
 export const socket = io('http://localhost:7001');
 
-export const connectToSocket = (roomId: string, user: IUserInfo) => {
-  socket.emit('room-join', roomId, user);
+export const connectToSocket = (roomId: string) => {
+  socket.emit('join-game', roomId);
 };
 
 export const sendMsgToAll = async (msg: IMsg) => {
@@ -25,9 +26,11 @@ export const recieveMsg =
       dispatch(setMessage(msg));
     });
 
-export const jonedNotification = () => {
-  socket.on('joined', (user) => {
-    console.log('joined', user);
-    setUser(user);
+export const jonedNotification = (
+  dispatch: ThunkDispatch<InitialState, unknown, IActionSetUser>,
+) => {
+  socket.on('joined', (users, socketId) => {
+    console.log('joined', socketId, users);
+    users.map((user: IUserInfo) => dispatch(setUser(user)));
   });
 };

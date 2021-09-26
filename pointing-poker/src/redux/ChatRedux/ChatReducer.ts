@@ -21,7 +21,7 @@ export const chatReducer = (state = chatState, action: TChatActions) => {
     case SET_OPEN_CHAT:
       return {
         ...state,
-        isOpen: action.payload as boolean,
+        isOpen: action.payload,
       };
     case SET_ALL_MESSAGES:
       return {

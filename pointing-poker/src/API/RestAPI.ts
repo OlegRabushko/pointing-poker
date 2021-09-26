@@ -22,13 +22,12 @@ export const receiveAllMsgs =
       .then((msgs) => dispatch(setAllMessage(msgs)));
   };
 
-export const getUser =
-  (userId: string): ThunkAction<void, InitialState, unknown, IActionSetUser> =>
+export const getAllUsers =
+  (gameId: string): ThunkAction<void, InitialState, unknown, IActionSetUser> =>
   (dispatch: ThunkDispatch<InitialState, unknown, IActionSetUser>) => {
-    return fetch(`${URL}/users/${userId}`)
+    return fetch(`${URL}/users/${gameId}`)
       .then((res) => res.json())
-      .then((user) => dispatch(setUser(user)))
-      .then((action) => connectToSocket(action.payload.game_id, action.payload));
+      .then((users) => users.map((user: IUserInfo) => dispatch(setUser(user))));
   };
 
 export const createNewUser =
@@ -45,7 +44,7 @@ export const createNewUser =
     })
       .then((res) => res.json())
       .then((user) => dispatch(setCurrUserID(user._id)))
-      .then((action) => dispatch(getUser(action.payload)));
+      .then(() => connectToSocket(gameId));
   };
 
 export const createNewGame =

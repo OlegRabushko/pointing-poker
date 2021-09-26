@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import GlobalFonts from './components/GlobalStyle/GlobalFonts';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -24,8 +25,11 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
-  jonedNotification();
-
+  const { isOpen } = useSelector((state: RootState) => state.chat);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    jonedNotification(dispatch);
+  }, []);
   // window.onclick = () => {
   //   const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
   //   console.log(
@@ -43,7 +47,7 @@ const App = () => {
         <GlobalFonts />
         <GlobalStyle />
         <Header />
-        <Chat />
+        {isOpen ? <Chat /> : null}
         <MiniGame />
         <Body />
         <Footer />

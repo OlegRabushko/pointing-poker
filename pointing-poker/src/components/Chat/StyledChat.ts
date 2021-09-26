@@ -52,7 +52,7 @@ export const StyledChatWindow = styled.div`
   flex: 2 2 85vh;
   padding: 5px 5px 0 5px;
   overflow-y: scroll;
-  background-color: #e5ebf1;
+  background-color: #f8f8ff;
   box-shadow: inset 0 0 4px rgb(0 0 0 / 14%), inset 0 0px 0px rgb(0 0 0 / 28%);
   border: 1px solid #c5d0db;
 
@@ -80,11 +80,9 @@ export const StyledChatWindow = styled.div`
     position: relative;
     word-break: break-word;
     width: fit-content;
-    background-color: #7d88a8 !important;
   }
 
   .msg-txt::before {
-    border-right: 1rem solid #7d88a8 !important;
     bottom: -0.1rem;
     content: '';
     height: 1rem;
@@ -92,7 +90,6 @@ export const StyledChatWindow = styled.div`
   }
 
   .msg-txt::after {
-    background-color: #e5ebf1 !important;
     bottom: -0.1rem;
     content: '';
     height: 1rem;
@@ -107,8 +104,8 @@ export const StyledChatWindow = styled.div`
 
   .chat-username {
     padding: 0 0 3px 0;
-    font-weight: 500;
-    color: #fee6cc !important;
+    font-weight: 600;
+    letter-spacing: 0.8px;
   }
 
   .msg {

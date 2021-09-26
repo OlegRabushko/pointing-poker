@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 import { setStartTime } from '../../redux/TimerRedux/TimerActions';
 import ScramMasterCard from './ScramMasterCard';
+import { getAllUsers } from '../../API/RestAPI';
 
 const ScramMasterSection = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,10 @@ const ScramMasterSection = () => {
     const link = document.querySelector('.scram-master-input') as HTMLInputElement;
     window.navigator.clipboard.writeText(link.value);
   };
+
+  useEffect(() => {
+    getAllUsers(gameId);
+  }, []);
 
   return (
     <StyledScramMasterSection>

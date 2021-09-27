@@ -1,5 +1,5 @@
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { io } from 'socket.io-client';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { setMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';

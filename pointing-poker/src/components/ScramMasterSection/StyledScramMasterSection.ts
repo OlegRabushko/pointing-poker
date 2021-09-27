@@ -12,6 +12,10 @@ export const StyledScramMasterSection = styled.div`
     font-style: italic;
     font-size: 24px;
   }
+  .empty {
+    width: 20px;
+    height: 50px;
+  }
   .flex-box,
   .flex-box-2 {
     width: 490px;

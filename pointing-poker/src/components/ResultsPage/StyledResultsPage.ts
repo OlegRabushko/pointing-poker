@@ -17,6 +17,7 @@ export const StyledResultsPage = styled.div`
   .cards-section {
     display: flex;
     flex-wrap: wrap;
+    pointer-events: none;
   }
   .card {
     margin: 0 5px;

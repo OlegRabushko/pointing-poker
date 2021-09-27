@@ -8,11 +8,13 @@ import {
   SET_OBSERVERS,
   SET_PLAYERS,
   SHOW_CONNECT_FORM,
-  SHOW_DELETE_PLAYER_FORM,
   SHOW_ISSUES_FORM,
   UPDATE_PLAYERS_STATE,
   RENAME_ISSUE_TITLE,
   RENAME_ISSUE_PRIORITY,
+  SET_COMPLETED_ISSUE_CARD,
+  SET_ELEM_INDEX,
+  RESTART_ISSUES,
 } from './ReduxFormTypes';
 
 // ROLE PLAYERS
@@ -51,15 +53,16 @@ export const showIssuesForm = (payload: boolean) => ({
   type: SHOW_ISSUES_FORM,
   payload,
 });
-export const showDeleteForm = (payload: boolean) => ({
-  type: SHOW_DELETE_PLAYER_FORM,
-  payload,
-});
 
 // ISSUE FORM
-export const createIssueCard = (payload: IIssueCard, issueID: string, current: boolean) => ({
+export const createIssueCard = (
+  payload: IIssueCard,
+  issueID: string,
+  current: boolean,
+  isCompleted: boolean,
+) => ({
   type: SET_ISSUE_DATA,
-  payload: { ...payload, issueID, current },
+  payload: { ...payload, issueID, current, isCompleted },
 });
 
 export const deleteIssueCard = (payload: string) => ({
@@ -69,6 +72,16 @@ export const deleteIssueCard = (payload: string) => ({
 
 export const toggleCurrentIssueCard = (payload: string) => ({
   type: TOGGLE_CURRENT_ISSUE_CARD,
+  payload,
+});
+
+export const setCompletedIssueCard = (payload: { id: string; count: boolean }) => ({
+  type: SET_COMPLETED_ISSUE_CARD,
+  payload,
+});
+
+export const setElementIndex = (payload: number) => ({
+  type: SET_ELEM_INDEX,
   payload,
 });
 
@@ -82,4 +95,9 @@ export const renameIssuePriority = (payload: string, issueID: string) => ({
   type: RENAME_ISSUE_PRIORITY,
   payload,
   issueID,
+});
+
+export const restartIssues = (payload: boolean) => ({
+  type: RESTART_ISSUES,
+  payload,
 });

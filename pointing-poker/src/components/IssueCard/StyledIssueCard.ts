@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { whiteColor } from '../GlobalStyle/StyledGlobal';
+import selectedIco from '../../assets/icons/selected.png';
 
 interface Iprops {
   current: boolean;
@@ -9,6 +10,7 @@ export const StyledIssueCard = styled.div<Iprops>`
   display: flex;
   flex: 0 0 300px;
   max-width: 300px;
+  position: relative;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
@@ -18,7 +20,6 @@ export const StyledIssueCard = styled.div<Iprops>`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   transition: all 0.2s ease;
-  cursor: pointer;
 
   .upd-issue-card-title {
     border: none;
@@ -61,6 +62,22 @@ export const StyledIssueCard = styled.div<Iprops>`
   .plus-img {
     cursor: pointer;
     width: 35px;
+  }
+  .selected-card-skin {
+    position: absolute;
+    background-color: rgba(96, 218, 191, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    &::after {
+      position: absolute;
+      content: url(${selectedIco});
+      transform: scale(0.3);
+      top: -52px;
+      left: 170px;
+    }
   }
 `;
 

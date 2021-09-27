@@ -41,4 +41,5 @@ export interface IIssueCard {
   issuePriority: string;
   issueLink?: string;
   issueTitle: string;
+  isCompleted: boolean;
 }

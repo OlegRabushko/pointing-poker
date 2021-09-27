@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledUserCard = styled.div`
@@ -11,6 +11,37 @@ export const StyledUserCard = styled.div`
   background: ${whiteColor};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+`;
+
+interface IPropsAvater {
+  background?: string;
+  width?: string;
+  height?: string;
+}
+
+export const ImageContainer = styled.div<IPropsAvater>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${({ width }) => width || '55px'};
+  height: ${({ height }) => height || '55px'};
+  border-radius: 50%;
+  background: #60dabf ${({ background }) => background || ''} center / cover no-repeat;
+  ${(props) =>
+    props.className === 'avatar-chat'
+      ? css`
+          flex-shrink: 0;
+        `
+      : null}
+  .initials {
+    font-weight: bold;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export const StyledUserInfo = styled.div`

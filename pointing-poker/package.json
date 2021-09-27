@@ -2,7 +2,12 @@
   "name": "react-typescript-webpack-starter",
   "version": "1.0.0",
   "description": "A starter template for React with Typescript using Webpack 5",
+  "engines": {
+    "node": "v14.15.4"
+  },
   "scripts": {
+    "dev-server": "node ./src/server/index.js",
+    "watch": "nodemon",
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
@@ -29,6 +34,7 @@
     "react-uuid": "^1.0.2",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "^4.2.0",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
@@ -40,7 +46,9 @@
     "@babel/runtime": "^7.13.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@testing-library/react": "^12.0.0",
+    "@types/express-fileupload": "^1.1.7",
     "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.2",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/react-redux": "^7.1.18",

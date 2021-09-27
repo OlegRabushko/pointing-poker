@@ -1,12 +1,23 @@
 import { IMsg } from '../../types/interfaces';
-import { SET_MESSAGE, SET_OPEN_CHAT } from './ChatTypes';
+import {
+  IActionOpenChat,
+  IActionSetAllMsgs,
+  IActionSetMsg,
+  SET_ALL_MESSAGES,
+  SET_MESSAGE,
+  SET_OPEN_CHAT,
+} from './ChatTypes';
 
-export const setMessage = (msg: IMsg) => ({
+export const setMessage = (msg: IMsg): IActionSetMsg => ({
   type: SET_MESSAGE,
   payload: msg,
 });
 
-export const setOpenChat = (count: boolean) => ({
+export const setAllMessage = (msgs: IMsg[]): IActionSetAllMsgs => ({
+  type: SET_ALL_MESSAGES,
+  payload: msgs,
+});
+export const setOpenChat = (currState: boolean): IActionOpenChat => ({
   type: SET_OPEN_CHAT,
-  payload: count,
+  payload: currState,
 });

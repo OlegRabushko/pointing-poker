@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const blueColor = '#2B3A67';
 export const whiteColor = '#ffffff';
 export const beigeColor = '#fdd1a1';
+export const blackColor = '#000';
 
 const GlobalStyle = createGlobalStyle`
 *{

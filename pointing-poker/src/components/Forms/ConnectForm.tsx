@@ -64,11 +64,11 @@ const ConnectForm = () => {
     }
     if (isPlayer) {
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
-      history.push('/lobby');
+      history.push('/settings');
     }
     if (isObserver) {
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
-      history.push('/lobby');
+      history.push('/settings');
     }
     reset();
   };

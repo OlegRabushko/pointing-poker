@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import PlayerDecision from '../PlayerDecision/PlayerDecision';
@@ -11,7 +12,8 @@ interface IRoundResultProps {
 }
 
 const RoundResult: FC<IRoundResultProps> = ({ setShowResults }) => {
-  const players = useSelector((store: RootState) => store.dataConnectForm.userPlayers);
+  const playerIsDealer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const { userPlayers, userDealer } = useSelector((store: RootState) => store.dataConnectForm);
 
   return (
     <StyledRoundResult>
@@ -22,7 +24,21 @@ const RoundResult: FC<IRoundResultProps> = ({ setShowResults }) => {
           <img onClick={() => setShowResults!(false)} src={plusIco} alt="close-ico" />
         </div>
         <div className="container">
-          {players.map((el, i) => (
+          {playerIsDealer && (
+            <div className="flex-box">
+              <PlayerDecision decision="in progress" />
+              <UserCard
+                userID={userDealer.userID}
+                firstName={userDealer.firstName}
+                lastName={userDealer.lastName}
+                job={userDealer.job}
+                avatar={userDealer.avatar}
+                session={userDealer.session}
+                dialer
+              />
+            </div>
+          )}
+          {userPlayers.map((el, i) => (
             <div key={i} className="flex-box">
               <PlayerDecision decision="in progress" />
               <UserCard
@@ -32,6 +48,7 @@ const RoundResult: FC<IRoundResultProps> = ({ setShowResults }) => {
                 job={el.job}
                 avatar={el.avatar}
                 session={el.session}
+                dialer
               />
             </div>
           ))}

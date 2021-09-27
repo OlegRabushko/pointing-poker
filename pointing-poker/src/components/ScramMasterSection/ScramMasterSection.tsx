@@ -19,15 +19,21 @@ const ScramMasterSection = () => {
     <StyledScramMasterSection>
       <div className="text">Scram master</div>
       <ScramMasterCard />
-      {isDialer && (
-        <>
-          <div className="key-text">Key to lobby:</div>
-          <div className="flex-box">
-            <input className="scram-master-input" type="text" defaultValue="2Rt9g5f1" />
-            <Button colorBG={blueColor} color={whiteColor} text="Copy" />
-          </div>
-          <div className="flex-box-2">
-            <Link to="/game-dealer">
+      {!isDialer && <div className="empty" />}
+      <>
+        {isDialer && (
+          <>
+            <div className="key-text">Key to lobby:</div>
+            <div className="flex-box">
+              <input className="scram-master-input" type="text" defaultValue="2Rt9g5f1" />
+              <Button colorBG={blueColor} color={whiteColor} text="Copy" />
+            </div>
+          </>
+        )}
+
+        <div className="flex-box-2">
+          {isDialer && (
+            <Link to="/game">
               <Button
                 onClick={startGame}
                 colorBG={blueColor}
@@ -35,12 +41,16 @@ const ScramMasterSection = () => {
                 text="Start Game"
               />
             </Link>
-            <Link to="/">
-              <Button colorBG={whiteColor} color={blueColor} text="Cancel Game" />
-            </Link>
-          </div>
-        </>
-      )}
+          )}
+          <Link to="/">
+            <Button
+              colorBG={whiteColor}
+              color={blueColor}
+              text={isDialer ? 'Cancel Game' : 'Exit'}
+            />
+          </Link>
+        </div>
+      </>
     </StyledScramMasterSection>
   );
 };

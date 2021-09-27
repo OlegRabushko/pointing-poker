@@ -1,3 +1,4 @@
+import { SET_COMPLETED_ISSUE_CARD, SET_ELEM_INDEX } from './ReduxFormTypes';
 /* eslint-disable array-callback-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
@@ -10,7 +11,6 @@ import {
   IAvatar,
   SET_AVATAR,
   IInitialStatePlayers,
-  SHOW_DELETE_PLAYER_FORM,
   UPDATE_PLAYERS_STATE,
   SET_DEALERS,
   SET_PLAYERS,
@@ -22,13 +22,13 @@ import {
   TOGGLE_CURRENT_ISSUE_CARD,
   RENAME_ISSUE_TITLE,
   RENAME_ISSUE_PRIORITY,
+  RESTART_ISSUES,
 } from './ReduxFormTypes';
 
 // SHOW FORMS
 const showFormsState = {
   isConnectForm: false,
   isIssuesForm: false,
-  isDeleteUser: false,
 };
 
 export const showFormsReducer = (state = showFormsState, action: ActionTypeShowForms) => {
@@ -42,11 +42,6 @@ export const showFormsReducer = (state = showFormsState, action: ActionTypeShowF
       return {
         ...state,
         isIssuesForm: action.payload,
-      };
-    case SHOW_DELETE_PLAYER_FORM:
-      return {
-        ...state,
-        isDeleteUser: action.payload,
       };
     default:
       return state;
@@ -116,6 +111,7 @@ export const connectFormDataReducer = (
 
 // ISSUE FORM
 const issueFormState: IInitialStateIssueCards = {
+  elemIndex: 0,
   issueCards: [],
 };
 
@@ -145,6 +141,19 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
         ...state,
         issueCards: [...state.issueCards],
       };
+    case SET_COMPLETED_ISSUE_CARD:
+      issueCards.map((card) => {
+        if (card.issueID === action.payload.id) card.isCompleted = action.payload.count;
+      });
+      return {
+        ...state,
+        issueCards: [...state.issueCards],
+      };
+    case SET_ELEM_INDEX:
+      return {
+        ...state,
+        elemIndex: action.payload,
+      };
     case RENAME_ISSUE_TITLE:
       issueCards.map((card) => {
         if (card.issueID === action.issueID) {
@@ -164,6 +173,12 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       return {
         ...state,
         issueCards: [...state.issueCards],
+      };
+    case RESTART_ISSUES:
+      return {
+        ...state,
+        elemIndex: action.payload && 0,
+        issueCards: action.payload && [],
       };
     default:
       return state;

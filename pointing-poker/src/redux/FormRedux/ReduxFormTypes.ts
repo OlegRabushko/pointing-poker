@@ -2,12 +2,14 @@ import { IConnectForm, IIssueCard } from '../../components/Forms/FormTypes';
 
 export const SHOW_CONNECT_FORM = 'SHOW_CONNECT_FORM';
 export const SHOW_ISSUES_FORM = 'SHOW_ISSUES_FORM';
-export const SHOW_DELETE_PLAYER_FORM = 'SHOW_DELETE_PLAYER_FORM';
 
 export const SET_ISSUE_DATA = 'SET_ISSUE_DATA';
 export const DELETE_ISSUE_DATA = 'DELETE_ISSUE_DATA';
 export const TOGGLE_CURRENT_ISSUE_CARD = 'TOGGLE_CURRENT_ISSUE_CARD';
+export const SET_COMPLETED_ISSUE_CARD = 'SET_COMPLETED_ISSUE_CARD';
+export const SET_ELEM_INDEX = 'SET_ELEM_INDEX';
 export const RENAME_ISSUE_TITLE = 'RENAME_ISSUE_TITLE';
+export const RESTART_ISSUES = 'RESTART_ISSUES';
 export const RENAME_ISSUE_PRIORITY = 'RENAME_ISSUE_PRIORITY';
 
 export const SET_DEALERS = 'SET_DEALERS';
@@ -58,6 +60,7 @@ export interface IAvatar {
 // ISSUE FORM
 export interface IInitialStateIssueCards {
   issueCards: IIssueCard[];
+  elemIndex: number;
 }
 
 interface ISetIssueFormData {
@@ -70,11 +73,25 @@ interface IDeleteIssueFormData {
   payload: string;
 }
 
+interface ICompletedIssueCard {
+  type: typeof SET_COMPLETED_ISSUE_CARD;
+  payload: { id: string; count: boolean };
+}
+
+interface IElemIndex {
+  type: typeof SET_ELEM_INDEX;
+  payload: number;
+}
+
 interface IToggleCurrentIssueCard {
   type: typeof TOGGLE_CURRENT_ISSUE_CARD;
   payload: string;
 }
 
+interface IRestartIssues {
+  type: typeof RESTART_ISSUES;
+  payload: boolean;
+}
 interface IRenameIssueTitle {
   type: typeof RENAME_ISSUE_TITLE;
   payload: string;
@@ -92,7 +109,10 @@ export type ActionTypeIssueCards =
   | IDeleteIssueFormData
   | IToggleCurrentIssueCard
   | IRenameIssueTitle
-  | IRenameIssuePriority;
+  | IRenameIssuePriority
+  | ICompletedIssueCard
+  | IElemIndex
+  | IRestartIssues;
 
 // SHOW FORMS
 interface IShowConnectForm {
@@ -105,9 +125,4 @@ interface IShowIssuesForm {
   payload: boolean;
 }
 
-interface IShowDeletePlayerForm {
-  type: typeof SHOW_DELETE_PLAYER_FORM;
-  payload: boolean;
-}
-
-export type ActionTypeShowForms = IShowConnectForm | IShowIssuesForm | IShowDeletePlayerForm;
+export type ActionTypeShowForms = IShowConnectForm | IShowIssuesForm;

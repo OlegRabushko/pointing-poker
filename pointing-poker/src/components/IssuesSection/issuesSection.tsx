@@ -1,11 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { StyledIssuesSection } from './StyledIssuesSection';
 import AddIssueCard from '../IssueCard/AddIssueCard';
 import IssueCard from '../IssueCard/IssueCard';
 import { RootState } from '../../redux';
+import { toggleCurrentIssueCard } from '../../redux/FormRedux/FormActions';
 
 const IssuesSection = (): JSX.Element => {
-  const { issueCards } = useSelector((state: RootState) => state.issueFormData);
+  const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (issueCards[elemIndex]) {
+      dispatch(toggleCurrentIssueCard(issueCards[elemIndex].issueID));
+    }
+  }, [issueCards.length, elemIndex]);
 
   const createIssueCards = issueCards.map((card) => {
     return (
@@ -15,13 +23,14 @@ const IssuesSection = (): JSX.Element => {
         issueTitle={card.issueTitle}
         issuePriority={card.issuePriority}
         issueID={card.issueID}
+        isCompleted={card.isCompleted}
       />
     );
   });
 
   return (
     <StyledIssuesSection>
-      <div className="text issue-game-page">Issues: </div>
+      <div className="text issue-game-page">Issues:</div>
       <div className="issue-cards-section">
         {createIssueCards}
         <AddIssueCard />

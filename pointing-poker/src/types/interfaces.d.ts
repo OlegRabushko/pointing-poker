@@ -27,3 +27,11 @@ export interface IInputComponentProps {
   count: number;
   actualCount: number;
 }
+
+export interface IssueData {
+  _id?: string;
+  game_id: string;
+  title: string;
+  link: string;
+  priority: string;
+}

@@ -6,9 +6,9 @@ const {json} = require('body-parser')
 const cors = require('cors')
 const express = require('express')
 const http = require('http')
-const MsgController  = require('./controllers/MsgController')
 const GameService = require('./service/GameService')
 const UserService = require('./service/UserService')
+const ChatService = require('./service/ChatService')
 
 const PORT = Number(process.env.PORT) || 7001
 const HOST = '0.0.0.0'
@@ -47,11 +47,9 @@ try {
         }
         )
         
-        const msgController = new MsgController(io, socket)
         socket.on('send-msg', (msg) =>{
-            console.log('msg sent', msg)
             io.in(msg.game_id).emit('recieve-msg', msg)  
-            msgController.setMessage(msg)
+            ChatService.addMessage(msg)
         } 
             )
     })    

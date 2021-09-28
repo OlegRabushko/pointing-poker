@@ -1,23 +1,26 @@
 const ChatService = require( "../service/ChatService")
 
 class MsgController {
-    constructor(io, scoket){
-        this.io = io
-        this.scoket = scoket
-    }
 
-    async setMessage(msg){
+    async setMessage(req, res){
         try {
-            await ChatService.addMessage(msg)
-            
+        const  msg = req.body
+        const newMsg = await ChatService.addMessage(msg)
+        return res.status(200).json(newMsg)
         } catch (error) {
-            console.log(error)
+           return  res.status(500).json(error)
         }
     }
 
-    async getMessage(msgOrderId){
-            const msg = await ChatService.getMessage(msgOrderId)
-            return msg
+    async getMessage(req, res){
+        try {
+            const {msgId} = req.msgId
+            const msg = await ChatService.getMessage(msgId)
+            return res.status(200).json(msg)
+        } catch (error) {
+          return  res.status(500).json(error)
+        }
+            
     }
 
     async getAllMessages(req, res){

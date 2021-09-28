@@ -6,7 +6,6 @@ export const StyledIssuesSection = styled.div`
   padding: 0 15px;
   .issue-cards-section {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
   }
   .text {

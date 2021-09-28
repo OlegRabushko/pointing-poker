@@ -101,12 +101,12 @@ const ConnectForm = () => {
     if (isPlayer) {
       insertNewUser(data, isDialer, isPlayer, isObserver);
       dispatch(setConnectFormPlayer(data, avatar, nanoid()));
-      history.push('/lobby');
+      history.push('/settings');
     }
     if (isObserver) {
       insertNewUser(data, isDialer, isObserver, isObserver);
       dispatch(setConnectFormObserver(data, avatar, nanoid()));
-      history.push('/lobby');
+      history.push('/settings');
     }
     reset();
   };

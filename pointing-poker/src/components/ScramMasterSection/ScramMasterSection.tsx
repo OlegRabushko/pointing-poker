@@ -53,12 +53,12 @@ const ScramMasterSection = () => {
                 text="Start Game"
               />
             </Link>
-            <Link to="/">
-              <Button colorBG={whiteColor} color={blueColor} text="Cancel Game" />
-            </Link>
           </div>
         </>
       )}
+      <Link to="/">
+        <Button colorBG={whiteColor} color={blueColor} text={isDialer ? 'Cancel Game' : 'Exit'} />
+      </Link>
     </StyledScramMasterSection>
   );
 };

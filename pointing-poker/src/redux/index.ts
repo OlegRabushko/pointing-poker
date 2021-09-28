@@ -13,6 +13,7 @@ import {
 } from './FormRedux/FormReducers';
 import { gameStatusPersonReducer } from './RolesRedux/RolesReducers';
 import { timerReducer } from './TimerRedux/TimerReducer';
+import { resultsPageReducer } from './ResultsPageRedux/ResultsPageReducer';
 
 const rootReducer = combineReducers({
   personStatus: gameStatusPersonReducer,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   card: gameCardReducer,
   timer: timerReducer,
   gameProcess: gameProcessReducer,
+  results: resultsPageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

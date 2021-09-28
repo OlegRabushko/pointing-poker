@@ -12,7 +12,6 @@ import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
-import { setDealerStatus } from '../../redux/RolesRedux/RolesActions';
 
 const CreateIssueForm = () => {
   const {
@@ -27,8 +26,7 @@ const CreateIssueForm = () => {
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));
-    dispatch(setDealerStatus(true));
-    dispatch(createIssueCard(data, nanoid(), false));
+    dispatch(createIssueCard(data, nanoid(), false, false));
     reset();
   };
 
@@ -66,9 +64,8 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('issueLink', { required: true, maxLength: 100 })}
+              {...register('issueLink', { required: false, maxLength: 100 })}
             />
-            {errors.issueLink && <p className="error">Link is required</p>}
           </StyledLabel>
 
           <StyledLabel display="flex" maxWidth="415px">

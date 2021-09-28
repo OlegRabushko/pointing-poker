@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
 import { RootState } from '../../redux';
-import { showDeleteForm } from '../../redux/FormRedux/FormActions';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
 import DeleteUser from '../DeletePlayer/DeleteUser';
 import { IConnectForm } from '../Forms/FormTypes';
@@ -11,9 +10,8 @@ import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 const UserCard: FC<IConnectForm> = (props) => {
   const { firstName, lastName, job, avatar, userID, dialer } = props;
 
-  const dispatch = useDispatch();
+  const [openForm, setOpenForm] = useState(false);
   const { isDialer } = useSelector((state: RootState) => state.personStatus);
-  const { isDeleteUser } = useSelector((state: RootState) => state.showForms);
 
   return (
     <>
@@ -28,15 +26,18 @@ const UserCard: FC<IConnectForm> = (props) => {
           <span className="card-user-position">{job}</span>
         </StyledUserInfo>
         {isDialer && !dialer && (
-          <ExcludeBtn onClick={() => console.log(userID)}>
-            <img
-              src={cancelImg}
-              onClick={() => dispatch(showDeleteForm(true))}
-              alt="exclude button"
-            />
+          <ExcludeBtn>
+            <img src={cancelImg} onClick={() => setOpenForm(true)} alt="exclude button" />
           </ExcludeBtn>
         )}
-        {isDeleteUser && <DeleteUser firstName={firstName} lastName={lastName} id={userID} />}
+        {openForm && (
+          <DeleteUser
+            setOpenForm={setOpenForm}
+            firstName={firstName}
+            lastName={lastName}
+            id={userID}
+          />
+        )}
       </StyledUserCard>
     </>
   );

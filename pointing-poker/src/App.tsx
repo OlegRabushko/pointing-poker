@@ -12,7 +12,6 @@ import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
 import Chat from './components/Chat/Chat';
 import { jonedNotification } from './sockets/SocketsAPI';
-// import DeleteUser from './components/DeleteUser/DeleteUser';
 import MiniGame from './components/MiniGame/MiniGame';
 
 const StyledApp = styled.div`
@@ -30,16 +29,6 @@ const App = () => {
   useEffect(() => {
     jonedNotification(dispatch);
   }, []);
-  // window.onclick = () => {
-  //   const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
-  //   console.log(
-  //     animals.filter((el) => {
-  //       if (el !== 'camel') {
-  //         return el;
-  //       }
-  //     }),
-  //   );
-  // };
 
   return (
     <BrowserRouter>

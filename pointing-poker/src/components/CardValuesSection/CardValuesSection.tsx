@@ -13,14 +13,16 @@ const authorSequence = [1, 2, 3, 6, 10, 20, 30, 40];
 
 interface ICardsProps {
   isStats: boolean;
+  isStatisticSection?: boolean;
 }
 
-export const Cards: FC<ICardsProps> = ({ isStats }) => {
+export const Cards: FC<ICardsProps> = ({ isStats, isStatisticSection }) => {
   const [isHide, setIsHide] = useState(false);
   const location = useLocation();
   const state = useSelector((store: RootState) => store.settings);
+
   useEffect(() => {
-    if (location.pathname === '/settings' || location.pathname === '/game-dealer') {
+    if (location.pathname === '/settings') {
       setIsHide(true);
     } else {
       setIsHide(false);
@@ -31,17 +33,43 @@ export const Cards: FC<ICardsProps> = ({ isStats }) => {
     <StyleCardValuesSection events={isHide}>
       <div className="flex-box">
         {state.coffeeCardNeeded && (
-          <GameCard isStats={isStats} ID="Coffee" type="Coffee" content={coffeeIco} />
+          <GameCard
+            isStatisticSection={isStatisticSection}
+            isStats={isStats}
+            ID="Coffee"
+            type="Coffee"
+            content={coffeeIco}
+          />
         )}
         {state.sequenceType === 'Fibonacci'
           ? fibonacciSequence.map((el, i) => (
-              <GameCard isStats={isStats} ID={i + 1} key={i} type="SP" content={el} />
+              <GameCard
+                isStatisticSection={isStatisticSection}
+                isStats={isStats}
+                ID={i + 1}
+                key={i}
+                type="SP"
+                content={el}
+              />
             ))
           : authorSequence.map((el, i) => (
-              <GameCard isStats={isStats} ID={i + 1} key={i} type="SP" content={el} />
+              <GameCard
+                isStatisticSection={isStatisticSection}
+                isStats={isStats}
+                ID={i + 1}
+                key={i}
+                type="SP"
+                content={el}
+              />
             ))}
         {state.questionCardNeeded && (
-          <GameCard isStats={isStats} ID="Unknown" type="Unknown" content={questionIco} />
+          <GameCard
+            isStatisticSection={isStatisticSection}
+            isStats={isStats}
+            ID="Unknown"
+            type="Unknown"
+            content={questionIco}
+          />
         )}
       </div>
     </StyleCardValuesSection>

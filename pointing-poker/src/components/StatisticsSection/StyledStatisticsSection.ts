@@ -15,6 +15,7 @@ export const StyledStatisticsSection = styled.div`
     font-weight: bold;
   }
   .flex-box {
+    pointer-events: none !important;
     justify-content: center;
   }
   @media (max-width: 650px) {

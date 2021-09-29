@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface Iprops {
+interface IStyledGameCardProps {
   events?: boolean;
 }
 
-export const StyleCardValuesSection = styled.div<Iprops>`
+export const StyleCardValuesSection = styled.div<IStyledGameCardProps>`
   text-align: center;
   pointer-events: ${(props) => (!props.events ? 'auto' : 'none')};
   .text {

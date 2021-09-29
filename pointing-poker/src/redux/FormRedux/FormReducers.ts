@@ -1,4 +1,3 @@
-import { SET_COMPLETED_ISSUE_CARD, SET_ELEM_INDEX } from './ReduxFormTypes';
 /* eslint-disable array-callback-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
@@ -12,6 +11,8 @@ import {
   SET_AVATAR,
   IInitialStatePlayers,
   UPDATE_PLAYERS_STATE,
+  SET_COMPLETED_ISSUE_CARD,
+  SET_ELEM_INDEX,
   SET_DEALERS,
   SET_PLAYERS,
   SET_OBSERVERS,

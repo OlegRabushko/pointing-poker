@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { io } from 'socket.io-client';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { setMessage } from '../redux/ChatRedux/ChatActions';

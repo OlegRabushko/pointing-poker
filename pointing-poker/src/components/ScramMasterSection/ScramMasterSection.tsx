@@ -16,6 +16,7 @@ const ScramMasterSection = () => {
     gameId: store.initial.gameId,
   }));
   const isDialer = useSelector((store: RootState) => store.personStatus.isDialer);
+
   const startGame = () => {
     dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
   };
@@ -45,7 +46,7 @@ const ScramMasterSection = () => {
             <Button colorBG={blueColor} color={whiteColor} text="Copy" onClick={copyGameID} />
           </div>
           <div className="flex-box-2">
-            <Link to="/game-dealer">
+            <Link to="/game">
               <Button
                 onClick={startGame}
                 colorBG={blueColor}

@@ -11,12 +11,12 @@ import { RootState } from '../../redux';
 const fibonacciSequence = [1, 2, 3, 5, 8, 13, 21, 34];
 const authorSequence = [1, 2, 3, 6, 10, 20, 30, 40];
 
-interface ICardsProps {
+interface IGameCardsProps {
   isStats: boolean;
   isStatisticSection?: boolean;
 }
 
-export const Cards: FC<ICardsProps> = ({ isStats, isStatisticSection }) => {
+export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
   const [isHide, setIsHide] = useState(false);
   const location = useLocation();
   const state = useSelector((store: RootState) => store.settings);

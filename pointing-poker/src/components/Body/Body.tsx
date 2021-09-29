@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import ErrorPage from '../404/ErrorPage';
 import GamePage from '../GamePage/GamePage';
 import MainPage from '../MainPage/MainPage';
 import ResultsPage from '../ResultsPage/ResultsPage';
@@ -13,6 +14,7 @@ const Body = () => {
         <Route exact path="/settings" component={SettingPage} />
         <Route exact path="/game" component={GamePage} />
         <Route exact path="/results" component={ResultsPage} />
+        <Route component={ErrorPage} />
       </Switch>
     </StyleBody>
   );

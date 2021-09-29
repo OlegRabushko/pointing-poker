@@ -21,6 +21,7 @@ const GameCard: FC<IGameCardProps> = ({ isStats, ID, type, content, isStatisticS
     (store: RootState) => store.card.store.find((el) => el.id === ID).selected,
   );
 
+  //! что за хардкод?)
   const choiceCard = () => {
     dispatch(
       setGameCard({

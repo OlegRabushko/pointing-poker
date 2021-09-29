@@ -9,7 +9,6 @@ import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
 const UserCard: FC<IConnectForm> = (props) => {
   const { firstName, lastName, job, avatar, userID, dialer } = props;
-
   const [openForm, setOpenForm] = useState(false);
   const { isDialer } = useSelector((state: RootState) => state.personStatus);
 

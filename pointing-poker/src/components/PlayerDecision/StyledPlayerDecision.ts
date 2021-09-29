@@ -9,6 +9,7 @@ export const StyledPlayerDecision = styled.div`
   border-radius: 4px;
   background-color: ${whiteColor};
   margin-right: 15px;
+
   div {
     padding-top: 20px;
     text-align: center;

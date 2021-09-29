@@ -44,7 +44,7 @@ class IssueController {
         }
     }
 
-    async deleteIssues (req, res){
+    async deleteIssue (req, res){
         try {
            const {issueId} = req.params
            const result = await  IssueService.deleteIssue(issueId)

@@ -35,3 +35,7 @@ export interface IssueData {
   link: string;
   priority: string;
 }
+
+export interface Issues {
+  [key: string]: IssueData;
+}

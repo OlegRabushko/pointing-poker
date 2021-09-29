@@ -8,16 +8,36 @@ import { RootState } from '../../redux';
 import { setStartTime } from '../../redux/TimerRedux/TimerActions';
 import ScramMasterCard from './ScramMasterCard';
 import { getAllUsers } from '../../API/RestAPI';
+import { sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
 
 const ScramMasterSection = () => {
   const dispatch = useDispatch();
-  const { timeStore, gameId } = useSelector((store: RootState) => ({
-    timeStore: store.timer,
-    gameId: store.initial.gameId,
-  }));
-  const isDialer = useSelector((store: RootState) => store.personStatus.isDialer);
+  const gameID = useSelector((store: RootState) => store.initial.gameId);
+  const { isDialer } = useSelector((store: RootState) => store.personStatus);
+  const {
+    scramMasterAsPlayer,
+    changeCardInRoundEnd,
+    timerNeeded,
+    coffeeCardNeeded,
+    questionCardNeeded,
+    sequenceType,
+  } = useSelector((store: RootState) => store.settings);
+  const { minutes, seconds } = useSelector((store: RootState) => store.timer);
+
   const startGame = () => {
-    dispatch(setStartTime([timeStore.minutes, timeStore.seconds]));
+    dispatch(setStartTime([minutes, seconds]));
+    sendTimerToAll({ minutes, seconds }, gameID);
+    sendSettingsToAll(
+      {
+        scramMasterAsPlayer,
+        changeCardInRoundEnd,
+        timerNeeded,
+        coffeeCardNeeded,
+        questionCardNeeded,
+        sequenceType,
+      },
+      gameID,
+    );
   };
 
   const EntryKeyField = ({ gameKey }: { gameKey: string }) => {
@@ -30,7 +50,7 @@ const ScramMasterSection = () => {
   };
 
   useEffect(() => {
-    getAllUsers(gameId);
+    getAllUsers(gameID);
   }, []);
 
   return (
@@ -41,11 +61,11 @@ const ScramMasterSection = () => {
         <>
           <div className="key-text">Key to lobby:</div>
           <div className="flex-box">
-            <EntryKeyField gameKey={gameId} />
+            <EntryKeyField gameKey={gameID} />
             <Button colorBG={blueColor} color={whiteColor} text="Copy" onClick={copyGameID} />
           </div>
           <div className="flex-box-2">
-            <Link to="/game-dealer">
+            <Link to="/game">
               <Button
                 onClick={startGame}
                 colorBG={blueColor}

@@ -8,6 +8,12 @@ export const SET_ROUND = 'SET_ROUND';
 export const SET_MINI_GAME = 'SET_MINI_GAME';
 export const SET_DILER_ID = 'SET_DILER_ID';
 
+export const SET_CHECK = 'SET_CHECK';
+export interface III {
+  type: typeof SET_CHECK;
+  payload: any;
+}
+
 export interface InitialState {
   gameId: string;
   dilerId: string;
@@ -44,8 +50,8 @@ export interface IActionSetDilerID {
 }
 
 export interface IActionTypeGameProcess {
-  type: typeof SET_ROUND | typeof SET_MINI_GAME;
-  payload: boolean;
+  type: typeof SET_ROUND | typeof SET_MINI_GAME | typeof SET_CHECK;
+  payload: boolean | any;
 }
 
 export interface IActionSetGameId {

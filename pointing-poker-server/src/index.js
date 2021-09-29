@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const nanoid = require('nanoid')
-const fileUpload = require('express-fileupload') 
-const {route} = require('./router/router')
-const {json} = require('body-parser')
+const fileUpload = require('express-fileupload')
+const { route } = require('./router/router')
+const { json } = require('body-parser')
 const cors = require('cors')
 const express = require('express')
 const http = require('http')
-const MsgController  = require('./controllers/MsgController')
+const MsgController = require('./controllers/MsgController')
 const GameService = require('./service/GameService')
 const UserService = require('./service/UserService')
 
@@ -17,7 +17,7 @@ const app = express()
 app.use(express.json())
 app.use(json())
 app.use(cors({
-    origin:'http://localhost:8080'
+    origin: 'http://localhost:8080'
 }))
 app.use('/api', route)
 const server = http.createServer(app)
@@ -30,9 +30,9 @@ const io = require('socket.io')(server, {
 
 
 app.post('/api/start', (req, res) => {
-    const {gameIndex} = req.body
+    const { gameIndex } = req.body
     GameService.setNewGame(gameIndex)
-    .then((newGame) => {res.send(newGame)})
+        .then((newGame) => { res.send(newGame) })
 })
 
 
@@ -40,21 +40,26 @@ try {
     io.on('connection', (socket) => {
         socket.on('join-game', async (roomId) => {
             console.log('socket server user join', roomId),
-            socket.join(roomId)
+                socket.join(roomId)
             const users = await UserService.getAllUsers(roomId)
             console.log('all users from server', users)
             io.in(roomId).emit('joined', users, socket.id)
-        }
-        )
-        
+        })
+
         const msgController = new MsgController(io, socket)
-        socket.on('send-msg', (msg) =>{
+        socket.on('send-msg', (msg) => {
             console.log('msg sent', msg)
-            io.in(msg.game_id).emit('recieve-msg', msg)  
+            io.in(msg.game_id).emit('recieve-msg', msg)
             msgController.setMessage(msg)
-        } 
-            )
-    })    
+        })
+
+        socket.on('game-settings', (settings, id) => {
+            io.in(id).emit('received-settings', settings)
+        })
+        socket.on('set-timer', (time, id) => {
+            io.in(id).emit('received-timer', time)
+        })
+    })
 } catch (error) {
     console.log(error)
 }
@@ -62,7 +67,7 @@ try {
 try {
     server.listen(PORT, async () => {
         console.log(`server is started on ${PORT}`)
-        await mongoose.connect(DB_URL,{useUnifiedTopology: true ,useNewUrlParser: true})
+        await mongoose.connect(DB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
     })
 } catch (error) {
     console.log(error)

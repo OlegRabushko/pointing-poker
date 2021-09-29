@@ -9,6 +9,7 @@ import {
   SET_USER,
   SET_USERS,
   TActionsInitial,
+  SET_CHECK,
 } from './InitialTypes';
 
 const initialState: InitialState = {
@@ -55,6 +56,7 @@ const gameProcessState = {
   startRound: false,
   selectedCard: false,
   miniGame: false,
+  check: [] as any[],
 };
 export const gameProcessReducer = (state = gameProcessState, action: IActionTypeGameProcess) => {
   switch (action.type) {
@@ -67,6 +69,11 @@ export const gameProcessReducer = (state = gameProcessState, action: IActionType
       return {
         ...state,
         miniGame: action.payload,
+      };
+    case SET_CHECK:
+      return {
+        ...state,
+        check: [action.payload],
       };
     default:
       return state;

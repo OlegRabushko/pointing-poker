@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { checkThunk } from '../../API/RestAPI';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { setAvatar, showConnectForm } from '../../redux/FormRedux/FormActions';
@@ -12,6 +13,8 @@ import { StyleMainPage } from './StyledMainPage';
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
+
+  const check = useSelector((state: RootState) => state.gameProcess.check);
 
   const handlerDealerState = () => {
     dispatch(showConnectForm(!isConnectForm));
@@ -37,6 +40,12 @@ const MainPage = () => {
         <div className="strip"></div>
         <div className="planning">Planing</div>
       </section>
+      <button onClick={() => dispatch(checkThunk('1'))}>oo</button>
+      <div>
+        {check.map((el) => (
+          <div key={el}>{el.title}</div>
+        ))}
+      </div>
       <section className="body">
         <div>Start your planning</div>
         <div className="flex-box">

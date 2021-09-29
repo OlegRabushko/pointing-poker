@@ -2,7 +2,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { setAllMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetAllMsgs } from '../redux/ChatRedux/ChatTypes';
-import { setCurrUserID, setGameId, setUser } from '../redux/InitialRedux/InitialActions';
+import { setCurrUserID, setGameId, setUser, setCheck } from '../redux/InitialRedux/InitialActions';
 import {
   IActionSetCurrUserID,
   IActionSetGameId,
@@ -63,3 +63,10 @@ export const createNewGame =
       .then((newGame) => dispatch(setGameId(newGame._id)))
       .then((action) => dispatch(createNewUser(action.payload, diler)));
   };
+
+export const checkThunk = (id: string) => {
+  return (dispatch: ThunkDispatch<any, any, any>) =>
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(setCheck(json)));
+};

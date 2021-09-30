@@ -13,6 +13,8 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
 
+  const check = useSelector((state: RootState) => state.gameProcess.check);
+
   const handlerDealerState = () => {
     dispatch(showConnectForm(!isConnectForm));
     dispatch(setDealerStatus(true));
@@ -37,6 +39,11 @@ const MainPage = () => {
         <div className="strip"></div>
         <div className="planning">Planing</div>
       </section>
+      <div>
+        {check.map((el) => (
+          <div key={el}>{el.title}</div>
+        ))}
+      </div>
       <section className="body">
         <div>Start your planning</div>
         <div className="flex-box">

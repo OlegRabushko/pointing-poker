@@ -32,7 +32,7 @@ export const StyledScramMasterSection = styled.div`
 
   .flex-box-2 {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
   }
 
   .scram-master-input {

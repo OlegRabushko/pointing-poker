@@ -20,7 +20,7 @@ export const StyledGameCard = styled.div<IStyledGameCardProps>`
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
   margin: ${(props) => (props.isStats ? '50px 5px 0px' : '10px 3px 0')};
 
   img {

@@ -4,6 +4,7 @@ import {
   IActionSetGameId,
   IActionSetUser,
   IActionSetUsers,
+  SET_CHECK,
   SET_CURR_USER_ID,
   SET_DILER_ID,
   SET_GAME_ID,
@@ -46,4 +47,8 @@ export const setMiniGame = (count: boolean) => ({
 export const setDilerId = (id: string) => ({
   type: SET_DILER_ID,
   payload: id,
+});
+export const setCheck = (payload: any) => ({
+  type: SET_CHECK,
+  payload,
 });

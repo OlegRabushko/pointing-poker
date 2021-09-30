@@ -8,80 +8,71 @@ import {
   ICardState,
   SET_SEQUENCE_FOR_CARD,
   SET_INITIAL_CARDS,
+  SET_GAME_CARD_COUNT,
   CardType,
 } from './GameCardTypes';
 
 const cardsState: ICardState = {
-  count: 1,
+  count: 0,
   store: [
     {
       id: 'Coffee',
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 1,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 2,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 3,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 4,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 5,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 6,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 7,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 8,
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
     {
       id: 'Unknown',
       stats: 0,
       chosen: 0,
-      selected: false,
       content: '',
     },
   ],
@@ -95,20 +86,21 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
     case SET_GAME_CARD:
       return {
         ...state,
-        count: state.count + 1,
         store: state.store.map((el) => {
           const payload = action.payload as CardType;
           if (el.id === payload.id) {
             el.chosen += payload.chosen;
             el.selected = payload.selected;
-          } else {
-            el.selected = !payload.selected;
           }
           el.stats = Math.round((100 / state.count) * el.chosen);
           return el;
         }),
       };
-
+    case SET_GAME_CARD_COUNT:
+      return {
+        ...state,
+        count: state.count + (action.payload as number),
+      };
     case SET_SEQUENCE_FOR_CARD:
       return {
         ...state,
@@ -127,7 +119,7 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
       };
     case SET_INITIAL_CARDS:
       return {
-        count: (action.payload as boolean) && 1,
+        count: (action.payload as boolean) && 0,
         store:
           (action.payload as boolean) &&
           state.store.map((el) => {

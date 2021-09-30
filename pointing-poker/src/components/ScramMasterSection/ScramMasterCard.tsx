@@ -6,10 +6,9 @@ import { IUsers } from '../../types/interfaces';
 import UserCard from '../UserCard/UserCard';
 
 const ScramMasterCard = () => {
-  // const { userDealer } = useSelector((state: RootState) => state.dataConnectForm);
-  // const { userID, lastName, firstName, job, avatar } = userDealer;
   const dispatch = useDispatch();
   const users: IUsers = useSelector((state: RootState): IUsers => state.initial.users);
+
   const dilerId = Object.keys(users)
     .filter((userId: string) => users[userId].isDialer)
     .join();

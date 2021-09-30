@@ -28,6 +28,7 @@ export const MiniGameIcoStyled = styled.div`
   background: url('../../assets/icons/a-ico.svg') center / cover no-repeat;
   transition: 0.3s;
   top: 10px;
+
   p {
     visibility: hidden;
     color: ${whiteColor};
@@ -42,6 +43,7 @@ export const MiniGameIcoStyled = styled.div`
     background-color: rgba(43, 72, 132, 0.6);
     transition: 1.5s;
   }
+
   &:hover {
     top: 7px;
     width: 35px;
@@ -61,6 +63,7 @@ export const ChatIcoStyled = styled.div`
   background: url('../../assets/icons/chat-ico.png') center / cover no-repeat;
   cursor: pointer;
   transition: 0.2s;
+
   &:hover {
     transform: scale(1.1);
   }

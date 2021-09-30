@@ -13,10 +13,12 @@ export const StyledTimer = styled.div`
 
   section {
     position: relative;
+
     &:hover > .plus-btn {
       transition: 0.5s;
       opacity: 1;
     }
+
     &:hover > .minus-btn {
       transition: 0.5s;
       opacity: 1;
@@ -43,6 +45,7 @@ export const StyledTimer = styled.div`
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+
     &:hover {
       background-color: #60dabf;
     }
@@ -50,12 +53,14 @@ export const StyledTimer = styled.div`
       content: '-';
     }
   }
+
   .plus-btn {
     left: 5px;
     &::after {
       content: '+';
     }
   }
+
   input {
     pointer-events: visible;
     text-align: center;
@@ -69,6 +74,7 @@ export const StyledTimer = styled.div`
     border-radius: 5px;
     cursor: inherit;
   }
+
   .points {
     margin: 13px 0 0 0;
     font-size: 42px;

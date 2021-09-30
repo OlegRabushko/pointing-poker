@@ -2,20 +2,24 @@ import styled from 'styled-components';
 
 export const StyledScramMasterSection = styled.div`
   margin-top: 20px;
+
   .text {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
     margin-bottom: 10px;
   }
+
   .key-text {
     margin: 25px 0 10px;
     font-style: italic;
     font-size: 24px;
   }
+
   .empty {
     width: 20px;
     height: 50px;
   }
+
   .flex-box,
   .flex-box-2 {
     width: 490px;
@@ -25,10 +29,12 @@ export const StyledScramMasterSection = styled.div`
       width: 360px;
     }
   }
+
   .flex-box-2 {
     width: 100%;
     margin-top: 30px;
   }
+
   .scram-master-input {
     text-align: center;
     width: 100%;

@@ -51,8 +51,8 @@ const GamePage = () => {
     }
   };
 
-  const addCardsForResult = async () => {
-    await dispatch(
+  const addCardsForResult = () => {
+    dispatch(
       setResultCards({
         title: issueCards[elemIndex].issueTitle,
         link: issueCards[elemIndex].issueLink,
@@ -64,7 +64,7 @@ const GamePage = () => {
         })),
       }),
     );
-    await dispatch(setInitialCards(true));
+    dispatch(setInitialCards(true));
   };
 
   const nextIssue = () => {

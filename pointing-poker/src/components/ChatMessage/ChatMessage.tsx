@@ -3,7 +3,7 @@ import { vME, vOTHERS } from '../../types/globalVirables';
 import { StyledMsg } from './StyledChatMsg';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 
-interface IProps {
+interface IChatMessageProps {
   users: IUsers;
   currUserID: string;
   msgData: IMsg;
@@ -13,7 +13,7 @@ const ChatMessage = ({
   msgData: { _id, user_id, text, time },
   currUserID,
   users,
-}: IProps): JSX.Element => {
+}: IChatMessageProps): JSX.Element => {
   const msgSender = users[user_id];
 
   return (

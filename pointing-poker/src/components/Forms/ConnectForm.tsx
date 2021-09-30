@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -44,14 +45,19 @@ const ConnectForm = () => {
   const history = useHistory();
 
   const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const src = await new Promise((resolve) => {
+    const src = await new Promise((resolve, reject) => {
       const file: Blob = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
           resolve(reader.result);
-          dispatch(setAvatar(reader.result as string));
+          const imageElement = new Image();
+          imageElement.src = URL.createObjectURL(file);
+          dispatch(setAvatar(imageElement.src));
+        };
+        reader.onerror = (error) => {
+          reject(error);
         };
       }
     });
@@ -158,7 +164,12 @@ const ConnectForm = () => {
           <div className="input-file-wrapper">
             <label className="upload-label">
               <span>Choose avatar</span>
-              <input type="file" className="upload-input" onChange={addAvatar} />
+              <input
+                type="file"
+                className="upload-input"
+                accept=".jpg, .jpeg, .png"
+                onChange={addAvatar}
+              />
             </label>
           </div>
           <ImageContainer mainPage background={`url(${avatar})`} width="83px" height="83px" />

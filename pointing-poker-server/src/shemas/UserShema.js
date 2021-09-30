@@ -12,4 +12,4 @@ const UserSchema = Schema({
   avatar: Buffer
 });
 
-module.exports = mongoose.model('users', UserSchema)
+module.exports = mongoose.model('users', UserSchema);

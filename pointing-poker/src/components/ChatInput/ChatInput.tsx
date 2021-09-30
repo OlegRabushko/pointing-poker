@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction } from 'react';
 import { StyledChatInput } from './StyledChatInput';
 import sendImg from '../../assets/icons/send-icon.svg';
 
-interface IProps {
+interface IChatInputProps {
   setMsg: Dispatch<SetStateAction<string>>;
   submitMsg: () => void;
   txtRef: React.LegacyRef<HTMLDivElement>;
 }
 
-const ChatInput = ({ setMsg, submitMsg, txtRef }: IProps) => {
+const ChatInput = ({ setMsg, submitMsg, txtRef }: IChatInputProps) => {
   return (
     <StyledChatInput>
       <div className="input-wrapper">

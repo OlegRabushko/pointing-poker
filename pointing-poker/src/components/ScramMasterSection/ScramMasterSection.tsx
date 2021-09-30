@@ -1,17 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Button from '../Button/Button';
 import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
-import { setStartTime } from '../../redux/TimerRedux/TimerActions';
 import ScramMasterCard from './ScramMasterCard';
 import { getAllUsers } from '../../API/RestAPI';
-import { sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
+import { sendIssuesToAll, sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
 
 const ScramMasterSection = () => {
-  const dispatch = useDispatch();
   const gameID = useSelector((store: RootState) => store.initial.gameId);
   const { isDialer } = useSelector((store: RootState) => store.personStatus);
   const {
@@ -25,7 +23,6 @@ const ScramMasterSection = () => {
   const { minutes, seconds } = useSelector((store: RootState) => store.timer);
 
   const startGame = () => {
-    dispatch(setStartTime([minutes, seconds]));
     sendTimerToAll({ minutes, seconds }, gameID);
     sendSettingsToAll(
       {
@@ -35,6 +32,28 @@ const ScramMasterSection = () => {
         coffeeCardNeeded,
         questionCardNeeded,
         sequenceType,
+      },
+      gameID,
+    );
+    sendIssuesToAll(
+      {
+        issueTitle: 'One-1',
+        issueLink: '',
+        issuePriority: 'Low',
+        issueID: '',
+        current: false,
+        isCompleted: false,
+      },
+      gameID,
+    );
+    sendIssuesToAll(
+      {
+        issueTitle: 'Two-2',
+        issueLink: '',
+        issuePriority: 'Low',
+        issueID: '',
+        current: false,
+        isCompleted: false,
       },
       gameID,
     );
@@ -64,21 +83,18 @@ const ScramMasterSection = () => {
             <EntryKeyField gameKey={gameID} />
             <Button colorBG={blueColor} color={whiteColor} text="Copy" onClick={copyGameID} />
           </div>
-          <div className="flex-box-2">
-            <Link to="/game">
-              <Button
-                onClick={startGame}
-                colorBG={blueColor}
-                color={whiteColor}
-                text="Start Game"
-              />
-            </Link>
-          </div>
         </>
       )}
-      <Link to="/">
-        <Button colorBG={whiteColor} color={blueColor} text={isDialer ? 'Cancel Game' : 'Exit'} />
-      </Link>
+      <div className="flex-box-2">
+        {isDialer && (
+          <Link to="/game">
+            <Button onClick={startGame} colorBG={blueColor} color={whiteColor} text="Start Game" />
+          </Link>
+        )}
+        <Link to="/">
+          <Button colorBG={whiteColor} color={blueColor} text={isDialer ? 'Cancel Game' : 'Exit'} />
+        </Link>
+      </div>
     </StyledScramMasterSection>
   );
 };

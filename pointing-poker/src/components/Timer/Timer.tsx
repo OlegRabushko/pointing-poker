@@ -14,6 +14,7 @@ const InputComponent: FC<IInputComponentProps> = ({ actualCount, setter, count }
     if (count === 1) dispatch(setter(actualCount < 9 ? actualCount + count : 10));
     if (count === 5) dispatch(setter(actualCount < 55 ? actualCount + count : 55));
   };
+
   const decreaseTime = () => {
     if (count === 1) dispatch(setter(actualCount > 1 ? actualCount - count : 1));
     if (count === 5) dispatch(setter(actualCount > 0 ? actualCount - count : 0));
@@ -49,7 +50,7 @@ const Timer = () => {
         } else if (state.seconds > 0) {
           dispatch(setSeconds(state.seconds - 1));
         }
-      }, 10);
+      }, 30);
     }
   }, [isRound, state.seconds, state.minutes]);
 

@@ -2,46 +2,51 @@
 import { useLocation } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import GameCard from '../GameCard/GameCard';
 import { StyleCardValuesSection } from './StyledCardValues';
 import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
 import { RootState } from '../../redux';
+import GameCard from '../GameCard/GameCard';
 
 const fibonacciSequence = [1, 2, 3, 5, 8, 13, 21, 34];
 const authorSequence = [1, 2, 3, 6, 10, 20, 30, 40];
 
-interface ICardsProps {
+interface IGameCardsProps {
   isStats: boolean;
   isStatisticSection?: boolean;
 }
 
-export const Cards: FC<ICardsProps> = ({ isStats, isStatisticSection }) => {
+export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
   const [isHide, setIsHide] = useState(false);
+  const [choseCard, setChoseCard] = useState(1);
+
   const location = useLocation();
-  const state = useSelector((store: RootState) => store.settings);
+  const settings = useSelector((store: RootState) => store.settings);
+  const { minutes, seconds } = useSelector((store: RootState) => store.timer);
 
   useEffect(() => {
-    if (location.pathname === '/settings') {
+    if (location.pathname === '/settings' || (minutes === 0 && seconds === 0)) {
       setIsHide(true);
     } else {
       setIsHide(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, minutes, seconds]);
 
   return (
     <StyleCardValuesSection events={isHide}>
       <div className="flex-box">
-        {state.coffeeCardNeeded && (
+        {settings.coffeeCardNeeded && (
           <GameCard
             isStatisticSection={isStatisticSection}
             isStats={isStats}
             ID="Coffee"
             type="Coffee"
             content={coffeeIco}
+            choseCard={choseCard}
+            setChoseCard={setChoseCard}
           />
         )}
-        {state.sequenceType === 'Fibonacci'
+        {settings.sequenceType === 'Fibonacci'
           ? fibonacciSequence.map((el, i) => (
               <GameCard
                 isStatisticSection={isStatisticSection}
@@ -50,6 +55,8 @@ export const Cards: FC<ICardsProps> = ({ isStats, isStatisticSection }) => {
                 key={i}
                 type="SP"
                 content={el}
+                choseCard={choseCard}
+                setChoseCard={setChoseCard}
               />
             ))
           : authorSequence.map((el, i) => (
@@ -60,15 +67,19 @@ export const Cards: FC<ICardsProps> = ({ isStats, isStatisticSection }) => {
                 key={i}
                 type="SP"
                 content={el}
+                choseCard={choseCard}
+                setChoseCard={setChoseCard}
               />
             ))}
-        {state.questionCardNeeded && (
+        {settings.questionCardNeeded && (
           <GameCard
             isStatisticSection={isStatisticSection}
             isStats={isStats}
             ID="Unknown"
             type="Unknown"
             content={questionIco}
+            choseCard={choseCard}
+            setChoseCard={setChoseCard}
           />
         )}
       </div>

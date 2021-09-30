@@ -11,7 +11,13 @@ import { RootState } from './redux';
 import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
 import Chat from './components/Chat/Chat';
-import { jonedNotification, receivedSettings, receivedTimer } from './sockets/SocketsAPI';
+import {
+  jonedNotification,
+  receivedIssues,
+  receivedRelocateResultPage,
+  receivedSettings,
+  receivedTimer,
+} from './sockets/SocketsAPI';
 import MiniGame from './components/MiniGame/MiniGame';
 
 const StyledApp = styled.div`
@@ -32,6 +38,8 @@ const App = () => {
     jonedNotification(dispatch);
     receivedSettings(dispatch, history);
     receivedTimer(dispatch);
+    receivedIssues(dispatch);
+    receivedRelocateResultPage(history);
   }, []);
 
   return (

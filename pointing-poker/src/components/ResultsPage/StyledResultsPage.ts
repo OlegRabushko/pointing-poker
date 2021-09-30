@@ -7,6 +7,7 @@ export const StyledResultsPage = styled.div`
   margin: 0 0 50px 50%;
   padding-top: 20px;
   transform: translateX(-50%);
+
   .title {
     letter-spacing: 1px;
     text-align: left;
@@ -14,14 +15,17 @@ export const StyledResultsPage = styled.div`
     font-size: 26px;
     font-weight: bold;
   }
+
   .cards-section {
     display: flex;
     flex-wrap: wrap;
     pointer-events: none;
   }
+
   .card {
     margin: 0 5px;
   }
+
   .stats {
     color: ${blueColor};
     margin-top: 20px;

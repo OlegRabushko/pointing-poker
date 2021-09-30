@@ -19,6 +19,7 @@ export const StyledGamePage = styled.div`
         transform: scale(1.3);
       }
     }
+
     .scram-master-container {
       margin: 60px 0 50px;
       display: flex;
@@ -27,6 +28,7 @@ export const StyledGamePage = styled.div`
         align-self: flex-end;
       }
     }
+
     .timer-block {
       height: 220px;
       display: flex;
@@ -35,21 +37,25 @@ export const StyledGamePage = styled.div`
       align-items: center;
       margin-top: 120px;
     }
+
     @media (max-width: 650px) {
       margin-left: -70px;
       margin-top: -130px;
       transform: scale(0.7);
     }
   }
+
   .section {
     margin-top: 35px;
     @media (max-width: 650px) {
       margin: 10px;
     }
   }
+
   .text {
     text-align: left;
   }
+
   .no-issues {
     margin: auto;
     color: red;

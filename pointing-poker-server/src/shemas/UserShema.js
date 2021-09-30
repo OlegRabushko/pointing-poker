@@ -8,8 +8,8 @@ const UserSchema = Schema({
   isDialer: Boolean,
   isObserver: Boolean,
   isPlayer: Boolean,
-  job:String,
-  avatar: String
+  job: String,
+  avatar: String,
 });
 
-module.exports = mongoose.model('users', UserSchema)
+module.exports = mongoose.model('users', UserSchema);

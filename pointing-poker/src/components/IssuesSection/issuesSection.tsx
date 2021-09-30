@@ -6,7 +6,7 @@ import IssueCard from '../IssueCard/IssueCard';
 import { RootState } from '../../redux';
 import { toggleCurrentIssueCard } from '../../redux/FormRedux/FormActions';
 
-const IssuesSection = (): JSX.Element => {
+const IssuesSection = () => {
   const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
   const dispatch = useDispatch();
   useEffect(() => {

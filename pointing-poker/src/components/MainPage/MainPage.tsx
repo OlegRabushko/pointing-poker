@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkThunk } from '../../API/RestAPI';
 import cards from '../../assets/icons/cards-ico.svg';
 import { RootState } from '../../redux';
 import { setAvatar, showConnectForm } from '../../redux/FormRedux/FormActions';
@@ -40,7 +39,6 @@ const MainPage = () => {
         <div className="strip"></div>
         <div className="planning">Planing</div>
       </section>
-      <button onClick={() => dispatch(checkThunk('1'))}>oo</button>
       <div>
         {check.map((el) => (
           <div key={el}>{el.title}</div>

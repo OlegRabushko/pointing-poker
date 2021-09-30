@@ -10,9 +10,11 @@ const MembersSection = () => {
     users: state.initial.users,
     gameId: state.initial.gameId,
   }));
+
   useEffect(() => {
     getAllUsers(gameId);
   });
+
   return (
     <StyledMembers>
       <div className="text">Members: </div>

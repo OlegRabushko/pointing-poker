@@ -1,11 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
-interface Iprops {
+interface IStyledMiniGameProps {
   gameIsOpen: boolean;
 }
 
-export const StyledMiniGame = styled.div<Iprops>`
+export const StyledMiniGame = styled.div<IStyledMiniGameProps>`
   display: ${(props) => (props.gameIsOpen ? 'block' : 'none')};
   z-index: 10;
   position: absolute;
@@ -16,6 +16,7 @@ export const StyledMiniGame = styled.div<Iprops>`
   border-radius: 10px 10px 5px 5px;
   box-shadow: inset 0 0 4px rgb(0 0 0 / 14%), inset 0 0px 0px rgb(0 0 0 / 28%);
   overflow: hidden;
+
   .header {
     border-radius: 10px 10px 0 0;
     border: 1px solid rgba(43, 58, 103, 0.9);
@@ -23,6 +24,7 @@ export const StyledMiniGame = styled.div<Iprops>`
     height: 50px;
     background-color: rgba(43, 58, 103, 0.9);
     cursor: grab;
+
     button {
       color: black;
       z-index: 5;
@@ -39,6 +41,7 @@ export const StyledMiniGame = styled.div<Iprops>`
       cursor: pointer;
       transition: 0.2s;
       cursor: pointer;
+
       &:hover {
         background-color: ${whiteColor};
       }
@@ -47,12 +50,14 @@ export const StyledMiniGame = styled.div<Iprops>`
       }
     }
   }
+
   .game-block {
     border: 1px solid #c5d0db;
     background-color: #e5ebf1;
     height: 195px;
     padding: 5px 15px 0;
   }
+
   .header-text {
     text-align: center;
     font-size: 22px;
@@ -60,6 +65,7 @@ export const StyledMiniGame = styled.div<Iprops>`
     text-shadow: 0 0 5px #b79fff;
     margin-bottom: 15px;
   }
+
   button {
     cursor: pointer;
     border: none;
@@ -71,6 +77,7 @@ export const StyledMiniGame = styled.div<Iprops>`
       transform: scale(1.1);
     }
   }
+
   .refresh {
     width: 40px;
     height: 40px;
@@ -78,10 +85,12 @@ export const StyledMiniGame = styled.div<Iprops>`
     img {
     }
   }
+
   .flex-box {
     display: flex;
     justify-content: space-between;
   }
+
   .word-block {
     font-size: 33px;
     text-transform: uppercase;
@@ -93,6 +102,7 @@ export const StyledMiniGame = styled.div<Iprops>`
       margin-bottom: 15px;
     }
   }
+
   .input-block {
     input {
       height: 40px;
@@ -117,6 +127,7 @@ export const StyledMiniGame = styled.div<Iprops>`
       );
     }
   }
+
   .answer {
     position: absolute;
     top: 95px;
@@ -129,6 +140,7 @@ export const StyledMiniGame = styled.div<Iprops>`
     font-size: 33px;
     background-color: #e5ebf1;
   }
+
   .answer-btn {
     margin-bottom: 10px;
     border-radius: 5px;
@@ -145,6 +157,7 @@ export const StyledMiniGame = styled.div<Iprops>`
       content: 'Answer';
     }
   }
+
   .timer {
     position: absolute;
     top: 142px;
@@ -175,6 +188,7 @@ export const StyledWin = styled.div`
   height: 60px;
   background: url('../../assets/icons/check-true.png') center / cover no-repeat;
 `;
+
 export const StyledFail = styled.div`
   position: absolute;
   animation: ${show} 3s infinite;

@@ -9,16 +9,19 @@ export const StyleSwitcher = styled.div<Iprops>`
   position: relative;
   width: 55px;
   height: 30px;
+
   .switcher-input {
     opacity: 0;
     width: 0;
     height: 0;
   }
+
   label {
     opacity: 1;
     width: 0;
     height: 0;
   }
+
   span {
     right: 0;
     position: absolute;
@@ -29,6 +32,7 @@ export const StyleSwitcher = styled.div<Iprops>`
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     transition: 0.5s;
+
     &::before {
       transform: ${({ checked }) => (checked ? 'translateX(-30px)' : 'translateX(0px)')};
 

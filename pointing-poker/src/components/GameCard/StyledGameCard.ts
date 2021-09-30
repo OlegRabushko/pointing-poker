@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { blueColor, beigeColor } from '../GlobalStyle/StyledGlobal';
 import selectedIco from '../../assets/icons/selected.png';
 
-interface Iprops {
+interface IStyledGameCardProps {
   isStats: boolean;
 }
 
-export const StyledGameCard = styled.div<Iprops>`
+export const StyledGameCard = styled.div<IStyledGameCardProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,8 +20,9 @@ export const StyledGameCard = styled.div<Iprops>`
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  cursor: default;
+  cursor: pointer;
   margin: ${(props) => (props.isStats ? '50px 5px 0px' : '10px 3px 0')};
+
   img {
     width: 70px;
     margin-bottom: 10px;
@@ -29,6 +30,7 @@ export const StyledGameCard = styled.div<Iprops>`
       width: 40px;
     }
   }
+
   .selected-card-skin {
     position: absolute;
     background-color: rgba(96, 218, 191, 0.5);
@@ -45,6 +47,7 @@ export const StyledGameCard = styled.div<Iprops>`
       left: -10px;
     }
   }
+
   .stats {
     color: ${blueColor};
     text-shadow: 0 0 5px ${beigeColor};
@@ -55,6 +58,7 @@ export const StyledGameCard = styled.div<Iprops>`
       font-size: 18px;
     }
   }
+
   .number {
     font-size: 60px;
     text-shadow: 0px 0px 5px ${beigeColor};
@@ -62,12 +66,15 @@ export const StyledGameCard = styled.div<Iprops>`
       font-size: 40px;
     }
   }
+
   .type-left {
     align-self: flex-start;
   }
+
   .type-right {
     align-self: flex-end;
   }
+
   @media (max-width: 650px) {
     width: 70px;
     height: 120px;

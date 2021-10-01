@@ -16,7 +16,6 @@ import {
   setElementIndex,
 } from '../redux/FormRedux/FormActions';
 import {
-  setCardInRoundEnd,
   setCoffeeCard,
   setQuestionCard,
   setScramMasterRole,
@@ -28,6 +27,7 @@ import {
   setGameCardCount,
   setInitialCards,
   setGameCard,
+  userIsSelectedCard,
 } from '../redux/GameCardRedux/GameCardActions';
 import { CardType } from '../redux/GameCardRedux/GameCardTypes';
 
@@ -65,7 +65,6 @@ export const receivedSettings = (
 ) => {
   socket.on('received-settings', (settings: ILobbySettingsState) => {
     dispatch(setScramMasterRole(settings.scramMasterAsPlayer));
-    dispatch(setCardInRoundEnd(settings.changeCardInRoundEnd));
     dispatch(setTimer(settings.timerNeeded));
     dispatch(setCoffeeCard(settings.coffeeCardNeeded));
     dispatch(setQuestionCard(settings.questionCardNeeded));
@@ -198,5 +197,23 @@ export const receivedDeletedCard = (dispatch: ThunkDispatch<any, unknown, any>) 
         chosen: -1,
       }),
     );
+  });
+};
+
+export const sendIsUserSelectedCard = (userID: string, id: string) => {
+  socket.emit('is-user-selected-card', userID, id);
+};
+export const receivedIsUserSelectedCard = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-is-user-selected-card', (userID) => {
+    dispatch(userIsSelectedCard({ id: userID, count: true }));
+  });
+};
+
+export const sendIsUserCanceledCard = (userID: string, id: string) => {
+  socket.emit('is-user-canceled-card', userID, id);
+};
+export const receivedIsUserCanceledCard = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-is-user-canceled-card', (userID) => {
+    dispatch(userIsSelectedCard({ id: userID, count: false }));
   });
 };

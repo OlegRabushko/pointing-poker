@@ -23,14 +23,23 @@ export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
   const location = useLocation();
   const settings = useSelector((store: RootState) => store.settings);
   const { minutes, seconds } = useSelector((store: RootState) => store.timer);
-
+  const isTimer = useSelector((store: RootState) => store.settings.timerNeeded);
+  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const playersCheckedCard = useSelector((store: RootState) => store.card.count);
+  const allUsers = useSelector((store: RootState) => store.initial.users);
+  const allUsersLength = Object.keys(allUsers).length;
   useEffect(() => {
-    if (location.pathname === '/settings' || (minutes === 0 && seconds === 0)) {
+    if (
+      location.pathname === '/settings' ||
+      (minutes === 0 && seconds === 0) ||
+      (!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength) ||
+      (!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1)
+    ) {
       setIsHide(true);
     } else {
       setIsHide(false);
     }
-  }, [location.pathname, minutes, seconds]);
+  }, [location.pathname, minutes, seconds, playersCheckedCard]);
 
   return (
     <StyleCardValuesSection events={isHide}>

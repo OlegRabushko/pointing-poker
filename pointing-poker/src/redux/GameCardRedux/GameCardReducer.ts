@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-else-return */
 /* eslint-disable no-param-reassign */
 import {
   SET_GAME_CARD,
@@ -10,9 +7,11 @@ import {
   SET_INITIAL_CARDS,
   SET_GAME_CARD_COUNT,
   CardType,
+  USER_IS_SELECTED_CARD,
 } from './GameCardTypes';
 
 const cardsState: ICardState = {
+  userSelectedCard: {},
   count: 0,
   store: [
     {
@@ -90,7 +89,6 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
           const payload = action.payload as CardType;
           if (el.id === payload.id) {
             el.chosen += payload.chosen;
-            el.selected = payload.selected;
           }
           el.stats = Math.round((100 / state.count) * el.chosen);
           return el;
@@ -120,14 +118,24 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
     case SET_INITIAL_CARDS:
       return {
         count: (action.payload as boolean) && 0,
+        userSelectedCard: (action.payload as boolean) && {},
         store:
           (action.payload as boolean) &&
           state.store.map((el) => {
             el.chosen = 0;
             el.stats = 0;
-            el.selected = false;
             return el;
           }),
+      };
+    case USER_IS_SELECTED_CARD:
+      return {
+        ...state,
+        userSelectedCard: {
+          ...state.userSelectedCard,
+          [(action.payload as { id: string; count: boolean }).id]: (
+            action.payload as { id: string; count: boolean }
+          ).count,
+        },
       };
     default:
       return state;

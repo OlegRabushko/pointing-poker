@@ -35,7 +35,7 @@ export const StyledMiniGame = styled.div<IStyledMiniGameProps>`
       border: none;
       border-radius: 50%;
       box-shadow: 0px 0px 7px rgb(166, 213, 247);
-      font-size: 22px;
+      font-size: 20px;
       text-align: center;
       font-weight: bold;
       cursor: pointer;
@@ -46,6 +46,7 @@ export const StyledMiniGame = styled.div<IStyledMiniGameProps>`
         background-color: ${whiteColor};
       }
       &::after {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         content: 'X';
       }
     }

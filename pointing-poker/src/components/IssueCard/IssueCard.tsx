@@ -26,16 +26,25 @@ const IssueCard: FC<IIssueCard> = (props) => {
 
   const { seconds, minutes } = useSelector((state: RootState) => state.timer);
   const isTimer = useSelector((state: RootState) => state.settings.timerNeeded);
+  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const playersCheckedCard = useSelector((store: RootState) => store.card.count);
+
+  const allUsers = useSelector((store: RootState) => store.initial.users);
+  const allUsersLength = Object.keys(allUsers).length;
 
   useEffect(() => {
-    if (isTimer && seconds === 0 && minutes === 0) {
+    if (
+      (isTimer && seconds === 0 && minutes === 0) ||
+      (!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength) ||
+      (!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1)
+    ) {
       cards.forEach((el) => {
         if (el.current) {
           dispatch(setCompletedIssueCard({ id: el.issueID, count: true }));
         }
       });
     }
-  }, [seconds, minutes]);
+  }, [seconds, minutes, playersCheckedCard]);
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(renameIssueTitle(data.issueTitle, issueID));

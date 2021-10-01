@@ -3,6 +3,7 @@ import {
   SET_SEQUENCE_FOR_CARD,
   SET_INITIAL_CARDS,
   SET_GAME_CARD_COUNT,
+  USER_IS_SELECTED_CARD,
   CardType,
 } from './GameCardTypes';
 
@@ -23,5 +24,10 @@ export const setSequenceForCard = (sequence: string) => ({
 
 export const setInitialCards = (count: boolean) => ({
   type: SET_INITIAL_CARDS,
+  payload: count,
+});
+
+export const userIsSelectedCard = (count: { id: string; count: boolean }) => ({
+  type: USER_IS_SELECTED_CARD,
   payload: count,
 });

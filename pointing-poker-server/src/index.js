@@ -89,6 +89,12 @@ try {
         socket.on('card-deleted', (cardID, id) => {
             io.in(id).emit('received-card-deleted', cardID)
         })
+        socket.on('is-user-selected-card', (userID, id) => {
+            io.in(id).emit('received-is-user-selected-card', userID)
+        })
+        socket.on('is-user-canceled-card', (userID, id) => {
+            io.in(id).emit('received-is-user-canceled-card', userID)
+        })
     })
 } catch (error) {
     console.log(error);

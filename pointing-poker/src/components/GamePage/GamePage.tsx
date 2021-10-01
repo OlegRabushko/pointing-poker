@@ -20,6 +20,8 @@ import { StyledGamePage } from './StyledGamePage';
 import {
   receivedCard,
   receivedDeletedCard,
+  receivedIsUserCanceledCard,
+  receivedIsUserSelectedCard,
   receivedNextIssue,
   receivedRestartRound,
   receivedResults,
@@ -80,6 +82,8 @@ const GamePage = () => {
     receivedResults(addCardsForResult);
     receivedCard(dispatch);
     receivedDeletedCard(dispatch);
+    receivedIsUserCanceledCard(dispatch);
+    receivedIsUserSelectedCard(dispatch);
   }, []);
 
   return (

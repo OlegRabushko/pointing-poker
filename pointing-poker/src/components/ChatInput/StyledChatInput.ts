@@ -6,7 +6,6 @@ export const StyledChatInput = styled.form`
     background-color: ${whiteColor};
     display: flex;
     flex-direction: row;
-    border-top: 2px solid #f2f2f2;
     border-bottom: 3px solid #f2f2f2;
   }
 

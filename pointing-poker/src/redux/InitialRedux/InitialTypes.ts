@@ -16,7 +16,7 @@ export interface III {
 
 export interface InitialState {
   gameId: string;
-  dilerId: string;
+  dealerId: string;
   currUserID: string;
   users: IUsers;
   NotUserArr: IUserInfo[];

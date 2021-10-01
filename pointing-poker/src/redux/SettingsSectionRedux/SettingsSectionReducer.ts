@@ -1,5 +1,4 @@
 import {
-  SET_CARD_IN_ROUND_END,
   SET_TIMER,
   SET_COFFEE_CARD,
   SET_QUESTION_CARD,
@@ -10,7 +9,6 @@ import {
 
 export interface ILobbySettingsState {
   scramMasterAsPlayer: boolean;
-  changeCardInRoundEnd: boolean;
   timerNeeded: boolean;
   coffeeCardNeeded: boolean;
   questionCardNeeded: boolean;
@@ -19,7 +17,6 @@ export interface ILobbySettingsState {
 
 const lobbySettingsState: ILobbySettingsState = {
   scramMasterAsPlayer: true,
-  changeCardInRoundEnd: false,
   timerNeeded: true,
   coffeeCardNeeded: true,
   questionCardNeeded: false,
@@ -35,11 +32,6 @@ export const lobbySettingsReducer = (
       return {
         ...state,
         scramMasterAsPlayer: action.payload as boolean,
-      };
-    case SET_CARD_IN_ROUND_END:
-      return {
-        ...state,
-        changeCardInRoundEnd: action.payload as boolean,
       };
     case SET_TIMER:
       return {

@@ -1,6 +1,5 @@
 import {
   SET_SCRAM_MASTER_ROLE,
-  SET_CARD_IN_ROUND_END,
   SET_TIMER,
   SET_COFFEE_CARD,
   SET_QUESTION_CARD,
@@ -10,10 +9,6 @@ import {
 export const setScramMasterRole = (role: boolean) => ({
   type: SET_SCRAM_MASTER_ROLE,
   payload: role,
-});
-export const setCardInRoundEnd = (count: boolean) => ({
-  type: SET_CARD_IN_ROUND_END,
-  payload: count,
 });
 export const setTimer = (count: boolean) => ({
   type: SET_TIMER,

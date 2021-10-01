@@ -9,21 +9,21 @@ const ScramMasterCard = () => {
   const dispatch = useDispatch();
   const users: IUsers = useSelector((state: RootState): IUsers => state.initial.users);
 
-  const dilerId = Object.keys(users)
+  const dealerId = Object.keys(users)
     .filter((userId: string) => users[userId].isDialer)
     .join();
 
   useEffect(() => {
-    dispatch(setDilerId(dilerId));
-  }, [dilerId]);
+    dispatch(setDilerId(dealerId));
+  }, [dealerId]);
 
-  return dilerId ? (
+  return dealerId ? (
     <UserCard
-      userID={users[dilerId]._id}
-      lastName={users[dilerId].lastName}
-      firstName={users[dilerId].name}
-      job={users[dilerId].job}
-      avatar={users[dilerId].avatar}
+      userID={users[dealerId]._id}
+      lastName={users[dealerId].lastName}
+      firstName={users[dealerId].name}
+      job={users[dealerId].job}
+      avatar={users[dealerId].avatar}
       dialer
     />
   ) : null;

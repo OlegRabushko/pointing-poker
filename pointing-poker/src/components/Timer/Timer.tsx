@@ -50,7 +50,7 @@ const Timer = () => {
         } else if (state.seconds > 0) {
           dispatch(setSeconds(state.seconds - 1));
         }
-      }, 30);
+      }, 100);
     }
   }, [isRound, state.seconds, state.minutes]);
 

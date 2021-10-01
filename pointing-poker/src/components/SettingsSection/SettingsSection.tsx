@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { StyledSettingsSection } from './StyledSettingsSection';
 import Switcher from '../Switcher/Switcher';
 import {
-  setCardInRoundEnd,
   setCoffeeCard,
   setQuestionCard,
   setScramMasterRole,
@@ -29,10 +28,6 @@ const SettingsSection = () => {
       <div className="flex-box">
         <div className="setting-name">Scram master as player</div>
         <Switcher checked={checker.scramMasterAsPlayer} listener={setScramMasterRole} />
-      </div>
-      <div className="flex-box">
-        <div className="setting-name">Changing card in round end:</div>
-        <Switcher checked={checker.changeCardInRoundEnd} listener={setCardInRoundEnd} />
       </div>
       <div className="flex-box">
         <div className="setting-name">Is timer needed:</div>

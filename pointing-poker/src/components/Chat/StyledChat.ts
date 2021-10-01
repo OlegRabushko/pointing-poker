@@ -44,6 +44,7 @@ export const StyledChatBox = styled.div<Iprops>`
       }
 
       &::after {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         content: 'X';
       }
     }
@@ -79,14 +80,16 @@ export const StyledChatWindow = styled.div`
   .msg-txt {
     border-radius: 1.15rem;
     line-height: 1.25;
-    max-width: 100%;
+    max-width: 300px;
     padding: 0.5rem 0.875rem;
     position: relative;
     word-break: break-word;
     width: fit-content;
+    background-color: #b0c0d9;
   }
 
   .msg-txt::before {
+    border-right: 1rem solid #b0c0d9;
     bottom: -0.1rem;
     content: '';
     height: 1rem;
@@ -110,6 +113,7 @@ export const StyledChatWindow = styled.div`
     padding: 0 0 3px 0;
     font-weight: 600;
     letter-spacing: 0.8px;
+    color: #292929;
   }
 
   .msg {

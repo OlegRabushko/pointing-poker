@@ -14,7 +14,7 @@ import {
 
 const initialState: InitialState = {
   gameId: '',
-  dilerId: '',
+  dealerId: '',
   currUserID: '',
   users: {},
   NotUserArr: [],
@@ -45,7 +45,7 @@ export const initialReducer = (state = initialState, action: TActionsInitial) =>
     case SET_DILER_ID:
       return {
         ...state,
-        dilerId: action.payload,
+        dealerId: action.payload,
       };
     default:
       return state;

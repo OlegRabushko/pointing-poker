@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledPlayerDecision = styled.div`
-  margin-top: 10px;
-  width: 150px;
+  width: 120px;
   height: 70px;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 4px;
@@ -11,9 +10,10 @@ export const StyledPlayerDecision = styled.div`
   margin-right: 15px;
 
   div {
-    padding-top: 20px;
+    text-transform: uppercase;
+    padding-top: 24px;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
   }
 `;

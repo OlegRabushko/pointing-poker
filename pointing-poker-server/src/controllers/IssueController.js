@@ -1,4 +1,3 @@
-const { json } = require("stream/consumers")
 const IssueService = require( "../service/IssueService")
 
 class IssueController {

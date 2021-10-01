@@ -8,13 +8,21 @@ import {
   SET_SEQUENCE_TYPE,
 } from './SettingsSectionTypes';
 
-const lobbySettingsState = {
+export interface ILobbySettingsState {
+  scramMasterAsPlayer: boolean;
+  changeCardInRoundEnd: boolean;
+  timerNeeded: boolean;
+  coffeeCardNeeded: boolean;
+  questionCardNeeded: boolean;
+  sequenceType: string;
+}
+
+const lobbySettingsState: ILobbySettingsState = {
   scramMasterAsPlayer: true,
   changeCardInRoundEnd: false,
   timerNeeded: true,
   coffeeCardNeeded: true,
   questionCardNeeded: false,
-  settingPage: false,
   sequenceType: 'Fibonacci',
 };
 

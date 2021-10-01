@@ -2,10 +2,17 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { setAllMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetAllMsgs } from '../redux/ChatRedux/ChatTypes';
-import { setCurrUserID, setGameId, setUser } from '../redux/InitialRedux/InitialActions';
+import {
+  setCurrUserID,
+  setGameId,
+  setUser,
+  setCheck,
+  setGameTitle,
+} from '../redux/InitialRedux/InitialActions';
 import {
   IActionSetCurrUserID,
   IActionSetGameId,
+  IActionSetGameTitle,
   IActionSetUser,
   InitialState,
 } from '../redux/InitialRedux/InitialTypes';
@@ -70,17 +77,27 @@ export const createNewUser =
 
 export const createNewGame =
   (
-    gameIndex: string,
+    gameTitle: string,
     diler: IUserInfo,
-  ): ThunkAction<void, InitialState, unknown, IActionSetGameId> =>
-  async (dispatch: ThunkDispatch<InitialState, unknown, IActionSetGameId>) => {
-    const data = { gameIndex };
+  ): ThunkAction<void, InitialState, unknown, IActionSetGameId | IActionSetGameTitle> =>
+  async (
+    dispatch: ThunkDispatch<InitialState, unknown, IActionSetGameId | IActionSetGameTitle>,
+  ) => {
+    const data = { gameTitle };
     const res = await fetch(`${URL}/start`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     const newGame = await res.json();
-    const action = dispatch(setGameId(newGame._id));
-    return dispatch(createNewUser(action.payload, diler));
+    dispatch(setGameId(newGame._id));
+    dispatch(setGameTitle(newGame.title));
+    return dispatch(createNewUser(newGame._id, diler));
   };
+
+export const checkThunk = (id: string) => {
+  return (dispatch: ThunkDispatch<any, any, any>) =>
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then((response) => response.json())
+      .then((json) => dispatch(setCheck(json)));
+};

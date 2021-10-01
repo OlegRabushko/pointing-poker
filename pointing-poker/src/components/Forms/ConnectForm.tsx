@@ -72,7 +72,7 @@ const ConnectForm = () => {
   ) => {
     if (diler) {
       dispatch(
-        createNewGame(nanoid(), {
+        createNewGame(data.session, {
           name: data.firstName,
           lastName: data.lastName,
           isDialer: diler,

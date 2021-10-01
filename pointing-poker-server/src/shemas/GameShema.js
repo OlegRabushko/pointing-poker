@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const GameSchema = Schema({
- game_index: String,
+ title: String,
  users:[{
      type:String
  }],

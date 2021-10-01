@@ -2,8 +2,6 @@ export const SET_RESULT_CARDS = 'SET_RESULT_CARDS';
 
 export type ResultType = {
   title: string;
-  link: string;
-  priority: string;
   cardsResult: {
     id: string | number;
     stats?: number;

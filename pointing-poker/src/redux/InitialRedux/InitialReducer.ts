@@ -9,10 +9,13 @@ import {
   SET_USER,
   SET_USERS,
   TActionsInitial,
+  SET_CHECK,
+  SET_GAME_TITLE,
 } from './InitialTypes';
 
 const initialState: InitialState = {
   gameId: '',
+  gameTitle: '',
   dilerId: '',
   currUserID: '',
   users: {},
@@ -36,6 +39,11 @@ export const initialReducer = (state = initialState, action: TActionsInitial) =>
         ...state,
         NotUserArr: action.payload,
       };
+    case SET_GAME_TITLE:
+      return {
+        ...state,
+        gameTitle: action.payload,
+      };
     case SET_GAME_ID:
       return {
         ...state,
@@ -55,6 +63,7 @@ const gameProcessState = {
   startRound: false,
   selectedCard: false,
   miniGame: false,
+  check: [] as any[],
 };
 export const gameProcessReducer = (state = gameProcessState, action: IActionTypeGameProcess) => {
   switch (action.type) {
@@ -67,6 +76,11 @@ export const gameProcessReducer = (state = gameProcessState, action: IActionType
       return {
         ...state,
         miniGame: action.payload,
+      };
+    case SET_CHECK:
+      return {
+        ...state,
+        check: [action.payload],
       };
     default:
       return state;

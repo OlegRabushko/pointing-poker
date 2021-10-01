@@ -2,11 +2,14 @@ import { IUserInfo } from '../../types/interfaces';
 import {
   IActionSetCurrUserID,
   IActionSetGameId,
+  IActionSetGameTitle,
   IActionSetUser,
   IActionSetUsers,
+  SET_CHECK,
   SET_CURR_USER_ID,
   SET_DILER_ID,
   SET_GAME_ID,
+  SET_GAME_TITLE,
   SET_MINI_GAME,
   SET_ROUND,
   SET_USER,
@@ -33,6 +36,11 @@ export const setGameId = (gameId: string): IActionSetGameId => ({
   payload: gameId,
 });
 
+export const setGameTitle = (gameTitle: string): IActionSetGameTitle => ({
+  type: SET_GAME_TITLE,
+  payload: gameTitle,
+});
+
 export const setRound = (count: boolean) => ({
   type: SET_ROUND,
   payload: count,
@@ -46,4 +54,8 @@ export const setMiniGame = (count: boolean) => ({
 export const setDilerId = (id: string) => ({
   type: SET_DILER_ID,
   payload: id,
+});
+export const setCheck = (payload: any) => ({
+  type: SET_CHECK,
+  payload,
 });

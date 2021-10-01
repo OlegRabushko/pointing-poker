@@ -6,11 +6,11 @@ import {
   SET_START_TIME,
 } from './TimerTypes';
 
-type TimerStateTypes = {
-  startTime: number[];
+export type TimerStateTypes = {
+  startTime?: number[];
   seconds: number;
   minutes: number;
-  fullSeconds: number;
+  fullSeconds?: number;
 };
 
 const timerState: TimerStateTypes = {

@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const GameControler = require('../controllers/GameController')
 const IssueController = require('../controllers/IssueController')
 const MsgController = require('../controllers/MsgController')
 const UserController = require('../controllers/UserController')
@@ -6,6 +7,7 @@ const route = Router()
 const msgController = new MsgController()
 const userController = new UserController()
 const issueController = new IssueController()
+const gameController = new GameControler()
 
 route.get('/messages/:gameId', msgController.getAllMessages)
 route.delete('/messages/:msgId', msgController.deleteMessage)
@@ -17,5 +19,6 @@ route.get('/issues/:issueId', issueController.getIssue)
 route.get('/issues/:gameId', issueController.getAllIssues)
 route.post('/issues',  issueController.addIssue)
 route.delete('/users/:issueId', issueController.deleteIssue)
+route.get('/game/:gameId', gameController.getGame)
 
 module.exports = {route}

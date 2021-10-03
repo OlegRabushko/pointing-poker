@@ -5,7 +5,7 @@ import { StyledErrorPage } from './StyledErrorPage';
 const ErrorPage = () => {
   return (
     <StyledErrorPage>
-      <h2 className="error-text">404 Not Found</h2>
+      <h2 className="error-text">404 Not Found!</h2>
       <Link to="/">
         <span className="home">go home...</span>
       </Link>

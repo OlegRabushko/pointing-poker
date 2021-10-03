@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { RootState } from '../../redux';
-import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
+import { timerActions } from '../../redux/TimerRedux/TimerActions';
 import { IInputComponentProps } from '../../types/interfaces';
 import { StyledTimer } from './StyledTimer';
 
@@ -33,6 +33,7 @@ const InputComponent: FC<IInputComponentProps> = ({ actualCount, setter, count }
 };
 
 const Timer = () => {
+  const { setSeconds, setMinutes } = timerActions;
   const dispatch = useDispatch();
   const state = useSelector((store: RootState) => store.timer);
   const isRound = useSelector((store: RootState) => store.gameProcess.startRound);

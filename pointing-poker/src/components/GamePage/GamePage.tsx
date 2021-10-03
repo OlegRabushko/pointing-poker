@@ -13,8 +13,8 @@ import { Cards } from '../CardValuesSection/CardValuesSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
 import ScramMasterCard from '../ScramMasterSection/ScramMasterCard';
 import { RootState } from '../../redux';
-import { setMinutes, setSeconds } from '../../redux/TimerRedux/TimerActions';
-import { setInitialCards } from '../../redux/GameCardRedux/GameCardActions';
+import { timerActions } from '../../redux/TimerRedux/TimerActions';
+import { gameCard } from '../../redux/GameCardRedux/GameCardActions';
 import { setResultCards } from '../../redux/ResultsPageRedux/ResultsPageActions';
 import { StyledGamePage } from './StyledGamePage';
 import {
@@ -36,6 +36,7 @@ import { IIssueCard } from '../Forms/FormTypes';
 import { CardType } from '../../redux/GameCardRedux/GameCardTypes';
 
 const GamePage = () => {
+  const { setSeconds, setMinutes } = timerActions;
   const [showResults, setShowResults] = useState(false);
   const dispatch = useDispatch();
   const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
@@ -72,7 +73,7 @@ const GamePage = () => {
         })),
       }),
     );
-    dispatch(setInitialCards(true));
+    dispatch(gameCard.setInitialCards(true));
   };
 
   useEffect(() => {

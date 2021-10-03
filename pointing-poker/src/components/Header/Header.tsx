@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { setOpenChat } from '../../redux/ChatRedux/ChatActions';
-import { setMiniGame } from '../../redux/InitialRedux/InitialActions';
+import { chat } from '../../redux/ChatRedux/ChatActions';
+import { initial } from '../../redux/InitialRedux/InitialActions';
 import { HeaderStyled, IconStyled, ChatIcoStyled, MiniGameIcoStyled } from './StyledHeader';
 
 export default function Header() {
   const location = useLocation().pathname;
   const dispatch = useDispatch();
-  const openChat = () => dispatch(setOpenChat(true));
-  const openMiniGame = () => dispatch(setMiniGame(true));
+  const openChat = () => dispatch(chat.setOpenChat(true));
+  const openMiniGame = () => dispatch(initial.setMiniGame(true));
 
   return (
     <HeaderStyled>

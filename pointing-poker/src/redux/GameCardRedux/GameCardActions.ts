@@ -1,33 +1,38 @@
-import {
-  SET_GAME_CARD,
-  SET_SEQUENCE_FOR_CARD,
-  SET_INITIAL_CARDS,
-  SET_GAME_CARD_COUNT,
-  USER_IS_SELECTED_CARD,
-  CardType,
-} from './GameCardTypes';
+import { CardType } from './GameCardTypes';
 
-export const setGameCard = (card: CardType) => ({
-  type: SET_GAME_CARD,
-  payload: card,
-});
+type TProperties<T> = T extends { [key: string]: infer U } ? U : never;
+type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnType<TProperties<T>>;
 
-export const setGameCardCount = (count: number) => ({
-  type: SET_GAME_CARD_COUNT,
-  payload: count,
-});
+export type TGameCard = TInferActions<typeof gameCard>;
 
-export const setSequenceForCard = (sequence: string) => ({
-  type: SET_SEQUENCE_FOR_CARD,
-  payload: sequence,
-});
+export const gameCard = {
+  setGameCard: (card: CardType) =>
+    ({
+      type: 'SET_GAME_CARD',
+      payload: card,
+    } as const),
 
-export const setInitialCards = (count: boolean) => ({
-  type: SET_INITIAL_CARDS,
-  payload: count,
-});
+  setGameCardCount: (count: number) =>
+    ({
+      type: 'SET_GAME_CARD_COUNT',
+      payload: count,
+    } as const),
 
-export const userIsSelectedCard = (count: { id: string; count: boolean }) => ({
-  type: USER_IS_SELECTED_CARD,
-  payload: count,
-});
+  setSequenceForCard: (sequence: string) =>
+    ({
+      type: 'SET_SEQUENCE_FOR_CARD',
+      payload: sequence,
+    } as const),
+
+  setInitialCards: (count: boolean) =>
+    ({
+      type: 'SET_INITIAL_CARDS',
+      payload: count,
+    } as const),
+
+  userIsSelectedCard: (count: { id: string; count: boolean }) =>
+    ({
+      type: 'USER_IS_SELECTED_CARD',
+      payload: count,
+    } as const),
+};

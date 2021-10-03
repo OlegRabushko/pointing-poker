@@ -1,23 +1,24 @@
 import { IMsg } from '../../types/interfaces';
-import {
-  IActionOpenChat,
-  IActionSetAllMsgs,
-  IActionSetMsg,
-  SET_ALL_MESSAGES,
-  SET_MESSAGE,
-  SET_OPEN_CHAT,
-} from './ChatTypes';
 
-export const setMessage = (msg: IMsg): IActionSetMsg => ({
-  type: SET_MESSAGE,
-  payload: msg,
-});
+type TProperties<T> = T extends { [key: string]: infer U } ? U : never;
+type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnType<TProperties<T>>;
 
-export const setAllMessage = (msgs: IMsg[]): IActionSetAllMsgs => ({
-  type: SET_ALL_MESSAGES,
-  payload: msgs,
-});
-export const setOpenChat = (currState: boolean): IActionOpenChat => ({
-  type: SET_OPEN_CHAT,
-  payload: currState,
-});
+export type TChat = TInferActions<typeof chat>;
+
+export const chat = {
+  setMessage: (msg: IMsg) =>
+    ({
+      type: 'SET_MESSAGE',
+      payload: msg,
+    } as const),
+  setAllMessage: (msgs: IMsg[]) =>
+    ({
+      type: 'SET_ALL_MESSAGES',
+      payload: msgs,
+    } as const),
+  setOpenChat: (currState: boolean) =>
+    ({
+      type: 'SET_OPEN_CHAT',
+      payload: currState,
+    } as const),
+};

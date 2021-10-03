@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
-import { setDilerId } from '../../redux/InitialRedux/InitialActions';
+import { initial } from '../../redux/InitialRedux/InitialActions';
 import { IUsers } from '../../types/interfaces';
 import UserCard from '../UserCard/UserCard';
 
@@ -14,7 +14,7 @@ const ScramMasterCard = () => {
     .join();
 
   useEffect(() => {
-    dispatch(setDilerId(dealerId));
+    dispatch(initial.setDilerId(dealerId));
   }, [dealerId]);
 
   return dealerId ? (

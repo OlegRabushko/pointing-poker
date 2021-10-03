@@ -1,11 +1,4 @@
-import {
-  SET_TIMER,
-  SET_COFFEE_CARD,
-  SET_QUESTION_CARD,
-  ActionTypeLobbySettings,
-  SET_SCRAM_MASTER_ROLE,
-  SET_SEQUENCE_TYPE,
-} from './SettingsSectionTypes';
+import { TSettings } from './SettingsSectionActions';
 
 export interface ILobbySettingsState {
   scramMasterAsPlayer: boolean;
@@ -15,6 +8,11 @@ export interface ILobbySettingsState {
   sequenceType: string;
 }
 
+export type ActionColor = {
+  about: boolean;
+  home: boolean;
+};
+
 const lobbySettingsState: ILobbySettingsState = {
   scramMasterAsPlayer: true,
   timerNeeded: true,
@@ -23,32 +21,29 @@ const lobbySettingsState: ILobbySettingsState = {
   sequenceType: 'Fibonacci',
 };
 
-export const lobbySettingsReducer = (
-  state = lobbySettingsState,
-  action: ActionTypeLobbySettings,
-) => {
+export const lobbySettingsReducer = (state = lobbySettingsState, action: TSettings) => {
   switch (action.type) {
-    case SET_SCRAM_MASTER_ROLE:
+    case 'SET_SCRAM_MASTER_ROLE':
       return {
         ...state,
         scramMasterAsPlayer: action.payload as boolean,
       };
-    case SET_TIMER:
+    case 'SET_TIMER':
       return {
         ...state,
         timerNeeded: action.payload as boolean,
       };
-    case SET_COFFEE_CARD:
+    case 'SET_COFFEE_CARD':
       return {
         ...state,
         coffeeCardNeeded: action.payload as boolean,
       };
-    case SET_QUESTION_CARD:
+    case 'SET_QUESTION_CARD':
       return {
         ...state,
         questionCardNeeded: action.payload as boolean,
       };
-    case SET_SEQUENCE_TYPE:
+    case 'SET_SEQUENCE_TYPE':
       return {
         ...state,
         sequenceType: action.payload as string,

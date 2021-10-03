@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUpdatedPlayersState } from '../../redux/FormRedux/FormActions';
+import { setRolePlayers } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import { StyledConnectWrapper } from '../Forms/StyledFormComponents';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
@@ -15,7 +15,7 @@ const DeleteUser: FC<IDeleteUserProps> = (props) => {
 
   const deleteUser = () => {
     setOpenForm(false);
-    dispatch(setUpdatedPlayersState(id));
+    dispatch(setRolePlayers.setUpdatedPlayersState(id));
   };
   const cancelDeletion = () => setOpenForm(false);
 

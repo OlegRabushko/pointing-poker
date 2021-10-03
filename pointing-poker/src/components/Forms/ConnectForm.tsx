@@ -14,18 +14,8 @@ import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { RootState } from '../../redux/index';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
-import {
-  setDealerStatus,
-  setObserverStatus,
-  setPlayerStatus,
-} from '../../redux/RolesRedux/RolesActions';
-import {
-  setAvatar,
-  setConnectFormDialer,
-  setConnectFormObserver,
-  setConnectFormPlayer,
-  showConnectForm,
-} from '../../redux/FormRedux/FormActions';
+import { actions } from '../../redux/RolesRedux/RolesActions';
+import { setAvatar, setRolePlayers, showForms } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
 import { createNewGame, createNewUser } from '../../API/RestAPI';
 
@@ -98,30 +88,30 @@ const ConnectForm = () => {
   };
 
   const onSubmit: SubmitHandler<IConnectForm> = (data) => {
-    dispatch(showConnectForm(!isConnectForm));
+    dispatch(showForms.showConnectForm(!isConnectForm));
     if (isDialer) {
       insertNewUser(data, isDialer, isPlayer, isObserver);
-      dispatch(setConnectFormDialer(data, avatar, nanoid()));
+      dispatch(setRolePlayers.setConnectFormDialer(data, avatar, nanoid()));
       history.push('/settings');
     }
     if (isPlayer) {
       insertNewUser(data, isDialer, isPlayer, isObserver);
-      dispatch(setConnectFormPlayer(data, avatar, nanoid()));
+      dispatch(setRolePlayers.setConnectFormPlayer(data, avatar, nanoid()));
       history.push('/settings');
     }
     if (isObserver) {
       insertNewUser(data, isDialer, isObserver, isObserver);
-      dispatch(setConnectFormObserver(data, avatar, nanoid()));
+      dispatch(setRolePlayers.setConnectFormObserver(data, avatar, nanoid()));
       history.push('/settings');
     }
     reset();
   };
 
   const onShowConnectForm = () => {
-    dispatch(showConnectForm(!isConnectForm));
-    dispatch(setDealerStatus(false));
-    dispatch(setPlayerStatus(false));
-    dispatch(setObserverStatus(false));
+    dispatch(showForms.showConnectForm(!isConnectForm));
+    dispatch(actions.setDealerStatus(false));
+    dispatch(actions.setPlayerStatus(false));
+    dispatch(actions.setObserverStatus(false));
   };
 
   return (
@@ -135,7 +125,7 @@ const ConnectForm = () => {
           {!isDialer && (
             <div className="switcher-wrapper">
               <p>Connect as observer</p>
-              <Switcher checked={isObserver} listener={setObserverStatus} />
+              <Switcher checked={isObserver} listener={actions.setObserverStatus} />
             </div>
           )}
         </div>

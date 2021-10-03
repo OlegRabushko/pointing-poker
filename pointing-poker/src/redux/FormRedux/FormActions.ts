@@ -1,42 +1,38 @@
 import { IConnectForm, IIssueCard } from '../../components/Forms/FormTypes';
-import {
-  DELETE_ISSUE_DATA,
-  SET_AVATAR,
-  SET_DEALERS,
-  SET_ISSUE_DATA,
-  TOGGLE_CURRENT_ISSUE_CARD,
-  SET_OBSERVERS,
-  SET_PLAYERS,
-  SHOW_CONNECT_FORM,
-  SHOW_ISSUES_FORM,
-  UPDATE_PLAYERS_STATE,
-  RENAME_ISSUE_TITLE,
-  RENAME_ISSUE_PRIORITY,
-  SET_COMPLETED_ISSUE_CARD,
-  SET_ELEM_INDEX,
-  RESTART_ISSUES,
-} from './ReduxFormTypes';
+import { SET_AVATAR } from './ReduxFormTypes';
+
+type TProperties<T> = T extends { [key: string]: infer U } ? U : never;
+type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnType<TProperties<T>>;
 
 // ROLE PLAYERS
-export const setConnectFormDialer = (payload: IConnectForm, avatar: string, userID: string) => ({
-  type: SET_DEALERS,
-  payload: { ...payload, avatar, userID },
-});
 
-export const setConnectFormPlayer = (payload: IConnectForm, avatar: string, userID: string) => ({
-  type: SET_PLAYERS,
-  payload: { ...payload, avatar, userID },
-});
+export type TSetRolePlayers = TInferActions<typeof setRolePlayers>;
 
-export const setConnectFormObserver = (payload: IConnectForm, avatar: string, userID: string) => ({
-  type: SET_OBSERVERS,
-  payload: { ...payload, avatar, userID },
-});
+export const setRolePlayers = {
+  setConnectFormDialer: (payload: IConnectForm, avatar: string, userID: string) =>
+    ({
+      type: 'SET_DEALERS',
+      payload: { ...payload, avatar, userID },
+    } as const),
 
-export const setUpdatedPlayersState = (payload: string) => ({
-  type: UPDATE_PLAYERS_STATE,
-  payload,
-});
+  setConnectFormPlayer: (payload: IConnectForm, avatar: string, userID: string) =>
+    ({
+      type: 'SET_PLAYERS',
+      payload: { ...payload, avatar, userID },
+    } as const),
+
+  setConnectFormObserver: (payload: IConnectForm, avatar: string, userID: string) =>
+    ({
+      type: 'SET_OBSERVERS',
+      payload: { ...payload, avatar, userID },
+    } as const),
+
+  setUpdatedPlayersState: (payload: string) =>
+    ({
+      type: 'UPDATE_PLAYERS_STATE',
+      payload,
+    } as const),
+};
 
 // AVATAR CONNECT FORM
 export const setAvatar = (payload: string) => ({
@@ -45,59 +41,74 @@ export const setAvatar = (payload: string) => ({
 });
 
 // SHOW FORMS
-export const showConnectForm = (payload: boolean) => ({
-  type: SHOW_CONNECT_FORM,
-  payload,
-});
-export const showIssuesForm = (payload: boolean) => ({
-  type: SHOW_ISSUES_FORM,
-  payload,
-});
+
+export type TShowForms = TInferActions<typeof showForms>;
+
+export const showForms = {
+  showConnectForm: (payload: boolean) =>
+    ({
+      type: 'SHOW_CONNECT_FORM',
+      payload,
+    } as const),
+  showIssuesForm: (payload: boolean) =>
+    ({
+      type: 'SHOW_ISSUES_FORM',
+      payload,
+    } as const),
+};
 
 // ISSUE FORM
-export const createIssueCard = (
-  payload: IIssueCard,
-  issueID: string,
-  current: boolean,
-  isCompleted: boolean,
-) => ({
-  type: SET_ISSUE_DATA,
-  payload: { ...payload, issueID, current, isCompleted },
-});
 
-export const deleteIssueCard = (payload: string) => ({
-  type: DELETE_ISSUE_DATA,
-  payload,
-});
+export type TIssueForm = TInferActions<typeof issueForm>;
 
-export const toggleCurrentIssueCard = (payload: string) => ({
-  type: TOGGLE_CURRENT_ISSUE_CARD,
-  payload,
-});
+export const issueForm = {
+  createIssueCard: (payload: IIssueCard, issueID: string, current: boolean, isCompleted: boolean) =>
+    ({
+      type: 'SET_ISSUE_DATA',
+      payload: { ...payload, issueID, current, isCompleted },
+    } as const),
 
-export const setCompletedIssueCard = (payload: { id: string; count: boolean }) => ({
-  type: SET_COMPLETED_ISSUE_CARD,
-  payload,
-});
+  deleteIssueCard: (payload: string) =>
+    ({
+      type: 'DELETE_ISSUE_DATA',
+      payload,
+    } as const),
 
-export const setElementIndex = (payload: number) => ({
-  type: SET_ELEM_INDEX,
-  payload,
-});
+  toggleCurrentIssueCard: (payload: string) =>
+    ({
+      type: 'TOGGLE_CURRENT_ISSUE_CARD',
+      payload,
+    } as const),
 
-export const renameIssueTitle = (payload: string, issueID: string) => ({
-  type: RENAME_ISSUE_TITLE,
-  payload,
-  issueID,
-});
+  setCompletedIssueCard: (payload: { id: string; count: boolean }) =>
+    ({
+      type: 'SET_COMPLETED_ISSUE_CARD',
+      payload,
+    } as const),
 
-export const renameIssuePriority = (payload: string, issueID: string) => ({
-  type: RENAME_ISSUE_PRIORITY,
-  payload,
-  issueID,
-});
+  setElementIndex: (payload: number) =>
+    ({
+      type: 'SET_ELEM_INDEX',
+      payload,
+    } as const),
 
-export const restartIssues = (payload: boolean) => ({
-  type: RESTART_ISSUES,
-  payload,
-});
+  renameIssueTitle: (payload: string, issueID: string) =>
+    ({
+      type: 'RENAME_ISSUE_TITLE',
+      payload,
+      issueID,
+    } as const),
+
+  renameIssuePriority: (payload: string, issueID: string) =>
+    ({
+      type: 'RENAME_ISSUE_PRIORITY',
+      payload,
+      issueID,
+    } as const),
+
+  restartIssues: (payload: boolean) =>
+    ({
+      type: 'RESTART_ISSUES',
+      payload,
+    } as const),
+};

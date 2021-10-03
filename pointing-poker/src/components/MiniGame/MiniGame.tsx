@@ -5,7 +5,7 @@ import refreshIco from '../../assets/icons/refresh-ico.svg';
 import { randomWord, words } from './helper';
 import { mouseDown, mouseMove, mouseUp } from '../Chat/helper';
 import { RootState } from '../../redux';
-import { setMiniGame } from '../../redux/InitialRedux/InitialActions';
+import { initial } from '../../redux/InitialRedux/InitialActions';
 
 const MiniGame = () => {
   const [actualWord, setActualWord] = useState(words[randomWord()]);
@@ -74,7 +74,7 @@ const MiniGame = () => {
     setInputWord('');
   };
 
-  const closeGame = () => dispatch(setMiniGame(false));
+  const closeGame = () => dispatch(initial.setMiniGame(false));
 
   window.onkeydown = (e) => {
     if (e.key === 'Enter') setAnswer();

@@ -1,19 +1,14 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { StyledMembers } from './StyledMembers';
 import UserCard from '../UserCard/UserCard';
 import { RootState } from '../../redux';
-import { getAllUsers } from '../../API/RestAPI';
 
 const MembersSection = () => {
-  const { users, gameId } = useSelector((state: RootState) => ({
+  const { users } = useSelector((state: RootState) => ({
     users: state.initial.users,
+    currUserId: state.initial.currUserID,
     gameId: state.initial.gameId,
   }));
-
-  useEffect(() => {
-    getAllUsers(gameId);
-  });
 
   return (
     <StyledMembers>

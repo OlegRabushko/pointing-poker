@@ -1,3 +1,4 @@
+/* eslint-disable no-self-compare */
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../Button/Button';
@@ -9,7 +10,7 @@ import questionIco from '../../assets/icons/question-ico.svg';
 import { RootState } from '../../redux';
 
 const setContent = (content: string | number) => {
-  if (typeof content === 'number') return content;
+  if (Number(content) === Number(content)) return content;
   if (content === 'Unknown') return questionIco;
   if (content === 'Coffee') return coffeeIco;
   return '';
@@ -33,9 +34,9 @@ const ResultsPage = () => {
                   <div className="card" key={ind}>
                     <div className="stats">{card.stats}%</div>
                     <GameCard
-                      content={setContent(card.content)}
+                      content={String(setContent(card.content))}
                       ID={card.id}
-                      type={typeof card.id === 'number' ? 'SP' : card.id}
+                      type={Number(card.id) === Number(card.id) ? 'SP' : card.id}
                       isStats={false}
                     />
                   </div>

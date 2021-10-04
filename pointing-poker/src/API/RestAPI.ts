@@ -18,7 +18,13 @@ import {
 } from '../redux/InitialRedux/InitialTypes';
 import { setIssue } from '../redux/IssueRedux/IssueActions';
 import { IActionSetIssue, IssueState } from '../redux/IssueRedux/IssueTypes';
-import { connectToSocket } from '../sockets/SocketsAPI';
+import {
+  addNewIssueWithSocket,
+  connectToSocket,
+  notifyIssueDeleted,
+  notifyIssueUpdated,
+  notifyUserDeleted,
+} from '../sockets/SocketsAPI';
 import { IssueData, IUserInfo } from '../types/interfaces';
 
 const URL = 'http://localhost:7001/api';
@@ -31,13 +37,33 @@ export const getAllIssues =
       .then((issues) => issues.map((issue: IssueData) => dispatch(setIssue(issue))));
   };
 
-export const createNewIssue = (gameId: string, issueData: IssueData) => {
+export const createNewIssue = async (gameId: string, issueData: IssueData) => {
   const data = { issueData, gameId };
-  return fetch(`${URL}/issues`, {
+  const res = await fetch(`${URL}/issues`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
+  const issue = await res.json();
+  return addNewIssueWithSocket(gameId, issue);
+};
+
+export const deleteIssueById = async (issueId: string) => {
+  const deleteRes = await fetch(`${URL}/issues/${issueId}`, {
+    method: 'DELETE',
+  });
+  const deletedIssue = await deleteRes.json();
+  notifyIssueDeleted(deletedIssue);
+};
+
+export const updateIssueById = async (newIssueData: IssueData) => {
+  const res = await fetch(`${URL}/issues`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newIssueData),
+  });
+  const updatedIssue: IssueData = await res.json();
+  return notifyIssueUpdated(updatedIssue);
 };
 
 export const receiveAllMsgs =
@@ -63,7 +89,9 @@ export const createNewUser =
     gameId: string,
     newUser: IUserInfo,
   ): ThunkAction<void, InitialState, unknown, IActionSetCurrUserID> =>
-  async (dispatch: ThunkDispatch<InitialState, unknown, IActionSetCurrUserID>) => {
+  async (
+    dispatch: ThunkDispatch<InitialState, unknown, IActionSetCurrUserID | IActionSetIssue>,
+  ) => {
     const data = { newUser, gameId };
     const res = await fetch(`${URL}/users`, {
       method: 'POST',
@@ -72,8 +100,16 @@ export const createNewUser =
     });
     const user = await res.json();
     dispatch(setCurrUserID(user._id));
-    return connectToSocket(gameId);
+    connectToSocket(gameId, user);
   };
+
+export const deleteUserById = async (userId: string) => {
+  const deleteRes = await fetch(`${URL}/users/${userId}`, {
+    method: 'DELETE',
+  });
+  const deletedIssue = await deleteRes.json();
+  notifyUserDeleted(deletedIssue);
+};
 
 export const createNewGame =
   (

@@ -13,7 +13,10 @@ class UserController {
             newUser.game_id = gameId
             UserService.setUser(newUser)
               .then((user) =>{
-                  res.status(200).json(user);
+                  const newUser = {...user}
+                  const img = Buffer.from(user.avatar.buffer,'binary').toString('base64')
+                  newUser.avatar = img
+                  res.status(200).json(newUser);
                   GameService.updateGameUsers(gameId, user._id)} )
         } catch (error) {
             res.status(500).json(error)

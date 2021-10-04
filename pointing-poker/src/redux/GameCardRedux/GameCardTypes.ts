@@ -4,11 +4,11 @@ export const SET_INITIAL_CARDS = 'SET_INITIAL_CARDS';
 export const SET_GAME_CARD_COUNT = 'SET_GAME_CARD_COUNT';
 
 export interface CardType {
-  id: string | number;
+  id: string;
   stats?: number;
   chosen?: number;
   selected?: boolean;
-  content?: string | number;
+  content?: string;
 }
 
 export interface ICardState {

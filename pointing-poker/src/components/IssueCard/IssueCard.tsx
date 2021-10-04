@@ -8,40 +8,62 @@ import deleteImg from '../../assets/icons/delete_basket.png';
 import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 import { RootState } from '../../redux';
 import { IIssueCard } from '../Forms/FormTypes';
-import {
-  deleteIssueCard,
-  renameIssuePriority,
-  renameIssueTitle,
-  setCompletedIssueCard,
-} from '../../redux/FormRedux/FormActions';
+import { setCompletedIssueCard } from '../../redux/FormRedux/FormActions';
+import { deleteIssueById, updateIssueById } from '../../API/RestAPI';
+import { sendCurrIssue } from '../../sockets/SocketsAPI';
+import { IGameCardValues, IssueData } from '../../types/interfaces';
 
-const IssueCard: FC<IIssueCard> = (props) => {
-  const { issueTitle, issuePriority, issueID, current, isCompleted } = props;
+interface IssuseCardProps {
+  issueId: string;
+  title: string;
+  priority: string;
+  isCompleted: boolean;
+  isCurrent: boolean;
+  results: IGameCardValues[];
+}
+
+const IssueCard: FC<IssuseCardProps> = (props) => {
+  const { title, priority, issueId, isCompleted } = props;
   const { register, handleSubmit, reset } = useForm<IIssueCard>({ mode: 'onChange' });
   const dispatch = useDispatch();
   const isDialer = useSelector((state: RootState) => state.personStatus.isDialer);
   const [isUpdateIssueTitle, setUpdateIssueTitle] = useState<boolean>(false);
   const location = useLocation().pathname;
-  const cards = useSelector((state: RootState) => state.issueFormData.issueCards);
-
+  const { issues, currIssueId } = useSelector((state: RootState) => state.issues);
+  const gameId = useSelector((state: RootState) => state.initial.gameId);
   const { seconds, minutes } = useSelector((state: RootState) => state.timer);
   const isTimer = useSelector((state: RootState) => state.settings.timerNeeded);
 
+  // useEffect(() => {
+  //   const data = {
+  //     title,
+  //     priority,
+  //     issueId,
+  //   };
+  //   dispatch(createIssueCard(data, issueId, isCurrent, isCompleted));
+  // }, []);
+
   useEffect(() => {
     if (isTimer && seconds === 0 && minutes === 0) {
-      cards.forEach((el) => {
-        if (el.current) {
-          dispatch(setCompletedIssueCard({ id: el.issueID, count: true }));
+      Object.keys(issues).forEach((issueIndx) => {
+        if (issues[issueIndx].isCurrent) {
+          dispatch(setCompletedIssueCard({ id: issues[issueIndx]._id, count: true }));
         }
       });
     }
   }, [seconds, minutes]);
 
-  const onSubmit: SubmitHandler<IIssueCard> = (data) => {
-    dispatch(renameIssueTitle(data.issueTitle, issueID));
-    dispatch(renameIssuePriority(data.issuePriority, issueID));
+  const onSubmit: SubmitHandler<IssueData> = (data) => {
+    updateIssueById(data);
+    // dispatch(renameIssueTitle(data.title, issueId));
+    // dispatch(renameIssuePriority(data.priority, issueId));
     setUpdateIssueTitle(false);
     reset();
+  };
+
+  const setCurrentIssue = () => {
+    // dispatch(toggleCurrentIssueCard(issueId));
+    sendCurrIssue(issueId, gameId);
   };
 
   const handleEditBtn = (e: React.MouseEvent) => {
@@ -51,24 +73,28 @@ const IssueCard: FC<IIssueCard> = (props) => {
 
   const handleDeleteBtn = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dispatch(deleteIssueCard(issueID));
+    // dispatch(deleteIssueCard(issueId));
+    deleteIssueById(issueId);
   };
 
   return (
-    <StyledIssueCard current={location !== '/settings' && current}>
+    <StyledIssueCard
+      current={!!(location !== '/settings' && issueId === currIssueId)}
+      onClick={location !== '/settings' && isDialer ? setCurrentIssue : null}
+    >
       <StyledIssueInfo>
         {isUpdateIssueTitle ? (
           <form onSubmit={handleSubmit(onSubmit)} onBlur={handleSubmit(onSubmit)}>
             <input
               type="text"
               className="upd-issue-card-title"
-              defaultValue={issueTitle}
-              {...register('issueTitle', { maxLength: 30 })}
+              defaultValue={title}
+              {...register('title', { maxLength: 30 })}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             />
             <select
               className="upd-issue-card-priority"
-              {...register('issuePriority')}
+              {...register('priority')}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <option value="Low">Low</option>
@@ -78,8 +104,8 @@ const IssueCard: FC<IIssueCard> = (props) => {
           </form>
         ) : (
           <>
-            <span className="issue-card-name">{issueTitle}</span>
-            <span className="issue-card-prior">{issuePriority} priority</span>
+            <span className="issue-card-name">{title}</span>
+            <span className="issue-card-prior">{priority} priority</span>
             {isCompleted && <div className="selected-card-skin" />}
           </>
         )}

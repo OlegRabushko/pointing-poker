@@ -11,6 +11,7 @@ import {
   TActionsInitial,
   SET_CHECK,
   SET_GAME_TITLE,
+  SET_DELETED_USER,
 } from './InitialTypes';
 
 const initialState: InitialState = {
@@ -53,6 +54,13 @@ export const initialReducer = (state = initialState, action: TActionsInitial) =>
       return {
         ...state,
         dilerId: action.payload,
+      };
+    case SET_DELETED_USER:
+      // eslint-disable-next-line no-case-declarations
+      const { [action.payload]: deleted, ...newUsers } = state.users;
+      return {
+        ...state,
+        userss: newUsers,
       };
     default:
       return state;

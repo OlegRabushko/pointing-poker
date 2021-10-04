@@ -2,16 +2,17 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
 import { RootState } from '../../redux';
 
-import { createIssueCard, showIssuesForm } from '../../redux/FormRedux/FormActions';
+import { showIssuesForm } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import { IIssueCard } from './FormTypes';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
+import { createNewIssue } from '../../API/RestAPI';
+import { IssueData } from '../../types/interfaces';
 
 const CreateIssueForm = () => {
   const {
@@ -23,10 +24,10 @@ const CreateIssueForm = () => {
 
   const dispatch = useDispatch();
   const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
-
-  const onSubmit: SubmitHandler<IIssueCard> = (data) => {
+  const { gameId } = useSelector((state: RootState) => state.initial);
+  const onSubmit: SubmitHandler<IssueData> = (data) => {
     dispatch(showIssuesForm(!isIssuesForm));
-    dispatch(createIssueCard(data, nanoid(), false, false));
+    createNewIssue(gameId, data);
     reset();
   };
 
@@ -53,9 +54,9 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('issueTitle', { required: true, maxLength: 30 })}
+              {...register('title', { required: true, maxLength: 30 })}
             />
-            {errors.issueTitle && <p className="error">Title is required</p>}
+            {errors.title && <p className="error">Title is required</p>}
           </StyledLabel>
 
           <StyledLabel display="flex" maxWidth="570px" padding="0 0 40px 0">
@@ -64,13 +65,13 @@ const CreateIssueForm = () => {
               maxWidth="420px"
               borderRadius="0px"
               margin="0 0 0 30px"
-              {...register('issueLink', { required: false, maxLength: 100 })}
+              {...register('link', { required: false, maxLength: 100 })}
             />
           </StyledLabel>
 
           <StyledLabel display="flex" maxWidth="415px">
             Priority:
-            <StyledSelect {...register('issuePriority')}>
+            <StyledSelect {...register('priority')}>
               <option value="Low">Low</option>
               <option value="Middle">Middle</option>
               <option value="Hight">Hight</option>

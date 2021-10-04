@@ -22,49 +22,49 @@ const cardsState: ICardState = {
       content: '',
     },
     {
-      id: 1,
+      id: '1',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 2,
+      id: '2',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 3,
+      id: '3',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 4,
+      id: '4',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 5,
+      id: '5',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 6,
+      id: '6',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 7,
+      id: '7',
       stats: 0,
       chosen: 0,
       content: '',
     },
     {
-      id: 8,
+      id: '8',
       stats: 0,
       chosen: 0,
       content: '',
@@ -107,9 +107,9 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
         store: state.store.map((el) => {
           if (typeof el.id === 'number') {
             if ((action.payload as string) === 'Fibonacci') {
-              el.content = fibonacciSequence[el.id - 1];
+              el.content = String(fibonacciSequence[el.id - 1]);
             } else {
-              el.content = authorSequence[el.id - 1];
+              el.content = String(authorSequence[el.id - 1]);
             }
           } else {
             el.content = el.id;

@@ -13,10 +13,10 @@ class IssueController {
         }
     }
 
-    async updateIssue (res, req){
+    async updateIssue (req, res){
     try {
-        const {issueData} = req.body
-        const updatedIsu = await IssueService.updateIssue(issueData)
+        const newIssueData = req.body
+        const updatedIsu = await IssueService.updateIssue(newIssueData)
         return res.status(200).json(updatedIsu)
     } catch (error) {
         res.status(500).json(error)
@@ -46,6 +46,7 @@ class IssueController {
     async deleteIssue (req, res){
         try {
            const {issueId} = req.params
+           console.log('in controller', issueId)
            const result = await  IssueService.deleteIssue(issueId)
            return res.status(200).json(result)
         } catch (error) {

@@ -51,10 +51,10 @@ export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
               <GameCard
                 isStatisticSection={isStatisticSection}
                 isStats={isStats}
-                ID={i + 1}
+                ID={String(i + 1)}
                 key={i}
                 type="SP"
-                content={el}
+                content={String(el)}
                 choseCard={choseCard}
                 setChoseCard={setChoseCard}
               />
@@ -63,10 +63,10 @@ export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
               <GameCard
                 isStatisticSection={isStatisticSection}
                 isStats={isStats}
-                ID={i + 1}
+                ID={String(i + 1)}
                 key={i}
                 type="SP"
-                content={el}
+                content={String(el)}
                 choseCard={choseCard}
                 setChoseCard={setChoseCard}
               />

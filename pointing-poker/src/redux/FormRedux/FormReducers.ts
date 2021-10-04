@@ -112,13 +112,13 @@ export const connectFormDataReducer = (
 
 // ISSUE FORM
 const issueFormState: IInitialStateIssueCards = {
-  elemIndex: 0,
+  elemIndex: '',
   issueCards: [],
 };
 
 export const issueFormDataReducer = (state = issueFormState, action: ActionTypeIssueCards) => {
   const { issueCards } = state;
-  const issueIndex = issueCards.findIndex(({ issueID }) => issueID === action.payload);
+  const issueIndex = issueCards.findIndex(({ issueId }) => issueId === action.payload);
 
   switch (action.type) {
     case SET_ISSUE_DATA:
@@ -136,7 +136,7 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       };
     case TOGGLE_CURRENT_ISSUE_CARD:
       issueCards.map((card) =>
-        card.issueID !== action.payload ? (card.current = false) : (card.current = true),
+        card.issueId !== action.payload ? (card.isCurrent = false) : (card.isCurrent = true),
       );
       return {
         ...state,
@@ -144,7 +144,7 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       };
     case SET_COMPLETED_ISSUE_CARD:
       issueCards.map((card) => {
-        if (card.issueID === action.payload.id) card.isCompleted = action.payload.count;
+        if (card.issueId === action.payload.id) card.isCompleted = action.payload.count;
       });
       return {
         ...state,
@@ -157,8 +157,8 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       };
     case RENAME_ISSUE_TITLE:
       issueCards.map((card) => {
-        if (card.issueID === action.issueID) {
-          card.issueTitle = action.payload;
+        if (card.issueId === action.issueID) {
+          card.title = action.payload;
         }
       });
       return {
@@ -167,8 +167,8 @@ export const issueFormDataReducer = (state = issueFormState, action: ActionTypeI
       };
     case RENAME_ISSUE_PRIORITY:
       issueCards.map((card) => {
-        if (card.issueID === action.issueID) {
-          card.issuePriority = action.payload;
+        if (card.issueId === action.issueID) {
+          card.priority = action.payload;
         }
       });
       return {

@@ -19,19 +19,19 @@ import { setResultCards } from '../../redux/ResultsPageRedux/ResultsPageActions'
 import { StyledGamePage } from './StyledGamePage';
 import {
   receivedCard,
+  receivedCurrIssue,
   receivedDeletedCard,
-  receivedNextIssue,
   receivedRestartRound,
   receivedResults,
   receivedStartRound,
-  sendNextIssue,
   sendRelocateResultPage,
   sendRestartRound,
   sendResults,
   sendStartRound,
 } from '../../sockets/SocketsAPI';
-import { IIssueCard } from '../Forms/FormTypes';
 import { CardType } from '../../redux/GameCardRedux/GameCardTypes';
+import { setCompletedIssue } from '../../redux/IssueRedux/IssueActions';
+import { updateIssueById } from '../../API/RestAPI';
 
 const GamePage = () => {
   const [showResults, setShowResults] = useState(false);
@@ -42,13 +42,17 @@ const GamePage = () => {
   const cardsArr = useSelector((store: RootState) => [...store.card.store]);
   const timeStore = useSelector((store: RootState) => store.timer);
   const { isPlayer, isDialer } = useSelector((store: RootState) => store.personStatus);
-  const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
+  const { issueCards } = useSelector((state: RootState) => state.issueFormData);
+  const { issues, currIssueId, completedIssue } = useSelector((state: RootState) => state.issues);
+  const { minutes, seconds } = useSelector((store: RootState) => store.timer);
+  const isTimer = useSelector((store: RootState) => store.settings.timerNeeded);
 
   const startRound = () => sendStartRound(gameID);
   const restartRound = () => sendRestartRound(issueCards, gameID);
-  const nextIssue = () => sendNextIssue(cardsArr, issueCards, elemIndex, gameID);
+  //const nextIssue = () => sendNextIssue(cardsArr, issueCards, elemIndex, gameID);
   const setResults = () => {
-    sendResults(cardsArr, issueCards, elemIndex, gameID);
+    dispatch(setCompletedIssue(currIssueId));
+    sendResults(cardsArr, currIssueId, gameID);
     sendRelocateResultPage(gameID);
   };
 
@@ -58,25 +62,46 @@ const GamePage = () => {
       dispatch(setSeconds(timeStore.startTime[1]));
     }, 500);
 
-  const addCardsForResult = (cards: CardType[], IssueCards: IIssueCard[], index: number) => {
-    const updatedCardsArr = () => cards.filter((el) => el.stats > 0);
+  const addCardsForResult = (cards: CardType[], issueId: string) => {
+    const updatedCardsArr = () => cards.filter((card) => card.stats > 0);
     dispatch(
       setResultCards({
-        title: IssueCards[index].issueTitle,
-        cardsResult: updatedCardsArr().map((el) => ({
-          id: el.id,
-          stats: el.stats,
-          content: el.content,
+        title: issues[issueId].title,
+        issueId: issues[issueId]._id,
+        cardsResult: updatedCardsArr().map((card) => ({
+          id: card.id,
+          stats: card.stats,
+          content: card.content,
         })),
       }),
     );
+    const cardsResult = updatedCardsArr().map((card) => ({
+      id: card.id,
+      stats: card.stats,
+      content: card.content,
+    }));
+    updateIssueById({
+      _id: issues[issueId]._id,
+      game_id: issues[issueId].game_id,
+      title: issues[issueId].title,
+      link: issues[issueId].link,
+      priority: issues[issueId].priority,
+      isCurrent: issues[issueId].isCurrent,
+      results: cardsResult,
+    });
     dispatch(setInitialCards(true));
   };
 
   useEffect(() => {
+    if (isTimer && minutes === 0 && seconds === 0) {
+      addCardsForResult(cardsArr, currIssueId);
+    }
+  }, [minutes, seconds]);
+
+  useEffect(() => {
     receivedStartRound(dispatch);
     receivedRestartRound(setStartedTime, dispatch);
-    receivedNextIssue(setStartedTime, addCardsForResult, dispatch);
+    receivedCurrIssue(setStartedTime, dispatch);
     receivedResults(addCardsForResult);
     receivedCard(dispatch);
     receivedDeletedCard(dispatch);
@@ -121,19 +146,19 @@ const GamePage = () => {
                     colorBG={blueColor}
                   />
 
-                  {issueCards[elemIndex].isCompleted && elemIndex + 1 < issueCards.length && (
+                  {/* {issues[setCurrIssueID].isCompleted && elemIndex + 1 < issueCards.length && (
                     <Button
                       text="Next ISSUE"
                       onClick={nextIssue}
                       color={whiteColor}
                       colorBG={blueColor}
                     />
-                  )}
-                  {issueCards[issueCards.length - 1].isCompleted && (
+                  )} */}
+                  {Object.keys(issues).length === completedIssue.length && (
                     <Link to="/results" onClick={setResults}>
                       <Button
                         text="Results"
-                        onClick={nextIssue}
+                        //onClick={nextIssue}
                         color={whiteColor}
                         colorBG={blueColor}
                       />
@@ -142,7 +167,7 @@ const GamePage = () => {
                 </>
               ) : (
                 <>
-                  {issueCards.length > 0 && isDialer ? (
+                  {Object.keys(issues).length > 0 && isDialer ? (
                     <Button
                       text="Run Round"
                       onClick={startRound}

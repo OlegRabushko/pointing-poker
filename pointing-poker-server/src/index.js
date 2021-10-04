@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const nanoid = require('nanoid')
 const fileUpload = require('express-fileupload') 
 const {route} = require('./router/router')
 const {json} = require('body-parser')
@@ -7,9 +6,8 @@ const cors = require('cors')
 const express = require('express')
 const http = require('http')
 const GameService = require('./service/GameService')
-const UserService = require('./service/UserService')
-const ChatService = require('./service/ChatService')
-const IssueService = require('./service/IssueService')
+const startSocket = require('./service/SocketService')
+
 
 const PORT = Number(process.env.PORT) || 7001;
 const DB_URL =
@@ -42,59 +40,6 @@ app.post('/api/start', (req, res) => {
         .then((newGame) => { res.send(newGame) })
 })
 
-
-try {
-    io.on('connection', (socket) => {
-        socket.on('join-game', async (roomId) => {
-            console.log('socket server user join', roomId),
-                socket.join(roomId)
-            const users = await UserService.getAllUsers(roomId)
-            const issues = await IssueService.getAllIssues(roomId)
-            console.log('all users from server', users)
-            io.in(roomId).emit('joined', users, issues)
-        })
-
-        socket.on('send-msg', (msg) => {
-            console.log('msg sent', msg)
-            io.in(msg.game_id).emit('recieve-msg', msg)
-            ChatService.addMessage(msg)
-        })
-
-        socket.on('game-settings', (settings, id) => {
-            io.in(id).emit('received-settings', settings)
-        })
-        socket.on('set-timer', (time, id) => {
-            io.in(id).emit('received-timer', time)
-        })
-        socket.on('set-issues', (issues, id) => {
-            io.in(id).emit('received-issues', issues)
-        })
-        socket.on('relocate-result-page', (id) => {
-            io.in(id).emit('received-relocate-result-page')
-        })
-        socket.on('round', (id) => {
-            io.in(id).emit('received-round')
-        })
-        socket.on('restart-round', (issueCards, id) => {
-            io.in(id).emit('received-restart-round', issueCards)
-        })
-        socket.on('next-issue', (CardsArr, issueCards, elemIndex, id) => {
-            io.in(id).emit('received-next-issue', CardsArr, issueCards, elemIndex)
-        })
-        socket.on('results', (CardsArr, issueCards, elemIndex, id) => {
-            io.in(id).emit('received-results', CardsArr, issueCards, elemIndex)
-        })
-        socket.on('card', (cardID, id) => {
-            io.in(id).emit('received-card', cardID)
-        })
-        socket.on('card-deleted', (cardID, id) => {
-            io.in(id).emit('received-card-deleted', cardID)
-        })
-    })
-} catch (error) {
-    console.log(error);
-}
-
 try {
     server.listen(PORT, async () => {
         console.log(`server is started on ${PORT}`);
@@ -106,3 +51,5 @@ try {
 } catch (error) {
     console.log(error);
 }
+
+startSocket(io)

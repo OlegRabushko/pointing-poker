@@ -1,29 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { StyledIssuesSection } from './StyledIssuesSection';
 import AddIssueCard from '../IssueCard/AddIssueCard';
 import IssueCard from '../IssueCard/IssueCard';
 import { RootState } from '../../redux';
-import { toggleCurrentIssueCard } from '../../redux/FormRedux/FormActions';
 
 const IssuesSection = () => {
-  const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (issueCards[elemIndex]) {
-      dispatch(toggleCurrentIssueCard(issueCards[elemIndex].issueID));
-    }
-  }, [issueCards.length, elemIndex]);
+  const { issues } = useSelector((state: RootState) => state.issues);
 
-  const createIssueCards = issueCards.map((card) => {
+  const createIssueCards = Object.keys(issues).map((issueId: string) => {
     return (
       <IssueCard
-        key={card.issueID}
-        current={card.current}
-        issueTitle={card.issueTitle}
-        issuePriority={card.issuePriority}
-        issueID={card.issueID}
-        isCompleted={card.isCompleted}
+        key={issues[issueId]._id}
+        isCurrent={issues[issueId].isCurrent}
+        title={issues[issueId].title}
+        priority={issues[issueId].priority}
+        issueId={issues[issueId]._id}
+        isCompleted={issues[issueId].isCompleted}
+        results={issues[issueId].results}
       />
     );
   });

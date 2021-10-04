@@ -36,10 +36,10 @@ export interface IPopupWrapper {
 
 // ISSUES DATA
 export interface IIssueCard {
-  issueID: string;
-  current: boolean;
-  issuePriority: string;
-  issueLink?: string;
-  issueTitle: string;
-  isCompleted: boolean;
+  issueId?: string;
+  isCurrent?: boolean;
+  priority: string;
+  link?: string;
+  title: string;
+  isCompleted?: boolean;
 }

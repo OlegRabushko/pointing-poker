@@ -2,10 +2,11 @@ export const SET_RESULT_CARDS = 'SET_RESULT_CARDS';
 
 export type ResultType = {
   title: string;
+  issueId: string;
   cardsResult: {
-    id: string | number;
+    id: string;
     stats?: number;
-    content?: string | number;
+    content?: string;
   }[];
 };
 

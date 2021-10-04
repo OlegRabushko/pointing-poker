@@ -1,5 +1,6 @@
 import { IUserInfo } from '../../types/interfaces';
 import {
+  IActionDeleteUser,
   IActionSetCurrUserID,
   IActionSetGameId,
   IActionSetGameTitle,
@@ -7,6 +8,7 @@ import {
   IActionSetUsers,
   SET_CHECK,
   SET_CURR_USER_ID,
+  SET_DELETED_USER,
   SET_DILER_ID,
   SET_GAME_ID,
   SET_GAME_TITLE,
@@ -39,6 +41,11 @@ export const setGameId = (gameId: string): IActionSetGameId => ({
 export const setGameTitle = (gameTitle: string): IActionSetGameTitle => ({
   type: SET_GAME_TITLE,
   payload: gameTitle,
+});
+
+export const setDeletedUser = (deleteId: string): IActionDeleteUser => ({
+  type: SET_DELETED_USER,
+  payload: deleteId,
 });
 
 export const setRound = (count: boolean) => ({

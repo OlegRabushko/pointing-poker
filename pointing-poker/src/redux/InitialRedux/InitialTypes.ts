@@ -8,6 +8,7 @@ export const SET_ROUND = 'SET_ROUND';
 export const SET_MINI_GAME = 'SET_MINI_GAME';
 export const SET_DILER_ID = 'SET_DILER_ID';
 export const SET_GAME_TITLE = 'SET_GAME_TITLE';
+export const SET_DELETED_USER = 'SET_DELETED_USER';
 
 export const SET_CHECK = 'SET_CHECK';
 export interface III {
@@ -30,7 +31,8 @@ export type TActionsInitial =
   | IActionSetGameId
   | IActionSetUsers
   | IActionSetDilerID
-  | IActionSetGameTitle;
+  | IActionSetGameTitle
+  | IActionDeleteUser;
 
 export interface IActionSetCurrUserID {
   type: 'SET_USER_ID';
@@ -64,5 +66,10 @@ export interface IActionSetGameId {
 
 export interface IActionSetGameTitle {
   type: 'SET_GAME_TITLE';
+  payload: string;
+}
+
+export interface IActionDeleteUser {
+  type: 'SET_DELETED_USER';
   payload: string;
 }

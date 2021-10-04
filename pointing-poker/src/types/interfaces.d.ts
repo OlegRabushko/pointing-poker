@@ -30,10 +30,19 @@ export interface IInputComponentProps {
 
 export interface IssueData {
   _id?: string;
-  game_id: string;
+  game_id?: string;
+  isCurrent?: boolean;
+  isCompleted?: boolean;
   title: string;
-  link: string;
+  link?: string;
   priority: string;
+  results: IGameCardValues[];
+}
+
+export interface IGameCardValues {
+  id: string;
+  stats: number;
+  content: string;
 }
 
 export interface Issues {

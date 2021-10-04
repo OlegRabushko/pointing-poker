@@ -7,7 +7,7 @@ import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 import ScramMasterCard from './ScramMasterCard';
 import { getAllUsers } from '../../API/RestAPI';
-import { sendIssuesToAll, sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
+import { sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
 
 const ScramMasterSection = () => {
   const gameID = useSelector((store: RootState) => store.initial.gameId);
@@ -32,28 +32,6 @@ const ScramMasterSection = () => {
         coffeeCardNeeded,
         questionCardNeeded,
         sequenceType,
-      },
-      gameID,
-    );
-    sendIssuesToAll(
-      {
-        issueTitle: 'One-1',
-        issueLink: '',
-        issuePriority: 'Low',
-        issueID: '',
-        current: false,
-        isCompleted: false,
-      },
-      gameID,
-    );
-    sendIssuesToAll(
-      {
-        issueTitle: 'Two-2',
-        issueLink: '',
-        issuePriority: 'Low',
-        issueID: '',
-        current: false,
-        isCompleted: false,
       },
       gameID,
     );

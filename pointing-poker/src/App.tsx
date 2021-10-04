@@ -12,11 +12,16 @@ import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
 import Chat from './components/Chat/Chat';
 import {
+  emitIssueToAll,
+  getInitialDataByScoket,
   jonedNotification,
+  receiveDeletedIssue,
+  receiveDeletedUser,
   receivedIssues,
   receivedRelocateResultPage,
   receivedSettings,
   receivedTimer,
+  receiveUpdatedIssue,
 } from './sockets/SocketsAPI';
 import MiniGame from './components/MiniGame/MiniGame';
 
@@ -36,6 +41,11 @@ const App = () => {
 
   useEffect(() => {
     jonedNotification(dispatch);
+    emitIssueToAll(dispatch);
+    getInitialDataByScoket(dispatch);
+    receiveUpdatedIssue(dispatch);
+    receiveDeletedIssue(dispatch);
+    receiveDeletedUser(dispatch);
     receivedSettings(dispatch, history);
     receivedTimer(dispatch);
     receivedIssues(dispatch);

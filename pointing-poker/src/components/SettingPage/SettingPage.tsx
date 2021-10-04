@@ -14,6 +14,7 @@ const SettingPage = () => {
 
   return (
     <StyledSettingPage>
+      {/* what is this link? */}
       <Link to="/game"> link</Link>
       <LobbyHeaderSection />
       <ScramMasterSection />

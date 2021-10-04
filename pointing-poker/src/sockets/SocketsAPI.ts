@@ -5,10 +5,14 @@ import { setMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';
 import { IIssueCard } from '../components/Forms/FormTypes';
-import { setRound, setUser } from '../redux/InitialRedux/InitialActions';
-import { IActionSetUser, InitialState } from '../redux/InitialRedux/InitialTypes';
+import { setDeletedUser, setRound, setUser } from '../redux/InitialRedux/InitialActions';
+import {
+  IActionDeleteUser,
+  IActionSetUser,
+  InitialState,
+} from '../redux/InitialRedux/InitialTypes';
 import { TimerStateTypes } from '../redux/TimerRedux/TimerReducer';
-import { IMsg, IssueData, IUserInfo } from '../types/interfaces';
+import { IMsg, IssueData, Issues, IUserInfo } from '../types/interfaces';
 import { ILobbySettingsState } from '../redux/SettingsSectionRedux/SettingsSectionReducer';
 import {
   createIssueCard,
@@ -30,13 +34,23 @@ import {
   setGameCard,
 } from '../redux/GameCardRedux/GameCardActions';
 import { CardType } from '../redux/GameCardRedux/GameCardTypes';
-import { setIssue } from '../redux/IssueRedux/IssueActions';
-import { IActionSetIssue } from '../redux/IssueRedux/IssueTypes';
+import {
+  setCurrIssueID,
+  setDeletedIssue,
+  setIssue,
+  setUpdatedIssue,
+} from '../redux/IssueRedux/IssueActions';
+import {
+  IActionSetIssue,
+  IActiontDeleteIssue,
+  IActionUpdateIssue,
+  IssueState,
+} from '../redux/IssueRedux/IssueTypes';
 
 export const socket = io('http://localhost:7001');
 
-export const connectToSocket = (roomId: string) => {
-  socket.emit('join-game', roomId);
+export const connectToSocket = (roomId: string, user: IUserInfo) => {
+  socket.emit('join-game', roomId, user);
 };
 
 export const sendMsgToAll = async (msg: IMsg) => {
@@ -50,12 +64,62 @@ export const recieveMsg =
       dispatch(setMessage(msg));
     });
 
-export const jonedNotification = (
-  dispatch: ThunkDispatch<InitialState, unknown, IActionSetUser | IActionSetIssue>,
+export const getInitialDataByScoket = (
+  dispatch: ThunkDispatch<InitialState, unknown, IActionSetIssue | IActionSetUser>,
 ) => {
-  socket.on('joined', (users, issues) => {
+  socket.on('get-prev-data', (users, issues) => {
     users.map((user: IUserInfo) => dispatch(setUser(user)));
     issues.map((issue: IssueData) => dispatch(setIssue(issue)));
+  });
+};
+
+export const jonedNotification = (
+  dispatch: ThunkDispatch<InitialState, unknown, IActionSetUser>,
+) => {
+  socket.on('joined', (user: IUserInfo) => {
+    dispatch(setUser(user));
+  });
+};
+
+export const addNewIssueWithSocket = (gameId: string, issue: IssueData) => {
+  socket.emit('add-issue', gameId, issue);
+};
+export const emitIssueToAll = (dispatch: ThunkDispatch<IssueState, unknown, IActionSetIssue>) => {
+  socket.on('issue-to-all', (issue) => {
+    dispatch(setIssue(issue));
+  });
+};
+
+export const notifyUserDeleted = (deletedUser: IUserInfo) => {
+  socket.emit('user-deleted-send', deletedUser);
+};
+export const receiveDeletedUser = (
+  dispatch: ThunkDispatch<InitialState, unknown, IActionDeleteUser>,
+) => {
+  socket.on('user-deleted-get', (deletedIssueId) => {
+    dispatch(setDeletedUser(deletedIssueId));
+  });
+};
+
+export const notifyIssueDeleted = (deletedIssue: IssueData) => {
+  socket.emit('issue-deleted-send', deletedIssue);
+};
+export const receiveDeletedIssue = (
+  dispatch: ThunkDispatch<IssueState, unknown, IActiontDeleteIssue>,
+) => {
+  socket.on('issue-deleted-get', (deletedIssueId) => {
+    dispatch(setDeletedIssue(deletedIssueId));
+  });
+};
+
+export const notifyIssueUpdated = (updatedIssue: IssueData) => {
+  socket.emit('issue-updated-send', updatedIssue);
+};
+export const receiveUpdatedIssue = (
+  dispatch: ThunkDispatch<IssueState, unknown, IActionUpdateIssue>,
+) => {
+  socket.on('issue-updated-get', (updatedIssue) => {
+    dispatch(setUpdatedIssue(updatedIssue));
   });
 };
 
@@ -93,7 +157,7 @@ export const sendIssuesToAll = (issues: IIssueCard, id: string) => {
 };
 export const receivedIssues = (dispatch: ThunkDispatch<IIssueCard, unknown, any>) => {
   socket.on('received-issues', (issues: IIssueCard) => {
-    dispatch(createIssueCard(issues, issues.issueTitle, false, false));
+    dispatch(createIssueCard(issues, issues.title, false, false));
   });
 };
 
@@ -122,14 +186,13 @@ export const receivedRestartRound = (
   setStartedTime: () => void,
   dispatch: ThunkDispatch<any, unknown, any>,
 ) => {
-  socket.on('received-restart-round', (issueCards: IIssueCard[]) => {
-    if (issueCards.length > 0) {
-      issueCards.forEach((el: IIssueCard) => {
-        if (el.current && el.isCompleted) {
-          dispatch(setCompletedIssueCard({ id: el.issueID, count: false }));
+  socket.on('received-restart-round', (issueCards: Issues) => {
+    if (Object.keys(issueCards).length > 0) {
+      Object.keys(issueCards).forEach((issueId: string) => {
+        if (issueCards[issueId].isCurrent && issueCards[issueId].isCompleted) {
+          dispatch(setCompletedIssueCard({ id: issueCards[issueId]._id, count: false }));
         }
       });
-
       dispatch(setRound(false));
       setStartedTime();
       dispatch(setInitialCards(true));
@@ -137,45 +200,41 @@ export const receivedRestartRound = (
   });
 };
 
-export const sendNextIssue = (
-  cardsArr: CardType[],
-  issueCards: IIssueCard[],
-  elemIndex: number,
-  id: string,
-) => {
-  socket.emit('next-issue', cardsArr, issueCards, elemIndex, id);
+export const sendCurrIssue = (issueId: string, gameId: string) => {
+  socket.emit('curr-issue', issueId, gameId);
 };
-export const receivedNextIssue = (
+export const receivedCurrIssue = (
   setStartedTime: () => void,
-  addCardsForResult: (cards: CardType[], IssueCards: IIssueCard[], index: number) => void,
+  // addCardsForResult: (cards: CardType[], IssueCards: Issues, index: number) => void,
   dispatch: ThunkDispatch<any, unknown, any>,
 ) => {
-  socket.on('received-next-issue', (cards, issueCards, elemIndex) => {
+  socket.on('received-curr-issue', (issueId) => {
     setStartedTime();
     dispatch(setRound(false));
-    dispatch(setElementIndex(elemIndex + 1));
-    addCardsForResult(cards, issueCards, elemIndex);
+    dispatch(setElementIndex(issueId));
+    dispatch(setCurrIssueID(issueId));
   });
 };
 
 export const sendResults = (
   cardsArr: CardType[],
-  issueCards: IIssueCard[],
-  elemIndex: number,
+  // issueCards: Issues,
+  elemIndex: string,
   id: string,
 ) => {
-  socket.emit('results', cardsArr, issueCards, elemIndex, id);
+  socket.emit('results', cardsArr, elemIndex, id);
 };
 export const receivedResults = (
-  addCardsForResult: (cards: CardType[], IssueCards: IIssueCard[], index: number) => void,
+  addCardsForResult: (cards: CardType[], issueId: string) => void,
 ) => {
-  socket.on('received-results', (cards, issueCards, elemIndex) => {
-    if (elemIndex + 1 < issueCards.length) addCardsForResult(cards, issueCards, elemIndex);
+  socket.on('received-results', (cards, elemIndex) => {
+    addCardsForResult(cards, elemIndex);
   });
 };
 
-export const sendCard = (cardID: string | number, id: string) => {
-  socket.emit('card', cardID, id);
+// choosen card bvalues
+export const sendCard = (cardID: string | number, gameId: string) => {
+  socket.emit('card', cardID, gameId);
 };
 export const receivedCard = (dispatch: ThunkDispatch<any, unknown, any>) => {
   socket.on('received-card', (cardID) => {

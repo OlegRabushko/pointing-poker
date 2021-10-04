@@ -1,4 +1,4 @@
-const IssueDB = require('../shemas/UserShema')
+const IssueDB = require('../shemas/issueShema')
 
 class IssueService {
 
@@ -8,13 +8,14 @@ class IssueService {
     }
 
     async updateIssue(issueData){
-        const updatedIsu = await IssueDB.updateOne({_id: issueData._id}, {
+        const updatedIsu = await IssueDB.findOneAndUpdate({_id: issueData._id}, {
             $set: {
                 title: issueData.title,
                 link: issueData.link,
-                priority: issueData.priority
+                priority: issueData.priority,
+                results: issueData.results
             }
-        })
+        }, {new: true})
         return updatedIsu
     }
 
@@ -32,17 +33,11 @@ class IssueService {
     }
 
     async deleteIssue(issueId){
-        if(!userId){
+        if(!issueId){
             throw new Error('no ID')
         }
-        await IssueDB.findByIdAndDelete(issueId, (err) => {
-            if(err){
-                return {res: 'Not Found User'}
-            }
-            else {
-                return {res: 'Issue deleted'}
-            }}
-        )
+        const deletedIssue = await IssueDB.findByIdAndDelete(issueId)
+        return deletedIssue
     };
 
     async deleteIssues(gameId){

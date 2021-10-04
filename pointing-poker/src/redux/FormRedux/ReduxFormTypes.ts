@@ -60,7 +60,7 @@ export interface IAvatar {
 // ISSUE FORM
 export interface IInitialStateIssueCards {
   issueCards: IIssueCard[];
-  elemIndex: number;
+  elemIndex: string;
 }
 
 interface ISetIssueFormData {

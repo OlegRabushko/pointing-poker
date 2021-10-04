@@ -1,6 +1,7 @@
 const UserService = require('./UserService')
 const ChatService = require('./ChatService')
 const IssueService = require('./IssueService')
+const GameService = require('./GameService')
 
 const startSocket = (io) => {
     try {
@@ -9,7 +10,8 @@ const startSocket = (io) => {
                 socket.join(roomId)
                 const users = await UserService.getAllUsers(roomId)
                 const issues = await IssueService.getAllIssues(roomId)
-                io.to(socket.id).emit('get-prev-data', users, issues)
+                const game = await GameService.getGame(roomId)
+                io.to(socket.id).emit('get-prev-data', users, issues, game.title )
                 socket.to(roomId).emit('joined', user)
             })
     

@@ -71,11 +71,16 @@ export const recieveMsg =
     });
 
 export const getInitialDataByScoket = (
-  dispatch: ThunkDispatch<InitialState, unknown, IActionSetIssue | IActionSetUser>,
+  dispatch: ThunkDispatch<
+    InitialState,
+    unknown,
+    IActionSetIssue | IActionSetUser | IActionSetGameTitle
+  >,
 ) => {
-  socket.on('get-prev-data', (users, issues) => {
+  socket.on('get-prev-data', (users, issues, gameTitle) => {
     users.map((user: IUserInfo) => dispatch(setUser(user)));
     issues.map((issue: IssueData) => dispatch(setIssue(issue)));
+    dispatch(setGameTitle(gameTitle));
   });
 };
 

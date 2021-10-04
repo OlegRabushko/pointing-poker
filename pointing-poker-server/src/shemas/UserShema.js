@@ -9,7 +9,7 @@ const UserSchema = Schema({
   isObserver: Boolean,
   isPlayer: Boolean,
   job: String,
-  avatar: Buffer
+  avatar: String,
 });
 
 module.exports = mongoose.model('users', UserSchema);

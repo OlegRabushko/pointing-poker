@@ -2,13 +2,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { setAllMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetAllMsgs } from '../redux/ChatRedux/ChatTypes';
-import {
-  setCurrUserID,
-  setGameId,
-  setUser,
-  setCheck,
-  setGameTitle,
-} from '../redux/InitialRedux/InitialActions';
+import { setCurrUserID, setGameId, setUser, setCheck } from '../redux/InitialRedux/InitialActions';
 import {
   IActionSetCurrUserID,
   IActionSetGameId,
@@ -24,6 +18,7 @@ import {
   notifyIssueDeleted,
   notifyIssueUpdated,
   notifyUserDeleted,
+  sendTitle,
 } from '../sockets/SocketsAPI';
 import { IssueData, IUserInfo } from '../types/interfaces';
 
@@ -127,7 +122,7 @@ export const createNewGame =
     });
     const newGame = await res.json();
     dispatch(setGameId(newGame._id));
-    dispatch(setGameTitle(newGame.title));
+    sendTitle(newGame._id, newGame.title);
     return dispatch(createNewUser(newGame._id, diler));
   };
 

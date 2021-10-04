@@ -21,6 +21,7 @@ import {
   receivedRelocateResultPage,
   receivedSettings,
   receivedTimer,
+  receiveTitle,
   receiveUpdatedIssue,
 } from './sockets/SocketsAPI';
 import MiniGame from './components/MiniGame/MiniGame';
@@ -46,6 +47,7 @@ const App = () => {
     receiveUpdatedIssue(dispatch);
     receiveDeletedIssue(dispatch);
     receiveDeletedUser(dispatch);
+    receiveTitle(dispatch);
     receivedSettings(dispatch, history);
     receivedTimer(dispatch);
     receivedIssues(dispatch);

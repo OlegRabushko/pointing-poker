@@ -3,11 +3,11 @@ import { RootState } from '../../redux';
 import { StyleLobbyHeaderSection } from './StyledLobbyHeaderSection';
 
 const LobbyHeaderSection = () => {
-  const sessionName = useSelector((state: RootState) => state.dataConnectForm.userDealer.session);
+  const { gameTitle } = useSelector((state: RootState) => state.initial);
 
   return (
     <StyleLobbyHeaderSection>
-      <div className="header-text">{sessionName}</div>
+      <div className="header-text">{gameTitle}</div>
     </StyleLobbyHeaderSection>
   );
 };

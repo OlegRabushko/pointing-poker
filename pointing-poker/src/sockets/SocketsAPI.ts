@@ -5,9 +5,15 @@ import { setMessage } from '../redux/ChatRedux/ChatActions';
 import { IChatState } from '../redux/ChatRedux/ChatReducer';
 import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';
 import { IIssueCard } from '../components/Forms/FormTypes';
-import { setDeletedUser, setRound, setUser } from '../redux/InitialRedux/InitialActions';
+import {
+  setDeletedUser,
+  setGameTitle,
+  setRound,
+  setUser,
+} from '../redux/InitialRedux/InitialActions';
 import {
   IActionDeleteUser,
+  IActionSetGameTitle,
   IActionSetUser,
   InitialState,
 } from '../redux/InitialRedux/InitialTypes';
@@ -78,6 +84,17 @@ export const jonedNotification = (
 ) => {
   socket.on('joined', (user: IUserInfo) => {
     dispatch(setUser(user));
+  });
+};
+
+export const sendTitle = (gameId: string, title: string) => {
+  socket.emit('set-title', gameId, title);
+};
+export const receiveTitle = (
+  dispatch: ThunkDispatch<InitialState, unknown, IActionSetGameTitle>,
+) => {
+  socket.on('received-title', (title) => {
+    dispatch(setGameTitle(title));
   });
 };
 

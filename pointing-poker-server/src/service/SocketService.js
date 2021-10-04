@@ -25,6 +25,9 @@ const startSocket = (io) => {
             socket.on('issue-updated-send',(updateIssue) => {
                 io.in(updateIssue.game_id).emit('issue-updated-get',updateIssue)
             })
+            socket.on('set-title', (id, title) => {
+                io.in(id).emit('received-title', title)
+            })
 
             socket.on('game-settings', (settings, id) => {
                 io.in(id).emit('received-settings', settings)

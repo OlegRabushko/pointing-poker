@@ -46,6 +46,7 @@ try {
         await mongoose.connect(DB_URL, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
+            useFindAndModify: false,
         });
     });
 } catch (error) {

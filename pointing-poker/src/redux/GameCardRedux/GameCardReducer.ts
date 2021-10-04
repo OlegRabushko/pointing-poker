@@ -1,14 +1,6 @@
 /* eslint-disable no-param-reassign */
-import {
-  SET_GAME_CARD,
-  ActionTypeGameCard,
-  ICardState,
-  SET_SEQUENCE_FOR_CARD,
-  SET_INITIAL_CARDS,
-  SET_GAME_CARD_COUNT,
-  CardType,
-  USER_IS_SELECTED_CARD,
-} from './GameCardTypes';
+import { TGameCard } from './GameCardActions';
+import { ICardState, CardType } from './GameCardTypes';
 
 const cardsState: ICardState = {
   userSelectedCard: {},
@@ -80,9 +72,9 @@ const cardsState: ICardState = {
 const fibonacciSequence = [1, 2, 3, 5, 8, 13, 21, 34];
 const authorSequence = [1, 2, 3, 6, 10, 20, 30, 40];
 
-export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) => {
+export const gameCardReducer = (state = cardsState, action: TGameCard) => {
   switch (action.type) {
-    case SET_GAME_CARD:
+    case 'SET_GAME_CARD':
       return {
         ...state,
         store: state.store.map((el) => {
@@ -94,12 +86,12 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
           return el;
         }),
       };
-    case SET_GAME_CARD_COUNT:
+    case 'SET_GAME_CARD_COUNT':
       return {
         ...state,
         count: state.count + (action.payload as number),
       };
-    case SET_SEQUENCE_FOR_CARD:
+    case 'SET_SEQUENCE_FOR_CARD':
       return {
         ...state,
         store: state.store.map((el) => {
@@ -115,7 +107,7 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
           return el;
         }),
       };
-    case SET_INITIAL_CARDS:
+    case 'SET_INITIAL_CARDS':
       return {
         count: (action.payload as boolean) && 0,
         userSelectedCard: (action.payload as boolean) && {},
@@ -127,7 +119,7 @@ export const gameCardReducer = (state = cardsState, action: ActionTypeGameCard) 
             return el;
           }),
       };
-    case USER_IS_SELECTED_CARD:
+    case 'USER_IS_SELECTED_CARD':
       return {
         ...state,
         userSelectedCard: {

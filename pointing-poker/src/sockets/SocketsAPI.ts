@@ -1,35 +1,24 @@
 import { io } from 'socket.io-client';
 import { History } from 'history';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { setMessage } from '../redux/ChatRedux/ChatActions';
-import { IChatState } from '../redux/ChatRedux/ChatReducer';
-import { IActionSetMsg } from '../redux/ChatRedux/ChatTypes';
+import { chat } from '../redux/ChatRedux/ChatActions';
 import { IIssueCard } from '../components/Forms/FormTypes';
-import { setRound, setUser } from '../redux/InitialRedux/InitialActions';
-import { IActionSetUser, InitialState } from '../redux/InitialRedux/InitialTypes';
+import { initial, TInitial } from '../redux/InitialRedux/InitialActions';
 import { TimerStateTypes } from '../redux/TimerRedux/TimerReducer';
 import { IMsg, IUserInfo } from '../types/interfaces';
-import { ILobbySettingsState } from '../redux/SettingsSectionRedux/SettingsSectionReducer';
-import {
-  createIssueCard,
-  setCompletedIssueCard,
-  setElementIndex,
-} from '../redux/FormRedux/FormActions';
-import {
-  setCoffeeCard,
-  setQuestionCard,
-  setScramMasterRole,
-  setSequenceType,
-  setTimer,
-} from '../redux/SettingsSectionRedux/SettingsSectionActions';
-import { setMinutes, setSeconds, setStartTime } from '../redux/TimerRedux/TimerActions';
-import {
-  setGameCardCount,
-  setInitialCards,
-  setGameCard,
-  userIsSelectedCard,
-} from '../redux/GameCardRedux/GameCardActions';
+import { issueForm } from '../redux/FormRedux/FormActions';
+import { settingsSection } from '../redux/SettingsSectionRedux/SettingsSectionActions';
+import { timerActions } from '../redux/TimerRedux/TimerActions';
+import { gameCard } from '../redux/GameCardRedux/GameCardActions';
 import { CardType } from '../redux/GameCardRedux/GameCardTypes';
+import { IActionSetMsg, IChatState } from '../redux/ChatRedux/ChatTypes';
+import { ILobbySettingsState } from '../redux/SettingsSectionRedux/SettingsSectionReducer';
+
+const { setInitialCards, setGameCardCount, setGameCard, userIsSelectedCard } = gameCard;
+const { setUser, setRound } = initial;
+const { setCoffeeCard, setQuestionCard, setScramMasterRole, setSequenceType, setTimer } =
+  settingsSection;
+const { setMinutes, setSeconds, setStartTime } = timerActions;
 
 export const socket = io('http://localhost:7001');
 
@@ -45,12 +34,10 @@ export const recieveMsg =
   (): ThunkAction<void, IChatState, unknown, IActionSetMsg> =>
   (dispatch: ThunkDispatch<IChatState, unknown, IActionSetMsg>) =>
     socket.on('recieve-msg', (msg) => {
-      dispatch(setMessage(msg));
+      dispatch(chat.setMessage(msg));
     });
 
-export const jonedNotification = (
-  dispatch: ThunkDispatch<InitialState, unknown, IActionSetUser>,
-) => {
+export const jonedNotification = (dispatch: ThunkDispatch<TInitial, unknown, TInitial>) => {
   socket.on('joined', (users) => {
     users.map((user: IUserInfo) => dispatch(setUser(user)));
   });
@@ -89,7 +76,7 @@ export const sendIssuesToAll = (issues: IIssueCard, id: string) => {
 };
 export const receivedIssues = (dispatch: ThunkDispatch<IIssueCard, unknown, any>) => {
   socket.on('received-issues', (issues: IIssueCard) => {
-    dispatch(createIssueCard(issues, issues.issueTitle, false, false));
+    dispatch(issueForm.createIssueCard(issues, issues.issueTitle, false, false));
   });
 };
 
@@ -122,7 +109,7 @@ export const receivedRestartRound = (
     if (issueCards.length > 0) {
       issueCards.forEach((el: IIssueCard) => {
         if (el.current && el.isCompleted) {
-          dispatch(setCompletedIssueCard({ id: el.issueID, count: false }));
+          dispatch(issueForm.setCompletedIssueCard({ id: el.issueID, count: false }));
         }
       });
 
@@ -149,7 +136,7 @@ export const receivedNextIssue = (
   socket.on('received-next-issue', (cards, issueCards, elemIndex) => {
     setStartedTime();
     dispatch(setRound(false));
-    dispatch(setElementIndex(elemIndex + 1));
+    dispatch(issueForm.setElementIndex(elemIndex + 1));
     addCardsForResult(cards, issueCards, elemIndex);
   });
 };

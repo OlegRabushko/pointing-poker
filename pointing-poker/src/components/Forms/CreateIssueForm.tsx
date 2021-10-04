@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { RootState } from '../../redux';
 
-import { createIssueCard, showIssuesForm } from '../../redux/FormRedux/FormActions';
+import { issueForm, showForms } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import { IIssueCard } from './FormTypes';
 import { StyledConnectForm } from './StyledForm';
@@ -25,13 +25,13 @@ const CreateIssueForm = () => {
   const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
-    dispatch(showIssuesForm(!isIssuesForm));
-    dispatch(createIssueCard(data, nanoid(), false, false));
+    dispatch(showForms.showIssuesForm(!isIssuesForm));
+    dispatch(issueForm.createIssueCard(data, nanoid(), false, false));
     reset();
   };
 
   const onShowConnectForm = () => {
-    dispatch(showIssuesForm(!isIssuesForm));
+    dispatch(showForms.showIssuesForm(!isIssuesForm));
   };
 
   return (

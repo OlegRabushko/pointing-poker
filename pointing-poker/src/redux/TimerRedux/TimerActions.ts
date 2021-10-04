@@ -1,18 +1,27 @@
-import { SET_FULL_SECONDS, SET_MINUTES, SET_SECONDS, SET_START_TIME } from './TimerTypes';
+type TProperties<T> = T extends { [key: string]: infer U } ? U : never;
+type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnType<TProperties<T>>;
 
-export const setSeconds = (count: number) => ({
-  type: SET_SECONDS,
-  payload: count,
-});
-export const setMinutes = (count: number) => ({
-  type: SET_MINUTES,
-  payload: count,
-});
-export const setFullSeconds = (count: number) => ({
-  type: SET_FULL_SECONDS,
-  payload: count,
-});
-export const setStartTime = (count: number[]) => ({
-  type: SET_START_TIME,
-  payload: count,
-});
+export type TTimer = TInferActions<typeof timerActions>;
+
+export const timerActions = {
+  setSeconds: (count: number) =>
+    ({
+      type: 'SET_SECONDS',
+      payload: count,
+    } as const),
+  setMinutes: (count: number) =>
+    ({
+      type: 'SET_MINUTES',
+      payload: count,
+    } as const),
+  setFullSeconds: (count: number) =>
+    ({
+      type: 'SET_FULL_SECONDS',
+      payload: count,
+    } as const),
+  setStartTime: (count: number[]) =>
+    ({
+      type: 'SET_START_TIME',
+      payload: count,
+    } as const),
+};

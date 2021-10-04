@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import addPlusImg from '../../assets/icons/plus-add.png';
 import { RootState } from '../../redux';
-import { showIssuesForm } from '../../redux/FormRedux/FormActions';
+import { showForms } from '../../redux/FormRedux/FormActions';
 import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 
 const AddIssueCard = () => {
@@ -10,7 +10,7 @@ const AddIssueCard = () => {
   const isDialer = useSelector((state: RootState) => state.personStatus.isDialer);
 
   const ahowCreateIssueForm = () => {
-    dispatch(showIssuesForm(!isIssuesForm));
+    dispatch(showForms.showIssuesForm(!isIssuesForm));
   };
 
   return (

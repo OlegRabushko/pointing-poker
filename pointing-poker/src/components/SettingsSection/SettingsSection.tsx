@@ -3,22 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { StyledSettingsSection } from './StyledSettingsSection';
 import Switcher from '../Switcher/Switcher';
-import {
-  setCoffeeCard,
-  setQuestionCard,
-  setScramMasterRole,
-  setSequenceType,
-  setTimer,
-} from '../../redux/SettingsSectionRedux/SettingsSectionActions';
+import { settingsSection } from '../../redux/SettingsSectionRedux/SettingsSectionActions';
 import Timer from '../Timer/Timer';
 import { RootState } from '../../redux';
-import { setSequenceForCard } from '../../redux/GameCardRedux/GameCardActions';
+import { gameCard } from '../../redux/GameCardRedux/GameCardActions';
 
 const SettingsSection = () => {
+  const { setCoffeeCard, setQuestionCard, setScramMasterRole, setSequenceType, setTimer } =
+    settingsSection;
   const dispatch = useDispatch();
   const sequenceType = useSelector((store: RootState) => store.settings.sequenceType);
   useEffect(() => {
-    dispatch(setSequenceForCard(sequenceType));
+    dispatch(gameCard.setSequenceForCard(sequenceType));
   }, [sequenceType]);
 
   const checker = useSelector((state: RootState) => state.settings);

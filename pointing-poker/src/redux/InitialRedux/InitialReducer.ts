@@ -1,16 +1,13 @@
-import {
-  IActionTypeGameProcess,
-  InitialState,
-  SET_CURR_USER_ID,
-  SET_DILER_ID,
-  SET_GAME_ID,
-  SET_MINI_GAME,
-  SET_ROUND,
-  SET_USER,
-  SET_USERS,
-  TActionsInitial,
-  SET_CHECK,
-} from './InitialTypes';
+import { IUserInfo, IUsers } from '../../types/interfaces';
+import { TInitial } from './InitialActions';
+
+export interface InitialState {
+  gameId: string;
+  dealerId: string;
+  currUserID: string;
+  users: IUsers;
+  NotUserArr: IUserInfo[];
+}
 
 const initialState: InitialState = {
   gameId: '',
@@ -20,29 +17,29 @@ const initialState: InitialState = {
   NotUserArr: [],
 };
 
-export const initialReducer = (state = initialState, action: TActionsInitial) => {
+export const initialReducer = (state = initialState, action: TInitial) => {
   switch (action.type) {
-    case SET_CURR_USER_ID:
+    case 'SET_CURR_USER_ID':
       return {
         ...state,
         currUserID: action.payload,
       };
-    case SET_USER:
+    case 'SET_USER':
       return {
         ...state,
         users: { ...state.users, [action.payload._id]: action.payload },
       };
-    case SET_USERS:
+    case 'SET_USERS':
       return {
         ...state,
         NotUserArr: action.payload,
       };
-    case SET_GAME_ID:
+    case 'SET_GAME_ID':
       return {
         ...state,
         gameId: action.payload,
       };
-    case SET_DILER_ID:
+    case 'SET_DILER_ID':
       return {
         ...state,
         dealerId: action.payload,
@@ -58,19 +55,19 @@ const gameProcessState = {
   miniGame: false,
   check: [] as any[],
 };
-export const gameProcessReducer = (state = gameProcessState, action: IActionTypeGameProcess) => {
+export const gameProcessReducer = (state = gameProcessState, action: TInitial) => {
   switch (action.type) {
-    case SET_ROUND:
+    case 'SET_ROUND':
       return {
         ...state,
         startRound: action.payload,
       };
-    case SET_MINI_GAME:
+    case 'SET_MINI_GAME':
       return {
         ...state,
         miniGame: action.payload,
       };
-    case SET_CHECK:
+    case 'SET_CHECK':
       return {
         ...state,
         check: [action.payload],

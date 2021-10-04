@@ -1,28 +1,32 @@
-import {
-  SET_SCRAM_MASTER_ROLE,
-  SET_TIMER,
-  SET_COFFEE_CARD,
-  SET_QUESTION_CARD,
-  SET_SEQUENCE_TYPE,
-} from './SettingsSectionTypes';
+type TProperties<T> = T extends { [key: string]: infer U } ? U : never;
+type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnType<TProperties<T>>;
 
-export const setScramMasterRole = (role: boolean) => ({
-  type: SET_SCRAM_MASTER_ROLE,
-  payload: role,
-});
-export const setTimer = (count: boolean) => ({
-  type: SET_TIMER,
-  payload: count,
-});
-export const setCoffeeCard = (count: boolean) => ({
-  type: SET_COFFEE_CARD,
-  payload: count,
-});
-export const setQuestionCard = (count: boolean) => ({
-  type: SET_QUESTION_CARD,
-  payload: count,
-});
-export const setSequenceType = (sequence: string) => ({
-  type: SET_SEQUENCE_TYPE,
-  payload: sequence,
-});
+export type TSettings = TInferActions<typeof settingsSection>;
+
+export const settingsSection = {
+  setScramMasterRole: (role: boolean) =>
+    ({
+      type: 'SET_SCRAM_MASTER_ROLE',
+      payload: role,
+    } as const),
+  setTimer: (count: boolean) =>
+    ({
+      type: 'SET_TIMER',
+      payload: count,
+    } as const),
+  setCoffeeCard: (count: boolean) =>
+    ({
+      type: 'SET_COFFEE_CARD',
+      payload: count,
+    } as const),
+  setQuestionCard: (count: boolean) =>
+    ({
+      type: 'SET_QUESTION_CARD',
+      payload: count,
+    } as const),
+  setSequenceType: (sequence: string) =>
+    ({
+      type: 'SET_SEQUENCE_TYPE',
+      payload: sequence,
+    } as const),
+};

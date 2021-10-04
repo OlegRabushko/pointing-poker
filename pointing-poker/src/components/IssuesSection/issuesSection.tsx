@@ -4,14 +4,14 @@ import { StyledIssuesSection } from './StyledIssuesSection';
 import AddIssueCard from '../IssueCard/AddIssueCard';
 import IssueCard from '../IssueCard/IssueCard';
 import { RootState } from '../../redux';
-import { toggleCurrentIssueCard } from '../../redux/FormRedux/FormActions';
+import { issueForm } from '../../redux/FormRedux/FormActions';
 
 const IssuesSection = () => {
   const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
   const dispatch = useDispatch();
   useEffect(() => {
     if (issueCards[elemIndex]) {
-      dispatch(toggleCurrentIssueCard(issueCards[elemIndex].issueID));
+      dispatch(issueForm.toggleCurrentIssueCard(issueCards[elemIndex].issueID));
     }
   }, [issueCards.length, elemIndex]);
 

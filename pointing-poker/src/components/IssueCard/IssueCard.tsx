@@ -8,12 +8,7 @@ import deleteImg from '../../assets/icons/delete_basket.png';
 import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 import { RootState } from '../../redux';
 import { IIssueCard } from '../Forms/FormTypes';
-import {
-  deleteIssueCard,
-  renameIssuePriority,
-  renameIssueTitle,
-  setCompletedIssueCard,
-} from '../../redux/FormRedux/FormActions';
+import { issueForm } from '../../redux/FormRedux/FormActions';
 
 const IssueCard: FC<IIssueCard> = (props) => {
   const { issueTitle, issuePriority, issueID, current, isCompleted } = props;
@@ -40,15 +35,15 @@ const IssueCard: FC<IIssueCard> = (props) => {
     ) {
       cards.forEach((el) => {
         if (el.current) {
-          dispatch(setCompletedIssueCard({ id: el.issueID, count: true }));
+          dispatch(issueForm.setCompletedIssueCard({ id: el.issueID, count: true }));
         }
       });
     }
   }, [seconds, minutes, playersCheckedCard]);
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
-    dispatch(renameIssueTitle(data.issueTitle, issueID));
-    dispatch(renameIssuePriority(data.issuePriority, issueID));
+    dispatch(issueForm.renameIssueTitle(data.issueTitle, issueID));
+    dispatch(issueForm.renameIssuePriority(data.issuePriority, issueID));
     setUpdateIssueTitle(false);
     reset();
   };
@@ -60,7 +55,7 @@ const IssueCard: FC<IIssueCard> = (props) => {
 
   const handleDeleteBtn = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dispatch(deleteIssueCard(issueID));
+    dispatch(issueForm.deleteIssueCard(issueID));
   };
 
   return (

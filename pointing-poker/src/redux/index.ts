@@ -11,9 +11,9 @@ import {
   issueFormDataReducer,
   showFormsReducer,
 } from './FormRedux/FormReducers';
-import { gameStatusPersonReducer } from './RolesRedux/RolesReducers';
 import { timerReducer } from './TimerRedux/TimerReducer';
 import { resultsPageReducer } from './ResultsPageRedux/ResultsPageReducer';
+import { gameStatusPersonReducer } from './RolesRedux/RolesReducers';
 
 const rootReducer = combineReducers({
   personStatus: gameStatusPersonReducer,

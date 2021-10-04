@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
 import { IMsg } from '../../types/interfaces';
 import { receiveAllMsgs } from '../../API/RestAPI';
-import { setOpenChat } from '../../redux/ChatRedux/ChatActions';
+import { chat } from '../../redux/ChatRedux/ChatActions';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
 import { recieveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
@@ -52,7 +52,7 @@ const Chat = () => {
       dispatch(recieveMsg());
     }
   }, []);
-  const closeChat = () => dispatch(setOpenChat(false));
+  const closeChat = () => dispatch(chat.setOpenChat(false));
 
   return (
     <>

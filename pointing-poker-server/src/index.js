@@ -17,8 +17,8 @@ const server = http.createServer(app);
 
 app.use(express.json({ limit: '5mb' }));
 app.use(cors({
-    origin: 'https://nifty-lewin-7e18da.netlify.app',
-    
+    origin: '*',
+
 }))
 app.use(
     express.urlencoded({ limit: '5mb', extended: true, parameterLimit: 5000 })
@@ -28,7 +28,7 @@ app.use('/api', route);
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: 'http://localhost:8080',
+        origin: '*',
     },
 });
 

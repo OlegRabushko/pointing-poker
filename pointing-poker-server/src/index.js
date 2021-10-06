@@ -18,8 +18,7 @@ const server = http.createServer(app);
 app.use(express.json({ limit: '5mb' }));
 app.use(cors({
     origin: 'https://nifty-lewin-7e18da.netlify.app',
-    credentials: true,            //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
+    
 }))
 app.use(
     express.urlencoded({ limit: '5mb', extended: true, parameterLimit: 5000 })

@@ -17,7 +17,7 @@ const server = http.createServer(app);
 
 app.use(express.json({ limit: '5mb' }));
 app.use(cors({
-    origin: '*',
+    origin: 'https://nifty-lewin-7e18da.netlify.app',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 }))

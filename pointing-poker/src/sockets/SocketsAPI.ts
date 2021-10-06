@@ -3,16 +3,17 @@ import { History } from 'history';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { chat } from '../redux/ChatRedux/ChatActions';
 import { IIssueCard } from '../components/Forms/FormTypes';
-import { initial, TInitial } from '../redux/InitialRedux/InitialActions';
-import { TimerStateTypes } from '../redux/TimerRedux/TimerReducer';
+import { initial } from '../redux/InitialRedux/InitialActions';
 import { IMsg, IUserInfo } from '../types/interfaces';
-import { issueForm } from '../redux/FormRedux/FormActions';
-import { settingsSection } from '../redux/SettingsSectionRedux/SettingsSectionActions';
-import { timerActions } from '../redux/TimerRedux/TimerActions';
+import { issueForm, setRolePlayers } from '../redux/FormRedux/FormActions';
+import {
+  ILobbySettingsState,
+  settingsSection,
+} from '../redux/SettingsSectionRedux/SettingsSectionActions';
+import { timerActions, TimerStateTypes } from '../redux/TimerRedux/TimerActions';
 import { gameCard } from '../redux/GameCardRedux/GameCardActions';
 import { CardType } from '../redux/GameCardRedux/GameCardTypes';
 import { IActionSetMsg, IChatState } from '../redux/ChatRedux/ChatTypes';
-import { ILobbySettingsState } from '../redux/SettingsSectionRedux/SettingsSectionReducer';
 
 const { setInitialCards, setGameCardCount, setGameCard, userIsSelectedCard } = gameCard;
 const { setUser, setRound } = initial;
@@ -22,24 +23,58 @@ const { setMinutes, setSeconds, setStartTime } = timerActions;
 
 export const socket = io('http://localhost:7001');
 
-export const connectToSocket = (roomId: string) => {
-  socket.emit('join-game', roomId);
+export const connectToSocket = (roomId: string, user: IUserInfo) => {
+  socket.emit('join-game', roomId, user);
 };
 
 export const sendMsgToAll = async (msg: IMsg) => {
   socket.emit('send-msg', msg);
 };
 
-export const recieveMsg =
+export const receiveMsg =
   (): ThunkAction<void, IChatState, unknown, IActionSetMsg> =>
   (dispatch: ThunkDispatch<IChatState, unknown, IActionSetMsg>) =>
     socket.on('recieve-msg', (msg) => {
       dispatch(chat.setMessage(msg));
     });
 
-export const jonedNotification = (dispatch: ThunkDispatch<TInitial, unknown, TInitial>) => {
-  socket.on('joined', (users) => {
+export const joinedNotification = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('joined', (user: IUserInfo) => {
+    dispatch(setUser(user));
+  });
+};
+
+export const getInitialDataBySocket = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('get-prev-data', (users, gameTitle) => {
     users.map((user: IUserInfo) => dispatch(setUser(user)));
+    dispatch(initial.setGameTitle(gameTitle));
+  });
+};
+
+export const sendTitle = (gameId: string, title: string) => {
+  socket.emit('set-title', gameId, title);
+};
+export const receiveTitle = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-title', (title) => {
+    dispatch(initial.setGameTitle(title));
+  });
+};
+
+export const sendIsObserver = (count: number, gameId: string) => {
+  socket.emit('is-observer', count, gameId);
+};
+export const receiveIsObserver = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-is-observer', (count) => {
+    dispatch(initial.setObserversCount(count));
+  });
+};
+
+export const sendDeletedUserToAll = (userID: string, id: string) => {
+  socket.emit('deleted-user', userID, id);
+};
+export const receivedDeletedUser = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-deleted-user', (userID) => {
+    dispatch(initial.setDeletedUser(userID));
   });
 };
 
@@ -80,6 +115,25 @@ export const receivedIssues = (dispatch: ThunkDispatch<IIssueCard, unknown, any>
   });
 };
 
+export const sendDeletedIssuesToAll = (issueID: string, id: string) => {
+  socket.emit('set-deleted-issues', issueID, id);
+};
+export const receivedDeletedIssues = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-deleted-issues', (issueID: string) => {
+    dispatch(issueForm.deleteIssueCard(issueID));
+  });
+};
+
+export const sendRenameIssueToAll = (data: any, issueID: string, id: string) => {
+  socket.emit('send-rename-issues', data, issueID, id);
+};
+export const receivedRenameIssues = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-rename-issues', (data, issueID) => {
+    dispatch(issueForm.renameIssueTitle(data.issueTitle, issueID));
+    dispatch(issueForm.renameIssuePriority(data.issuePriority, issueID));
+  });
+};
+
 export const sendRelocateResultPage = (id: string) => {
   socket.emit('relocate-result-page', id);
 };
@@ -98,25 +152,24 @@ export const receivedStartRound = (dispatch: ThunkDispatch<boolean, unknown, any
   });
 };
 
-export const sendRestartRound = (issueCards: IIssueCard[], id: string) => {
-  socket.emit('restart-round', issueCards, id);
+export const sendRestartRound = (issueCards: IIssueCard[], timer: boolean, id: string) => {
+  socket.emit('restart-round', issueCards, timer, id);
 };
 export const receivedRestartRound = (
   setStartedTime: () => void,
   dispatch: ThunkDispatch<any, unknown, any>,
 ) => {
-  socket.on('received-restart-round', (issueCards: IIssueCard[]) => {
-    if (issueCards.length > 0) {
+  socket.on('received-restart-round', (issueCards: IIssueCard[], timer) => {
+    setStartedTime();
+    if (!timer) {
       issueCards.forEach((el: IIssueCard) => {
         if (el.current && el.isCompleted) {
           dispatch(issueForm.setCompletedIssueCard({ id: el.issueID, count: false }));
         }
       });
-
-      dispatch(setRound(false));
-      setStartedTime();
-      dispatch(setInitialCards(true));
     }
+    dispatch(setRound(false));
+    dispatch(setInitialCards(true));
   });
 };
 
@@ -202,5 +255,34 @@ export const sendIsUserCanceledCard = (userID: string, id: string) => {
 export const receivedIsUserCanceledCard = (dispatch: ThunkDispatch<any, unknown, any>) => {
   socket.on('received-is-user-canceled-card', (userID) => {
     dispatch(userIsSelectedCard({ id: userID, count: false }));
+  });
+};
+
+export const sendCancelGame = (id: string) => {
+  socket.emit('cancel-game', id);
+};
+export const receivedCancelGame = (history: History) => {
+  socket.on('received-cancel-game', () => {
+    history.push('/');
+    window.location.reload();
+    alert('Session was closed!');
+  });
+};
+
+export const sendOpenDeleteFormToAll = (who: string, whom: string, userID: string, id: string) => {
+  socket.emit('delete-form', who, whom, userID, id);
+};
+export const receivedOpenDeleteForm = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-delete-form', (who, whom, deleteID) => {
+    dispatch(setRolePlayers.setDeleteModal({ count: true, who, whom, deleteID }));
+  });
+};
+
+export const sendChoiceForDeleteToAll = (id: string) => {
+  socket.emit('delete-choice', id);
+};
+export const receivedChoiceForDelete = (dispatch: ThunkDispatch<any, unknown, any>) => {
+  socket.on('received-delete-choice', () => {
+    dispatch(setRolePlayers.setAcceptCount(1));
   });
 };

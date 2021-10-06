@@ -1,14 +1,7 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
+import { ISwitcherProps } from '../../types/interfaces';
 import { StyleSwitcher } from './StyledSwitcher';
-
-export interface ISwitcherProps {
-  listener: (role: boolean) => {
-    type: string;
-    payload: boolean;
-  };
-  checked: boolean;
-}
 
 const Switcher: FC<ISwitcherProps> = ({ listener, checked }) => {
   const dispatch = useDispatch();

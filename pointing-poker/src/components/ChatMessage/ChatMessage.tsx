@@ -1,5 +1,5 @@
 import { IMsg, IUsers } from '../../types/interfaces';
-import { vME, vOTHERS } from '../../types/globalVirables';
+import { vME, vOTHERS } from '../../types/globalVariables';
 import { StyledMsg } from './StyledChatMsg';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 

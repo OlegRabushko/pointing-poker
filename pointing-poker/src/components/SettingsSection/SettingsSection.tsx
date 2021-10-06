@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-onchange */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { StyledSettingsSection } from './StyledSettingsSection';
@@ -12,12 +11,12 @@ const SettingsSection = () => {
   const { setCoffeeCard, setQuestionCard, setScramMasterRole, setSequenceType, setTimer } =
     settingsSection;
   const dispatch = useDispatch();
-  const sequenceType = useSelector((store: RootState) => store.settings.sequenceType);
-  useEffect(() => {
-    dispatch(gameCard.setSequenceForCard(sequenceType));
-  }, [sequenceType]);
-
   const checker = useSelector((state: RootState) => state.settings);
+
+  useEffect(() => {
+    dispatch(gameCard.setSequenceForCard(checker.sequenceType));
+  }, [checker.sequenceType]);
+
   return (
     <StyledSettingsSection>
       <div className="text">Game settings: </div>

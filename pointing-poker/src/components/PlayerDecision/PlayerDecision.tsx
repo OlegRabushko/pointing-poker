@@ -1,9 +1,6 @@
 import { FC } from 'react';
+import { IPlayerDecisionProps } from '../../types/interfaces';
 import { StyledPlayerDecision } from './StyledPlayerDecision';
-
-interface IPlayerDecisionProps {
-  decision: string;
-}
 
 const PlayerDecision: FC<IPlayerDecisionProps> = ({ decision }) => {
   return (

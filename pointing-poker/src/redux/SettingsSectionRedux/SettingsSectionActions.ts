@@ -3,6 +3,19 @@ type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnT
 
 export type TSettings = TInferActions<typeof settingsSection>;
 
+export interface ILobbySettingsState {
+  scramMasterAsPlayer: boolean;
+  timerNeeded: boolean;
+  coffeeCardNeeded: boolean;
+  questionCardNeeded: boolean;
+  sequenceType: string;
+}
+
+export type ActionColor = {
+  about: boolean;
+  home: boolean;
+};
+
 export const settingsSection = {
   setScramMasterRole: (role: boolean) =>
     ({

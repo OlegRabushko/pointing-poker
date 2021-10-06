@@ -34,4 +34,11 @@ export const StyledResultsPage = styled.div`
     text-align: center;
     text-shadow: 0px 0px 5px ${beigeColor};
   }
+
+  .excel-btn {
+    button {
+      margin-top: 100px;
+      width: 250px;
+    }
+  }
 `;

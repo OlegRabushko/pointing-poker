@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { TGameCard } from './GameCardActions';
 import { ICardState, CardType } from './GameCardTypes';
 

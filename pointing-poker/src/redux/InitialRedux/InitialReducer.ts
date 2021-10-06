@@ -1,4 +1,4 @@
-import { IUserInfo, IUsers } from '../../types/interfaces';
+import { IUsers } from '../../types/interfaces';
 import { TInitial } from './InitialActions';
 
 export interface InitialState {
@@ -6,7 +6,8 @@ export interface InitialState {
   dealerId: string;
   currUserID: string;
   users: IUsers;
-  NotUserArr: IUserInfo[];
+  observersCount: number;
+  gameTitle: string;
 }
 
 const initialState: InitialState = {
@@ -14,7 +15,8 @@ const initialState: InitialState = {
   dealerId: '',
   currUserID: '',
   users: {},
-  NotUserArr: [],
+  observersCount: 0,
+  gameTitle: '',
 };
 
 export const initialReducer = (state = initialState, action: TInitial) => {
@@ -29,20 +31,30 @@ export const initialReducer = (state = initialState, action: TInitial) => {
         ...state,
         users: { ...state.users, [action.payload._id]: action.payload },
       };
-    case 'SET_USERS':
+    case 'SET_OBSERVERS_COUNT':
       return {
         ...state,
-        NotUserArr: action.payload,
+        observersCount: action.payload,
       };
     case 'SET_GAME_ID':
       return {
         ...state,
         gameId: action.payload,
       };
+    case 'SET_GAME_TITLE':
+      return {
+        ...state,
+        gameTitle: action.payload,
+      };
     case 'SET_DILER_ID':
       return {
         ...state,
         dealerId: action.payload,
+      };
+    case 'SET_DELETED_USER':
+      delete state.users[`${action.payload}`];
+      return {
+        ...state,
       };
     default:
       return state;

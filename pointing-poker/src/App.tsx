@@ -12,11 +12,15 @@ import ConnectForm from './components/Forms/ConnectForm';
 import CreateIssueForm from './components/Forms/CreateIssueForm';
 import Chat from './components/Chat/Chat';
 import {
-  jonedNotification,
+  getInitialDataBySocket,
+  joinedNotification,
+  receivedCancelGame,
+  receivedDeletedUser,
   receivedIssues,
   receivedRelocateResultPage,
   receivedSettings,
   receivedTimer,
+  receiveTitle,
 } from './sockets/SocketsAPI';
 import MiniGame from './components/MiniGame/MiniGame';
 
@@ -29,17 +33,21 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const history = useHistory();
   const { isConnectForm, isIssuesForm } = useSelector((state: RootState) => state.showForms);
   const { isOpen } = useSelector((state: RootState) => state.chat);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
-    jonedNotification(dispatch);
+    joinedNotification(dispatch);
     receivedSettings(dispatch, history);
     receivedTimer(dispatch);
     receivedIssues(dispatch);
+    receivedDeletedUser(dispatch);
     receivedRelocateResultPage(history);
+    receivedCancelGame(history);
+    receiveTitle(dispatch);
+    getInitialDataBySocket(dispatch);
   }, []);
 
   return (

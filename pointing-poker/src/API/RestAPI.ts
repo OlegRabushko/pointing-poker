@@ -2,10 +2,10 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { chat } from '../redux/ChatRedux/ChatActions';
 import { IActionSetAllMsgs, IChatState } from '../redux/ChatRedux/ChatTypes';
 import { initial, TInitial } from '../redux/InitialRedux/InitialActions';
-import { connectToSocket } from '../sockets/SocketsAPI';
+import { connectToSocket, sendTitle } from '../sockets/SocketsAPI';
 import { IUserInfo } from '../types/interfaces';
 
-const { setCurrUserID, setGameId, setUser, setCheck } = initial;
+const { setCurrUserID, setGameId, setUser } = initial;
 
 const URL = 'http://localhost:7001/api';
 
@@ -38,8 +38,14 @@ export const createNewUser =
     });
     const user = await res.json();
     dispatch(setCurrUserID(user._id));
-    return connectToSocket(gameId);
+    return connectToSocket(gameId, user);
   };
+
+export const deleteUserById = async (userId: string) => {
+  await fetch(`${URL}/users/${userId}`, {
+    method: 'DELETE',
+  });
+};
 
 export const createNewGame =
   (gameIndex: string, diler: IUserInfo): ThunkAction<void, TInitial, unknown, TInitial> =>
@@ -52,12 +58,6 @@ export const createNewGame =
     });
     const newGame = await res.json();
     const action = dispatch(setGameId(newGame._id));
+    sendTitle(newGame._id, newGame.title);
     return dispatch(createNewUser(action.payload, diler));
   };
-
-export const checkThunk = (id: string) => {
-  return (dispatch: ThunkDispatch<any, any, any>) =>
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then((response) => response.json())
-      .then((json) => dispatch(setCheck(json)));
-};

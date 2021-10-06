@@ -17,4 +17,19 @@ export const StyleFooter = styled.footer`
     font-size: 12px;
     text-shadow: 0px 0px 5px #66999b;
   }
+
+  div {
+    font-size: 30px;
+    position: absolute;
+    top: 23px;
+    right: 60px;
+    font-weight: bold;
+    text-shadow: 0 0 5px ${whiteColor};
+  }
+  img {
+    position: absolute;
+    top: 15px;
+    right: 140px;
+    width: 100px;
+  }
 `;

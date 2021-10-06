@@ -3,6 +3,13 @@ type TInferActions<T extends { [key: string]: (...args: any) => any }> = ReturnT
 
 export type TTimer = TInferActions<typeof timerActions>;
 
+export type TimerStateTypes = {
+  startTime?: number[];
+  seconds: number;
+  minutes: number;
+  fullSeconds?: number;
+};
+
 export const timerActions = {
   setSeconds: (count: number) =>
     ({

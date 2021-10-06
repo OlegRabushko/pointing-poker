@@ -7,6 +7,8 @@ export interface IInitialStatePlayers {
   userDealer: IConnectForm;
   userPlayers: IConnectForm[];
   userObservers: IConnectForm[];
+  isDeleteModal: { count: boolean; who: string; whom: string; deleteID: string };
+  acceptDeleteUserCount: number;
 }
 
 // AVATAR CONNECT FORM

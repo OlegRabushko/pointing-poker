@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { vME } from '../../types/globalVirables';
+import { vME } from '../../types/globalVariables';
 import { blackColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 
 export const StyledMsg = styled.div`

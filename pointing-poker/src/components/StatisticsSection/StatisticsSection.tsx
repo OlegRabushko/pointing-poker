@@ -1,20 +1,16 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import { IStatisticsSectionProps } from '../../types/interfaces';
 import { Cards } from '../CardValuesSection/CardValuesSection';
 import { StyledStatisticsSection } from './StyledStatisticsSection';
 
-interface IStatisticsSectionProps {
-  isStats: boolean;
-}
-
 const StatisticsSection: FC<IStatisticsSectionProps> = ({ isStats }) => {
   const { minutes, seconds } = useSelector((store: RootState) => store.timer);
-  const isTimer = useSelector((store: RootState) => store.settings.timerNeeded);
-  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const { timerNeeded, scramMasterAsPlayer } = useSelector((store: RootState) => store.settings);
   const playersCheckedCard = useSelector((store: RootState) => store.card.count);
-  const allUsers = useSelector((store: RootState) => store.initial.users);
-  const allUsersLength = Object.keys(allUsers).length;
+  const { users, observersCount } = useSelector((store: RootState) => store.initial);
+  const allUsersLength = Object.keys(users).length;
 
   const ResultsSection = () => (
     <StyledStatisticsSection>
@@ -27,13 +23,13 @@ const StatisticsSection: FC<IStatisticsSectionProps> = ({ isStats }) => {
 
   return (
     <>
-      {isTimer && minutes === 0 && seconds === 0 && <ResultsSection />}
-      {!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength && (
-        <ResultsSection />
-      )}
-      {!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1 && (
-        <ResultsSection />
-      )}
+      {timerNeeded && minutes === 0 && seconds === 0 && <ResultsSection />}
+      {!timerNeeded &&
+        scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - observersCount && <ResultsSection />}
+      {!timerNeeded &&
+        !scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - 1 - observersCount && <ResultsSection />}
     </>
   );
 };

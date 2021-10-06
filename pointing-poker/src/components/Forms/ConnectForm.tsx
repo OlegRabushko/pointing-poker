@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,7 +60,7 @@ const ConnectForm = () => {
   ) => {
     if (diler) {
       dispatch(
-        createNewGame(nanoid(), {
+        createNewGame(data.session, {
           name: data.firstName,
           lastName: data.lastName,
           isDialer: diler,
@@ -146,7 +144,7 @@ const ConnectForm = () => {
           </StyledLabel>
           {isDialer && (
             <StyledLabel>
-              Sessiot name:
+              Session name:
               <StyledInput {...register('session', { required: true, maxLength: 20 })} />
               {errors.session && <p className="error">Session name is required</p>}
             </StyledLabel>

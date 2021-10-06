@@ -2,15 +2,24 @@ import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import cancelImg from '../../assets/icons/Vector-cancel.png';
 import { RootState } from '../../redux';
+import { sendOpenDeleteFormToAll } from '../../sockets/SocketsAPI';
 import { getInitials, ImageContainer } from '../Avatar/StyledAvatar';
-import DeleteUser from '../DeletePlayer/DeleteUser';
+import DeleteUser, { DeleteUserMini } from '../DeletePlayer/DeleteUser';
 import { IConnectForm } from '../Forms/FormTypes';
 import { StyledUserCard, StyledUserInfo, ExcludeBtn } from './StyledUserCard';
 
-const UserCard: FC<IConnectForm> = (props) => {
-  const { firstName, lastName, job, avatar, userID, dialer } = props;
+const UserCard: FC<IConnectForm> = ({ firstName, lastName, job, avatar, userID, dialer }) => {
   const [openForm, setOpenForm] = useState(false);
-  const { isDialer } = useSelector((state: RootState) => state.personStatus);
+  const { isDialer, isPlayer, isObserver } = useSelector((state: RootState) => state.personStatus);
+  const { users, currUserID, gameId, dealerId } = useSelector((state: RootState) => state.initial);
+  const isDeleteModal = useSelector(
+    (state: RootState) => state.dataConnectForm.isDeleteModal.count,
+  );
+  const usersLength = Object.keys(users).length;
+
+  const openDeleteFormToAll = () => {
+    sendOpenDeleteFormToAll(users[currUserID].name, users[userID].name, userID, gameId);
+  };
 
   return (
     <>
@@ -24,9 +33,13 @@ const UserCard: FC<IConnectForm> = (props) => {
           </span>
           <span className="card-user-position">{job}</span>
         </StyledUserInfo>
-        {isDialer && !dialer && (
+        {(isDialer || (usersLength > 3 && isPlayer)) && !dialer && (
           <ExcludeBtn>
-            <img src={cancelImg} onClick={() => setOpenForm(true)} alt="exclude button" />
+            <img
+              src={cancelImg}
+              onClick={() => (dealerId === currUserID ? setOpenForm(true) : openDeleteFormToAll())}
+              alt="exclude button"
+            />
           </ExcludeBtn>
         )}
         {openForm && (
@@ -37,6 +50,7 @@ const UserCard: FC<IConnectForm> = (props) => {
             id={userID}
           />
         )}
+        {isDeleteModal && !isObserver && <DeleteUserMini />}
       </StyledUserCard>
     </>
   );

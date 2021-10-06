@@ -1,5 +1,4 @@
-const IssueDB = require('../shemas/issueShema')
-
+IssueDB = require('../shemas/IssueShema')
 class IssueService {
 
     async createIssue(issueData){ 

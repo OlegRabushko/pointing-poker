@@ -32,6 +32,16 @@ export const setRolePlayers = {
       type: 'UPDATE_PLAYERS_STATE',
       payload,
     } as const),
+  setDeleteModal: (payload: { count: boolean; who: string; whom: string; deleteID: string }) =>
+    ({
+      type: 'SET_DELETE_MODAL',
+      payload,
+    } as const),
+  setAcceptCount: (payload: number) =>
+    ({
+      type: 'SET_ACCEPT_COUNT',
+      payload,
+    } as const),
 };
 
 // AVATAR CONNECT FORM

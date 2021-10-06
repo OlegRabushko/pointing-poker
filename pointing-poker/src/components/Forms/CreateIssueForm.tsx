@@ -1,17 +1,16 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { RootState } from '../../redux';
-
-import { issueForm, showForms } from '../../redux/FormRedux/FormActions';
+import { showForms } from '../../redux/FormRedux/FormActions';
 import Button from '../Button/Button';
 import { IIssueCard } from './FormTypes';
 import { StyledConnectForm } from './StyledForm';
 import { StyledPopupWrapper } from './StyledPopupWrapper';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { StyledInput, StyledLabel, StyledSelect } from './StyledFormComponents';
+import { sendIssuesToAll } from '../../sockets/SocketsAPI';
 
 const CreateIssueForm = () => {
   const {
@@ -23,10 +22,21 @@ const CreateIssueForm = () => {
 
   const dispatch = useDispatch();
   const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
+  const gameID = useSelector((store: RootState) => store.initial.gameId);
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
     dispatch(showForms.showIssuesForm(!isIssuesForm));
-    dispatch(issueForm.createIssueCard(data, nanoid(), false, false));
+    sendIssuesToAll(
+      {
+        issueTitle: data.issueTitle,
+        issueLink: data.issueLink,
+        issuePriority: data.issuePriority,
+        issueID: nanoid(),
+        current: false,
+        isCompleted: false,
+      },
+      gameID,
+    );
     reset();
   };
 

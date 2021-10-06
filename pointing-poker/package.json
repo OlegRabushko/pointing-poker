@@ -25,6 +25,7 @@
   "author": "Oleg Rabushko",
   "license": "MIT",
   "dependencies": {
+    "file-saver": "^2.0.5",
     "nanoid": "^3.1.25",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -36,7 +37,8 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^4.2.0",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "xlsx": "^0.17.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -48,6 +50,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@testing-library/react": "^12.0.0",
     "@types/express-fileupload": "^1.1.7",
+    "@types/file-saver": "^2.0.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.3.2",
     "@types/react": "^17.0.2",
@@ -75,6 +78,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-webpack-plugin": "^3.0.1",
     "html-webpack-plugin": "^5.1.0",
+    "husky": "4",
     "jest": "^27.1.0",
     "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^2.1.0",
@@ -87,7 +91,6 @@
     "styled-components": "^5.3.1",
     "typescript": "^4.1.5",
     "webpack": "^5.21.2",
-    "husky": "4",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.7.3"

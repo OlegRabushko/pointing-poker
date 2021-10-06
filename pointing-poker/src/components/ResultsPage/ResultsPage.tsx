@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import GameCard from '../GameCard/GameCard';
@@ -7,6 +7,7 @@ import { StyledResultsPage } from './StyledResultsPage';
 import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
 import { RootState } from '../../redux';
+import { ExportCSV } from './helper';
 
 const setContent = (content: string | number) => {
   if (typeof content === 'number') return content;
@@ -17,10 +18,31 @@ const setContent = (content: string | number) => {
 
 const ResultsPage = () => {
   const results = useSelector((store: RootState) => store.results.store);
+  const fileName = useSelector((store: RootState) => store.initial.gameTitle);
+  const history = useHistory();
+  const objForExcel = results.reduce((acc, el) => {
+    acc.push({
+      Task: el.title,
+      Results: el.cardsResult
+        .map(
+          (card) =>
+            `${typeof card.content === 'string' ? card.content : `${card.content}SP`}: ${
+              card.stats
+            }%`,
+        )
+        .join(' | '),
+    });
+    return acc;
+  }, []);
+
+  const exitBtn = () => {
+    history.push('/');
+    window.location.reload();
+  };
 
   return (
     <StyledResultsPage>
-      <Link to="/">
+      <Link to="/" onClick={exitBtn}>
         <Button text="Exit" color={whiteColor} colorBG={blueColor} />
       </Link>
       {results.map(
@@ -44,6 +66,7 @@ const ResultsPage = () => {
             </div>
           ),
       )}
+      <ExportCSV csvData={objForExcel} fileName={fileName} />
     </StyledResultsPage>
   );
 };

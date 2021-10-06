@@ -1,5 +1,4 @@
-/* eslint-disable spaced-comment */
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
@@ -20,12 +19,15 @@ import { StyledGamePage } from './StyledGamePage';
 import {
   receivedCard,
   receivedDeletedCard,
+  receivedDeletedIssues,
   receivedIsUserCanceledCard,
   receivedIsUserSelectedCard,
   receivedNextIssue,
   receivedRestartRound,
   receivedResults,
   receivedStartRound,
+  sendCancelGame,
+  sendDeletedUserToAll,
   sendNextIssue,
   sendRelocateResultPage,
   sendRestartRound,
@@ -34,32 +36,51 @@ import {
 } from '../../sockets/SocketsAPI';
 import { IIssueCard } from '../Forms/FormTypes';
 import { CardType } from '../../redux/GameCardRedux/GameCardTypes';
+import { issueForm } from '../../redux/FormRedux/FormActions';
+import { deleteUserById } from '../../API/RestAPI';
 
 const GamePage = () => {
   const { setSeconds, setMinutes } = timerActions;
   const [showResults, setShowResults] = useState(false);
   const dispatch = useDispatch();
   const isRound = useSelector((store: RootState) => store.gameProcess.startRound);
-  const gameID = useSelector((store: RootState) => store.initial.gameId);
   const { timerNeeded, scramMasterAsPlayer } = useSelector((store: RootState) => store.settings);
   const cardsArr = useSelector((store: RootState) => [...store.card.store]);
   const timeStore = useSelector((store: RootState) => store.timer);
-  const { isPlayer, isDialer } = useSelector((store: RootState) => store.personStatus);
+  const { isPlayer, isDialer, isObserver } = useSelector((store: RootState) => store.personStatus);
   const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
+  const history = useHistory();
+  const location = useLocation().pathname;
+  const { currUserID, users, gameId } = useSelector((store: RootState) => store.initial);
 
-  const startRound = () => sendStartRound(gameID);
-  const restartRound = () => sendRestartRound(issueCards, gameID);
-  const nextIssue = () => sendNextIssue(cardsArr, issueCards, elemIndex, gameID);
+  useEffect(() => {
+    if (location === '/game' && users[currUserID] === undefined) {
+      history.push('/');
+      window.location.reload();
+      alert('Sorry, you were excluded from the game!');
+    }
+  }, [location, Object.keys(users).length, location]);
+
+  const startRound = () => sendStartRound(gameId);
+  const restartRound = () => {
+    sendRestartRound(issueCards, timerNeeded, gameId);
+  };
+  const nextIssue = () => sendNextIssue(cardsArr, issueCards, elemIndex, gameId);
   const setResults = () => {
-    sendResults(cardsArr, issueCards, elemIndex, gameID);
-    sendRelocateResultPage(gameID);
+    sendResults(cardsArr, issueCards, elemIndex, gameId);
+    sendRelocateResultPage(gameId);
   };
 
   const setStartedTime = () =>
     setTimeout(() => {
       dispatch(setMinutes(timeStore.startTime[0]));
       dispatch(setSeconds(timeStore.startTime[1]));
-    }, 500);
+      issueCards.forEach((el: IIssueCard) => {
+        if (el.current && el.isCompleted) {
+          dispatch(issueForm.setCompletedIssueCard({ id: el.issueID, count: false }));
+        }
+      });
+    }, 0);
 
   const addCardsForResult = (cards: CardType[], IssueCards: IIssueCard[], index: number) => {
     const updatedCardsArr = () => cards.filter((el) => el.stats > 0);
@@ -76,10 +97,21 @@ const GamePage = () => {
     dispatch(gameCard.setInitialCards(true));
   };
 
+  const cancelGame = () => {
+    if (isDialer) sendCancelGame(gameId);
+    else {
+      deleteUserById(currUserID);
+      sendDeletedUserToAll(currUserID, gameId);
+      history.push('/');
+      window.location.reload();
+    }
+  };
+
   useEffect(() => {
     receivedStartRound(dispatch);
     receivedRestartRound(setStartedTime, dispatch);
     receivedNextIssue(setStartedTime, addCardsForResult, dispatch);
+    receivedDeletedIssues(dispatch);
     receivedResults(addCardsForResult);
     receivedCard(dispatch);
     receivedDeletedCard(dispatch);
@@ -103,7 +135,7 @@ const GamePage = () => {
           <div className="scram-master-container">
             <div className="flex-box">
               <div className="stop-game-btn">
-                <Link to="/">
+                <Link to="/" onClick={cancelGame}>
                   <Button
                     text={isDialer ? 'Stop Game' : 'Exit'}
                     colorBG={whiteColor}
@@ -167,7 +199,7 @@ const GamePage = () => {
       <section className="section">
         <StatisticsSection isStats />
       </section>
-      {((isRound && isPlayer) || (isRound && scramMasterAsPlayer)) && (
+      {((isRound && isPlayer) || (isRound && scramMasterAsPlayer)) && !isObserver && (
         <section className="section">
           <Cards isStats={false} />
         </section>

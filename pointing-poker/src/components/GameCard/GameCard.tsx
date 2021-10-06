@@ -7,17 +7,8 @@ import {
   sendIsUserCanceledCard,
   sendIsUserSelectedCard,
 } from '../../sockets/SocketsAPI';
+import { IGameCardProps } from '../../types/interfaces';
 import { StyledGameCard } from './StyledGameCard';
-
-interface IGameCardProps {
-  type: string;
-  content: string | number;
-  ID: string | number;
-  isStats: boolean;
-  isStatisticSection?: boolean;
-  choseCard?: number;
-  setChoseCard?: React.Dispatch<React.SetStateAction<number>>;
-}
 
 const GameCard: FC<IGameCardProps> = ({
   isStats,
@@ -33,15 +24,13 @@ const GameCard: FC<IGameCardProps> = ({
   const stats = useSelector(
     (store: RootState) => store.card.store.find((el) => el.id === ID).stats,
   );
-  const gameID = useSelector((store: RootState) => store.initial.gameId);
-  const userID = useSelector((store: RootState) => store.initial.currUserID);
-  const isTimer = useSelector((store: RootState) => store.settings.timerNeeded);
-  const playersCheckedCard = useSelector((store: RootState) => store.card.count);
-  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
-  const allUsers = useSelector((store: RootState) => store.initial.users);
-  const allUsersLength = Object.keys(allUsers).length;
-
+  const { gameId, currUserID, users, observersCount } = useSelector(
+    (store: RootState) => store.initial,
+  );
+  const { timerNeeded, scramMasterAsPlayer } = useSelector((store: RootState) => store.settings);
   const { seconds, minutes } = useSelector((store: RootState) => store.timer);
+  const playersCheckedCard = useSelector((store: RootState) => store.card.count);
+  const allUsersLength = Object.keys(users).length;
 
   useEffect(() => {
     if (isSelected && seconds === 0 && minutes === 0) {
@@ -50,27 +39,31 @@ const GameCard: FC<IGameCardProps> = ({
     }
     if (
       (isStats && seconds === 0 && minutes === 0) ||
-      (!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength) ||
-      (!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1)
+      (!timerNeeded &&
+        scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - observersCount) ||
+      (!timerNeeded &&
+        !scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - 1 - observersCount)
     ) {
       setTimeout(() => setFlippedClass(true), 1000);
     } else {
       setFlippedClass(false);
     }
-  }, [seconds]);
+  }, [seconds, scramMasterAsPlayer, playersCheckedCard, allUsersLength, timerNeeded]);
 
   const choiceCard = () => {
     if (choseCard === 1 && !isSelected) {
-      sendIsUserSelectedCard(userID, gameID);
+      sendIsUserSelectedCard(currUserID, gameId);
       setIsSelected(true);
       setChoseCard((prev) => prev + 1);
-      sendCard(ID, gameID);
+      sendCard(ID, gameId);
     }
     if (choseCard !== 1 && isSelected) {
-      sendIsUserCanceledCard(userID, gameID);
+      sendIsUserCanceledCard(currUserID, gameId);
       setIsSelected(false);
       setChoseCard((prev) => prev - 1);
-      sendDeletedCard(ID, gameID);
+      sendDeletedCard(ID, gameId);
     }
   };
 

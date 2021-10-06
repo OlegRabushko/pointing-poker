@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { SET_RESULT_CARDS, ActionTypeGameCard, IResultsState } from './ResultsPageTypes';
 
 const cardsState: IResultsState = {

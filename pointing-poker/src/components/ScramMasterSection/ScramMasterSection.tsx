@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Button from '../Button/Button';
@@ -6,57 +6,44 @@ import { StyledScramMasterSection } from './StyledScramMasterSection';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { RootState } from '../../redux';
 import ScramMasterCard from './ScramMasterCard';
-import { getAllUsers } from '../../API/RestAPI';
-import { sendIssuesToAll, sendSettingsToAll, sendTimerToAll } from '../../sockets/SocketsAPI';
+import { deleteUserById, getAllUsers } from '../../API/RestAPI';
+import {
+  sendCancelGame,
+  sendDeletedUserToAll,
+  sendSettingsToAll,
+  sendTimerToAll,
+} from '../../sockets/SocketsAPI';
 
 const ScramMasterSection = () => {
-  const gameID = useSelector((store: RootState) => store.initial.gameId);
+  const { gameId, currUserID } = useSelector((store: RootState) => store.initial);
   const { isDialer } = useSelector((store: RootState) => store.personStatus);
-  const {
-    scramMasterAsPlayer,
-    changeCardInRoundEnd,
-    timerNeeded,
-    coffeeCardNeeded,
-    questionCardNeeded,
-    sequenceType,
-  } = useSelector((store: RootState) => store.settings);
+  const { scramMasterAsPlayer, timerNeeded, coffeeCardNeeded, questionCardNeeded, sequenceType } =
+    useSelector((store: RootState) => store.settings);
+  const history = useHistory();
   const { minutes, seconds } = useSelector((store: RootState) => store.timer);
 
   const startGame = () => {
-    sendTimerToAll({ minutes, seconds }, gameID);
+    sendTimerToAll({ minutes, seconds }, gameId);
     sendSettingsToAll(
       {
         scramMasterAsPlayer,
-        changeCardInRoundEnd,
         timerNeeded,
         coffeeCardNeeded,
         questionCardNeeded,
         sequenceType,
       },
-      gameID,
+      gameId,
     );
-    sendIssuesToAll(
-      {
-        issueTitle: 'One-1',
-        issueLink: '',
-        issuePriority: 'Low',
-        issueID: '',
-        current: false,
-        isCompleted: false,
-      },
-      gameID,
-    );
-    sendIssuesToAll(
-      {
-        issueTitle: 'Two-2',
-        issueLink: '',
-        issuePriority: 'Low',
-        issueID: '',
-        current: false,
-        isCompleted: false,
-      },
-      gameID,
-    );
+  };
+
+  const cancelGame = () => {
+    if (isDialer) sendCancelGame(gameId);
+    else {
+      deleteUserById(currUserID);
+      sendDeletedUserToAll(currUserID, gameId);
+      history.push('/');
+      window.location.reload();
+    }
   };
 
   const EntryKeyField = ({ gameKey }: { gameKey: string }) => {
@@ -69,7 +56,7 @@ const ScramMasterSection = () => {
   };
 
   useEffect(() => {
-    getAllUsers(gameID);
+    getAllUsers(gameId);
   }, []);
 
   return (
@@ -80,7 +67,7 @@ const ScramMasterSection = () => {
         <>
           <div className="key-text">Key to lobby:</div>
           <div className="flex-box">
-            <EntryKeyField gameKey={gameID} />
+            <EntryKeyField gameKey={gameId} />
             <Button colorBG={blueColor} color={whiteColor} text="Copy" onClick={copyGameID} />
           </div>
         </>
@@ -92,7 +79,12 @@ const ScramMasterSection = () => {
           </Link>
         )}
         <Link to="/">
-          <Button colorBG={whiteColor} color={blueColor} text={isDialer ? 'Cancel Game' : 'Exit'} />
+          <Button
+            onClick={cancelGame}
+            colorBG={whiteColor}
+            color={blueColor}
+            text={isDialer ? 'Cancel Game' : 'Exit'}
+          />
         </Link>
       </div>
     </StyledScramMasterSection>

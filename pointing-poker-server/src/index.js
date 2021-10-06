@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const nanoid = require('nanoid');
-const fileUpload = require('express-fileupload');
 const { route } = require('./router/router');
 const { json } = require('body-parser');
 const express = require('express');
@@ -44,21 +42,25 @@ app.post('/api/start', (req, res) => {
 
 try {
     io.on('connection', (socket) => {
-        socket.on('join-game', async (roomId) => {
-            console.log('socket server user join', roomId),
-                socket.join(roomId)
+        socket.on('join-game', async (roomId, user) => {
+            socket.join(roomId)
             const users = await UserService.getAllUsers(roomId)
-            console.log('all users from server', users)
-            io.in(roomId).emit('joined', users, socket.id)
+            const game = await GameService.getGame(roomId)
+            io.to(socket.id).emit('get-prev-data', users, game.title)
+            socket.to(roomId).emit('joined', user)
         })
-
+        socket.on('set-title', (id, title) => {
+            io.in(id).emit('received-title', title)
+        })
         const msgController = new MsgController(io, socket)
         socket.on('send-msg', (msg) => {
             console.log('msg sent', msg)
             io.in(msg.game_id).emit('recieve-msg', msg)
             msgController.setMessage(msg)
         })
-
+        socket.on('deleted-user', (userID, id) => {
+            io.in(id).emit('received-deleted-user', userID)
+        })
         socket.on('game-settings', (settings, id) => {
             io.in(id).emit('received-settings', settings)
         })
@@ -68,14 +70,20 @@ try {
         socket.on('set-issues', (issues, id) => {
             io.in(id).emit('received-issues', issues)
         })
+        socket.on('set-deleted-issues', (issueID, id) => {
+            io.in(id).emit('received-deleted-issues', issueID)
+        })
+        socket.on('send-rename-issues', (data, issueID, id) => {
+            io.in(id).emit('received-rename-issues', data, issueID)
+        })
         socket.on('relocate-result-page', (id) => {
             io.in(id).emit('received-relocate-result-page')
         })
         socket.on('round', (id) => {
             io.in(id).emit('received-round')
         })
-        socket.on('restart-round', (issueCards, id) => {
-            io.in(id).emit('received-restart-round', issueCards)
+        socket.on('restart-round', (issueCards, timer, id) => {
+            io.in(id).emit('received-restart-round', issueCards, timer)
         })
         socket.on('next-issue', (CardsArr, issueCards, elemIndex, id) => {
             io.in(id).emit('received-next-issue', CardsArr, issueCards, elemIndex)
@@ -95,6 +103,18 @@ try {
         socket.on('is-user-canceled-card', (userID, id) => {
             io.in(id).emit('received-is-user-canceled-card', userID)
         })
+        socket.on('cancel-game', (id) => {
+            io.in(id).emit('received-cancel-game')
+        })
+        socket.on('delete-form', (who, whom, userID, id) => {
+            io.in(id).emit('received-delete-form', who, whom, userID)
+        })
+        socket.on('delete-choice', (id) => {
+            io.in(id).emit('received-delete-choice')
+        })
+        socket.on('is-observer', (count, id) => {
+            io.in(id).emit('received-is-observer', count)
+        })
     })
 } catch (error) {
     console.log(error);
@@ -106,6 +126,7 @@ try {
         await mongoose.connect(DB_URL, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
+
         });
     });
 } catch (error) {

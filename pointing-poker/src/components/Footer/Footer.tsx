@@ -1,4 +1,5 @@
 import { StyleFooter } from './StyledFooter';
+import rsIco from '../../assets/icons/rs-ico.svg';
 
 const Footer = () => {
   return (
@@ -14,6 +15,8 @@ const Footer = () => {
           <a href="https://github.com/OlegRabushko">OlegRabushko</a>
         </li>
       </ul>
+      <div> 2021</div>
+      <img src={rsIco} alt="ico" />
     </StyleFooter>
   );
 };

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import { useLocation } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,14 +6,10 @@ import coffeeIco from '../../assets/icons/coffee-ico.svg';
 import questionIco from '../../assets/icons/question-ico.svg';
 import { RootState } from '../../redux';
 import GameCard from '../GameCard/GameCard';
+import { IGameCardsProps } from '../../types/interfaces';
 
 const fibonacciSequence = [1, 2, 3, 5, 8, 13, 21, 34];
 const authorSequence = [1, 2, 3, 6, 10, 20, 30, 40];
-
-interface IGameCardsProps {
-  isStats: boolean;
-  isStatisticSection?: boolean;
-}
 
 export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
   const [isHide, setIsHide] = useState(false);
@@ -23,17 +18,21 @@ export const Cards: FC<IGameCardsProps> = ({ isStats, isStatisticSection }) => {
   const location = useLocation();
   const settings = useSelector((store: RootState) => store.settings);
   const { minutes, seconds } = useSelector((store: RootState) => store.timer);
-  const isTimer = useSelector((store: RootState) => store.settings.timerNeeded);
-  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const { timerNeeded, scramMasterAsPlayer } = useSelector((store: RootState) => store.settings);
   const playersCheckedCard = useSelector((store: RootState) => store.card.count);
-  const allUsers = useSelector((store: RootState) => store.initial.users);
-  const allUsersLength = Object.keys(allUsers).length;
+  const { users, observersCount } = useSelector((store: RootState) => store.initial);
+  const allUsersLength = Object.keys(users).length;
+
   useEffect(() => {
     if (
       location.pathname === '/settings' ||
       (minutes === 0 && seconds === 0) ||
-      (!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength) ||
-      (!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1)
+      (!timerNeeded &&
+        scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - observersCount) ||
+      (!timerNeeded &&
+        !scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - 1 - observersCount)
     ) {
       setIsHide(true);
     } else {

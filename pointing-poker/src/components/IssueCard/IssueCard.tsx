@@ -1,37 +1,43 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import pencil from '../../assets/icons/edit_pencil.svg';
 import deleteImg from '../../assets/icons/delete_basket.png';
 import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 import { RootState } from '../../redux';
 import { IIssueCard } from '../Forms/FormTypes';
 import { issueForm } from '../../redux/FormRedux/FormActions';
+import { sendDeletedIssuesToAll, sendRenameIssueToAll } from '../../sockets/SocketsAPI';
 
-const IssueCard: FC<IIssueCard> = (props) => {
-  const { issueTitle, issuePriority, issueID, current, isCompleted } = props;
+const IssueCard: FC<IIssueCard> = ({
+  issueTitle,
+  issuePriority,
+  issueID,
+  current,
+  isCompleted,
+}) => {
   const { register, handleSubmit, reset } = useForm<IIssueCard>({ mode: 'onChange' });
   const dispatch = useDispatch();
   const isDialer = useSelector((state: RootState) => state.personStatus.isDialer);
   const [isUpdateIssueTitle, setUpdateIssueTitle] = useState<boolean>(false);
   const location = useLocation().pathname;
   const cards = useSelector((state: RootState) => state.issueFormData.issueCards);
-
   const { seconds, minutes } = useSelector((state: RootState) => state.timer);
-  const isTimer = useSelector((state: RootState) => state.settings.timerNeeded);
-  const scramMasterAsPlayer = useSelector((store: RootState) => store.settings.scramMasterAsPlayer);
+  const { timerNeeded, scramMasterAsPlayer } = useSelector((state: RootState) => state.settings);
   const playersCheckedCard = useSelector((store: RootState) => store.card.count);
-
-  const allUsers = useSelector((store: RootState) => store.initial.users);
-  const allUsersLength = Object.keys(allUsers).length;
+  const { users, observersCount, gameId } = useSelector((store: RootState) => store.initial);
+  const allUsersLength = Object.keys(users).length;
 
   useEffect(() => {
     if (
-      (isTimer && seconds === 0 && minutes === 0) ||
-      (!isTimer && scramMasterAsPlayer && playersCheckedCard === allUsersLength) ||
-      (!isTimer && !scramMasterAsPlayer && playersCheckedCard === allUsersLength - 1)
+      (timerNeeded && seconds === 0 && minutes === 0) ||
+      (!timerNeeded &&
+        scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - observersCount) ||
+      (!timerNeeded &&
+        !scramMasterAsPlayer &&
+        playersCheckedCard === allUsersLength - 1 - observersCount)
     ) {
       cards.forEach((el) => {
         if (el.current) {
@@ -42,8 +48,7 @@ const IssueCard: FC<IIssueCard> = (props) => {
   }, [seconds, minutes, playersCheckedCard]);
 
   const onSubmit: SubmitHandler<IIssueCard> = (data) => {
-    dispatch(issueForm.renameIssueTitle(data.issueTitle, issueID));
-    dispatch(issueForm.renameIssuePriority(data.issuePriority, issueID));
+    sendRenameIssueToAll(data, issueID, gameId);
     setUpdateIssueTitle(false);
     reset();
   };
@@ -55,7 +60,7 @@ const IssueCard: FC<IIssueCard> = (props) => {
 
   const handleDeleteBtn = (e: React.MouseEvent) => {
     e.stopPropagation();
-    dispatch(issueForm.deleteIssueCard(issueID));
+    sendDeletedIssuesToAll(issueID, gameId);
   };
 
   return (

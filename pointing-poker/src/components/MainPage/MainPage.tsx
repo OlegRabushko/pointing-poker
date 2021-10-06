@@ -12,7 +12,6 @@ import { StyleMainPage } from './StyledMainPage';
 const MainPage = () => {
   const dispatch = useDispatch();
   const { isConnectForm } = useSelector((state: RootState) => state.showForms);
-
   const check = useSelector((state: RootState) => state.gameProcess.check);
 
   const handlerDealerState = () => {

@@ -130,22 +130,31 @@ const ConnectForm = () => {
         <div className="connect-form-wrapper">
           <StyledLabel>
             Your first name:
-            <StyledInput {...register('firstName', { required: true, maxLength: 10 })} />
+            <StyledInput
+              data-testid="name-input"
+              {...register('firstName', { required: true, maxLength: 10 })}
+            />
             {errors.firstName && <p className="error">First name is required</p>}
           </StyledLabel>
           <StyledLabel>
             Your last name:
-            <StyledInput {...register('lastName', { required: true, maxLength: 10 })} />
+            <StyledInput
+              data-testid="last-name-input"
+              {...register('lastName', { required: true, maxLength: 10 })}
+            />
             {errors.firstName && <p className="error">Last name is required</p>}
           </StyledLabel>
           <StyledLabel>
             Your job position:
-            <StyledInput {...register('job')} />
+            <StyledInput data-testid="job-input" {...register('job')} />
           </StyledLabel>
           {isDialer && (
             <StyledLabel>
               Session name:
-              <StyledInput {...register('session', { required: true, maxLength: 20 })} />
+              <StyledInput
+                data-testid="session-input"
+                {...register('session', { required: true, maxLength: 20 })}
+              />
               {errors.session && <p className="error">Session name is required</p>}
             </StyledLabel>
           )}
@@ -160,7 +169,13 @@ const ConnectForm = () => {
               />
             </label>
           </div>
-          <ImageContainer mainPage background={`url(${avatar})`} width="83px" height="83px" />
+          <ImageContainer
+            data-testid="img-container"
+            mainPage
+            background={`url(${avatar})`}
+            width="83px"
+            height="83px"
+          />
         </div>
         <div className="connect-buttons-container">
           <Button

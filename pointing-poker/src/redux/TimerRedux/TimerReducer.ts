@@ -1,11 +1,4 @@
-import { TTimer } from './TimerActions';
-
-export type TimerStateTypes = {
-  startTime?: number[];
-  seconds: number;
-  minutes: number;
-  fullSeconds?: number;
-};
+import { TimerStateTypes, TTimer } from './TimerActions';
 
 const timerState: TimerStateTypes = {
   startTime: [2, 30],

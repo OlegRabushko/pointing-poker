@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-return-assign */
 import { TIssueForm, TSetRolePlayers, TShowForms } from './FormActions';
 import {
   IAvatar,
@@ -59,6 +56,13 @@ const connectFormState: IInitialStatePlayers = {
     avatar: '',
     session: '',
   },
+  isDeleteModal: {
+    count: false,
+    who: '',
+    whom: '',
+    deleteID: '',
+  },
+  acceptDeleteUserCount: 0,
   userPlayers: [],
   userObservers: [],
 };
@@ -79,6 +83,21 @@ export const connectFormDataReducer = (state = connectFormState, action: TSetRol
       return {
         ...state,
         userPlayers: [...state.userPlayers.filter((el) => el.userID !== action.payload)],
+      };
+    case 'SET_DELETE_MODAL':
+      return {
+        ...state,
+        isDeleteModal: {
+          count: action.payload.count,
+          who: action.payload.who,
+          whom: action.payload.whom,
+          deleteID: action.payload.deleteID,
+        },
+      };
+    case 'SET_ACCEPT_COUNT':
+      return {
+        ...state,
+        acceptDeleteUserCount: action.payload === 0 ? 0 : state.acceptDeleteUserCount + 1,
       };
     case 'SET_OBSERVERS':
       return {
@@ -123,7 +142,7 @@ export const issueFormDataReducer = (state = issueFormState, action: TIssueForm)
         issueCards: [...state.issueCards],
       };
     case 'SET_COMPLETED_ISSUE_CARD':
-      issueCards.map((card) => {
+      issueCards.forEach((card) => {
         if (card.issueID === action.payload.id) card.isCompleted = action.payload.count;
       });
       return {
@@ -136,7 +155,7 @@ export const issueFormDataReducer = (state = issueFormState, action: TIssueForm)
         elemIndex: action.payload,
       };
     case 'RENAME_ISSUE_TITLE':
-      issueCards.map((card) => {
+      issueCards.forEach((card) => {
         if (card.issueID === action.issueID) {
           card.issueTitle = action.payload;
         }
@@ -146,7 +165,7 @@ export const issueFormDataReducer = (state = issueFormState, action: TIssueForm)
         issueCards: [...state.issueCards],
       };
     case 'RENAME_ISSUE_PRIORITY':
-      issueCards.map((card) => {
+      issueCards.forEach((card) => {
         if (card.issueID === action.issueID) {
           card.issuePriority = action.payload;
         }

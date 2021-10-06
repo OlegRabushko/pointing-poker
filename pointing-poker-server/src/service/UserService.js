@@ -23,13 +23,8 @@ class UserService {
     if (!userId) {
       throw new Error('no ID');
     }
-    await UserDB.findByIdAndDelete(userId, (err) => {
-      if (err) {
-        return { res: 'Not Found User' };
-      } else {
-        return { res: 'User deleted' };
-      }
-    });
+    const deletedUser = await UserDB.findByIdAndDelete(userId);
+    return deletedUser
   }
 }
 

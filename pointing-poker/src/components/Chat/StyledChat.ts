@@ -85,11 +85,12 @@ export const StyledChatWindow = styled.div`
     position: relative;
     word-break: break-word;
     width: fit-content;
-    background-color: #b0c0d9;
+    background-color: #b0c0d9 !important;
   }
 
   .msg-txt::before {
-    border-right: 1rem solid #b0c0d9;
+    border-right: 3px solid #b0c0d9 !important;
+    border-left: 1rem solid #b0c0d9 !important;
     bottom: -0.1rem;
     content: '';
     height: 1rem;
@@ -113,7 +114,7 @@ export const StyledChatWindow = styled.div`
     padding: 0 0 3px 0;
     font-weight: 600;
     letter-spacing: 0.8px;
-    color: #292929;
+    color: #292929 !important;
   }
 
   .msg {

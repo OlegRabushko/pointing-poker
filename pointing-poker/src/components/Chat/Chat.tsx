@@ -1,5 +1,4 @@
-/* eslint-disable import/namespace */
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledChatBox, StyledChatWindow } from './StyledChat';
@@ -8,7 +7,7 @@ import { receiveAllMsgs } from '../../API/RestAPI';
 import { chat } from '../../redux/ChatRedux/ChatActions';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ChatInput from '../ChatInput/ChatInput';
-import { recieveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
+import { receiveMsg, sendMsgToAll } from '../../sockets/SocketsAPI';
 import { RootState } from '../../redux';
 import { mouseDown, mouseMove, mouseUp } from './helper';
 
@@ -27,11 +26,13 @@ const Chat = () => {
     msgs: state.chat.msgs,
     users: state.initial.users,
   }));
+
   const sendMsgToServer = (msgContent: IMsg) => {
     sendMsgToAll(msgContent);
     setMsg('');
     if (txtRef.current) txtRef.current.innerText = '';
   };
+
   const submitMsg = () => {
     const sendTime = new Date();
     const decimaLen = 2;
@@ -46,12 +47,14 @@ const Chat = () => {
       }`,
     });
   };
+
   useEffect(() => {
     if (currUserID.length) {
       dispatch(receiveAllMsgs(gameId));
-      dispatch(recieveMsg());
+      dispatch(receiveMsg());
     }
   }, []);
+
   const closeChat = () => dispatch(chat.setOpenChat(false));
 
   return (

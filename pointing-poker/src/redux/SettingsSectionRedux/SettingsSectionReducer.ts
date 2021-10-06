@@ -1,17 +1,4 @@
-import { TSettings } from './SettingsSectionActions';
-
-export interface ILobbySettingsState {
-  scramMasterAsPlayer: boolean;
-  timerNeeded: boolean;
-  coffeeCardNeeded: boolean;
-  questionCardNeeded: boolean;
-  sequenceType: string;
-}
-
-export type ActionColor = {
-  about: boolean;
-  home: boolean;
-};
+import { ILobbySettingsState, TSettings } from './SettingsSectionActions';
 
 const lobbySettingsState: ILobbySettingsState = {
   scramMasterAsPlayer: true,

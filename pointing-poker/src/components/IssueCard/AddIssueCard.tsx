@@ -6,17 +6,17 @@ import { StyledIssueCard, StyledIssueInfo } from './StyledIssueCard';
 
 const AddIssueCard = () => {
   const dispatch = useDispatch();
-  const { isIssuesForm } = useSelector((state: RootState) => state.showForms);
+  const isIssuesForm = useSelector((state: RootState) => state.showForms.isIssuesForm);
   const isDialer = useSelector((state: RootState) => state.personStatus.isDialer);
 
-  const ahowCreateIssueForm = () => {
+  const openCreateIssueForm = () => {
     dispatch(showForms.showIssuesForm(!isIssuesForm));
   };
 
   return (
     <>
       {isDialer && (
-        <StyledIssueCard current={false} onClick={ahowCreateIssueForm}>
+        <StyledIssueCard current={false} onClick={openCreateIssueForm}>
           <StyledIssueInfo>
             <span className="issue-card__name">Creat new Issue</span>
           </StyledIssueInfo>

@@ -9,10 +9,10 @@ import { issueForm } from '../../redux/FormRedux/FormActions';
 const IssuesSection = () => {
   const { issueCards, elemIndex } = useSelector((state: RootState) => state.issueFormData);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (issueCards[elemIndex]) {
+    if (issueCards[elemIndex])
       dispatch(issueForm.toggleCurrentIssueCard(issueCards[elemIndex].issueID));
-    }
   }, [issueCards.length, elemIndex]);
 
   const createIssueCards = issueCards.map((card) => {

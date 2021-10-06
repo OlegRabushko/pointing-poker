@@ -11,19 +11,21 @@ export const initial = {
       type: 'SET_CURR_USER_ID',
       payload: id,
     } as const),
-
+  setGameTitle: (gameTitle: string) =>
+    ({
+      type: 'SET_GAME_TITLE',
+      payload: gameTitle,
+    } as const),
+  setObserversCount: (count: number) =>
+    ({
+      type: 'SET_OBSERVERS_COUNT',
+      payload: count,
+    } as const),
   setUser: (userInfo: IUserInfo) =>
     ({
       type: 'SET_USER',
       payload: userInfo,
     } as const),
-
-  setUsers: (usersArr: IUserInfo[]) =>
-    ({
-      type: 'SET_USERS',
-      payload: usersArr,
-    } as const),
-
   setGameId: (gameId: string) =>
     ({
       type: 'SET_GAME_ID',
@@ -50,6 +52,11 @@ export const initial = {
   setCheck: (payload: any) =>
     ({
       type: 'SET_CHECK',
+      payload,
+    } as const),
+  setDeletedUser: (payload: string) =>
+    ({
+      type: 'SET_DELETED_USER',
       payload,
     } as const),
 };

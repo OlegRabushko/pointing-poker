@@ -26,6 +26,11 @@ export const ImageContainer = styled.div<IPropsAvatar>`
   background: ${(props) => (props.mainPage ? 'transparent' : '#60dabf')}
     ${({ background }) => background || ''} center / cover no-repeat;
 
+  img {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+  }
   .initials {
     font-weight: bold;
     font-size: 32px;

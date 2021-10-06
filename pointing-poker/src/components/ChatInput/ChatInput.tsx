@@ -1,12 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
 import { StyledChatInput } from './StyledChatInput';
 import sendImg from '../../assets/icons/send-icon.svg';
-
-interface IChatInputProps {
-  setMsg: Dispatch<SetStateAction<string>>;
-  submitMsg: () => void;
-  txtRef: React.LegacyRef<HTMLDivElement>;
-}
+import { IChatInputProps } from '../../types/interfaces';
 
 const ChatInput = ({ setMsg, submitMsg, txtRef }: IChatInputProps) => {
   return (

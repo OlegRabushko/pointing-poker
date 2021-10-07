@@ -13,9 +13,10 @@ import { RootState } from '../../redux/index';
 import { ImageContainer } from '../Avatar/StyledAvatar';
 import { blueColor, whiteColor } from '../GlobalStyle/StyledGlobal';
 import { actions } from '../../redux/RolesRedux/RolesActions';
-import { setAvatar, setRolePlayers, showForms } from '../../redux/FormRedux/FormActions';
+import { setRolePlayers, showForms } from '../../redux/FormRedux/FormActions';
 import { StyledInput, StyledLabel } from './StyledFormComponents';
 import { createNewGame, createNewUser } from '../../API/RestAPI';
+import { addAvatar } from './helper';
 
 const ConnectForm = () => {
   const {
@@ -31,26 +32,6 @@ const ConnectForm = () => {
   const { avatar } = useSelector((state: RootState) => state.connectAvatar);
   const gameId = useSelector((state: RootState) => state.initial.gameId);
   const history = useHistory();
-
-  const addAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const src = await new Promise((resolve, reject) => {
-      const file: Blob = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          resolve(reader.result);
-          const imageElement = new Image();
-          imageElement.src = URL.createObjectURL(file);
-          dispatch(setAvatar(imageElement.src));
-        };
-        reader.onerror = (error) => {
-          reject(error);
-        };
-      }
-    });
-    return src;
-  };
 
   const insertNewUser = (
     data: IConnectForm,
@@ -165,7 +146,7 @@ const ConnectForm = () => {
                 type="file"
                 className="upload-input"
                 accept=".jpg, .jpeg, .png"
-                onChange={addAvatar}
+                onChange={(e) => addAvatar(e, dispatch)}
               />
             </label>
           </div>

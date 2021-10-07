@@ -78,7 +78,7 @@ export const StyledChatWindow = styled.div`
   }
 
   .msg-txt {
-    border-radius: 1.15rem;
+    border-radius: 5px;
     line-height: 1.25;
     max-width: 300px;
     padding: 0.5rem 0.875rem;

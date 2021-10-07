@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 import { History } from 'history';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkDispatch } from 'redux-thunk';
 import { chat } from '../redux/ChatRedux/ChatActions';
 import { IIssueCard } from '../components/Forms/FormTypes';
 import { initial } from '../redux/InitialRedux/InitialActions';
@@ -30,13 +30,10 @@ export const connectToSocket = (roomId: string, user: IUserInfo) => {
 export const sendMsgToAll = async (msg: IMsg) => {
   socket.emit('send-msg', msg);
 };
-
-export const receiveMsg =
-  (): ThunkAction<void, IChatState, unknown, IActionSetMsg> =>
-  (dispatch: ThunkDispatch<IChatState, unknown, IActionSetMsg>) =>
-    socket.on('recieve-msg', (msg) => {
-      dispatch(chat.setMessage(msg));
-    });
+export const receiveMsg = (dispatch: ThunkDispatch<IChatState, unknown, IActionSetMsg>) =>
+  socket.on('recieve-msg', (msg: IMsg) => {
+    dispatch(chat.setMessage(msg));
+  });
 
 export const joinedNotification = (dispatch: ThunkDispatch<any, unknown, any>) => {
   socket.on('joined', (user: IUserInfo) => {
